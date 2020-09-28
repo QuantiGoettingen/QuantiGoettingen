@@ -366,22 +366,58 @@ $(document).ready(function () {
 <p>Im Bild unten sehen Sie eine ziemlich große Tabelle, in der die Gebutstagsdaten aller Studierenden der Uni Göttingen aufgelistet sind, die zum Zeitpunkt des 10.10.2019 an der Universität immatrikuliert gewesen waren. Mit Hilfe der Daten in dieser Tabelle wollen wir uns jetzt noch einige sehr nützliche Excel-Funktionen ansehen.</p>
 <p>Sie müssen sich diese Tabelle nicht selbst erstellen. Sie finden alle Materialen in einem so genannten “Online Repository”. Zur Übersicht über alle Sitzungen gelangen Sie <a href="https://github.com/QuantiGoettingen/quanti_eins_files">hier</a>. Die Excel-Datei mit dem “Geburtstage-Beispiel” können Sie direkt <a href="https://github.com/QuantiGoettingen/quanti_eins_files/blob/master/01_Einf%C3%BChrung/01_Einf%C3%BChrung_Geburtstage.xlsx">hier</a> herunterladen und danach öffnen.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/geburtstage_1.PNG" style="width:95.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/geburtstage_1.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>In Spalte <strong>C</strong> stehen die verschiedenen Geburtstagsdaten, in Spalte <strong>B</strong> der dazugehörige Monat und in Spalte <strong>A</strong> die dazugehörige Jahreszeit. In Datumsspalte <strong>C</strong> ist über die Spalten <strong>D</strong> und <strong>E</strong> noch einmal aufgeteilt (in Tag und Monat). Spalte <strong>F</strong> gibt an, wie viele Studierende an einem bestimmten Tag Geburstag haben.</p>
 <p>Weiter rechts in der Arbeitsmappe sehen Sie eine Reihe von <strong>Aufgaben</strong>. Darunter befindet sich eine vorgefertigte Tabelle, in die die Ergebnisse eingetragen werden sollen.</p>
 <p><br /></p>
 <p><strong>Aufgabe 1) Wie viele Studierende waren im WiSe 2019/2020 eingeschrieben?</strong></p>
-<p>Das Ergebnis soll in Zelle <strong>J33</strong> geschrieben werden, also in die Zelle rechts neben der Zelle, die <strong>“Gesamtanzahl”</strong> heißt. Eine Gesamtzahl lässt sich in Excel sehr schnell mit Hilfe der so genannten <strong>“Summenfunktion”</strong> ermitteln. Die Summenfunktion ist die erste Excel-Funktion, die Sie jetzt kennenlernen werden.</p>
-<p>So gehts: klicken Sie in Zelle <strong>J33</strong> und schreiben Sie wieder “<span class="math inline">\(=\)</span>”. Schreiben Sie unmittelbar dahinter “SUMME” und öffnen sie eine runde Klammer, “(”. Markieren Sie nun mit ihrer Maus den Spaltenbereich in Spalte <strong>F</strong>, in der die Anzahlen der Studierenden aufgelistet sind.Sie sollten einen farbigen Rahmen um diesen Spaltenbereich herum sehen. Danach beenden Sie die begonnende Funktion mit einer geschlossenen Klammer, “)”, und drücken Enter. Sie sollten jetzt das Ergebnis sehen (30405). Im Bild unten ist das Vorgehen noch einmal verdeutlicht.</p>
+<p><strong>Die erste Excel-Funktion:</strong></p>
+<p>Das Ergebnis soll in Zelle <strong>J33</strong> geschrieben werden, also in die Zelle rechts neben der Zelle, die <strong>“Gesamtanzahl”</strong> heißt. Eine Gesamtzahl lässt sich in Excel sehr schnell mit Hilfe der so genannten <strong>“Summenfunktion”</strong> ermitteln. Die Summenfunktion ist die erste <strong>Excel-Funktion</strong>, die Sie jetzt kennenlernen werden. Die Notation der Funktion ist <strong>=SUMME()</strong>.</p>
+<p>So gehts: klicken Sie in Zelle <strong>J33</strong> und schreiben Sie wieder “<span class="math inline">\(=\)</span>”. Schreiben Sie unmittelbar dahinter “<strong>SUMME</strong>” und öffnen sie eine runde Klammer, “<strong>(</strong>”. Markieren Sie nun mit ihrer Maus den Spaltenbereich in Spalte <strong>F</strong>, in der die Anzahlen der Studierenden aufgelistet sind.Sie sollten einen farbigen Rahmen um diesen Spaltenbereich herum sehen. Danach beenden Sie die begonnende Funktion mit einer geschlossenen Klammer, “<strong>)</strong>”, und drücken Enter. Sie sollten jetzt das Ergebnis sehen (30405). Im Bild unten ist das Vorgehen noch einmal verdeutlicht. Grundsätzlich gilt: In die Klammern, “<strong>()</strong>”, einer Funktion kommt immer das hinein, was mit Hilfe der Funktion “verrechnet” werden soll.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_summe.PNG" style="width:90.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_summe.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p><strong>Aufgabe 2) Zählen Sie aus, wie viele Studierende in jeder Jahreszeit Geburtstag haben</strong></p>
 <p>Um diese Aufgabe zu lösen, bietet es sich an, die Jahreszeitenspalte (Spalte <strong>A</strong>) zunächst zu sortieren. Markieren Sie dazu mittels “Klicken und Ziehen” den gesamten Abschnitt in Spalte <strong>A</strong>, in dem die Jahreszeiten stehen. Danach finden Sie oben rechts im Menübereich die Rubrik <strong>“Sortieren und Filtern”</strong>. Unten sehen Sie wieder ein Beispielbild. Dort können Sie auswählen, ob sie die Spalte “rückwärts” von Z nach A oder “vorwärts” von A nach Z sortieren wollen. Wir nehmen in diesem Fall von Z nach A, da dann der Winter, mit dem das Jahr beginnt, oben steht.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_marksort.PNG" style="width:90.0%" /> <br /></p>
+<p><img src="images/q1_01einf/excel_marksort.PNG" style="width:100.0%" /> <br /></p>
 <p>Nachdem Sie auf “von Z bis A” geklickt haben, wird Excel Ihnen eine Meldung anzeigen, die im nachfolgenden Bild zu sehen ist:</p>
 <p><img src="images/q1_01einf/excel_markerweitern.PNG" style="width:40.0%" /> <br /></p>
-<p>Das Programm versichert sich hier, ob man tatsächlich nur die markierte Spalte sortieren möchte, oder ob man die <strong>benachbarten Spalten auch mitsortieren</strong> möchte. Das “Mitsortieren” der Nachbarspalten erfolgt, wenn man den Punkt <strong>Markierung erweitern</strong> auswählt (ist schon standardmäßig vorgeschlagen). Was denken Sie, was in unserem Fall richtig ist?</p>
+<p>Das Programm versichert sich hier, ob man tatsächlich nur die markierte Spalte sortieren möchte, oder ob man nicht vielleicht doch die <strong>benachbarten Spalten auch mitsortieren</strong> möchte. Das “Mitsortieren” der Nachbarspalten erfolgt, wenn man den Punkt <strong>Markierung erweitern</strong> auswählt (ist schon standardmäßig vorgeschlagen). Das Mitsortieren der Nachbarspalten ist hier <strong>wichtig</strong>. Was würde nämlich passieren, wenn Sie die Nachbarspalten nicht mitsortieren würden? Probieren Sie das ruhig einmal aus und versuchen Sie zu sehen, was der Unterschied ist. (Im Übrigen: sollten Sie sich versehentlich einmal verklickt haben, müssen Sie nicht alles neu machen. Es gibt eine “Zurück-Funktion”. Diese verbirgt sich hinter einem “Pfeil-Icon” oben in der grünen Kopfzeile des Programms. Alternativ geht auch die Tastenkombination <strong>Strg + z</strong>.)</p>
+<p>Mit der Sortierung der Tabelle nach Jahreszeiten können Sie nun die Aufgabe lösen. Benutzen Sie dazu wieder die “Summen-Funktion” und zählen Sie nacheinander alle Studierenden, die im Winter, im Sommer, im Herbst und im Frühling Geburtstag haben. Schreiben Sie die Ergebnisse in die dafür vorgesehenen Zellen der Ergebnistabelle.</p>
+<p><strong>Und wo bitte ist die Lösung zur Selbstkontrolle?</strong></p>
+<p>Damit diese Seite hier nicht endlos lang wird, werden wir nicht für jeden einzelnen Schritt der Lösung eine Abbildung einfügen. Aber natürlich sollen Sie sich selbst überprüfen können. Tatsächlich haben Sie die Lösung der Aufgabe (sogar aller Aufgaben) schon vor sich, Sie sehen und wissen es bloß noch nicht. In allen Excel-Dateien, die sie für dieses Seminar runterladen, gibt es nämlich <strong>mehrere Arbeitsmappen</strong>. Sie befinden sich gerade in der “Aufgabe”-Arbeitsmappe. Es gibt aber auch eine weitere Arbeitsmappe, die “Lösung” heißt. Das Bild unten zeigt Ihnen, wo Sie diese finden.</p>
+<p><br /></p>
+<p><img src="images/q1_01einf/excel_mappen.PNG" style="width:100.0%" /> <br /> <br /></p>
+<p>Wenn Sie unten in Excel auf die Arbeitsmappe “Lösung” klicken, sehen Sie die fertig ausgefüllte Lösungstabelle.</p>
+<p><br /></p>
+<div class="boxBorder">
+<p><strong>TIPP:</strong> <em>Am besten lernen Sie natürlich, wenn Sie alles erst einmal so gut wie möglich selbst versuchen, und nicht sofort in die Lösung schauen</em>.</p>
+</div>
+<p><br /></p>
+<p><br /></p>
+<p><strong>Aufgabe 3) Zählen Sie aus, wie viele Studierende in jedem Monat Geburtstag haben</strong></p>
+<p>Um diese Aufgabe zu lösen, könnten Sie natürlich jetzt alles nach “Monat” sortieren und wieder mit der Summen-Funktion arbeiten. Excel hält aber eine ganze Menge Funktionen bereit und für die jetzige Aufgabe gibt es eine viel elegantere Lösung, die uns eine Menge Zeit erspart. Allerdings ist die dazugehörige Funktion auch dafür etwas komplexer.</p>
+<p>Die Funktion, die wir verwenden, heißt <strong>=SUMMEWENN()</strong>. Wie der Name schon andeutet, berechnet diese Funktion eine Summe <strong>wenn</strong> ein bestimmtes Kriterium erfüllt ist.</p>
+<p>In unserem Fall möchten wir immer dann alle Studierenden aufsummieren, wenn sie z.B. im Dezember Geburtstag haben (und danch alle, die im Januar Geburtstag haben usw.). Schreiben Sie sich daher zunächst die Monatsnamen in die noch leere Spalte “Monat” der Ergebnistabelle, so wie es im Bild unten bereits zu sehen ist.</p>
+<p><br /></p>
+<p><img src="images/q1_01einf/excel_summewenn.PNG" style="width:100.0%" /> <br /> <br /></p>
+<p>Bevor es gleich weitergeht: Wenn Sie das manuelle Eintippen der zwölf Monatsnamen schon ziemlich nervig fanden, gibt es eine gute Nachricht. Excel kann einige Dinge, die man machen möchte, quasi vorausahnen und automatisch vervollständigen. Löschen Sie nochmal alle Monatsnamen weg bis auf den Dezember. Klicken Sie auf die Zelle, in der Dezember steht, sodass diese markiert ist. In der rechten unteren Ecke des Markierungskästchens der Zelle sollten Sie jetzt ein kleines Quadrat sehen. Klicken Sie das kleine Quadrat an, halten Sie die Maustaste gedrückt und ziehen sie alles nach unten, lassen Sie die Maustaste los. Excel sollte jetzt alle Monatsnamen automatisch vervollständigt haben.</p>
+<p><img src="images/q1_01einf/excel_ziehenloslassen.PNG" style="width:100.0%" /> <br /> <br /></p>
+<p>Nun zurück zur Aufgabe. Klicken Sie jetzt in die erste Zelle der Spalte “Anzahl Monat” in der Ergebnistabelle und starten Sie die <strong>SUMMWENN()</strong> Funktion (s. Lösungsbild oben).</p>
+<ul>
+<li>Markieren Sie zuerst alle Einträge der Spalte “Monat” in der Ausgangstabelle (blau angezeigt in der oberen Abbildung).</li>
+<li>Tippen Sie dann ein Semikolon “<strong>;</strong>” ein.</li>
+<li>Klicken Sie jetzt auf die Zelle Dezember unmittelbar links neben der Ergebniszelle, in der Sie gerade die Funktion schreiben (rot angezeigt in der oberen Abbildung).</li>
+<li>Schreiben Sie dann wieder ein “<strong>;</strong>”.</li>
+<li>Markieren Sie jetzt noch den Spaltenbereich in der Ausgangstabelle, in dem die Anzahl der Immatrikulierten steht (lila angezeigt in der Abbildung).</li>
+<li>Beenden Sie die Funktion mit einer geschlossenen Klammer, “<strong>)</strong>”.</li>
+<li>Drücken Sie Enter.</li>
+</ul>
+<p>Sie sollten jetzt die Lösung für den Monat Dezember sehen. Um diesen Schritt jetzt nicht weitere elf Male wiederholen zu müssen, können wir den Funktionseintrag von eben noch einmal leicht abändern und uns danach wieder die “automatische Vervollständigung” von Excel zu Nutze machen.</p>
+<p>Klicken Sie noch einmal mit Doppelklick in die gerade erstellte Ergebniszelle <strong>L20</strong>. Dadurch wird die Funktion von eben wieder “aktiv” und wir können Änderungen vornehmen. Schreiben Sie jetzt Dollarzeichen an die Stellen, wie unten in der Abbildung gezeigt. Drücken Sie dann wieder Enter.</p>
+<p><img src="images/q1_01einf/excel_dollars.PNG" style="width:80.0%" /> <br /> <br /></p>
+<p>Machen Sie jetzt in dieser Spalte eine “automatische Vervollständigung” mit “klicken und nach unten ziehen”, genau wie Sie es schon für die Monatsspalte links danaben gemacht hatten.</p>
+<p><br /></p>
 </div>
 
 <p>Copyright &copy; 2020 Quanti-Team. All rights reserved.</p>
