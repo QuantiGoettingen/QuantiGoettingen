@@ -363,13 +363,17 @@ $(document).ready(function () {
 <h2>Ein etwas komplexeres Beispiel</h2>
 <p>Nachdem Sie sich nun ein wenig mit der Excel-Umgebung vertraut gemacht haben, wollen wir uns jetzt zum Ende dieser Einführungssitzung noch ein etwas umfangreicheres Beispiel ansehen.</p>
 <p><strong>Die Geburtstage der Studierenden im Wintersemester 19/20:</strong></p>
-<p>Im Bild unten sehen Sie eine ziemlich große Tabelle, in der die Gebutstagsdaten aller Studierenden der Uni Göttingen aufgelistet sind, die zum Zeitpunkt des 10.10.2019 an der Universität immatrikuliert gewesen waren. Mit Hilfe der Daten in dieser Tabelle wollen wir uns jetzt noch einige sehr nützliche Excel-Funktionen ansehen.</p>
+<p>Im Bild unten sehen Sie eine ziemlich große Tabelle, in der die Gebutstagsdaten aller Studierenden der Uni Göttingen aufgelistet sind, die zum Zeitpunkt des 10.10.2019 an der Universität immatrikuliert gewesen waren (selbstverständlich alles anonymisiert). Mit Hilfe der Daten in dieser Tabelle wollen wir uns jetzt noch einige sehr nützliche Excel-Funktionen ansehen.</p>
 <p>Sie müssen sich diese Tabelle nicht selbst erstellen. Sie finden alle Materialen in unserem GitHub Online-Repository. Zur Übersicht über alle Sitzungen gelangen Sie <a href="https://github.com/QuantiGoettingen/quanti_eins_files">hier</a>. Die Excel-Datei mit dem “Geburtstage-Beispiel” können Sie direkt <a href="https://github.com/QuantiGoettingen/quanti_eins_files/blob/master/01_Einf%C3%BChrung/01_Einf%C3%BChrung_Geburtstage.xlsx">hier</a> herunterladen.</p>
 <p><br /></p>
 <p><img src="images/q1_01einf/geburtstage_1.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>In Spalte <strong>C</strong> stehen die verschiedenen Geburtstagsdaten, in Spalte <strong>B</strong> der dazugehörige Monat und in Spalte <strong>A</strong> die dazugehörige Jahreszeit. In Datumsspalte <strong>C</strong> ist über die Spalten <strong>D</strong> und <strong>E</strong> noch einmal aufgeteilt (in Tag und Monat). Spalte <strong>F</strong> gibt an, wie viele Studierende an einem bestimmten Tag Geburstag haben.</p>
-<p>Weiter rechts in der Arbeitsmappe sehen Sie eine Reihe von <strong>Aufgaben</strong>. Darunter befindet sich eine vorgefertigte Tabelle, in die die Ergebnisse eingetragen werden sollen.</p>
+<p>Weiter rechts in der Arbeitsmappe sehen Sie eine Reihe von <strong>Aufgaben</strong>. Darunter befindet sich eine vorgefertigte Tabelle, in die die Ergebnisse eingetragen werden sollen. Wir werden jetzt die Aufgaben Schritt für Schritt durchgehen.</p>
 <p><br /></p>
+<div class="boxBorder">
+<p><strong>TIPP:</strong> <em>Ganz unten auf der Seite finden Sie auch ein Tutorial-Video, in dem wir die Lösung der Aufgaben besprechen. Bevor Sie das Video schauen, sollten Sie aber zunächst weiterlesen.</em></p>
+</div>
+<p><br /> <br /></p>
 <p><strong>Aufgabe 1) Wie viele Studierende waren im WiSe 2019/2020 eingeschrieben?</strong></p>
 <p><strong>Die erste Excel-Funktion:</strong></p>
 <p>Das Ergebnis soll in Zelle <strong>J33</strong> geschrieben werden, also in die Zelle rechts neben der Zelle, die <strong>“Gesamtanzahl”</strong> heißt. Eine Gesamtzahl lässt sich in Excel sehr schnell mit Hilfe der so genannten <strong>“Summenfunktion”</strong> ermitteln. Die Summenfunktion ist die erste <strong>Excel-Funktion</strong>, die Sie jetzt kennenlernen werden. Die Notation der Funktion ist <strong>=SUMME()</strong>.</p>
@@ -419,17 +423,21 @@ $(document).ready(function () {
 <p>Machen Sie jetzt in dieser Spalte eine “automatische Vervollständigung” mit “klicken und nach unten ziehen”, genau wie Sie es schon für die Monatsspalte links danaben gemacht hatten. Sie sollten jetzt die Ergebnisse für alle anderen Monate erhalten haben.</p>
 <p>Was wäre passiert, wenn man die Dollarzeichen nicht gesetzt hätte? Probieren Sie das einmal aus und schauen Sie, was sich ändert.</p>
 <p>Mit Dollarzeichen kann man Zellenbezüge (oder sogar ganze Spaltenbezüge) <strong>fixieren</strong>. Das ist sehr nützlich, um vernünftig mit Dingen, wie der automatischen Vervollständigung, arbeiten zu können.</p>
-<p><br /></p>
-<div class="boxBorder">
-<p><strong>TIPP:</strong> <em>Am besten lässt sich die Nützlichkeit des</em> <strong>Fixierens von Zellen mit Dollarzeichen</strong> <em>mit Hilfe eines anschaulichen Videos verstehen. Ein sehr gutes</em> <strong>YouTube-Video</strong> <em>des Kanals</em> <strong>TableTorial</strong> <em>dazu sehen Sie unten eingeblendet. Da das Fixieren von zellen äußert wichtig ist, sollten Sie sich auf jeden Fall die Zeit nehmen, dieses Video zu schauen.</em></p>
-</div>
-<p><br /> <br /></p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jldnaofJAC4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-<p><br /> <br /></p>
 <p><strong>Aufgabe 4) Besetimmen Sie den prozentualen Anteil der Studierenden, die in jeder Jahreszeit Geburtstag haben</strong></p>
 <p>Mit den Dingen, die Sie heute bereits gelernt haben (und mit ein wenig Nachdenken), können Sie versuchen, die vierte Aufgabe nun ganz alleine zu lösen. Zur Not wissen Sie ja jetzt auch, wo die zweite Arbeitsmappe mit der Lösung ist.</p>
+<p><br /></p>
+<div id="video-tutorial" class="section level3">
+<h3>Video-Tutorial</h3>
+<p>Abschließend ein Video-Tutorial, in dem wir die Lösung der Geburtstagsaufgabe demonstrieren. Außerdem erklären wir hier anhand der Aufgabe noch einmal, was es mit dem “Fixieren” von Zellen auf sich hat.</p>
+<p><br /></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_grvR5slMsI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
 <p><br /> <br /></p>
+<div class="boxBorder">
+<p><strong>TIPP:</strong> <em>Ein sehr guter YouTube-Kanal rund um Excel ist der Kanal</em> <strong>TableTorial</strong> <em>. Das Video dieses Kanals, welches das Fixieren von Zellen behandelt, finden Sie <a href="https://www.youtube.com/watch?v=jldnaofJAC4">hier</a>. Da das Fixieren von Zellen äußert wichtig ist, sollten Sie sich auf jeden Fall die Zeit nehmen, auch dieses Video zu schauen.</em></p>
+</div>
+<p><br /> <br /></p>
+</div>
 </div>
 
 <p>Copyright &copy; 2020 Quanti-Team. All rights reserved.</p>
