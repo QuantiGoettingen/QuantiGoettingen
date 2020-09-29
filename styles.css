@@ -1,0 +1,10 @@
+blockquote {
+  font-style: italic
+}
+
+.boxBorder {
+     border: 0px solid #bc93a7;
+     padding: 10px;
+     outline: #bc93a7 solid 5px;
+     outline-offset: 5px;
+   }
