@@ -16,7 +16,7 @@ blockquote {
 /* -- Center page titles and remove white space -- */
 .title {
   text-align: left;
-  margin-top: 0.5em !important;
+  margin-top: 1.5em !important;
   margin-bottom: 0.75em;
 }
    
