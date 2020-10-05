@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -25,6 +25,15 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -87,7 +96,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -236,6 +244,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -247,18 +256,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -372,25 +369,22 @@ $(document).ready(function () {
 
 
 <div class="column-right">
-<div class="figure">
-<img src="images/q1_01einf/excelsquirrel.png" />
-
-</div>
+<p><img src="images/q1_01einf/excelsquirrel.PNG" /></p>
 </div>
 <p>Für die Übungen im Modul Quantitative Methoden I benötigen Sie das Tabellenkalkulationsprogramm <strong>Microsoft Excel</strong>. Sofern Sie Excel nicht bereits auf Ihrem Rechner nutzen, können Sie als Studierende/r das Programm günstig über eine Uni-Lizenz bei studyhouse erwerben. Klicken Sie dazu einfach <a href="https://www.studyhouse.de/cgi-bin/product/office-proplus-georg-august-universitaet-goettingen-microsoft-bueroapplikationen-P10016549!381464">hier</a>.</p>
 <p>Eine frei verfügbare Alternative zu Microsoft Excel ist das Programm <strong>Libre Office Calc</strong>, welches Sie <a href="https://de.libreoffice.org/discover/calc/">hier</a> herunterladen können. Auch mit Libre Office Calc kann man die meisten Dinge machen. Die Übungen in diesem Seminar werden aber trotzdem mit Excel durchgeführt.</p>
 <p><br /></p>
 <p><br /></p>
-<div id="erste-schritte---die-exceloberflache" class="section level2">
+<div id="erste-schritte---die-exceloberfläche" class="section level2">
 <h2>Erste Schritte - die Exceloberfläche</h2>
 <p>Wenn Sie Excel installiert haben und öffnen, sieht die Oberfläche zunächst so aus, wie in dem Bild unten.</p>
 <p>Sie haben hier die Möglichkeit, aus verschiedenen “Vorlagen” zu wählen, bereits existierende Dateien aus einem Ordner heraus zu öffnen, oder ein neues Dokument zu beginnen. Excel-Dokumente heißen <strong>Arbeitsmappen</strong>. Um eine neue Arbeitsmappe zu erstellen, klicken Sie ganz einfach auf <strong>Leere Arbeitsmappe</strong>.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_oeffnen.png" style="width:70.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_oeffnen.PNG" style="width:70.0%" /> <br /> <br /></p>
 <div id="die-arbeitsmappenansicht" class="section level3">
 <h3>Die Arbeitsmappenansicht</h3>
 <p>Nachdem sie auf “Leere Arbeitsmappe” geklickt haben, gelangen Sie zur Arbeitsmappenansicht, die so aussieht, wie im Bild unten dargestellt. Im Wesentlichen sieht eine Arbeitsmappe aus wie eine riesige Tabelle, in der es jede Menge <strong>Spalten</strong> und <strong>Zeilen</strong> gibt. Spalten sind durch <strong>Buchstaben</strong> (A, B, C, …) und Zeilen durch <strong>Zahlen</strong> (1, 2, 3, …) gekennzeichnet. Die Schnittstelle zwischen einer Spalte und einer Zeile nennt man in Excel <strong>Zelle</strong>. Durch die Spalten- und Zeilenbeschriftungen kann also jede Zelle eindeutig benannt werden. Im Bild unten sind zur Verdeutlichung zwei Zellen rot markiert. Zum Beispiel befindet sich die erste rot markierte Zelle Spalte <strong>R</strong> und dort wiederum in Zeile <strong>3</strong>. Diese Zelle heißt also <strong>R3</strong>.</p>
-<p><img src="images/q1_01einf/tabelle_uebersicht.png" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/tabelle_uebersicht.PNG" /> <br /> <br /></p>
 <p>Sie können mit Ihrer Maus in eine beliebe Zelle klicken. Die Zelle, die Sie anklicken, wird dann zur besseren Orientierung durch einem grünen Rahmen markiert. Wie Sie sehen können, ist im Bild die Zelle <strong>A1</strong> markiert.</p>
 <p>Sie können dann Einträge in eine ausgewählte Zelle hineinschreiben. Solche Einträge können entweder <strong>Text</strong> oder <strong>Zahlen</strong> sein. In den meisten Fällen werden wir dort natürlich Zahlen vorfinden, denn wir wollen ja in diesem Seminar Excel benutzen, um zu rechnen und statistische Analysen durchzuführen. Text verwendet man in der Regel, um bestimmte Spalten, Zeilen, oder Zellen mit einer Beschriftung zu versehen.</p>
 <p><br /></p>
@@ -401,7 +395,7 @@ $(document).ready(function () {
 <p>Wir könnten jetzt zum Beispiel eine kleine Tabelle erstellen, in der wir uns die Lebenserwartungen von amerikanischen Grauhörnchen und europäischen Eichhörnchen notieren. Diese Tabelle ist in der ersten Abbildung unten dargestellt. Wie Sie dort sehen können, beträgt die durschnittliche Lebenserwartung von Eichhörnchen drei Jahre (das steht in… genau, in Zelle <strong>B2</strong>) und die von Grauhörnchen zehn Jahre (Zelle <strong>B3</strong>). Ein ziemlich großer Unterschied.</p>
 <p>Das schöne an Excel ist, dass man damit nicht nur Dinge notieren, sondern auch damit <strong>rechnen</strong> kann. Wir könnten jetzt z.B. die Differenz der zwei notierten Lebenserwartungen berechnen und das Ergebnis in Zelle <strong>D3</strong> hineinschreiben.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/squirrel_life.png" /> <br /></p>
+<p><img src="images/q1_01einf/squirrel_life.PNG" /> <br /></p>
 <p>Um in Excel eine Rechnung durchzuführen (s. Bild 2), klickt man zunächst in die Zelle, in die dar Ergebnis geschrieben werden soll (in unserem Fall <strong>D3</strong>). Danach schreibt man in diese Zelle ein <strong>Gleichheitszeichen</strong> (=); das ist für Excel nämlich das Signal, dass nun gerechnet werden soll. Wir könnten jetzt also in die Zelle <strong>D3</strong> einfach Folgendes schreiben: <span class="math inline">\(=10-3\)</span>. Wenn wir dann “Enter” drücken, wird das Ergebnis dieser Rechnung (7) in <strong>D3</strong> geschrieben. Wir müssen die Zahlen 10 und 3 aber nicht aus unserer Tabelle ablesen und manuell eintragen. Wir können nach dem “=” auch einfach mit der Maus zuerst Zelle <strong>B3</strong> anklicken, danach ein Minuszeichen (-) schreiben, und dann die Zelle <strong>B2</strong> anklicken. In Bild 2 oben können Sie sehen, wie das aussieht.</p>
 <p>Vielleicht fragen Sie sich jetzt, welchen Vorteil es haben könnte, statt den Zahlen lediglich die Koordinaten, <strong>B3</strong> und <strong>B2</strong>, einzutragen (s. Bild 2). Ein leicht ersichtlicher Vorteil ist natürlich, dass man so vermeidet, sich zu vertippen und versehentlich eine falsche Zahl einzutragen (was bei großen Tabellen schnell passieren kann).</p>
 <p>Ein weniger offensichtlicher aber gewaltiger Vorteil ist, dass die Ergebniszelle (<strong>D3</strong>) auf diese Weise <strong>“dynamisch”</strong> wird. Damit ist gemeint, dass sich das Ergebnis der Berechnung <strong>automatisch anpasst</strong>, wenn man in der Ausgangstabelle die <strong>Werte verändert</strong>. Stellen Sie sich vor, eine neue Studie hätte ergeben, dass europäische Eichhörnchen doch älter werden als zunächst gedacht (eine schöne Nachricht). Ändern Sie die “3” in eine “4”. Was passiert mit der berechneten Differenz? Genau, das Ergebnis wird automatisch aktualisiert (6 statt 7).</p>
@@ -411,7 +405,7 @@ $(document).ready(function () {
 <h3>Speichern einer Arbeitsmappe</h3>
 <p>Eine so wichtige Tabelle wie unsere Hörnchenlebenserwartungstabelle darf natürlich auf keinen Fall verloren gehen. Deshalb sollte man wissen, wie man Arbeitsmappen <strong>abspeichern</strong> kann. Das funktioniert in Excel wie mit den meisten Programmen, die Sie schon kennen.Klicken Sie oben im <strong>grünen Bereich</strong> des Programms auf <strong>Datei</strong>. In dem erscheinenden Menü finden Sie die Auswahl <strong>“Speichern unter”</strong>. Damit können Sie die gegenwärtige Arbeitsmappe in einem beliebigen Ordner Ihres Rechners speichern. Am besten erstellen Sie sich einen neuen Ordner, den Sie “Quanti 1” nennen. Dort können Sie dann alle Excel-Dateien, die Sie im Verlauf dieses Semesters erstellen werden, sammeln.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_speichern.png" style="width:70.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_speichern.PNG" style="width:70.0%" /> <br /> <br /></p>
 </div>
 </div>
 <div id="ein-etwas-komplexeres-beispiel" class="section level2">
@@ -421,7 +415,7 @@ $(document).ready(function () {
 <p>Im Bild unten sehen Sie eine ziemlich große Tabelle, in der die Gebutstagsdaten aller Studierenden der Uni Göttingen aufgelistet sind, die zum Zeitpunkt des 10.10.2019 an der Universität immatrikuliert gewesen waren (selbstverständlich alles anonymisiert). Mit Hilfe der Daten in dieser Tabelle wollen wir uns jetzt noch einige sehr nützliche Excel-Funktionen ansehen.</p>
 <p>Sie müssen sich diese Tabelle nicht selbst erstellen. Sie finden alle Materialen <a href="https://quantigoettingen.github.io/quantigoettingen/page-q1_materials.html">hier</a> und alternativ auch in stud.ip.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/geburtstage_1.png" style="width:100.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/geburtstage_1.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>In Spalte <strong>C</strong> stehen die verschiedenen Geburtstagsdaten, in Spalte <strong>B</strong> der dazugehörige Monat und in Spalte <strong>A</strong> die dazugehörige Jahreszeit. In Datumsspalte <strong>C</strong> ist über die Spalten <strong>D</strong> und <strong>E</strong> noch einmal aufgeteilt (in Tag und Monat). Spalte <strong>F</strong> gibt an, wie viele Studierende an einem bestimmten Tag Geburstag haben.</p>
 <p>Weiter rechts in der Arbeitsmappe sehen Sie eine Reihe von <strong>Aufgaben</strong>. Darunter befindet sich eine vorgefertigte Tabelle, in die die Ergebnisse eingetragen werden sollen. Wir werden jetzt die Aufgaben Schritt für Schritt durchgehen.</p>
 <p><br /></p>
@@ -436,24 +430,21 @@ $(document).ready(function () {
 <p>Im Bild unten ist das Vorgehen noch einmal verdeutlicht. Grundsätzlich gilt: In die Klammern, “<strong>()</strong>”, einer Funktion kommt immer das hinein, was mit Hilfe der Funktion “verrechnet” werden soll. Man sieht im Screenshot ebenfalls, dass der zu summierende Bereich innerhalb der Klammer der Funktion zu lesen ist: “F6:F371” bedeutet schlicht “Zelle F6 bis Zelle F371”. Der Doppelpunkt steht also für “bis”. Statt den aufzusummierenden Bereich mit der Maus zu markieren, könnte man ihn also auch einfach eintippen. (Hier versteckt sich übrigens ein grundsätzlicher und sehr nützlicher Punkt: Durch das Klicken in eine Zelle, in der eine Formel enthalten ist, wird die Formel und der Bereich, auf den sie sich bezieht, sichtbar. Das heißt, wenn Sie beispielsweise in unsere Musterlösungen schauen und sehen, dass die Summe der Immatrikulierten 30405 beträgt, können Sie in diese Zelle klicken und Sie sehen, wie wir darauf gekommen sind.)</p>
 <p>Das Markieren von größeren Bereichen kann übrigens durch ein Tastaturkürzel stark vereinfacht werden. Wählen Sie die erste Zelle der Spalte “Anzahl Immatrikulierte” (F6) durch Mausklick aus. Drücken Sie dann zunächst sowohl die Taste Strg als auch Shift (die Umstelltaste, die man auch zum Großschreiben nutzt). Halten Sie diese beiden Tasten gedrückt und drücken Sie nun zusätzlich die Pfeiltaste nach unten. Die gesamten Daten in der Spalte werden nun markiert (Excel erkennt automatisch, wo die Daten aufhören). Dasselbe Vorgehen würde natürlich auch nach links, rechts oder oben funktionieren. Wenn sie z.B. Zelle A6 anklicken, dasselbe Vorgehen wiederholen, aber die Pfeiltaste nach rechts drücken, wird die gesamte erste Zeile der Tabelle markiert. Wenn diese erste Zeile markiert ist, können Sie unter Gedrückthalten von Strg und shift auch nochmal die Pfeiltaste nach unten drücken. Nun ist die gesamte Tabelle markiert. Bei einem Mac funktioniert das Vorgehen genauso, aber mit Befehlstaste, Shift, und den gewünschten Pfeiltasten.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_summe.png" style="width:100.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_summe.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p><strong>Aufgabe 2) Zählen Sie aus, wie viele Studierende in jeder Jahreszeit Geburtstag haben</strong></p>
 <p>Um diese Aufgabe zu lösen, bietet es sich an, die Jahreszeitenspalte (Spalte <strong>A</strong>) zunächst zu sortieren. Markieren Sie dazu mittels “Klicken und Ziehen” den gesamten Abschnitt in Spalte <strong>A</strong>, in dem die Jahreszeiten stehen. Danach finden Sie oben rechts im Menübereich die Rubrik <strong>“Sortieren und Filtern”</strong>. Unten sehen Sie wieder ein Beispielbild. Dort können Sie auswählen, ob sie die Spalte “rückwärts” von Z nach A oder “vorwärts” von A nach Z sortieren wollen. Wir nehmen in diesem Fall von Z nach A, da dann der Winter, mit dem das Jahr beginnt, oben steht.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_marksort.png" style="width:100.0%" /> <br /></p>
+<p><img src="images/q1_01einf/excel_marksort.PNG" style="width:100.0%" /> <br /></p>
 <p>Nachdem Sie auf “von Z bis A” geklickt haben, wird Excel Ihnen eine Meldung anzeigen, die im nachfolgenden Bild zu sehen ist:</p>
-<p><img src="images/q1_01einf/excel_markerweitern.png" style="width:40.0%" /> <br /></p>
+<p><img src="images/q1_01einf/excel_markerweitern.PNG" style="width:40.0%" /> <br /></p>
 <p>Das Programm versichert sich hier, ob man tatsächlich nur die markierte Spalte sortieren möchte, oder ob man nicht vielleicht doch die <strong>benachbarten Spalten auch mitsortieren</strong> möchte. Das “Mitsortieren” der Nachbarspalten erfolgt, wenn man den Punkt <strong>Markierung erweitern</strong> auswählt (ist schon standardmäßig vorgeschlagen). Das Mitsortieren der Nachbarspalten ist hier <strong>wichtig</strong>. Was würde nämlich passieren, wenn Sie die Nachbarspalten nicht mitsortieren würden? Probieren Sie das ruhig einmal aus und versuchen Sie zu sehen, was der Unterschied ist. (Im Übrigen: sollten Sie sich versehentlich einmal verklickt haben, müssen Sie nicht alles neu machen. Es gibt eine “Zurück-Funktion”. Diese verbirgt sich hinter einem “Pfeil-Icon” oben in der grünen Kopfzeile des Programms. Alternativ geht auch die Tastenkombination <strong>Strg + z</strong>.)</p>
 <p>Um nicht jedes Mal dieses Pop Up-Fenster zu sehen, würde man an dieser Stelle natürlich üblicherweise direkt <strong>die gesamte Tabelle markieren</strong>, bevor man überhaupt auf “Sortieren und Filtern” klickt. Wenn man aber die gesamte Tabelle markiert, woher soll Excel dann wissen, nach welcher der (hier immerhin 6) Spalten wir sortieren möchten? Der Trick ist, dass wir bei diesem Vorgehen die Überschriften der Spalten mit markieren. Unsere Markierung startet also bei A5 (“Jahreszeit”), und von hier aus markieren wir die gesamte Zeile mit den Überschriften sowie alle Daten (A5:F371). Wenn diese Markierung besteht, klicken wir auf “Sortieren und Filtern” und wählen “Benutzerdefiniertes Sortieren”. Im dem nun erscheinenden Fenster muss oben rechts das Häkchen bei “Daten haben Überschriften” gesetzt werden. Dann weiß Excel, dass die erste Zeile des markierten Bereichs Überschriften enthält und keine Daten. Im unten sichtbaren Dropdown-Menü kann nun ausgewählt werden, nach welcher der 6 Spalten wir unsere Daten sortieren wollen und wie. Wir wählen “Jahreszeit” und “von Z bis A”. Übrigens könnte man an dieser Stelle auch weitere Sortierungs-Ebenen hinzufügen. Durch Klicken von “Ebene hinzufügen” erhalten wir eine weitere Zeile mit Dropdown-Menüs und könnten so beispielsweise unsere Daten zuerst nach Jahreszeit (erste Ebene), aber innerhalb der Jahreszeiten alphabetisch nach Monaten (zweite Ebene) sortieren.</p>
-<div class="figure">
-<img src="images/q1_01einf/excel_benutzerdef_sortieren.png" style="width:100.0%" />
-
-</div>
+<p><img src="images/q1_01einf/excel_benutzerdef_sortieren.png" style="width:100.0%" /></p>
 <p>Mit der Sortierung der Tabelle nach Jahreszeiten können Sie nun die Aufgabe lösen. Benutzen Sie dazu wieder die “Summen-Funktion” und zählen Sie nacheinander alle Studierenden, die im Winter, im Sommer, im Herbst und im Frühling Geburtstag haben. Schreiben Sie die Ergebnisse in die dafür vorgesehenen Zellen der Ergebnistabelle.</p>
 <p><strong>Und wo bitte ist die Lösung zur Selbstkontrolle?</strong></p>
 <p>Damit diese Seite hier nicht endlos lang wird, werden wir nicht für jeden einzelnen Schritt der Lösung eine Abbildung einfügen. Aber natürlich sollen Sie sich selbst überprüfen können. Tatsächlich haben Sie die Lösung der Aufgabe (sogar aller Aufgaben) schon vor sich, Sie sehen und wissen es bloß noch nicht. In allen Excel-Dateien, die sie für dieses Seminar runterladen, gibt es nämlich <strong>mehrere Arbeitsmappen</strong>. Sie befinden sich gerade in der “Aufgabe”-Arbeitsmappe. Es gibt aber auch eine weitere Arbeitsmappe, die “Lösung” heißt. Das Bild unten zeigt Ihnen, wo Sie diese finden.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_mappen.png" style="width:100.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_mappen.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>Wenn Sie unten in Excel auf die Arbeitsmappe “Lösung” klicken, sehen Sie die fertig ausgefüllte Lösungstabelle.</p>
 <p><br /></p>
 <div class="boxBorder">
@@ -466,9 +457,9 @@ $(document).ready(function () {
 <p>Die Funktion, die wir verwenden, heißt <strong>=SUMMEWENN()</strong>. Wie der Name schon andeutet, berechnet diese Funktion eine Summe <strong>wenn</strong> ein bestimmtes Kriterium erfüllt ist.</p>
 <p>In unserem Fall möchten wir immer dann alle Studierenden aufsummieren, wenn sie z.B. im Dezember Geburtstag haben (und danch alle, die im Januar Geburtstag haben usw.). Schreiben Sie sich daher zunächst die Monatsnamen in die noch leere Spalte “Monat” der Ergebnistabelle, so wie es im Bild unten bereits zu sehen ist.</p>
 <p><br /></p>
-<p><img src="images/q1_01einf/excel_summewenn.png" style="width:100.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_summewenn.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>Bevor es gleich weitergeht: Wenn Sie das manuelle Eintippen der zwölf Monatsnamen schon ziemlich nervig fanden, gibt es eine gute Nachricht. Excel kann einige häufig gewünschte Dinge, die man machen möchte, quasi vorausahnen und automatisch vervollständigen (Zahlenfolgen, Monatsfolgen, Daten…). Löschen Sie nochmal alle Monatsnamen weg bis auf den Dezember. Klicken Sie auf die Zelle, in der Dezember steht, sodass diese markiert ist. In der rechten unteren Ecke des Markierungskästchens der Zelle sollten Sie jetzt ein kleines Quadrat sehen. Klicken Sie das kleine Quadrat an, halten Sie die Maustaste gedrückt und ziehen sie alles nach unten, lassen Sie die Maustaste los. Excel sollte jetzt alle Monatsnamen automatisch vervollständigt haben. Das Vorgehen mit dem kleinen Quadrat sollten Sie sich merken, weil wir das sehr häufig brauchen werden. Damit lassen sich nämlich auch Formeln auf ganze Bereiche übertragen, wie wir gleich sehen werden.</p>
-<p><img src="images/q1_01einf/excel_ziehenloslassen.png" style="width:100.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_ziehenloslassen.PNG" style="width:100.0%" /> <br /> <br /></p>
 <p>Nun zurück zur Aufgabe. Klicken Sie jetzt in die erste Zelle der Spalte “Anzahl Monat” in der Ergebnistabelle und starten Sie die <strong>SUMMEWENN()</strong> Funktion (s. Lösungsbild oben).</p>
 <ul>
 <li>Markieren Sie zuerst alle Einträge der Spalte “Monat” in der Ausgangstabelle (blau angezeigt in der oberen Abbildung).</li>
@@ -482,7 +473,7 @@ $(document).ready(function () {
 <p>Sie sollten jetzt die Lösung für den Monat Dezember sehen. Aber was macht diese Funktion inhaltlich - was haben wir Excel da gerade zu tun beauftragt? Der erste Input der Funktion ist die Spalte mit allen Monatsnamen. Das ist der Bereich, in der gleich nach einem bestimmten Kriterium (einem der zwölf möglichen Monatsnamen) gesucht werden soll. Der zweite Input ist dieses gewünschte Kriterium, also einer der zwölf Monatsnamen. Wir könnten statt der Zelle K20 auch einfach “Dezember” an diese Stelle schreiben (inklusive der Anführungszeichen) und würden dasselbe Ergebnis erhalten. Es ist allerdings nützlich, stattdessen auf die Zelle zu verweisen, wie wir gleich noch sehen werden. Bisher weiß Excel also 1) dass es die Spalte mit den Monatsnamen durchsuchen soll, 2) dass es diese Spalte konkret nach “Dezember” durchsuchen soll. Dadurch, dass die Funktion “SUMMEWENN” gewählt wurde, weiß es auch, dass wir irgendwelche Werte summiert haben wollen - aber eben nur dann, wenn in der Monatsspalte “Dezember” steht. Was also noch fehlt, ist die Angabe darüber, wo die Werte zu finden sind, die bei Erfüllung dieses Kriteriums summiert werden sollen. Das ist natürlich die Spalte “Anzahl Immatrikulierte” (F6:F371), und der dritte Input dieser Funktion. Wir haben Excel also beauftragt, die Summe der Spalte “Anzahl Immatrikulierte” zu bilden, aber nur dann, wenn ein bestimmtes Kriterium erfüllt ist. Das Kriterium lautet, dass in der Monatsspalte “Dezember” steht. Wir bekommen also die Anzahl der Studierenden ausgegeben, die im Dezember Geburtstag haben.</p>
 <p>Um diesen Schritt jetzt nicht weitere elf Male wiederholen zu müssen, können wir den Funktionseintrag von eben noch einmal leicht abändern und uns danach wieder die “automatische Vervollständigung” von Excel zu Nutze machen.</p>
 <p>Klicken Sie noch einmal mit Doppelklick in die gerade erstellte Ergebniszelle <strong>L20</strong>. Dadurch wird die Funktion von eben wieder “aktiv” und wir können Änderungen vornehmen. Schreiben Sie jetzt Dollarzeichen an die Stellen, wie unten in der Abbildung gezeigt. Drücken Sie dann wieder Enter.</p>
-<p><img src="images/q1_01einf/excel_dollars.png" style="width:80.0%" /> <br /> <br /></p>
+<p><img src="images/q1_01einf/excel_dollars.PNG" style="width:80.0%" /> <br /> <br /></p>
 <p>Machen Sie jetzt in dieser Spalte eine “automatische Vervollständigung” mit “klicken und nach unten ziehen”, genau wie Sie es schon für die Monatsspalte links danaben gemacht hatten. Sie sollten jetzt die Ergebnisse für alle anderen Monate erhalten haben.</p>
 <p>Was haben wir da gerade gemacht und was wäre passiert, wenn man die Dollarzeichen nicht gesetzt hätte? Probieren Sie das einmal aus und schauen Sie, was sich ändert.</p>
 <p>Mit Dollarzeichen kann man Zellenbezüge (oder sogar ganze Spaltenbezüge) <strong>fixieren</strong>. Das ist sehr nützlich, um vernünftig mit Dingen, wie der automatischen Vervollständigung, arbeiten zu können. Warum genau das nützlich ist, erfahren Sie in dem kurzen Video unten.</p>
@@ -518,6 +509,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
