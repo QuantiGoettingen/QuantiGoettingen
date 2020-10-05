@@ -50,3 +50,8 @@ body {
   display: table;
   clear: both;
 }
+
+/* -- allows us to add borders to images -- */
+img[src*="#bordered"] {
+   border: 2px solid black;
+}
