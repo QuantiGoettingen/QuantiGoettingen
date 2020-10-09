@@ -24,7 +24,7 @@ blockquote {
 /* -- Define the font type of the website's body -- */
 body {
     font-family: 'Muli';
-    font-size: 19px;
+    font-size: 15px;
 }
 
 /* -- Define columns -- */
@@ -39,6 +39,22 @@ body {
   float: right;
   width: 50%;
   text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.column-right_alignRight{
+  float: right;
+  width: 20%;
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.column-right_alignRightBigger{
+  float: right;
+  width: 50%;
+  text-align: right;
   padding-left: 10px;
   padding-right: 10px;
 }
