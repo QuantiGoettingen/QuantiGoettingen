@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -262,6 +265,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -269,6 +335,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -369,6 +445,8 @@ $(document).ready(function () {
 </div>
 
 
+<div id="umfragen-vs.-experimente" class="section level1">
+<h1><span class="header-section-number">1</span> Umfragen vs. Experimente</h1>
 <p>In der letzten Sitzung haben wir uns mit der Aufbereitung erhobener Daten befasst. Nachdem Sie also nun wissen, wie man erhobene Daten so aufbereitet, dass man damit weiterarbeiten kann, sollten Sie nun auch erfahren, was dieses “Weiterarbeiten” umfasst. Ein erster Schritt, um den es heute geht, ist quasi immer eine <strong>Beschreibung</strong> der Daten durch die Ermittlung bestimmter <strong>statistischer Kennwerte</strong>. Wir befassen uns in dieser Sitzung also mit <strong>deskriptiver Statistik</strong>.</p>
 <p>In der letzten Sitzung haben wir Daten verwendet, die aus Umfragen/ Fragebögen stammten. In dieser Sitzung wollen wir das Thema “deskriptive Statistik” zur Abwechslung dagegen mit den Daten aus einem psychologischen Experiment besprechen.</p>
 <p>Hoffentlich haben Sie in der letzten Sitzung schon darüber nachgedacht und/ oder nachgelesen, was Umfragen von Experimenten unterscheidet. Im Kasten unten ist der Unterschied noch einmal kurz auf den Punkt gebracht.</p>
@@ -387,8 +465,9 @@ $(document).ready(function () {
 </ul>
 </div>
 <p><br> <br></p>
-<div id="das-heutige-beispiel-wie-reagieren-menschen-in-moralischen-dilemma-situationen" class="section level2">
-<h2>Das heutige Beispiel: Wie reagieren Menschen in moralischen Dilemma-Situationen?</h2>
+</div>
+<div id="das-heutige-beispiel-wie-reagieren-menschen-in-moralischen-dilemma-situationen" class="section level1">
+<h1><span class="header-section-number">2</span> Das heutige Beispiel: Wie reagieren Menschen in moralischen Dilemma-Situationen?</h1>
 <p>Eine in der Forschung zu moralischen Intuitionen viel untersuchte Frage ist, welche Handlungen Menschen in moralischen Dilemmasituationen eher für angemessen halten. Ein moralisches Dilemma ist dann gegeben, wenn man eigentlich keine der Handlungsoptionen in Ordnung findet, sich aber in der gegebenen Situation für eine der Optionen entscheiden muss. Folgende Situation illustriert ein solches (in diesem Fall völlig fiktives) moralisches Dilemma:</p>
 <p><br></p>
 <p><em>Stellen Sie sich vor, ein Zug ist außer Kontrolle geraten und rast die Gleise entlang. Weiter unten auf der Strecke sind gerade fünf Personen, die den nahenden Zug nicht bemerken können. Rast der Zug unkontrolliert weiter, so wird er die fünf Personen überrollen und töten. Es gibt eine Möglichkeit, das Leben der fünf Personen zu retten. Die Zugführerin könnte eine Weiche umstellen, wodurch der Zug noch rechtzeitig auf ein Nebengleis umgeleitet würde. Das Problem ist, dass auf diesem Nebengleis eine einzelne Person ist, die stattdessen auf jeden Fall sterben würde, wenn man den Zug umleiten würde.</em></p>
@@ -415,8 +494,8 @@ $(document).ready(function () {
 </div>
 <p>Im Wintersemester 2019/20 wollten wir den Psychologiestudierenden des ersten Semesters demonstrieren, wie robust dieser Effekt ist und deshalb ein Experiment durchgeführt. Uns ging es dabei nicht darum, eine Erklärung des Effekts zu prüfen, sondern nur, ihn einfach erneut zu demonstrieren. Wenn Sie das Thema mehr interessiert, können Sie z.B. dieses Kaptiel <a href="https://www.researchgate.net/profile/Michael_Waldmann/publication/260025638_Moral_Judgment/links/0c96053b9216aaabc1000000.pdf">hier</a>, aus dem die Abb. oben stammt, lesen. In unserem Experiment war die Frage: “Führt das Push-Dilemma zu niedrigeren Akzeptabilitätsratings als das Switch-Dilemma?” Dazu ließen wir die Studierenden also einfach entweder die “Switch-” oder die “Push-” Version des Dilemmas lesen und beurteilen. Die Versuchspersonen wurden den beiden Bedingungen (Switch vs. Push) zufällig zugeteilt. Nachdem sie die Szenarien gelesen hatten, gaben sie auf einer sechstufigen Ratingskala an, wie moralisch akzeptabel sie die beschriebene Handlung finden (1 = völlig unangemessen; 6 = völlig angemessen). Die gemessene oder auch <strong>abhängigke Variable</strong> (AV) war also dieses Akzeptabilitätsrating.</p>
 <p><br></p>
-<div id="die-daten" class="section level3">
-<h3>Die Daten</h3>
+<div id="die-daten" class="section level2">
+<h2><span class="header-section-number">2.1</span> Die Daten</h2>
 <p>Die Excel-Datei mit den Ergebnissen des Experiments können Sie <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">hier</a> herunterladen. Die erste Arbeitsmappe sollte dann so aussehen, wie unten abgebildet.</p>
 <p><br></p>
 <p><img src="images/q1_03exp/trolley_data.png#bordered" /> <br> <br></p>
@@ -429,8 +508,8 @@ $(document).ready(function () {
 <p>In die weiteren beschrifteten Spalten/ Zellen sollen in den nächsten Schritten die Ergebnisse von Berechnungen eingetragen werden.</p>
 <p><br></p>
 </div>
-<div id="wichtige-deskriptive-kennwerte-berechnen" class="section level3">
-<h3>Wichtige deskriptive Kennwerte berechnen</h3>
+<div id="wichtige-deskriptive-kennwerte-berechnen" class="section level2">
+<h2><span class="header-section-number">2.2</span> Wichtige deskriptive Kennwerte berechnen</h2>
 <p>In der Vorlesung haben Sie wichtige deskriptive statistische Kennwerte bereits kennengelernt, die man benutzt, um vorliegende Daten zu beschreiben, zusammenzufassen und damit letztlich besser zu verstehen. Zu diesen deskriptiven Kennwerten zählen z.B.:</p>
 <ul>
 <li><strong>Lageparameter</strong> wie:
@@ -451,13 +530,13 @@ $(document).ready(function () {
 <p><br></p>
 <p>Wie Sie in der Kopfzeile der Excel-Datei sehen können, sollen Sie einige dieser Werte für den vorliegenden Datensatz nun bestimmen.</p>
 <p><br></p>
-<div id="anzahl" class="section level4">
-<h4>Anzahl</h4>
+<div id="anzahl" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Anzahl</h3>
 <p>Benutzen Sie zuerst die Excel-Funktion “<strong>Anzahl()</strong>” und zählen Sie damit aus, wie viele Versuchspersonen in jeder Bedingung waren. Schreiben sie die Ergebnisse in die Zellen <strong>I21</strong> und <strong>J21</strong>.</p>
 <p><br></p>
 </div>
-<div id="arithmetische-mittel" class="section level4">
-<h4>Arithmetische Mittel</h4>
+<div id="arithmetisches-mittel" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Arithmetisches Mittel</h3>
 <p>Als nächstes die Berechnung der <strong>arithmetischen Mittel</strong> der beiden Versuchsgruppen. Diese Mittelwerte sollen Sie jeweils in die Zellen <strong>I14</strong> und <strong>J14</strong> eintragen. Überlegen Sie zuvor noch einmal, was genau gibt das arithmetische Mittel an?</p>
 <p>Die mathematische Formel ist: <span class="math inline">\(\frac{1}{n} \sum_{i=i}^{n} x_{i}\)</span></p>
 <p>Sie müssen also alle Rohwerte (Ratings jeder Versuchsperson) einer Versuchsgruppe aufsummieren und durch die Anzahl der Werte dieser Gruppe dividieren. Benutzen Sie dazu die Excel-Funktion “<strong>Summe()</strong>” und die zuvor berechneten Anzahlen (n). Hier eine Veranschaulichung für die Gruppe “Push”:</p>
@@ -469,8 +548,8 @@ $(document).ready(function () {
 <p><img src="images/q1_03exp/mittelwert2.png#bordered" /></p>
 <p><br> <br></p>
 </div>
-<div id="standardabweichung" class="section level4">
-<h4>Standardabweichung</h4>
+<div id="standardabweichung" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Standardabweichung</h3>
 <p>Als nächstes berechnen wir die Standardabweichungen der beiden Versuchsgruppen. Überlegen Sie erst noch einmal, was gibt die Standardabweichung an?</p>
 <p>Die Formel für die deskriptive Standardabweichung ist: <span class="math inline">\(s=\sqrt{\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2}\)</span></p>
 <p>Sie müssen also jeden Wert in einer Versuchsgruppe von deren Gruppenmittelwert abziehen und quadrieren, dann diese quadrierten Werte aufsummieren und durch die Anzahl der Werte teilen (also mitteln) und aus diesem Ergebnis dann am Ende die Wurzel ziehen.</p>
@@ -491,8 +570,8 @@ $(document).ready(function () {
 <p>Auch diesmal haben wir mit den einzelnen Schritten die mathematische Formel quasi nachvollzogen. Das sollte nur dazu dienen, besser zu verstehen, was die Standardabweichung ist. Auch für die Standardabweichung gibt es eine eigene Excel-Funktion (genau gesagt sogar zwei, aber dazu in späteren Sitzungen mehr), diese heißt “<strong>STABW.N()</strong>”. Benutzen Sie nun diese Funktion, um die Standardabweichungen beider Gruppen direkt zu ermitteln.</p>
 <p><br></p>
 </div>
-<div id="minimum-maximum-median-und-quartile" class="section level4">
-<h4>Minimum, Maximum, Median und Quartile</h4>
+<div id="minimum-maximum-median-und-quartile" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Minimum, Maximum, Median und Quartile</h3>
 <p>Als letztes gibt es noch eine kleine Tabelle in die <strong>Minimum</strong>, <strong>25% Quartil</strong>, <strong>Median</strong> und <strong>75% Quartil</strong> und <strong>Maximum</strong> für die beiden Versuchsgruppen eingetragen werden sollen. Was Minimum und Maximum ist, dürfte Ihnen natürlich schon klar sein. Aber was ist der Median? Und was sind das 25% und das 75% Quartil? Schauen Sie sich dazu den Zahlenstrahl unten an, bei dem eine Reihe von 8 Werten aufsteigend von links nach rechts sortiert ist.</p>
 <p><br></p>
 <p><img src="images/q1_03exp/minmax.png#bordered" /></p>
@@ -509,8 +588,8 @@ $(document).ready(function () {
 <p><br></p>
 </div>
 </div>
-<div id="abbildungen" class="section level3">
-<h3>Abbildungen</h3>
+<div id="abbildungen" class="section level2">
+<h2><span class="header-section-number">2.3</span> Abbildungen</h2>
 <p>Als nächstes sollen Sie verschiedene Abbildungen erstellen und zwar:</p>
 <ul>
 <li>Eine Abbildung der Gruppenmittelwerte in Form eines <strong>Säulendiagramms</strong>.</li>
@@ -518,20 +597,20 @@ $(document).ready(function () {
 <li><strong>Box-Plots</strong> für beide Gruppen.</li>
 </ul>
 <p>Wie diese Abbildungen am Ende aussehen sollen, sehen sie in den folgenden Abbildungen. Wie man diese Abbildungen in Excel erstellt, zeigen wir Ihnen wieder in kurzen Videos. <br> <br></p>
-<div id="säulendiagramm-mit-gruppenmittelwerten" class="section level4">
-<h4>Säulendiagramm mit Gruppenmittelwerten</h4>
+<div id="säulendiagramm-mit-gruppenmittelwerten" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Säulendiagramm mit Gruppenmittelwerten</h3>
 <p><img src="images/q1_03exp/mean_bars.png#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/mgdHlB63cfg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
-<div id="histogramme-für-beide-gruppen" class="section level4">
-<h4>Histogramme für beide Gruppen</h4>
+<div id="histogramme-für-beide-gruppen" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Histogramme für beide Gruppen</h3>
 <p><img src="images/q1_03exp/histograms.png#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/8ZXFekhMX0E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
-<div id="boxplots-für-beide-gruppen" class="section level4">
-<h4>Boxplots für beide Gruppen</h4>
+<div id="boxplots-für-beide-gruppen" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Boxplots für beide Gruppen</h3>
 <p><img src="images/q1_03exp/boxplots.png#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/ZRiWL4-hbMQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
@@ -539,18 +618,23 @@ $(document).ready(function () {
 </div>
 </div>
 </div>
-<div id="zusatzaufgabe-zum-weiteren-üben" class="section level2">
-<h2>Zusatzaufgabe zum weiteren Üben</h2>
+<div id="zusatzaufgabe-zum-weiteren-üben" class="section level1">
+<h1><span class="header-section-number">3</span> Zusatzaufgabe zum weiteren Üben</h1>
 <p>Wir haben noch einen zusätzlichen Datensatz für Sie, mit dem Sie noch einmal alles üben können. Den Datensatz finden Sie <a href="q1_dataFiles/03_Experimente%20und%20deskriptive%20Statistik_Zusatzaufgabe_HoernchenFitness.xlsx">hier</a>.</p>
 <p><br></p>
-<div id="szenario" class="section level3">
-<h3>Szenario</h3>
+<div id="szenario" class="section level2">
+<h2><span class="header-section-number">3.1</span> Szenario</h2>
 <p>Die Excel-Datei enthält die Daten eines fiktiven Experiments, das BiologInnen durchgeführt haben. Die ForscherInnen gingen der Frage nach, wie sich verschiedene Nahrungsgewohnheiten von Eichhörnchen auf deren körperliche Fitness auswirken. Konkret: Unterscheidet sich die körperliche Fitness von Eichhörnchen, die Walnüsse fressen, von der Fitness von Eichhörnchen, die Haselnüsse fressen?</p>
 <div class="column-right_alignRightBigger">
 <p><img src="images/q1_03exp/squirrel_fitness.PNG" style="width:80.0%" /></p>
 </div>
 <p>Um diese spannende Frage zu beantworten, haben die ForscherInnen ein Experiment durchgeführt. Sie fingen dazu 80 wilde Eichhörnchen (<em>Sciurus vulgaris</em>) aus dem nahegelegenen Wald und teilten die Eichhörnchen zufällig in zwei Gruppen auf. Eine Gruppe (n = 40 Eichhörnchen) wurde fortan für die Dauer von 10 Wochen nur noch mit Walnüssen gefüttert. Die andere Gruppe wurde für die Dauer von 10 Wochen nur noch mit Haselnüssen gefüttert. Nach Ablauf der 10 Wochen wurde die körperliche Fitness der Eichhörnchen in den beiden Gruppen ermittelt. Dazu wurde die Ausdauer aller Eichhörnchen von den ForscherInnen auf einer Skala von 0 (“weniger Ausdauer geht kaum”) bis 10 (“mehr Ausdauer geht kaum”) erfasst. Die ForscherInnen, die die Bewertung der Ausdauer vornahmen, waren natürlich “verblindet”, das heißt, sie wussten nicht, ob sie Eichhörnchen der Wal- oder der Haselnussbedingung bewerteten.</p>
 <p>Lösen Sie die in der Excel-Datei aufgeführten Aufgaben.</p>
+<p><br></p>
+</div>
+</div>
+<div id="fragen-zur-selbstkontrolle" class="section level1">
+<h1><span class="header-section-number">4</span> Fragen zur Selbstkontrolle</h1>
 <!---LEARNR-->
 <iframe style="margin:0 auto; min-width: 100%;" id="myIframe1" class="interactive" src="https://simonstephan.shinyapps.io/q1_03deskriptiv/" scrolling="no" frameborder="no">
 </iframe>
@@ -560,11 +644,12 @@ $(document).ready(function () {
   iFrameResize({}, ".interactive");
 </script>
 </div>
-</div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Quanti-Team. All rights reserved.</font></p>
 
 
+</div>
+</div>
 
 </div>
 
@@ -597,6 +682,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
