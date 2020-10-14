@@ -498,7 +498,8 @@ div.tocify {
 <h2><span class="header-section-number">2.1</span> Die Daten</h2>
 <p>Die Excel-Datei mit den Ergebnissen des Experiments können Sie <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">hier</a> herunterladen. Die erste Arbeitsmappe sollte dann so aussehen, wie unten abgebildet.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/trolley_data.png#bordered" /> <br> <br></p>
+<p><img src="images/q1_03exp/trolley_data.png#bordered" /></p>
+<p><br> <br></p>
 <p>Die verschiedenen Spalten bedeuten folgendes:</p>
 <ul>
 <li>Spalte A: “<strong>number/ sID</strong>” = Versuchspersonennummer</li>
@@ -541,11 +542,11 @@ div.tocify {
 <p>Die mathematische Formel ist: <span class="math inline">\(\frac{1}{n} \sum_{i=i}^{n} x_{i}\)</span></p>
 <p>Sie müssen also alle Rohwerte (Ratings jeder Versuchsperson) einer Versuchsgruppe aufsummieren und durch die Anzahl der Werte dieser Gruppe dividieren. Benutzen Sie dazu die Excel-Funktion “<strong>Summe()</strong>” und die zuvor berechneten Anzahlen (n). Hier eine Veranschaulichung für die Gruppe “Push”:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/mittelwert.png#bordered" /></p>
+<p><img src="images/q1_03exp/mittelwert.PNG#bordered" /></p>
 <p><br> <br></p>
 <p>Die Berechnung, die im Bild dargestellt ist, bildet die obige mathematische Formel nach. Das Schöne an Excel ist, dass man viele statistische Kennwerte aber auch direkt über eine eigene Funktion ermitteln kann. Für das arithmetische Mittel gibt es dafür die Funktion “<strong>=MITTELWERT()</strong>”. Benutzen Sie nun diese Funktion, wie im Bild unten dargestellt, und schreiben Sie die Ergebnisse in die dafür vorgesehenen Zellen <strong>I15</strong> und <strong>J15</strong>.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/mittelwert2.png#bordered" /></p>
+<p><img src="images/q1_03exp/mittelwert2.PNG#bordered" /></p>
 <p><br> <br></p>
 </div>
 <div id="standardabweichung" class="section level3">
@@ -556,16 +557,16 @@ div.tocify {
 <p>Zwischenfrage: Was für einen Kennwert bekommt man, wenn man die Standardabweichung quadriert?</p>
 <p>Das sollen Sie jetzt schrittweise machen. Dazu gibt es die Spalten “<strong>Abweichung Mittelwert</strong>” und “<strong>Abweichung quadriert</strong>”. Hier wieder eine Veranschaulichung:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/deviances.png#bordered" /></p>
+<p><img src="images/q1_03exp/deviances.PNG#bordered" /></p>
 <p><br> <br></p>
 <p>Warum wurde die Zelle des Mittelwerts (rot) mit Dollarzeichen “fixiert”? Üblergen Sie.</p>
 <p>In der Spalte rechts daneben berechnen Sie nun die quadrierten Werte der gerade berechneten Abweichungen. Also so:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/squareddev.png#bordered" /></p>
+<p><img src="images/q1_03exp/squareddev.PNG#bordered" /></p>
 <p><br> <br></p>
 <p>Wenn Sie das für beide Versuchsgruppen gemacht haben, können Sie als nächstes die Ergebnisse benutzen, um die Standardabweichungen in beiden Gruppen zu berechnen. Sie müssen dazu die Werte jetzt Mitteln und aus diesen Mittelwerten die Wurzel ziehen. Die Ergebnisse sollen in die Zellen <strong>I17</strong> und <strong>J17</strong>. In Excel kann man <strong>mehrere Funktionen ineinander “verschachteln”</strong>. Das können Sie sich nun zunutze machen.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/stabw.png#bordered" /></p>
+<p><img src="images/q1_03exp/stabw.PNG#bordered" /></p>
 <p><br> <br></p>
 <p>Auch diesmal haben wir mit den einzelnen Schritten die mathematische Formel quasi nachvollzogen. Das sollte nur dazu dienen, besser zu verstehen, was die Standardabweichung ist. Auch für die Standardabweichung gibt es eine eigene Excel-Funktion (genau gesagt sogar zwei, aber dazu in späteren Sitzungen mehr), diese heißt “<strong>STABW.N()</strong>”. Benutzen Sie nun diese Funktion, um die Standardabweichungen beider Gruppen direkt zu ermitteln.</p>
 <p><br></p>
@@ -582,7 +583,7 @@ div.tocify {
 <p>Zwischenfrage: Wie könnte man das 50%-Quartil noch nennen?</p>
 <p>Für die Berechnung der Kennwerte Minimum, Maximum, Median, und die verschiedenen Quartile gibt es eigene Excel-Funktionen. Für die Quartile gibt es die Funktionen “<strong>QUARTILE.EXKL()</strong>” und “<strong>QUARTILE.INKL()</strong>”. Wir benutzen dieses Mal die erste der beiden Funktionen. Recherchieren Sie aber ruhig einmal im Internet, was der Unterschied zwischen beiden Funktionen ist. Hier wieder ein Bild für die Berechnung des 25% Quartils:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/firstquartile.png#bordered" /></p>
+<p><img src="images/q1_03exp/firstquartile.PNG#bordered" /></p>
 <p><br> <br></p>
 <p>Versuchen Sie, die restlichen Kennwerte eigenständig zu ermitteln.</p>
 <p><br></p>
@@ -599,19 +600,19 @@ div.tocify {
 <p>Wie diese Abbildungen am Ende aussehen sollen, sehen sie in den folgenden Abbildungen. Wie man diese Abbildungen in Excel erstellt, zeigen wir Ihnen wieder in kurzen Videos. <br> <br></p>
 <div id="säulendiagramm-mit-gruppenmittelwerten" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Säulendiagramm mit Gruppenmittelwerten</h3>
-<p><img src="images/q1_03exp/mean_bars.png#bordered" style="width:50.0%" /></p>
+<p><img src="images/q1_03exp/mean_bars.PNG#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/mgdHlB63cfg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
 <div id="histogramme-für-beide-gruppen" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Histogramme für beide Gruppen</h3>
-<p><img src="images/q1_03exp/histograms.png#bordered" style="width:50.0%" /></p>
+<p><img src="images/q1_03exp/histograms.PNG#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/8ZXFekhMX0E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
 <div id="boxplots-für-beide-gruppen" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Boxplots für beide Gruppen</h3>
-<p><img src="images/q1_03exp/boxplots.png#bordered" style="width:50.0%" /></p>
+<p><img src="images/q1_03exp/boxplots.PNG#bordered" style="width:50.0%" /></p>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/ZRiWL4-hbMQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 <p><br /> <br /></p>
