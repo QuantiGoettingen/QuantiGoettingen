@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -29,15 +29,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -100,6 +91,7 @@ code {
 }
 img {
   max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -248,7 +240,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -261,9 +252,48 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <style type="text/css">
 
@@ -277,12 +307,6 @@ $(document).ready(function () {
 }
 }
 
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
 
 .toc-content {
   padding-left: 30px;
@@ -446,12 +470,15 @@ div.tocify {
 
 
 <div class="column-right">
-<p><img src="images/q1_02umfr/squirrel_litter.PNG" /></p>
+<div class="figure">
+<img src="images/q1_02umfr/squirrel_litter.png" />
+
+</div>
 </div>
 <p>Nachdem wir letzte Woche die Excel-Basics behandelt haben, schauen wir uns heute mal an, wie man sich mit Excel einen ersten Überblick über erhobene Daten verschaffen kann. Dabei lernen wir außerdem weitere hilfreiche Funktionen des Programms kennen.</p>
 <p>Die Daten zum Auswerten kommen dabei teilweise von Ihnen selbst! Wir möchten Sie bitten, zwei kurze Fragebögen auszufüllen (in einem geht es um umweltbezogenes Verhalten, im anderen um Prokrastination) - das sollte insgesamt nicht länger als 5 Minuten dauern. Die Daten stellen wir dann zum Üben bereit, sobald sie erhoben sind. Die Teilnahme ist natürlich freiwillig und anonym!</p>
 <p><a href="https://ww2.unipark.de/uc/NEngelmann/9058/">Hier</a> geht’s zur Umfrage! Gerne vor dem weiteren Lesen ausfüllen.</p>
-<p>Da wir die gleichen Fragebögen bereits im letzten Jahrgang bearbeiten lassen haben, können wir mit diesen Daten anfangen. Dieselben Arbeitsschritte können Sie dann in ein paar Tagen an Ihren eigenen Jahrgangsdaten noch einmal eigenständig üben. <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">Hier</a> geht’s zu den 2019er-Daten und hier (Link folgt) zu denen von 2020.</p>
+<p>Da wir die gleichen Fragebögen bereits im letzten Jahrgang bearbeiten lassen haben, können wir mit diesen Daten anfangen. Dieselben Arbeitsschritte können Sie dann in ein paar Tagen an Ihren eigenen Jahrgangsdaten noch einmal eigenständig üben. <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">Hier</a> geht’s zu den 2019er-Daten und <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2020.xlsx">hier</a> zu denen von 2020.</p>
 <p>Bei allen Datensätzen handelt es sich um simple Umfragen und nicht um Experimente. Was unterscheidet eine Umfrage von einem Experiment? Mehr Infos dazu finden sie <a href="https://lexikon.stangl.eu/3447/experiment/">hier</a>.</p>
 <p>Das Vorgehen wird hier nur für den Umwelt-Fragebogen veranschaulicht. Die Auswertungsschritte für den Prokrastinations-Fragebogen sind weitgehend identisch und können der Musterlösung entnommen werden.</p>
 <p><br /></p>
@@ -461,7 +488,10 @@ div.tocify {
 <p>Rechts ist ersichtlich, welches Kürzel in den Spaltenüberschriften zu welcher Frage gehört.</p>
 <p>In der Tabelle stehen die Antworten, die die Versuchspersonen auf die verschiedenen Fragen angekreuzt haben (auf der Skala von 1 - “nie” bis 6 - “immer”).</p>
 <p><br /></p>
-<p><img src="images/q1_02umfr/excel_datensatz.png#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<img src="images/q1_02umfr/excel_datensatz.png#bordered" style="width:100.0%" />
+
+</div>
 <p><br /> <br /></p>
 <div id="items-rekodieren" class="section level2">
 <h2><span class="header-section-number">1.1</span> Items rekodieren</h2>
@@ -481,23 +511,35 @@ div.tocify {
 <p>Wenn wir in der letzten Spalte der Tabelle anfangen, eine Summe pro Zeile zu bilden, können wir gezielt angeben, welche Werte summiert werden sollen und welche nicht. Nach dem Eintippen von “=SUMME(” halten wir dazu einfach die Strg-Taste gedrückt (Mac: Befehlstaste) und wählen die Zellen aus, die in den Summenscore eingehen sollen. Das sind einmal die Items, die von Anfang an richtig kodiert warten und andererseits die rekodierten Versionen von den Items, die es zu Beginn nicht waren (U1 ist also <strong>nicht</strong> drin, U1_r schon - usw.). Oben sind die genauen Zellenbezüge zu sehen, die natürlich auch einfach eingetippt werden können. Danach schließen wir die Klammer des Summenbefehls und drücken auf Enter.</p>
 <p>Das müssen wir zum Glück nur einmal machen! Für die restlichen Versuchspersonen kann der Befehl einfach übertragen werden wie in der letzten Sitzung gelernt (ein Doppelklick auf das kleine Quadrat rechts unten übertragt den Befehl übrigens noch schneller und einfacher auf die restlichen Zeilen. Auch hier erkennt Excel automatisch, wann die Tabelle endet.).</p>
 <p><br /></p>
-<p><img src="images/q1_02umfr/excel_summestrg.png#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<img src="images/q1_02umfr/excel_summestrg.png#bordered" style="width:100.0%" />
+
+</div>
 <p><br /></p>
 </div>
-<div id="summenscores-auszählen" class="section level2">
+<div id="summenscores-auszahlen" class="section level2">
 <h2><span class="header-section-number">1.3</span> Summenscores auszählen</h2>
 <p>Wir wollen nun wissen, wie viele Personen einen unterdurchschnittlichen, durchschnittlichen und überdurchschnittlichen Summenscore erreicht haben. Die numerischen Grenzen für jede dieser Kategorien stehen in der Arbeitsmappe. Um die Anzahl der Personen mit unterdurchschnittlich gutem Umweltverhalten zu ermitteln, wollen wir beispielsweise auszählen, wie viele Leute einen Summenscore &lt;= 39 erzielt haben. Das geht mit der sehr nützlichen “ZÄHLENWENN”-Funktion. Diese Funktion zählt einfach aus, wie viele Werte in einem definierten Bereich (hier: unsere Summenscores) ein bestimmtes Kriterium (hier: “&lt;= 39”, oder identisch “&lt;40” ) erfüllen. Das Kriterium muss in Anführungszeichen gesetzt werden, auch wenn es numerisch ist:</p>
 <p><br /></p>
-<p><img src="images/q1_02umfr/excel_zählenwenn.png#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<embed src="images/q1_02umfr/excel_zählenwenn.png#bordered" style="width:100.0%" />
+
+</div>
 <p><br /></p>
 <p>Dieses Vorgehen lässt sich einfach auf die Kategorie “überdurchschnittlich” übertragen - hier muss das Kriterium nur durch “&gt;50” ersetzt werden. Aber was machen wir mit “durchschnittlich”, also den Werten zwischen 40 und 50? Leider lässt sich innerhalb von “ZÄHLENWENN” kein Wertebereich als Kriterium formulieren. Aber wir können uns mit einem Trick behelfen: Wir zählen zunächst alle Werte &lt;= 50 (also alle “unterdurchschittlichen” plus alle “durchschnittlichen”) und ziehen dann einfach die wieder ab, die bei “unterdurchschnittlich” bereits gezählt wurden (wir verweisen dazu einfach auf die Zelle, in der die “unterdurchschnittlich”-Werte gezählt wurden):</p>
 <p><br /></p>
-<p><img src="images/q1_02umfr/excel_zählenwenn2.png#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<embed src="images/q1_02umfr/excel_zählenwenn2.png#bordered" style="width:100.0%" />
+
+</div>
 <p><br /></p>
 <p>Beim Prokrastinations-Fragebogen gibt es übrigens noch mehr “mittlere” Kategorien, da kann dieses Vorgehen also auch nochmal gut im Detail nachvollzogen werden.</p>
 <p>Wenn wir auf diese Weise die drei Kategorien ausgezählt haben, bietet es sich an, nocheinmal die Summe über alle Kategorien hinweg zu berechnen. Dabei sollten wir auf unsere Gesamtanzahl an Versuchspersonen kommen (84). Wenn nicht, haben wir beim Auszählen einen Fehler gemacht.</p>
 <p><br /></p>
-<p><img src="images/q1_02umfr/excel_zähltabelle.png#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<embed src="images/q1_02umfr/excel_zähltabelle.png#bordered" style="width:100.0%" />
+
+</div>
 <p><br /></p>
 </div>
 <div id="ein-histogramm-erstellen" class="section level2">
@@ -509,7 +551,7 @@ div.tocify {
 <p><br /> <br /></p>
 </div>
 </div>
-<div id="zum-weiteren-üben" class="section level1">
+<div id="zum-weiteren-uben" class="section level1">
 <h1><span class="header-section-number">2</span> Zum weiteren Üben</h1>
 <p>In der Excel-Datei zu dieser Sitzung finden Sie in einer separaten Arbeitsmappe auch die Daten und weitere Aufgaben für den Prokrastinationsfragebogen. Bearbeiten Sie diese Aufgaben eigenständig.</p>
 <p><br /> <br /></p>
@@ -545,49 +587,6 @@ $(document).ready(function () {
 });
 
 
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -26,15 +26,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -97,6 +88,7 @@ code {
 }
 img {
   max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -245,7 +237,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -257,6 +248,18 @@ $(document).ready(function () {
   display: none;
 }
 </style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
 
 <!-- code folding -->
 
@@ -393,6 +396,7 @@ body {
 <h4>Sitzung 2: Umfragen und Experimente - Datenaufbereitung</h4>
 <ul>
 <li>Excel-Datensatz “Umwelt- und Prokrastinationsfragebogen 2019”: <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">download</a></li>
+<li>Excel-Datensatz “Umwelt- und Prokrastinationsfragebogen 2020”: <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2020.xlsx">download</a></li>
 </ul>
 </div>
 <div id="sitzung-3-deskriptive-datenanalyse-und-grafiken" class="section level4">
@@ -418,7 +422,7 @@ body {
 <li>Link dann hier</li>
 </ul>
 </div>
-<div id="sitzung-6-mittelwertsunterschiede-prüfen---t-tests" class="section level4">
+<div id="sitzung-6-mittelwertsunterschiede-prufen---t-tests" class="section level4">
 <h4>Sitzung 6: Mittelwertsunterschiede prüfen - t-Tests</h4>
 <ul>
 <li>Link dann hier</li>
@@ -443,23 +447,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
