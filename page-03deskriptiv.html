@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -29,15 +29,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -100,6 +91,7 @@ code {
 }
 img {
   max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -248,7 +240,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -261,9 +252,48 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <style type="text/css">
 
@@ -277,12 +307,6 @@ $(document).ready(function () {
 }
 }
 
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
 
 .toc-content {
   padding-left: 30px;
@@ -445,24 +469,27 @@ div.tocify {
 </div>
 
 
-<div id="umfragen-vs.-experimente" class="section level1">
+<div id="umfragen-vs.experimente" class="section level1">
 <h1><span class="header-section-number">1</span> Umfragen vs. Experimente</h1>
 <p>In der letzten Sitzung haben wir uns mit der Aufbereitung erhobener Daten befasst. Nachdem Sie also nun wissen, wie man erhobene Daten so aufbereitet, dass man damit weiterarbeiten kann, sollten Sie nun auch erfahren, was dieses “Weiterarbeiten” umfasst. Ein erster Schritt, um den es heute geht, ist quasi immer eine <strong>Beschreibung</strong> der Daten durch die Ermittlung bestimmter <strong>statistischer Kennwerte</strong>. Wir befassen uns in dieser Sitzung also mit <strong>deskriptiver Statistik</strong>.</p>
 <p>In der letzten Sitzung haben wir Daten verwendet, die aus Umfragen/ Fragebögen stammten. In dieser Sitzung wollen wir das Thema “deskriptive Statistik” zur Abwechslung dagegen mit den Daten aus einem psychologischen Experiment besprechen.</p>
 <p>Hoffentlich haben Sie in der letzten Sitzung schon darüber nachgedacht und/ oder nachgelesen, was Umfragen von Experimenten unterscheidet. Im Kasten unten ist der Unterschied noch einmal kurz auf den Punkt gebracht.</p>
 <p><br></p>
 <div class="column-right_alignRight">
-<p><img src="images/home/squirrel_wissen.PNG" /></p>
+<div class="figure">
+<img src="images/home/squirrel_wissen.png" />
+
+</div>
 </div>
 <div class="boxBorder">
 <ul>
 <li><p><strong>Umfragen</strong> sind einfach Messungen von etwas. (Was nicht heißen soll, dass die Erstellung und Durchführung aussagekräftiger Umfragen sehr <em>einfach</em> wäre.) Eine Umfrage könnte z.B. die persönliche Einstellung von Menschen zu Fragen des Umweltschutzes erfassen.</p></li>
-<li><p><strong>Experimente</strong> dagegen sind mehr als einfach nur “messen”. Experimente sind eine wissenschaftliche Methode, die es erlaubt, <strong>Ursache-Wirkungs-Zusammenhänge</strong> in der Welt zu erfassen. Experimente, anders als bloße Umfragen, erlauben damit die Beantwortung <strong>kausaler Fragen</strong>. Z.B. könnten sich ForscherInnen fragen, ob ein bestimmtes Medikament die Symptome einer neuartigen Krankheit verbessert und versuchen, diese Frage mittels eines Experiments zu klären. Für ein Experiment sind die folgenden Dinge entscheidend:</p>
+<li><p><strong>Experimente</strong> dagegen sind mehr als einfach nur “messen”. Experimente sind eine wissenschaftliche Methode, die es erlaubt, <strong>Ursache-Wirkungs-Zusammenhänge</strong> in der Welt zu erfassen. Experimente, anders als bloße Umfragen, erlauben damit die Beantwortung <strong>kausaler Fragen</strong>. Z.B. könnten sich ForscherInnen fragen, ob ein bestimmtes Medikament die Symptome einer neuartigen Krankheit verbessert und versuchen, diese Frage mittels eines Experiments zu klären. Für ein Experiment sind die folgenden Dinge entscheidend:</p></li>
+</ul>
 <ol style="list-style-type: decimal">
 <li><p><strong>Manipulation</strong> (Variierung) des vermeintlichen Ursachenfaktors. Diesen Faktor nennt man auch <strong>unabhängige Variable</strong> (UV). Im einfachsten Fall stellt man eine Bedingung her, in der die UV anwesend ist (z.B. könnten ForscherInnen eine Versuchspersonengruppe rekrutieren, die das neue Medikament bekommt), und eine weitere Kontrollbedingung, in der die UV abwesend ist (z.B. eine Versuchspersonengruppe, die lediglich einen Placebo bekommt).</p></li>
-<li><p><strong>Kontrolle von Störvariablen</strong>. Man muss Maßnahmen ergreifen, die dafür sorgen, dass potentielle Störfaktoren die Ergebnisse nicht systematisch verfälschen. Dazu gibt es mehrere Möglichkeiten: (1) <strong>Abschalten</strong> oder (2) <strong>Konstanthalten</strong> von Störvariablen (was natürlich nur geht, wenn man diese überhaupt kennt), oder (3) <strong>Gleichverteilung</strong> der Störvariablen auf die verschiedenen Versuchsbedingungen des Experiments. Letzteres kann man auch versuchen, wenn man die Störvariablen nicht kennt und zwar durch <strong>Randomisierung</strong> (z.B. könnte man durch Münzwurf bestimmen, welche Versuchspersonen das Medikament bekommen und welche nur den Placebo).</p></li>
-</ol></li>
-</ul>
+<li><strong>Kontrolle von Störvariablen</strong>. Man muss Maßnahmen ergreifen, die dafür sorgen, dass potentielle Störfaktoren die Ergebnisse nicht systematisch verfälschen. Dazu gibt es mehrere Möglichkeiten: (1) <strong>Abschalten</strong> oder (2) <strong>Konstanthalten</strong> von Störvariablen (was natürlich nur geht, wenn man diese überhaupt kennt), oder (3) <strong>Gleichverteilung</strong> der Störvariablen auf die verschiedenen Versuchsbedingungen des Experiments. Letzteres kann man auch versuchen, wenn man die Störvariablen nicht kennt und zwar durch <strong>Randomisierung</strong> (z.B. könnte man durch Münzwurf bestimmen, welche Versuchspersonen das Medikament bekommen und welche nur den Placebo).</li>
+</ol>
 </div>
 <p><br> <br></p>
 </div>
@@ -474,31 +501,40 @@ div.tocify {
 <p><br></p>
 <p>Wie moralisch akzeptabel fänden Sie es, wenn man den Zug durch Umstellen der weiche auf das Nebengleis umleiten würde?</p>
 <p><br></p>
-<p>Viele Personen geben in diesem sogenannten <em>Trolley-Dilemma</em> an, dass es moralisch eher akzeptabel ist, die Handlung, also das Umlenken, durchzuführen. Der moralische Kompass von (vielen) Menschen scheint hier also mit <em>konsequentialistischen</em> bzw. <em>utilitaristsichen</em> Moraltheorien im Einklang zu sein (<a href="https://www.youtube.com/watch?v=R0VLVzuP83M">hier</a> noch ein ganz nettes Video dazu auf YouTube). Eine Person sterben zu lassen, um fünf andere dadurch zu retten, erscheint vielen Menschen akzeptabel.</p>
+<p>Es handelt sich dabei um das sogenannte <em>Trolley-Dilemma</em>, das von der Philosophin Philippa Foot erdacht wurde und vielleicht manchen von Ihnen bekannt ist (<a href="https://de.wikipedia.org/wiki/Trolley-Problem">hier</a> der Wikipedia-Artikel dazu). Eine Person sterben zu lassen, um fünf andere dadurch zu retten, erscheint vielen Menschen akzeptabel.</p>
 <p><br></p>
-<p>Stellen Sie sich jetzt folgende Version des Dilemmas vor:</p>
+<p>Stellen Sie sich jetzt folgende Version des Dilemmas vor (die in Reaktion auf den oben beschriebenen Fall von der Philosophin Judith Jarvis Thomson entwickelt wurde):</p>
 <p><br></p>
 <p><em>Ein Zug ist außer Kontrolle geraten und rast die Gleise entlang. Weiter unten auf der Strecke sind gerade fünf Personen, die den nahenden Zug nicht bemerken können. Rast der Zug unkontrolliert weiter, so wird er die fünf Personen überrollen und töten. Es gibt eine Möglichkeit, das Leben der fünf Personen zu retten. Jemand könnte eine sehr schwere Person von einer Brücke stoßen, wodurch diese auf die Gleise fallen und den Zug ganz sicher abbremsen würde, noch bevor er die fünf anderen Personen töten könnte. Das Problem ist, dass die Person, die man von der Brücke schubsen würde, auf jeden Fall sterben würde, wenn man den Zug umleitet.</em></p>
 <p><br></p>
 <p>Wie moralisch akzeptabel fänden Sie es, wenn man die Person von der Brücke herunter vor den Zug schubsen würde?</p>
 <p><br></p>
-<p>Im Gegensatz zu ersten Version, die auch “Bystander-” oder “Switch-” Version genannt wird, geben viele Personen in der jetzigen, der sogenannten “Footbridge-” oder “Push-” Variante des Trolley-Dilemmas, an, dass es moralisch eher nicht akzeptabel ist, die Handlung, also das Schubsen der einen Person, durchzuführen. Der moralische Kompass von (vielen) Menschen scheint hier also nicht mit <em>konsequentialistischen</em> bzw. <em>utilitaristsichen</em> Moraltheorien im Einklang zu sein. Eine Person sterben zu lassen, um fünf andere dadurch zu retten, erscheint vielen Menschen hier plötzlich nicht akzeptabel. Die beiden Versionen des Dilemmas sind in der unteren Abbildung noch einmal illustriert.</p>
+<p>Im Gegensatz zu ersten Version, die auch “Bystander-” oder “Switch-” Version genannt wird, geben viele Personen in der jetzigen, der sogenannten “Footbridge-” oder “Push-” Variante des Trolley-Dilemmas, an, dass es moralisch eher nicht akzeptabel ist, die Handlung, also das Schubsen der einen Person, durchzuführen.Eine Person sterben zu lassen, um fünf andere dadurch zu retten, erscheint vielen Menschen hier plötzlich nicht akzeptabel. Die beiden Versionen des Dilemmas sind in der unteren Abbildung noch einmal illustriert.</p>
 <p><br></p>
 <center>
-<p><img src="images/q1_03exp/trolley_illu.PNG" style="width:50.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/trolley_illu.PNG" style="width:50.0%" />
+
+</div>
 <em>Abb. entnommen aus <a href="https://www.researchgate.net/profile/Michael_Waldmann/publication/260025638_Moral_Judgment/links/0c96053b9216aaabc1000000.pdf">Waldmann, Nagel und Wiegmann (2012).</a></em>
 </center>
 <p><br></p>
 <div class="column-right_alignRight">
-<p><img src="images/q1_03exp/squirrel_scientist.PNG" /></p>
+<div class="figure">
+<img src="images/q1_03exp/squirrel_scientist.png" />
+
 </div>
-<p>Im Wintersemester 2019/20 wollten wir den Psychologiestudierenden des ersten Semesters demonstrieren, wie robust dieser Effekt ist und deshalb ein Experiment durchgeführt. Uns ging es dabei nicht darum, eine Erklärung des Effekts zu prüfen, sondern nur, ihn einfach erneut zu demonstrieren. Wenn Sie das Thema mehr interessiert, können Sie z.B. dieses Kaptiel <a href="https://www.researchgate.net/profile/Michael_Waldmann/publication/260025638_Moral_Judgment/links/0c96053b9216aaabc1000000.pdf">hier</a>, aus dem die Abb. oben stammt, lesen. In unserem Experiment war die Frage: “Führt das Push-Dilemma zu niedrigeren Akzeptabilitätsratings als das Switch-Dilemma?” Dazu ließen wir die Studierenden also einfach entweder die “Switch-” oder die “Push-” Version des Dilemmas lesen und beurteilen. Die Versuchspersonen wurden den beiden Bedingungen (Switch vs. Push) zufällig zugeteilt. Nachdem sie die Szenarien gelesen hatten, gaben sie auf einer sechstufigen Ratingskala an, wie moralisch akzeptabel sie die beschriebene Handlung finden (1 = völlig unangemessen; 6 = völlig angemessen). Die gemessene oder auch <strong>abhängigke Variable</strong> (AV) war also dieses Akzeptabilitätsrating.</p>
+</div>
+<p>Im Wintersemester 2019/20 wollten wir den Psychologiestudierenden des ersten Semesters demonstrieren, wie robust dieser Effekt ist und deshalb ein Experiment durchgeführt. Uns ging es dabei nicht darum, eine Erklärung des Effekts zu prüfen, sondern nur, ihn einfach erneut zu demonstrieren. Wenn Sie das Thema mehr interessiert, können Sie z.B. dieses Kaptiel <a href="https://www.researchgate.net/profile/Michael_Waldmann/publication/260025638_Moral_Judgment/links/0c96053b9216aaabc1000000.pdf">hier</a>, aus dem die Abb. oben stammt, lesen. In unserem Experiment war die Frage: “Führt das Push-Dilemma zu niedrigeren Akzeptabilitätsratings als das Switch-Dilemma?” Dazu ließen wir die Studierenden also einfach entweder die “Switch-” oder die “Push-” Version des Dilemmas lesen und beurteilen. Die Versuchspersonen wurden den beiden Bedingungen (Switch vs. Push) zufällig zugeteilt. Nachdem sie die Szenarien gelesen hatten, gaben sie auf einer sechstufigen Ratingskala an, wie moralisch akzeptabel sie die beschriebene Handlung finden (1 = völlig unangemessen; 6 = völlig angemessen). Die gemessene oder auch <strong>abhängige Variable</strong> (AV) war also dieses Akzeptabilitätsrating.</p>
 <p><br></p>
 <div id="die-daten" class="section level2">
 <h2><span class="header-section-number">2.1</span> Die Daten</h2>
 <p>Die Excel-Datei mit den Ergebnissen des Experiments können Sie <a href="q1_dataFiles/03_Experimente_und_deskriptive_Statistik.xlsx">hier</a> herunterladen. Die erste Arbeitsmappe sollte dann so aussehen, wie unten abgebildet.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/trolley_data.PNG#bordered" style="width:100.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/trolley_data.PNG#bordered" style="width:100.0%" />
+
+</div>
 <p><br> <br></p>
 <p>Die verschiedenen Spalten bedeuten folgendes:</p>
 <ul>
@@ -513,20 +549,16 @@ div.tocify {
 <h2><span class="header-section-number">2.2</span> Wichtige deskriptive Kennwerte berechnen</h2>
 <p>In der Vorlesung haben Sie wichtige deskriptive statistische Kennwerte bereits kennengelernt, die man benutzt, um vorliegende Daten zu beschreiben, zusammenzufassen und damit letztlich besser zu verstehen. Zu diesen deskriptiven Kennwerten zählen z.B.:</p>
 <ul>
-<li><strong>Lageparameter</strong> wie:
-<ul>
+<li><strong>Lageparameter</strong> wie:</li>
 <li><strong>Arithmetisches Mittel</strong> (oft einfach nur “Mittelwert” genannt)</li>
 <li><strong>Median</strong></li>
 <li><strong>Modus</strong></li>
-</ul></li>
-<li><strong>Streuungsmaße</strong> wie:
-<ul>
+<li><strong>Streuungsmaße</strong> wie:</li>
 <li><strong>Standardabweichung</strong> (oft einfach “Streuung” genannt)</li>
 <li><strong>Varianz</strong></li>
 <li><strong>Interquartilsabstand</strong></li>
 <li><strong>Minimum</strong></li>
 <li><strong>Maximum</strong></li>
-</ul></li>
 </ul>
 <p><br></p>
 <p>Wie Sie in der Kopfzeile der Excel-Datei sehen können, sollen Sie einige dieser Werte für den vorliegenden Datensatz nun bestimmen.</p>
@@ -542,11 +574,17 @@ div.tocify {
 <p>Die mathematische Formel ist: <span class="math inline">\(\frac{1}{n} \sum_{i=i}^{n} x_{i}\)</span></p>
 <p>Sie müssen also alle Rohwerte (Ratings jeder Versuchsperson) einer Versuchsgruppe aufsummieren und durch die Anzahl der Werte dieser Gruppe dividieren. Benutzen Sie dazu die Excel-Funktion “<strong>Summe()</strong>” und die zuvor berechneten Anzahlen (n). Hier eine Veranschaulichung für die Gruppe “Push”:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/mittelwert.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/mittelwert.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
 <p>Die Berechnung, die im Bild dargestellt ist, bildet die obige mathematische Formel nach. Das Schöne an Excel ist, dass man viele statistische Kennwerte aber auch direkt über eine eigene Funktion ermitteln kann. Für das arithmetische Mittel gibt es dafür die Funktion “<strong>=MITTELWERT()</strong>”. Benutzen Sie nun diese Funktion, wie im Bild unten dargestellt, und schreiben Sie die Ergebnisse in die dafür vorgesehenen Zellen <strong>I15</strong> und <strong>J15</strong>.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/mittelwert2.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/mittelwert2.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
 </div>
 <div id="standardabweichung" class="section level3">
@@ -557,16 +595,25 @@ div.tocify {
 <p>Zwischenfrage: Was für einen Kennwert bekommt man, wenn man die Standardabweichung quadriert?</p>
 <p>Das sollen Sie jetzt schrittweise machen. Dazu gibt es die Spalten “<strong>Abweichung Mittelwert</strong>” und “<strong>Abweichung quadriert</strong>”. Hier wieder eine Veranschaulichung:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/deviances.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/deviances.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
-<p>Warum wurde die Zelle des Mittelwerts (rot) mit Dollarzeichen “fixiert”? Üblergen Sie.</p>
+<p>Warum wurde die Zelle des Mittelwerts (rot) mit Dollarzeichen “fixiert”? Überlegen Sie.</p>
 <p>In der Spalte rechts daneben berechnen Sie nun die quadrierten Werte der gerade berechneten Abweichungen. Also so:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/squareddev.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/squareddev.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
-<p>Wenn Sie das für beide Versuchsgruppen gemacht haben, können Sie als nächstes die Ergebnisse benutzen, um die Standardabweichungen in beiden Gruppen zu berechnen. Sie müssen dazu die Werte jetzt Mitteln und aus diesen Mittelwerten die Wurzel ziehen. Die Ergebnisse sollen in die Zellen <strong>I17</strong> und <strong>J17</strong>. In Excel kann man <strong>mehrere Funktionen ineinander “verschachteln”</strong>. Das können Sie sich nun zunutze machen.</p>
+<p>Wenn Sie das für beide Versuchsgruppen gemacht haben, können Sie als nächstes die Ergebnisse benutzen, um die Standardabweichungen in beiden Gruppen zu berechnen. Sie müssen dazu die Werte jetzt mitteln und aus diesen Mittelwerten die Wurzel ziehen. Die Ergebnisse sollen in die Zellen <strong>I17</strong> und <strong>J17</strong>. In Excel kann man <strong>mehrere Funktionen ineinander “verschachteln”</strong>. Das können Sie sich nun zunutze machen.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/stabw.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/stabw.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
 <p>Auch diesmal haben wir mit den einzelnen Schritten die mathematische Formel quasi nachvollzogen. Das sollte nur dazu dienen, besser zu verstehen, was die Standardabweichung ist. Auch für die Standardabweichung gibt es eine eigene Excel-Funktion (genau gesagt sogar zwei, aber dazu in späteren Sitzungen mehr), diese heißt “<strong>STABW.N()</strong>”. Benutzen Sie nun diese Funktion, um die Standardabweichungen beider Gruppen direkt zu ermitteln.</p>
 <p><br></p>
@@ -575,15 +622,24 @@ div.tocify {
 <h3><span class="header-section-number">2.2.4</span> Minimum, Maximum, Median und Quartile</h3>
 <p>Als letztes gibt es noch eine kleine Tabelle in die <strong>Minimum</strong>, <strong>25% Quartil</strong>, <strong>Median</strong> und <strong>75% Quartil</strong> und <strong>Maximum</strong> für die beiden Versuchsgruppen eingetragen werden sollen. Was Minimum und Maximum ist, dürfte Ihnen natürlich schon klar sein. Aber was ist der Median? Und was sind das 25% und das 75% Quartil? Schauen Sie sich dazu den Zahlenstrahl unten an, bei dem eine Reihe von 8 Werten aufsteigend von links nach rechts sortiert ist.</p>
 <p><br></p>
-<p><img src="images/q1_03exp/minmax.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/minmax.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
 <p><br></p>
-<p><img src="images/q1_03exp/med.PNG" /></p>
+<div class="figure">
+<img src="images/q1_03exp/med.PNG" />
+
+</div>
 <p><br> <br></p>
 <p>Zwischenfrage: Wie könnte man das 50%-Quartil noch nennen?</p>
 <p>Für die Berechnung der Kennwerte Minimum, Maximum, Median, und die verschiedenen Quartile gibt es eigene Excel-Funktionen. Für die Quartile gibt es die Funktionen “<strong>QUARTILE.EXKL()</strong>” und “<strong>QUARTILE.INKL()</strong>”. Wir benutzen dieses Mal die erste der beiden Funktionen. Recherchieren Sie aber ruhig einmal im Internet, was der Unterschied zwischen beiden Funktionen ist. Hier wieder ein Bild für die Berechnung des 25% Quartils:</p>
 <p><br></p>
-<p><img src="images/q1_03exp/firstquartile.PNG#bordered" /></p>
+<div class="figure">
+<img src="images/q1_03exp/firstquartile.PNG#bordered" />
+
+</div>
 <p><br> <br></p>
 <p>Versuchen Sie, die restlichen Kennwerte eigenständig zu ermitteln.</p>
 <p><br></p>
@@ -598,38 +654,50 @@ div.tocify {
 <li><strong>Box-Plots</strong> für beide Gruppen.</li>
 </ul>
 <p>Wie diese Abbildungen am Ende aussehen sollen, sehen sie in den folgenden Abbildungen. Wie man diese Abbildungen in Excel erstellt, zeigen wir Ihnen wieder in kurzen Videos. <br> <br></p>
-<div id="säulendiagramm-mit-gruppenmittelwerten" class="section level3">
+<div id="saulendiagramm-mit-gruppenmittelwerten" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Säulendiagramm mit Gruppenmittelwerten</h3>
-<p><img src="images/q1_03exp/mean_bars.PNG#bordered" style="width:50.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/mean_bars.PNG#bordered" style="width:50.0%" />
+
+</div>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/mgdHlB63cfg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
-<div id="histogramme-für-beide-gruppen" class="section level3">
+<div id="histogramme-fur-beide-gruppen" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> Histogramme für beide Gruppen</h3>
-<p><img src="images/q1_03exp/histograms.PNG#bordered" style="width:50.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/histograms.PNG#bordered" style="width:50.0%" />
+
+</div>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/8ZXFekhMX0E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 </div>
-<div id="boxplots-für-beide-gruppen" class="section level3">
+<div id="boxplots-fur-beide-gruppen" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Boxplots für beide Gruppen</h3>
-<p><img src="images/q1_03exp/boxplots.PNG#bordered" style="width:50.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/boxplots.PNG#bordered" style="width:50.0%" />
+
+</div>
 <p><br> <br></p>
 <p><br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/ZRiWL4-hbMQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
 <p><br /> <br /></p>
 </div>
 </div>
 </div>
-<div id="zusatzaufgabe-zum-weiteren-üben" class="section level1">
+<div id="zusatzaufgabe-zum-weiteren-uben" class="section level1">
 <h1><span class="header-section-number">3</span> Zusatzaufgabe zum weiteren Üben</h1>
 <p>Wir haben noch einen zusätzlichen Datensatz für Sie, mit dem Sie noch einmal alles üben können. Den Datensatz finden Sie <a href="q1_dataFiles/03_Experimente_und_deskriptive_Statistik_Zusatzaufgabe_HoernchenFitness.xlsx">hier</a>.</p>
 <p><br></p>
 <div id="szenario" class="section level2">
 <h2><span class="header-section-number">3.1</span> Szenario</h2>
-<p>Die Excel-Datei enthält die Daten eines fiktiven Experiments, das BiologInnen durchgeführt haben. Die ForscherInnen gingen der Frage nach, wie sich verschiedene Nahrungsgewohnheiten von Eichhörnchen auf deren körperliche Fitness auswirken. Konkret: Unterscheidet sich die körperliche Fitness von Eichhörnchen, die Walnüsse fressen, von der Fitness von Eichhörnchen, die Haselnüsse fressen?</p>
+<p>Die Excel-Datei enthält die Daten eines fiktiven Experiments, das BiologInnen durchgeführt haben. Die Forscher*innen gingen der Frage nach, wie sich verschiedene Nahrungsgewohnheiten von Eichhörnchen auf deren körperliche Fitness auswirken. Konkret: Unterscheidet sich die körperliche Fitness von Eichhörnchen, die Walnüsse fressen, von der Fitness von Eichhörnchen, die Haselnüsse fressen?</p>
 <div class="column-right_alignRightBigger">
-<p><img src="images/q1_03exp/squirrel_fitness.PNG" style="width:80.0%" /></p>
+<div class="figure">
+<img src="images/q1_03exp/squirrel_fitness.png" style="width:80.0%" />
+
 </div>
-<p>Um diese spannende Frage zu beantworten, haben die ForscherInnen ein Experiment durchgeführt. Sie fingen dazu 80 wilde Eichhörnchen (<em>Sciurus vulgaris</em>) aus dem nahegelegenen Wald und teilten die Eichhörnchen zufällig in zwei Gruppen auf. Eine Gruppe (n = 40 Eichhörnchen) wurde fortan für die Dauer von 10 Wochen nur noch mit Walnüssen gefüttert. Die andere Gruppe wurde für die Dauer von 10 Wochen nur noch mit Haselnüssen gefüttert. Nach Ablauf der 10 Wochen wurde die körperliche Fitness der Eichhörnchen in den beiden Gruppen ermittelt. Dazu wurde die Ausdauer aller Eichhörnchen von den ForscherInnen auf einer Skala von 0 (“weniger Ausdauer geht kaum”) bis 10 (“mehr Ausdauer geht kaum”) erfasst. Die ForscherInnen, die die Bewertung der Ausdauer vornahmen, waren natürlich “verblindet”, das heißt, sie wussten nicht, ob sie Eichhörnchen der Wal- oder der Haselnussbedingung bewerteten.</p>
+</div>
+<p>Um diese spannende Frage zu beantworten, haben die Forscher*innen ein Experiment durchgeführt. Sie fingen dazu 80 wilde Eichhörnchen (<a href="https://en.wikipedia.org/wiki/Red_squirrel">Sciurus vulgaris</a>) aus dem nahegelegenen Wald und teilten die Eichhörnchen zufällig in zwei Gruppen auf. Eine Gruppe (n = 40 Eichhörnchen) wurde fortan für die Dauer von 10 Wochen nur noch mit Walnüssen gefüttert. Die andere Gruppe wurde für die Dauer von 10 Wochen nur noch mit Haselnüssen gefüttert. Nach Ablauf der 10 Wochen wurde die körperliche Fitness der Eichhörnchen in den beiden Gruppen ermittelt. Dazu wurde die Ausdauer aller Eichhörnchen auf einer Skala von 0 (“weniger Ausdauer geht kaum”) bis 10 (“mehr Ausdauer geht kaum”) erfasst (wir nehmen an, dass die Ausdauer somit auf Intervallskalenniveau erfasst wurde). Die Personen, die die Bewertung der Ausdauer vornahmen, waren natürlich “verblindet”, das heißt, sie wussten nicht, ob sie Eichhörnchen der Wal- oder der Haselnussbedingung bewerteten (überlegen Sie: warum ist das von Vorteil?).</p>
 <p>Lösen Sie die in der Excel-Datei aufgeführten Aufgaben.</p>
 <p><br></p>
 </div>
@@ -665,49 +733,6 @@ $(document).ready(function () {
 });
 
 
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
