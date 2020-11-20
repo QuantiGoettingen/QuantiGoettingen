@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -29,15 +29,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -100,6 +91,7 @@ code {
 }
 img {
   max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -248,7 +240,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -261,9 +252,48 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <style type="text/css">
 
@@ -277,12 +307,6 @@ $(document).ready(function () {
 }
 }
 
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
 
 .toc-content {
   padding-left: 30px;
@@ -465,7 +489,10 @@ div.tocify {
 <p>In der letzten Vorlesungssitzung haben Sie gelernt, warum Wahrscheinlichkeiten und Wahrscheinlichkeitsverteilungen für Statistik wichtig sind. Hoffentlich haben Sie sich das Folgende gemerkt:</p>
 <p><br></p>
 <div class="column-right_alignRight">
-<p><img src="images/home/squirrel_wissen.PNG" /></p>
+<div class="figure">
+<img src="images/home/squirrel_wissen.png" />
+
+</div>
 </div>
 <div class="boxBorder">
 <p>In der Statistik benutzen wir theoretische Wahrscheinlichkeitsverteilungen um empirische (also beobachtete) Ereignisse zu beurteilen.</p>
@@ -479,18 +506,22 @@ div.tocify {
 <li><p><strong>diskrete</strong> Zufallsvariablen: solche, die nur endlich viele oder abzählbar unendlich viele Werte annehmen können. „Abzählbar unendlich“ heißt ganz einfach, dass die Menge der Ausprägungen durchnummeriert werden kann.</p></li>
 <li><p><strong>kontinuierliche</strong> bzw. <strong>stetige</strong> Zufallsvariablen: solche, die unabzählbar unendlich viele Werte annehmen können. Stetige Zufallsvariablen können innerhalb eines Intervalls unendlich viele Ausprägungen haben.</p></li>
 </ul>
+<p>Sollten Sie mehr über die Vorteile wissen wollen, die es mit sich bringt, alltagsrelevante Phänomene als Realisierungen von Zufallsvariablen zu betrachten, bietet sich dafür das Buch “Die Kunst der Statistik”/“The Art of Statistics” von David Spiegelhalter an. Es ist unterhaltsam geschrieben und gut verständlich (<a href="https://www.genialokal.de/Produkt/David-Spiegelhalter/Die-Kunst-der-Statistik_lid_42119976.html?storeID=vatergoe">deutsche Ausgabe</a>, <a href="https://www.genialokal.de/Produkt/David-Spiegelhalter/Die-Kunst-der-Statistik_lid_42143889.html?storeID=vatergoe">ebook Deutsch</a>, <a href="https://www.genialokal.de/Produkt/David-Spiegelhalter/The-Art-of-Statistics_lid_42645150.html?storeID=vatergoe">englische Ausgabe</a>, <a href="https://www.genialokal.de/Produkt/David-Spiegelhalter/The-Art-of-Statistics_lid_38502593.html?storeID=vatergoe">ebook Englisch</a>)! Unbezahlte Werbung natürlich :)</p>
 <p><br></p>
 <p>In der heutigen Seminarsitzung wollen wir beide Arten von Zufallsvariablen und ihre entsprechenden Verteilungen noch einmal genauer unter die Lupe nehmen. Die Excel-Datei, die Sie benötigen, finden Sie <a href="q1_dataFiles/04_Wahrscheinlichkeitsverteilungen.xlsx">hier</a>.</p>
 <p><br></p>
 </div>
-<div id="diskrete-zufallsvariablen---magische-münzen-und-raten-in-klausuren" class="section level1">
+<div id="diskrete-zufallsvariablen---magische-munzen-und-raten-in-klausuren" class="section level1">
 <h1><span class="header-section-number">2</span> Diskrete Zufallsvariablen - Magische Münzen und Raten in Klausuren</h1>
 <p>Beginnen wir zunächst mit diskreten Zufallsvariablen und schauen wir uns an, was man mit dem Wissen über theoretische Wahrscheinlichkeitsverteilungen in einem solchen Fall anstellen kann.</p>
 <p><br></p>
-<div id="ist-diese-münze-fair" class="section level2">
+<div id="ist-diese-munze-fair" class="section level2">
 <h2><span class="header-section-number">2.1</span> Ist diese Münze fair?</h2>
 <div class="column-right_alignRight">
-<p><img src="images/q1_04wsk/coin.png" /></p>
+<div class="figure">
+<img src="images/q1_04wsk/coin.png" />
+
+</div>
 </div>
 <p>Stellen Sie sich vor, Sie finden eine seltsam aussehende Münze (s. Bild). Sie fragen sich, ob es sich bei dieser Münze um eine “faire” Münze handelt oder nicht. Wäre die Münze “fair”, dann wäre die Wahrscheinlichkeit für das Ereignis “Kopf” gleich der Wahrscheinlichkeit für das Ereignis “Zahl”. Da “Kopf” oder “Zahl” die einzigen beiden Ausprägungen sind, die aus einem Münzwurf resultieren können (deshalb sprechen wir hier von einer “diskreten” Zufallsvariablen), würde für eine “faire” Münze gelten, dass p(Kopf) = p(Zahl) = 0.5.</p>
 <p>Sie entschließen sich, die komische Münze <strong>100 Mal zu werfen</strong> und dabei zu zählen, wie oft das Ereignis “Kopf” aufgetreten ist. Das Ergebnis: Sie haben <strong>58 Mal “Kopf”</strong> geworfen. Wie sehr glauben Sie daran, hier eine “faire” Münze vor sich zu haben?</p>
@@ -500,10 +531,10 @@ div.tocify {
 <p><br></p>
 <div id="die-funktion-binom.vert" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Die Funktion “=Binom.Vert()”</h3>
-<p>Dazu benutzen wir in Excel die Funktion “<strong>=BINOM.VERT()</strong>”, was für “<strong>Binomialverteilung</strong>” steht (mehr Infos dazu auf dieser sehr nützlichen Seite “Mathe-Guru” <a href="https://matheguru.com/stochastik/binomialverteilung.html">hier</a>). Schreiben Sie in <strong>Zelle B33</strong> Folgendes:</p>
+<p>Dazu benutzen wir in Excel die Funktion “<strong>=BINOM.VERT()</strong>”, was für “<strong>Binomialverteilung</strong>” steht (mehr Infos dazu auf dieser sehr nützlichen Seite “Mathe-Guru” <a href="https://matheguru.com/stochastik/binomialverteilung.html">hier</a>). Schreiben Sie in <strong>Zelle B34</strong> Folgendes:</p>
 <p><br> <img src="images/q1_04wsk/binomvert.PNG#bordered" style="width:80.0%" /></p>
 <p><br></p>
-<p>Das erste Argument der Funktion ist das Ergebnis des Gedankenexperiments (auch “Zahl Erfolge” genannt). Da wir als erstes ermitteln wollen, wie wahrscheinlich es ist, dass man bei 100 Münzwürfen genau 0 Mal “Kopf” wirft, tragen wir dafür den Wert aus <strong>Zelle A33</strong> ein. Das zweite Argument ist die Anzahl der Versuche innerhalb des Gedankenexperiments. Das ist in unserem Fall 100. Danach soll die Erfolgswahrscheinlichkeit angegeben werden. Da wir hier von der Annahme ausgehen, die Münze sei fair, tragen wir hier 0.5 ein. Danach können wir angeben, ob die Wahrscheinlichkeiten der verschiedenen möglichen Ergebnisse aufaddiert werden sollen oder nicht. Da wir das nicht möchten, schreiben wir “FALSCH”. Unten sehen Sie noch einmal, welche Argumente die Funktion benötigt.</p>
+<p>Das erste Argument der Funktion ist das Ergebnis des Gedankenexperiments (auch “Zahl Erfolge” genannt). Da wir als erstes ermitteln wollen, wie wahrscheinlich es ist, dass man bei 100 Münzwürfen genau 0 Mal “Kopf” wirft, tragen wir dafür den Wert aus <strong>Zelle A34</strong> ein. Das zweite Argument ist die Anzahl der Versuche innerhalb des Gedankenexperiments. Das ist in unserem Fall 100. Danach soll die Erfolgswahrscheinlichkeit angegeben werden. Da wir hier von der Annahme ausgehen, die Münze sei fair, tragen wir hier 0.5 ein. Danach können wir angeben, ob die Wahrscheinlichkeiten der verschiedenen möglichen Ergebnisse aufaddiert werden sollen oder nicht. Da wir das nicht möchten, schreiben wir “FALSCH”. Unten sehen Sie noch einmal, welche Argumente die Funktion benötigt.</p>
 <p><br> <img src="images/q1_04wsk/binomvert_allg.PNG#bordered" style="width:80.0%" /></p>
 <p><br></p>
 <p>Das Ergebnis ist 7.88861E-31. Also 0.0000000…. (hier kommen insgesamt 31 Nullen) und dann 788861. Damit ist die Wahrscheinlichkeit bei 100-maligem Werfen einer fairen Münze niemals “Kopf” zu werfen praktisch Null. Das entspricht hoffentlich auch Ihrer Intuition. Als nächstes können Sie durch “Runterziehen” die Tabelle vervollständigen, um so alle Wahrscheinlichkeiten aufzulisten.</p>
@@ -511,7 +542,7 @@ div.tocify {
 </div>
 <div id="grafische-abbildung-der-verteilung" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Grafische Abbildung der Verteilung</h3>
-<p>Diese theoretische Wahrscheinlichkeitsverteilung unseres Gedankenexperiments können Sie nun grafisch mittels eines Säulendiagramms darstellen. Markieren Sie dazu alle zugehörigen Werte der <strong>Spalte B</strong> und klicken Sie in den Grafikoptionen auf Säulendiagramm. Vergeben Sie auch einen sinnvollen Titel und beschriften Sie die Achsen. Das Ergebnis sollte so ungefähr so aussehen:</p>
+<p>Diese theoretische Wahrscheinlichkeitsverteilung unseres Gedankenexperiments können Sie nun grafisch mittels eines Säulendiagramms darstellen. Markieren Sie dazu alle Werte der <strong>Spalten A und B</strong> und klicken Sie in den Grafikoptionen auf Säulendiagramm. Vergeben Sie auch einen sinnvollen Titel und beschriften Sie die Achsen. Das Ergebnis sollte so ungefähr so aussehen:</p>
 <p><br> <img src="images/q1_04wsk/binomvert100fair.PNG#bordered" style="width:100.0%" /></p>
 <p><br></p>
 </div>
@@ -519,20 +550,24 @@ div.tocify {
 <h3><span class="header-section-number">2.1.3</span> Wahrscheinlichkeiten bestimmen</h3>
 <p>Überlegen Sie nun, welches Ergebnis bei 100-maligem Werfen einer fairen Münze am wahrscheinlichsten ist. Wo sieht man das in der Abbildung der Verteilung? Sie sollten feststellen, dass das Ergebnis “50 Mal Kopf” das am ehesten zu erwartende ist.</p>
 <p>Schauen Sie nun in der Tabelle der Wahrscheinlichkeitsverteilung nach und sehen Sie sich an, wie wahrscheinlich genau dieses am ehesten zu erwartende Ereignis “50 Mal Kopf” ist. Das Ergebnis (Ihnen sollte auch klar sein, dass es sich hier um bedingte Wahrscheinlichkeiten handelt): p(“50 Mal Kopf bei 100 Würfen”| faire Münze) = 0.079589, also knapp 8%. Genau 50 Kopfwürfe bei 100 Würfen einer fairen Münze sind also recht unwahrscheinlich – aber dennoch wahrscheinlicher als jedes andere Ergebnis.</p>
-<p>Sie erinnern sich: Als Sie die seltsam aussehende Münze 100 Mal geworfen hatten, hatten Sie <strong>58 Mal “Kopf”</strong> geworfen. Wie wahrscheinlich ist es 58 Mal oder noch öfter Kopf zu werfen, wenn die Münze fair ist? Wie können Sie das mit Hilfe der angelegten Tabelle der Wahrscheinlichkeitsverteilung herausfinden? Lösung: berechnen Sie in <strong>Zelle F11</strong> die Summe der Zellen <strong>B91</strong> bis <strong>B133</strong>, also “<strong>=SUMME(B91:B133)</strong>”. Das Ergebnis: 0.0666, also eine recht kleine Wahrscheinlichkeit.</p>
+<p>Sie erinnern sich: Als Sie die seltsam aussehende Münze 100 Mal geworfen hatten, hatten Sie <strong>58 Mal “Kopf”</strong> geworfen. Wie wahrscheinlich ist es 58 Mal oder noch öfter Kopf zu werfen, wenn die Münze fair ist? Wie können Sie das mit Hilfe der angelegten Tabelle der Wahrscheinlichkeitsverteilung herausfinden? Lösung: berechnen Sie in <strong>Zelle F12</strong> die Summe der Zellen <strong>B92</strong> bis <strong>B134</strong>, also “<strong>=SUMME(B92:B134)</strong>”. Das Ergebnis: 0.0666, also eine recht kleine Wahrscheinlichkeit.</p>
+<p>Alternativ können Sie sich auch die kumulierte Wahrscheinlichkeitsverteilung ausgeben lassen. Nutzen Sie dazu die Spalte C und setzen im letzten Argument des binom.vert-Befehls “wahr” ein. Welche Wahrscheinlichkeiten werden jetzt ausgegeben? Erstellen Sie eine Grafik. Wie lässt sich die Wahrscheinlichkeit für “58 mal Kopf oder öfter” mit der kumulierten Wahrscheinlichkeitsverteilung bestimmen?</p>
 <p>Berechnen Sie nun die Wahrscheinlichkeit, bei 100 Würfen einer fairen Münze weniger als die von Ihnen beobachteten 58 Mal “Kopf” zu bekommen. Das Ergebnis: p(weniger als 58 Mal “Kopf”| faire Münze) = 0.933. Sollte die Münze fair sein, wird man also in gut 93% der Fälle bei 100 Würfen weniger als 58 Mal “Kopf” werfen.</p>
-<p>Schauen Sie nun noch in der Tabelle nach, wie wahrscheinlich es ist, genau 58 Mal “Kopf” zu werfen.</p>
+<p>Schauen Sie nun noch in der Tabelle nach, wie wahrscheinlich es ist, genau 58 Mal “Kopf” zu werfen.(All diese Wahrscheinlichkeiten lassen sich sowohl mit der unkumulierten als auch der kumulierten Wahrscheinlichkeitsverteilung bestimmen.)</p>
 <p>Nachdem Sie nun eine Weile mit der theoretischen Wahrscheinlichkeitsverteilung gearbeitet und ein paar Wahrscheinlichkeiten berechnet haben, wie sieht es mit ihrem Gefühl aus? Haben Sie da eine faire Münze vor sich?</p>
 <div id="neues-wissen" class="section level4">
 <h4><span class="header-section-number">2.1.3.1</span> Neues Wissen</h4>
 <p>Stellen Sie sich nun folgendes vor: Sie treffen eine Freundin, der diese Art Münze bekannt ist. Sie weiß, dass diese Münze aus einem Geschäft für Zauberzubehör stammt. Dort gibt es genau zwei verschiedene Typen dieser Art Münze. Ein Münztyp ist tatsächlich fair und der andere “unfair”. Ihre Freundin weiß auch, dass die unfairen Münzen so gestaltet sind, dass sie mit 70%-iger Wahrscheinlichkeit “Kopf” produzieren.</p>
-<p>Wie würde die Wahrscheinlichkeitsverteilung für “Kopf” aussehen, wenn es sich um eine Münze vom “unfairen” Typ handeln würde? Benutzen Sie <strong>Spalte C</strong> der bestehenden Tabelle, um diese Wahrscheinlichkeitsverteilung zu ermitteln. Machen Sie anschließend auch wieder eine Grafik der Verteilung. Versuchen sie sogar, eine gemeinsame Abbildung zu erstellen, die beide Wahrscheinlichkeitsverteilungen zeigt. Das Ergebnis sollte ungefähr so aussehen:</p>
+<p>Wie würde die Wahrscheinlichkeitsverteilung für “Kopf” aussehen, wenn es sich um eine Münze vom “unfairen” Typ handeln würde? Benutzen Sie <strong>Spalte D</strong> der bestehenden Tabelle, um diese Wahrscheinlichkeitsverteilung zu ermitteln. Machen Sie anschließend auch wieder eine Grafik der Verteilung. Versuchen sie sogar, eine gemeinsame Abbildung zu erstellen, die beide Wahrscheinlichkeitsverteilungen zeigt. Das Ergebnis sollte ungefähr so aussehen:</p>
 <p><br> <img src="images/q1_04wsk/two_binomverts.PNG#bordered" style="width:100.0%" /> <br></p>
-<p>Berechnen Sie nun die bedingte Wahrscheinlichkeit, bei einer Münze des “unfairen” Typs mehr als die beobachteten 58 Mal “Kopf” zu werfen. Berechnen Sie dann die bedingte Wahrscheinlichkeit, höchstens 58 Mal “Kopf” (also 58 oder weniger) zu werfen, wenn eine Münze vom “unfairen” Typ ist. Zuletzt noch die Wahrscheinlichkeit, in diesem Fall genau 58 Mal “Kopf” zu werfen. Die Ergebnisse sind:</p>
+<p>Hier noch ein kurzes Tutorial für das Erstellen einer Grafik mit zwei Wertereihen:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ORUCsoRHrnM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>Berechnen Sie nun die bedingte Wahrscheinlichkeit, bei einer Münze des “unfairen” Typs 58 oder mehr Mal “Kopf” zu werfen. Berechnen Sie dann die bedingte Wahrscheinlichkeit, höchstens 57 Mal “Kopf” zu werfen, wenn eine Münze vom “unfairen” Typ ist. Zuletzt noch die Wahrscheinlichkeit, in diesem Fall genau 58 Mal “Kopf” zu werfen. Die Ergebnisse sind:</p>
 <p><br> <img src="images/q1_04wsk/results_unfair.PNG#bordered" style="width:40.0%" /></p>
 <p><br></p>
 <p>Wie haben die Information über die Münzen, die Sie von besagter Freundin erhalten haben, und die gerade durchgeführten Berechnungen ihre Intuition verändert? Spricht das beobachtete Ergebnis von <strong>58 Mal “Kopf”</strong> nun eher dafür, dass Sie eine Münze vom “fairen” oder eine Münze vom “unfairen” Type vor sich haben?</p>
-<p>Setzen Sie zuletzt die zwei bedingten Wahrscheinlichkeiten für “genau 58 Mal ‘Kopf’”, die sich aus den beiden theoretischen Verteilungen ergeben, ins Verhältnis. Wie viel wahrscheinlicher ist “58 Mal Kopf” wenn eine Münze vom Typ “fair” ist als wenn sie vom Typ “unfair” ist? Schreiben Sie das Ergebnis in <strong>Zelle F28</strong>. Sie sollten herausbekommen haben, dass das beobachtete Ergebnis von 58 Mal “Kopf” knapp 7x wahrscheinlicher ist, wenn es sich um eine Münze aus dem Zaubershop handelt, die vom “fairen” Typ ist.</p>
+<p>Setzen Sie zuletzt die zwei bedingten Wahrscheinlichkeiten für “genau 58 Mal ‘Kopf’”, die sich aus den beiden theoretischen Verteilungen ergeben, ins Verhältnis. Wie viel wahrscheinlicher ist “58 Mal Kopf” wenn eine Münze vom Typ “fair” ist als wenn sie vom Typ “unfair” ist? Schreiben Sie das Ergebnis in <strong>Zelle G29</strong>. Sie sollten herausbekommen haben, dass das beobachtete Ergebnis von 58 Mal “Kopf” knapp 7x wahrscheinlicher ist, wenn es sich um eine Münze aus dem Zaubershop handelt, die vom “fairen” Typ ist.</p>
 <p><br></p>
 </div>
 </div>
@@ -599,7 +634,7 @@ div.tocify {
 <p><br></p>
 <p>Nehmen Sie an, dass im nächsten Jahr ca. 740.000 Kinder in Deutschland eingeschult werden (2019/20 waren es 733.000). In den Kultusministerien stellt man sich die Frage, wie viele der eingeschulten Kinder im kommenden Schuljahr aufgrund eine besondere Lernförderung brauchen werden. Im Allgemeinen wird davon ausgegangen, dass Kinder, deren Intelligenz (gemessen durch einen IQ-Test) mindestens zwei Standardabweichungen unterhalb des Mittelwerts liegt, eine solche Förderung brauchen. Man weiß, dass IQ-Werte normalverteilt sind und zwar mit den Parameterwerten <span class="math inline">\(\mu\,= 100\)</span> und <span class="math inline">\(\sigma\,= 15\)</span>.</p>
 <p>Wie viele der eingeschulten Kinder werden im kommenden Jahr eine besondere Lernförderung brauchen?</p>
-<p>Bevor wir die Frage beantworten benutzen wir Excel zunächst, um die Wahrscheinlichkeitsdichtefunktion der entsprechenden Normalverteilung grafisch abzubilden. Dazu benutzen wir die Funktion "__NORM.VERT()". Unten finden Sie dazu wieder ein kurzes Video:</p>
+<p>Bevor wir die Frage beantworten benutzen wir Excel zunächst, um die Wahrscheinlichkeitsdichtefunktion der entsprechenden Normalverteilung grafisch abzubilden. Dazu benutzen wir die Funktion “__NORM.VERT()“. Unten finden Sie dazu wieder ein kurzes Video:</p>
 <p><br></p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/05MFi3EDIrY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
@@ -649,49 +684,6 @@ $(document).ready(function () {
 });
 
 
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
