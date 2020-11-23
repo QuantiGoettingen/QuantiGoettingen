@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -29,6 +29,15 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -91,7 +100,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -240,6 +248,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -252,48 +261,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -307,6 +277,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -489,10 +465,7 @@ div.tocify {
 <p>In der letzten Vorlesungssitzung haben Sie gelernt, warum Wahrscheinlichkeiten und Wahrscheinlichkeitsverteilungen für Statistik wichtig sind. Hoffentlich haben Sie sich das Folgende gemerkt:</p>
 <p><br></p>
 <div class="column-right_alignRight">
-<div class="figure">
-<img src="images/home/squirrel_wissen.png" />
-
-</div>
+<p><img src="images/home/squirrel_wissen.PNG" /></p>
 </div>
 <div class="boxBorder">
 <p>In der Statistik benutzen wir theoretische Wahrscheinlichkeitsverteilungen um empirische (also beobachtete) Ereignisse zu beurteilen.</p>
@@ -511,17 +484,14 @@ div.tocify {
 <p>In der heutigen Seminarsitzung wollen wir beide Arten von Zufallsvariablen und ihre entsprechenden Verteilungen noch einmal genauer unter die Lupe nehmen. Die Excel-Datei, die Sie benötigen, finden Sie <a href="q1_dataFiles/04_Wahrscheinlichkeitsverteilungen.xlsx">hier</a>.</p>
 <p><br></p>
 </div>
-<div id="diskrete-zufallsvariablen---magische-munzen-und-raten-in-klausuren" class="section level1">
+<div id="diskrete-zufallsvariablen---magische-münzen-und-raten-in-klausuren" class="section level1">
 <h1><span class="header-section-number">2</span> Diskrete Zufallsvariablen - Magische Münzen und Raten in Klausuren</h1>
 <p>Beginnen wir zunächst mit diskreten Zufallsvariablen und schauen wir uns an, was man mit dem Wissen über theoretische Wahrscheinlichkeitsverteilungen in einem solchen Fall anstellen kann.</p>
 <p><br></p>
-<div id="ist-diese-munze-fair" class="section level2">
+<div id="ist-diese-münze-fair" class="section level2">
 <h2><span class="header-section-number">2.1</span> Ist diese Münze fair?</h2>
 <div class="column-right_alignRight">
-<div class="figure">
-<img src="images/q1_04wsk/coin.png" />
-
-</div>
+<p><img src="images/q1_04wsk/coin.png" /></p>
 </div>
 <p>Stellen Sie sich vor, Sie finden eine seltsam aussehende Münze (s. Bild). Sie fragen sich, ob es sich bei dieser Münze um eine “faire” Münze handelt oder nicht. Wäre die Münze “fair”, dann wäre die Wahrscheinlichkeit für das Ereignis “Kopf” gleich der Wahrscheinlichkeit für das Ereignis “Zahl”. Da “Kopf” oder “Zahl” die einzigen beiden Ausprägungen sind, die aus einem Münzwurf resultieren können (deshalb sprechen wir hier von einer “diskreten” Zufallsvariablen), würde für eine “faire” Münze gelten, dass p(Kopf) = p(Zahl) = 0.5.</p>
 <p>Sie entschließen sich, die komische Münze <strong>100 Mal zu werfen</strong> und dabei zu zählen, wie oft das Ereignis “Kopf” aufgetreten ist. Das Ergebnis: Sie haben <strong>58 Mal “Kopf”</strong> geworfen. Wie sehr glauben Sie daran, hier eine “faire” Münze vor sich zu haben?</p>
@@ -634,7 +604,7 @@ div.tocify {
 <p><br></p>
 <p>Nehmen Sie an, dass im nächsten Jahr ca. 740.000 Kinder in Deutschland eingeschult werden (2019/20 waren es 733.000). In den Kultusministerien stellt man sich die Frage, wie viele der eingeschulten Kinder im kommenden Schuljahr aufgrund eine besondere Lernförderung brauchen werden. Im Allgemeinen wird davon ausgegangen, dass Kinder, deren Intelligenz (gemessen durch einen IQ-Test) mindestens zwei Standardabweichungen unterhalb des Mittelwerts liegt, eine solche Förderung brauchen. Man weiß, dass IQ-Werte normalverteilt sind und zwar mit den Parameterwerten <span class="math inline">\(\mu\,= 100\)</span> und <span class="math inline">\(\sigma\,= 15\)</span>.</p>
 <p>Wie viele der eingeschulten Kinder werden im kommenden Jahr eine besondere Lernförderung brauchen?</p>
-<p>Bevor wir die Frage beantworten benutzen wir Excel zunächst, um die Wahrscheinlichkeitsdichtefunktion der entsprechenden Normalverteilung grafisch abzubilden. Dazu benutzen wir die Funktion “__NORM.VERT()“. Unten finden Sie dazu wieder ein kurzes Video:</p>
+<p>Bevor wir die Frage beantworten benutzen wir Excel zunächst, um die Wahrscheinlichkeitsdichtefunktion der entsprechenden Normalverteilung grafisch abzubilden. Dazu benutzen wir die Funktion "__NORM.VERT()". Unten finden Sie dazu wieder ein kurzes Video:</p>
 <p><br></p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/05MFi3EDIrY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
@@ -684,6 +654,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
