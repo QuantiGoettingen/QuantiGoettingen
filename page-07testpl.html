@@ -19,9 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
@@ -34,7 +39,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -262,6 +267,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -269,6 +337,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -334,6 +412,9 @@ $(document).ready(function () {
       <a href="page-07testpl.html">Sitzung 7: G*Power zur Testplanung</a>
     </li>
     <li>
+      <a href="page-zwischensitzung.html">Zwischensitzung: Wiederholung/ Anwendung des bisher Gelernten</a>
+    </li>
+    <li>
       <a href="page-08kontraste.html">Sitzung 8: Kontraste</a>
     </li>
     <li>
@@ -384,11 +465,174 @@ $(document).ready(function () {
 </div>
 
 
-
+<p>#Die vier Determinanten des statistischen Testens und ihre Beziehung zueinander</p>
+<p>Wir haben in dieser Woche gelernt, dass jeder statistische Test vier wichtige kennzeichnende Komponenten (sog. Determinanten) hat:</p>
+<ol style="list-style-type: decimal">
+<li><p>Das akzeptierte <strong>Alpha-Fehlerniveau</strong> (aus Konvention normalerweise 0.05). Wir haben gesehen, dass sich über Testverteilungen die Wahrscheinlichkeit bestimmter Ergebnisse (oder noch extremerer Ergebnisse) unter Annahme einer Nullhypothese ermitteln lässt. Sind empirisch beobachtete Ergebnisse unter Annahme der H0 hinreichend unwahrscheinlich, entscheiden wir uns, die H0 zugunsten einer Alternativhypothese (H1) zu verwerfen. Aber was ist “hinreichend unwahrscheinlich”? Was immer wir hier als Kriterium verwenden, ist unser akzeptiertes Alpha-Fehlerniveau. Wenn es bei “&lt;0.05” liegt bedeutet das: wir weisen eine Nullhypothese dann zurück, wenn unsere beobachteten Ergebnisse unter Annahme der H0 weniger als 5% wahrscheinlich sind. Auf lange Sicht werden wir die H0 dann nur in höchstens 5% aller Fälle fälschlicherweise zurückweisen, also einen sogenannten Alpha-Fehler (auch genannt: Fehler 1. Art) begehen. In einem Einzelfall können wir natürlich niemals sicher sein, ob wir ihn begangen haben oder nicht.</p></li>
+<li><p>Das akzeptierte <strong>beta-Fehlerniveau</strong> oder die <strong>Teststärke (1-beta)</strong>. Der beta-Fehler bezieht sich auf die zweite Art und Weise, auf die wir uns bei einem statistischen Test irren können. Wir können die Nullhypothese natürlich nicht nur fälschlicherweise annehmen (alpha-Fehler), sondern auch fälschlicherweise ablehnen. Hier würden wir also die Nullhypothese beibehalten und somit denken, dass es keinen Effekt einer bestimmten Manipulation gäbe, obwohl in Wahrheit eine Alternativhypothese zutrifft und die Manipulation, Behandlung o.ä. doch einen Effekt hat. Auch das wäre ärgerlich, weil uns dadurch möglicherweise bedeutsame Erkenntnisse entgehen könnten (denken Sie beispielsweise an Medikamentenforschung, Forschung zur Wirksamkeit von Psychotherapien oder die aktuellen Impfstudien). Wie groß der beta-Fehler sein darf, ist weniger stark festgelegt, aber eine häufige Faustregel ist, dass er nicht größer als 20% sein sollte. Statt der beta-Fehlerwahrscheinlichkeit wird häufig 1-beta, die sogenannte Teststärke angegeben. Die Teststärke ist also die Wahrscheinlichkeit, eine Alternativhypothese anzunehmen, wenn sie zutrifft. Nach der eben erwähnten Konvention sollte diese Wahrscheinlichkeit also mindestens 80% betragen.</p></li>
+<li><p>Die <strong>Effektgröße</strong>, entweder vermutet (vor dem Erheben und Testen) oder beobachtet (nach dem Erheben und Testen). Diese Angabe bezieht sich darauf, wie groß oder klein der Einfluss einer Manipulation, Behandlung oder ähnlichem auf die abhängige Variable ist, also wie groß oder klein beispielsweise ein Mittelwertsunterschied, ein Zusammenhang, eine Veränderung oder eine Abweichung von einem bekannten Mittelwert ist (relativiert an einem Streuungsmaß). Als Maß für Effektstärken kennen wir hier bisher Cohen’s d, es gibt aber noch eine ganze Reihe von anderen Effektgrößen, die wir auch teilweise noch kennenlernen werden.</p></li>
+<li><p>Die <strong>Stichprobengröße</strong>, entweder die benötigte (vor Erhebung und Test) oder die für eine Studie gewonnen werden konnte (nach Erhebung).</p></li>
+</ol>
+<p>Wenn wir jede dieser Komponenten ohne praktische Beschränkungen optimieren könnten, hätten wir in jedem Test am liebsten:</p>
+<ul>
+<li><p>Ein Alpha-Fehler-Niveau nahe Null (für ein auf lange Sicht minimales Risiko, eine H0 fälschlicherweise abzulehnen)</p></li>
+<li><p>Ein Beta-Fehler-Niveau nahe Null bzw. eine Teststärke nahe 1 (für ein auf lange Sicht minimales Risiko, einen wahren Effekt zu verpassen)</p></li>
+<li><p>Jede mögliche Effektstärke würden wir gern maximal präzise schätzen können, auch sehr kleine Effekte würden wir gern zuverlässig in unseren Studien detektieren können</p></li>
+<li><p>Möglichst kleine Stichproben, um Aufwand, Dauer und Kosten für unsere Studien gering zu halten</p></li>
+</ul>
+<p>Wie Sie vermutlich bereits geahnt haben, leben wir aber nicht in dieser idealen Welt - in Wahrheit sind die vier Determinanten des statistischen Testens <strong>voneinander abhängig</strong>. Jede Optimierung einer der Dimensionen wird durch eine Verschlechterung auf den anderen Dimensionen erkauft. Da Alpha aus Konvention selten geändert wird (obwohl es je nach Kontext einer Studie durchaus sinnvoll sein kann, darüber nachzudenken), stehen praktisch meistens folgende Zusammenhänge im Vordergrund (eigentlich ist es ein und derselbe Zusammenhang, aber aus drei Blickwinkeln betrachtet):</p>
+<ul>
+<li><p>Je mehr Versuchspersonen wir in einer Studie haben, desto höher wird die Wahrscheinlichkeit, einen bestimmten wahren Effekt (von zb. d = 0.5) in der Studie zu detektieren (desto höher also die Teststärke für diesen Effekt). Zudem wird derselbe Effekt mit einer höheren Präzision geschätzt, je größer die Stichprobe ist (wenn man sehr viele Studien mit großen Stichproben durchführen würde, sollte der in jeder einzelnen Studie gefundene Effekt also nicht mehr weit vom wahren Effekt abweichen).</p></li>
+<li><p>Je kleiner ein Effekt in der Population, desto mehr Versuchspersonen werden benötigt, um ihn in einer Studie mit einer bestimmten Teststärke (auch: Power), beispielsweise 80%, detektieren zu können.</p></li>
+<li><p>Je höher unser angestrebtes Powerlevel (zb 90% oder sogar 95% statt 80%) für einen bestimmten Effekt (zb d = 0.2), desto mehr Versuchspersonen werden wir benötigen, um dieses Powerlevel in einer Studie zu realiseren.</p></li>
+</ul>
+<p><br /></p>
+<p><img src="images/q1_07power/juggling_squirrel.PNG" style="width:40.0%" /></p>
+<p><br /></p>
+<p>#G-Power zur Testplanung</p>
+<p>G-Power ist ein Programm, mit dem sich für viele übliche Testverfahren berechnen lässt, welcher Wert sich für die eine beliebige der genannten Komponenten ergibt, wenn man die Werte der drei anderen festlegt. (Die Formel, mit der man dasselbe per Hand berechnen könnte, ist im Anhang der Vorlesung 7 zu finden. Dank G-Power können wir uns das manuelle Berechnen aber sparen.)</p>
+<p>Wenn Sie G-Power öffnen, müssen Sie zunächst die Testfamilie auswählen (diese richtet sich nach der verwendeten Teststatistik), beispielsweise die Familie der t-Tests. Anschließend wird der konkrete gewünschte Test ausgewählt. Die im rechten Screenshot rot umrandeten Optionen entsprechen den drei t-Tests, die wir bisher behandelt haben. Welche Option zu welchem der t-Tests gehört, dürfte sich Ihnen mittlerweile aus der Bezeichnung erschließen.</p>
+<p><img src="images/q1_07power/gpower_01.png" /></p>
+<p><br /></p>
+<p>Ist der gewünschte Test gewählt, gibt es stets fünf mögliche Arten, auf die die Test-Determinanten miteinander verrechnet werden können:</p>
+<p><br /></p>
+<p><img src="images/q1_07power/gpower_02.png" style="width:50.0%" /></p>
+<p><br /></p>
+<ul>
+<li><p>A priori: Die benötigte Stichprobengröße vor der Durchführung einer Studie aus den anderen Komponenten berechnen.</p></li>
+<li><p>Compromise: Werte für alpha und beta aus den anderen Komponenten berechnen, unter Angabe eines gewünschten Verhältnisses zwischen den beiden Fehlerarten (zb: beta soll viermal so groß wie alpha sein, aber die konkreten Werte sind nachrangig).</p></li>
+<li><p>Criterion: Erreichbares Alpha-Niveau aus den anderen Komponenten berechnen.</p></li>
+<li><p>Post hoc: Die erreichte Teststärke nach Durchführung einer Studie berechnen.</p></li>
+<li><p>Sensitivity: Berechnen, wie groß ein Effekt mindestens sein müsste, damit man ihn bei vorgegebener Stichprobengröße mit bestimmter Power (und alpa-Niveau) finden kann.</p></li>
+</ul>
+<p>Wir werden uns in diesem Semester fast nur mit “a priori”" und “post hoc” beschäftigen.</p>
+<p>##T-Test</p>
+<p>Jede der drei Varianten des t-Tests, die wir bisher kennengelernt haben, braucht leicht anderen Input.</p>
+<p>###Einstichproben-Test</p>
+<p>Option bei “Statistical Test”: “Means: Difference from constant (one sample case)”</p>
+<p><strong>A priori:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size d: Für welchen Effekt planen wir?</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>power: Welche Teststärke wollen wir erreichen?</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li><strong>Total sample size: Benötigte Anzahl an Versuchspersonen</strong> (unser Hauptergebnis)</li>
+<li>Actual power: Genauer Wert der erreichten Power. Da bei der Anzahl der benötigten Versuchspersonen nur ganze Zahlen sinnvoll sind, weicht diese leicht von der links eingegebenen angestrebten Power ab.</li>
+</ul>
+<p><strong>Post hoc:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size d: Welchen Effekt haben wir gefunden?</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>Total sample size: Was was unsere Stichprobengröße?</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li><strong>Power: Welche Teststärke haben wir in diesem Experiment erreicht?</strong> (unser Hauptergebnis)</li>
+</ul>
+<p><br /></p>
+<p><img src="images/q1_07power/onesample.png" style="width:100.0%" /></p>
+<p><br /> Beispiel: Planung für einseitigen Test und mittleren Effekt (links). Stichprobe war offenbar größer als erwartet (rechts), Effekt wie vermutet, Power in Test demnach höher als zur Planung verwendet.</p>
+<p><br /> ###Zweistichprobentest, unabhängig</p>
+<p>Option bei “Statistical Test”: “Means: Difference between two independent means (two groups)”</p>
+<p><strong>A priori:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size d: Für welchen Effekt planen wir?</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>power: Welche Teststärke wollen wir erreichen?</li>
+<li>allocation ratio: Wenn wir die Gesamtanzahl der Vpn gleichmäßig auf beide Gruppen aufteilen wollen (was wir eigentlich immer anstreben), lassen wir hier “1” stehen.</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li>Sample size group 1: n in erster Gruppe</li>
+<li>Sample size group 2: n in zweiter Gruppe</li>
+<li><strong>Total sample size: Benötigte Anzahl an Versuchspersonen</strong> (unser Hauptergebnis)</li>
+<li>Actual power: Genauer Wert der erreichten Power. Da bei der Anzahl der benötigten Versuchspersonen nur ganze Zahlen sinnvoll sind, weicht diese leicht von der links eingegebenen angestrebten Power ab.</li>
+</ul>
+<p><strong>Post hoc:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size d: Welchen Effekt haben wir gefunden?</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>Sample size group 1: n in erster Gruppe</li>
+<li>Sample size group 2: n in zweiter Gruppe</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li><strong>Power: Welche Teststärke haben wir in diesem Experiment erreicht?</strong> (unser Hauptergebnis)</li>
+</ul>
+<p><br /></p>
+<p><img src="images/q1_07power/independent.png" style="width:100.0%" /></p>
+<p><br /> Beispiel: Planung für einseitigen Test und kleinen Effekt (links). Stichprobe war offenbar kleiner als erwartet (rechts), Effekt wie vermutet, Power in Test demnach niedriger als zur Planung verwendet.</p>
+<p><br /></p>
+<p>###Zweistichprobentest, abhängig</p>
+<p>Option bei “Statistical Test”: “Means: Difference between two dependent means (matched pairs)”</p>
+<p><strong>A priori:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size dz: Für welchen Effekt planen wir? (dz = Cohen’s d für abhängige Daten)</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>power: Welche Teststärke wollen wir erreichen?</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li><strong>Total sample size: Benötigte Anzahl an Versuchspersonen</strong> (unser Hauptergebnis)</li>
+<li>Actual power: Genauer Wert der erreichten Power. Da bei der Anzahl der benötigten Versuchspersonen nur ganze Zahlen sinnvoll sind, weicht diese leicht von der links eingegebenen angestrebten Power ab.</li>
+</ul>
+<p><strong>Post hoc:</strong></p>
+<p>Input:</p>
+<ul>
+<li>Tail(s): Einseitig (one) oder zweiseitig (two)</li>
+<li>Effect size dz: Welchen Effekt haben wir gefunden? (dz = Cohen’s d für abhängige Daten)</li>
+<li>alpha err prob: Was ist unser alpha?</li>
+<li>Total sample size: Stichprobengröße</li>
+</ul>
+<p>“Calculate” klicken (unten rechts)</p>
+<p>Output:</p>
+<ul>
+<li>Noncentrality parameter: t-Wert, bei dem der Hochpunkt der Verteilung für die H1 liegt (siehe oben erscheinende Illustration)</li>
+<li>Critical t: kritischer t-Wert für den geplanten Test</li>
+<li>Df: Freiheitsgrade</li>
+<li><strong>Power: Welche Teststärke haben wir in diesem Experiment erreicht?</strong> (unser Hauptergebnis)</li>
+</ul>
+<p><br /></p>
+<p><img src="images/q1_07power/dependent.png" style="width:100.0%" /> <br /> Beispiel: Planung für zweiseitigen Test und großen Effekt (links). Stichprobe war offenbar größer als erwartet (rechts), Effekt wie vermutet, Power in Test demnach höher als zur Planung verwendet.</p>
+<p><br /></p>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
 
+</div>
+</div>
 
 </div>
 
@@ -396,7 +640,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -421,6 +665,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

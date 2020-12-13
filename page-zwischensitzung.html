@@ -11,7 +11,7 @@
 
 
 
-<title>Sitzung 2: Umfragen und Experimente – Datenaufbereitung</title>
+<title>Zwischensitzung: Anwendung des bisher Gelernten</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -460,90 +460,55 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sitzung 2: Umfragen und Experimente – Datenaufbereitung</h1>
+<h1 class="title toc-ignore">Zwischensitzung: Anwendung des bisher Gelernten</h1>
 
 </div>
 
 
-<div class="column-right">
-<p><img src="images/q1_02umfr/squirrel_litter.PNG" /></p>
+<div id="doping-am-nordpol" class="section level1">
+<h1><span class="header-section-number">1</span> Doping am Nordpol</h1>
+<p><br></p>
+<div class="column-left_alignLeft">
+<p><img src="images/home/rudolph2.PNG" /></p>
 </div>
-<p>Nachdem wir letzte Woche die Excel-Basics behandelt haben, schauen wir uns heute mal an, wie man sich mit Excel einen ersten Überblick über erhobene Daten verschaffen kann. Dabei lernen wir außerdem weitere hilfreiche Funktionen des Programms kennen.</p>
-<p>Die Daten zum Auswerten kommen dabei teilweise von Ihnen selbst! Wir möchten Sie bitten, zwei kurze Fragebögen auszufüllen (in einem geht es um umweltbezogenes Verhalten, im anderen um Prokrastination) - das sollte insgesamt nicht länger als 5 Minuten dauern. Die Daten stellen wir dann zum Üben bereit, sobald sie erhoben sind. Die Teilnahme ist natürlich freiwillig und anonym!</p>
-<p><a href="https://ww2.unipark.de/uc/NEngelmann/9058/">Hier</a> geht’s zur Umfrage! Gerne vor dem weiteren Lesen ausfüllen.</p>
-<p>Da wir die gleichen Fragebögen bereits im letzten Jahrgang bearbeiten lassen haben, können wir mit diesen Daten anfangen. Dieselben Arbeitsschritte können Sie dann in ein paar Tagen an Ihren eigenen Jahrgangsdaten noch einmal eigenständig üben. <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2019.xlsx">Hier</a> geht’s zu den 2019er-Daten und <a href="q1_dataFiles/02_Deskriptive_Statistik_Umfragen_2020.xlsx">hier</a> zu denen von 2020.</p>
-<p>Bei allen Datensätzen handelt es sich um simple Umfragen und nicht um Experimente. Was unterscheidet eine Umfrage von einem Experiment? Mehr Infos dazu finden sie <a href="https://lexikon.stangl.eu/3447/experiment/">hier</a>.</p>
-<p>Das Vorgehen wird hier nur für den Umwelt-Fragebogen veranschaulicht. Die Auswertungsschritte für den Prokrastinations-Fragebogen sind weitgehend identisch und können der Musterlösung entnommen werden.</p>
-<p><br /></p>
-<div id="der-datensatz" class="section level1">
-<h1><span class="header-section-number">1</span> Der Datensatz</h1>
-<p>Der Umweltfragebogen besteht aus 10 Fragen (auch “Items” genannt). In unserem Datensatz bekommt jedes Item eine eigene Spalte und jede Zeile beinhaltet die Antworten einer anonymen Versuchsperson (also einer Person aus dem Quanti-Jahrgang 2019/20).</p>
-<p>Rechts ist ersichtlich, welches Kürzel in den Spaltenüberschriften zu welcher Frage gehört.</p>
-<p>In der Tabelle stehen die Antworten, die die Versuchspersonen auf die verschiedenen Fragen angekreuzt haben (auf der Skala von 1 - “nie” bis 6 - “immer”).</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_datensatz.png#bordered" style="width:100.0%" /></p>
-<p><br /> <br /></p>
-<div id="items-rekodieren" class="section level2">
-<h2><span class="header-section-number">1.1</span> Items rekodieren</h2>
-<p>Beim Lesen der Fragen fällt auf, dass nicht alle Fragen “in dieselbe Richtung formuliert” sind. Bei manchen Fragen zeigt ein hoher Wert auf der Skala ein besonders umweltfreundliches Verhalten an, bei anderen Fragen zeigt er ein besonders umweltschädliches Verhalten an. Wir wollen alle Items zur Vereinfachung der Auswertung so umkodieren, dass ein hoher Wert für ein <strong>umweltfreundliches</strong> Verhalten steht. Welche Items müssen wir “umdrehen” und wie könnte das funktionieren?</p>
-<p>Es bietet sich an, die Spalten mit den zu invertierenden Items zunächst einmal farblich zu kennzeichnen und rechts von ihnen eine neue, leere Spalte anzulegen. Diese zunächst leere Spalte kann dann später die invertierten Werte beinhalten. Um in Excel eine neue Spalte zwischen bestehende Spalten einzufügen, kann man einfach eine bestehende Spalte komplett auswählen (indem man oben auf den Buchstaben klickt, der sie kennzeichnet). Durch Rechtsklick auf den nun markierten Bereich erscheint ein Menü, hier “Zellen einfügen” auswählen. <strong>Links von der markierten Spalte</strong> erscheint eine leere Spalte.</p>
-<p>Im untenstehenden Screenshot ist Item U1 gelb markiert, da es sich hierbei um eine Frage handelt, bei der ein hoher Wert ein umweltschädliches Verhalten anzeigt (Batterien in den Hausmüll werfen). Rechts von der Spalte, die U1 enthält, wird eine neue Spalte eingefügt. Wir nennen sie “U1_r”, weil hier die rekodierten Werte für U1 eingetragen werden sollen.</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_neuespalte.png" style="width:100.0%" /> <br /> <br /></p>
-<p>Wer mag, kann da zunächst selbst einmal überlegen, wie man das Item rekodieren könnte. Dafür brauchen wir keine gesonderte Excel-Funktion, sondern müssen uns nur eine einfache Rechnung überlegen. Diese sollte aus einem Wert von 1 in U1 eine 6 in U1_r machen. Eine 2 in U1 wird zur 5 in U1_r, eine 3 in U1 wird zur 4 in U1_r, eine 4 in U1 zur 3 in U1_r, eine 5 in U1 zur 2 in U1_r und eine 6 in U1 zur 1 in U1_r. Wem dazu nichts einfällt - siehe Lösung oder Lehrvideo.</p>
-<p>Woher weiß man, welche Items man rekodieren muss? Zu einem Fragebogen gehört normalerweise ein Handbuch, in dem solche Informationen enthalten wären. In unserem Fall kann man es sich recht leicht inhaltlich erschließen oder einfach der Lösung entnehmen.</p>
-<p><br /></p>
+<p><br></p>
+<p>Bevor das Jahr zu Ende geht und wir im Januar mit neuen statistischen Tests weitermachen, sollen Sie noch einmal alles Bisherige wiederholen. Da trifft es sich gut, dass uns jüngst die folgenden News vom Nordpol erreicht haben.</p>
+<p><br></p>
+<div class="column-right_alignRight">
+<p><img src="images/home/deer_left.PNG" /></p>
 </div>
-<div id="summenscores-bilden" class="section level2">
-<h2><span class="header-section-number">1.2</span> Summenscores bilden</h2>
-<p>Wenn die nötigen Items rekodiert wurden, kann man pro Person einen Summenscore bilden, der ihr umweltbezogenes Verhalten widerspiegelt. Nach dem Rekodieren bedeuten höhere Werte auf allen Items ein umweltfreundlicheres Verhalten. Je höher also die Summe aller Items einer Person zusammengenommen, desto umweltfreundlicher verhält sie sich - oder behauptet es zumindest im Fragebogen.</p>
-<p>Wir haben gesehen, dass die Werte von jeder Versuchsperson in einer Zeile angeordnet sind. Man könnte also denken, dass wir für den Summenscore nun einfach die Summe jeder Zeile bilden müssen. Ganz so leicht geht es in diesem Fall aber nicht, da wir natürlich berücksichtigen müssen, dass wir von einigen Items zwei Versionen haben - die originale und die rekodierte. Im Summenscore wollen wir natürlich nur die rekodierte Version dieser Items berücksichtigen (bei denen ein höherer Wert für ein umweltfreundlicheres Verhalten steht).</p>
-<p>Wenn wir in der letzten Spalte der Tabelle anfangen, eine Summe pro Zeile zu bilden, können wir gezielt angeben, welche Werte summiert werden sollen und welche nicht. Nach dem Eintippen von “=SUMME(” halten wir dazu einfach die Strg-Taste gedrückt (Mac: Befehlstaste) und wählen die Zellen aus, die in den Summenscore eingehen sollen. Das sind einmal die Items, die von Anfang an richtig kodiert warten und andererseits die rekodierten Versionen von den Items, die es zu Beginn nicht waren (U1 ist also <strong>nicht</strong> drin, U1_r schon - usw.). Oben sind die genauen Zellenbezüge zu sehen, die natürlich auch einfach eingetippt werden können. Danach schließen wir die Klammer des Summenbefehls und drücken auf Enter.</p>
-<p>Das müssen wir zum Glück nur einmal machen! Für die restlichen Versuchspersonen kann der Befehl einfach übertragen werden wie in der letzten Sitzung gelernt (ein Doppelklick auf das kleine Quadrat rechts unten übertragt den Befehl übrigens noch schneller und einfacher auf die restlichen Zeilen. Auch hier erkennt Excel automatisch, wann die Tabelle endet.).</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_summestrg.png#bordered" style="width:100.0%" /></p>
-<p><br /></p>
+<p><br></p>
+<p>Wie jedes Jahr ist der Weihnachtsmann wieder spät dran, weil er mal wieder alle nötigen Vorbereitungen zu lange hinausgezögert hat. (Das Ausfüllen eines psychologischen Prokrastinationsfragebogens verweigerte er bisher hartnäckig, aber es dürfte auch so klar sein, dass es in puncto Aufschieberitis nicht gut um ihn bestellt ist). Während die fleißigen Wichtel und Wichtelinnen sich mit dem Geschenkeverpacken gerade kräftig abrackern, um noch irgendwie die Heiligabend-Deadline einhalten zu können, beschließt der Weihnachtsmann, sich um ein anderes, noch viel größeres Problem zu kümmern. Seine Rentiere hatten den ganzen Sommer nur auf der faulen Haut gelegen und einfach gar nichts für ihre körperliche Fitness getan. Ein entsprechend desolates Bild geben die Tiere deshalb momentan ab. Der einzige, der sich über das Jahr hinweg mal wieder vorbildlich in Schuss gehalten hat, ist ein Rentier mit Namen Rudolf (eigentlich Rudolf Julius Konstantin Friedemann). Eigentlich sollten aber alle Rentiere, die die große Ehre haben, für den Weihnachtsmann arbeiten zu dürfen, entsprechend fit sein. Vor allem ist es wichtig, dass die Rentiere eine bestimmte Fluggeschwindigkeit erreichen können, damit alle Geschenke am Stichtag dann auch rechtzeitig verteilt werden können. Mindestens die Überschreitung der Schallgeschwindigkeit (gemessen in trockener Luft bei 20°C) sollte erreicht werden. Schon der katastrophale Anblick seiner faulen Tiere verrät dem Weihnachtsmann allerdings, dass für die Weihnachtsnacht dieses Jahr wohl eher nicht mit einem neuen Geschwindigkeitsrekord zu rechnen ist, wenn sich jetzt nicht endlich was tut. Ihm ist auch völlig klar, dass das reguläres Intervalltraining (also der gezielte Wechsel von Ausdauer- und Sprintkomponenten im Flugtraining) hier womöglich nicht mehr zum Erfolg führen wird. Da muss also dringend eine andere Lösung her. Der Weihnachtsmann meint sich zu erinnern, wie ihm einmal eine mehr als fragwürdige und zudem völlig fremde Person erzählt hatte, dass sich fliegende Rentiere sehr gut mit der Zugabe von Sternenstaub in ihr Futter dopen ließen. Das solle wohl „wahre Wunder“ bewirken. Aber Moment, war es wirklich Sternenstaub oder doch Kometenhagel? Seine Erinnerung an dieses Gespräch mit dem seltsamen Fremden ist einfach zu schwach, weshalb der Weihnachtsmann sich kurzerhand entschließt, die Sache zunächst wissenschaftlich zu ergründen. Da trifft es sich gut, dass er noch ein Buch über “Wissenschaftliche Methoden und Statistik für PsychologInnen“ rumliegen hat, das letztes Jahr zu Weihnachten einfach niemand unter dem Weihnachtsbaum haben wollte. Nach kurzer Lektüre ist klar: Ein <strong>Randomized-Controlled-Trial (RCT)</strong> muss her. (Eigentlich in diesem Fall ein <strong>RRCT</strong>: <em>„Rendeer Randomized Controlled Trial</em>.)</p>
+<p><br></p>
+<div class="column-left_alignLeft">
+<p><img src="images/home/deer_right.PNG" /></p>
 </div>
-<div id="summenscores-auszählen" class="section level2">
-<h2><span class="header-section-number">1.3</span> Summenscores auszählen</h2>
-<p>Wir wollen nun wissen, wie viele Personen einen unterdurchschnittlichen, durchschnittlichen und überdurchschnittlichen Summenscore erreicht haben. Die numerischen Grenzen für jede dieser Kategorien stehen in der Arbeitsmappe. Um die Anzahl der Personen mit unterdurchschnittlich gutem Umweltverhalten zu ermitteln, wollen wir beispielsweise auszählen, wie viele Leute einen Summenscore &lt;= 39 erzielt haben. Das geht mit der sehr nützlichen “ZÄHLENWENN”-Funktion. Diese Funktion zählt einfach aus, wie viele Werte in einem definierten Bereich (hier: unsere Summenscores) ein bestimmtes Kriterium (hier: “&lt;= 39”, oder identisch “&lt;40” ) erfüllen. Das Kriterium muss in Anführungszeichen gesetzt werden, auch wenn es numerisch ist:</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_zählenwenn.png#bordered" style="width:100.0%" /></p>
-<p><br /></p>
-<p>Dieses Vorgehen lässt sich einfach auf die Kategorie “überdurchschnittlich” übertragen - hier muss das Kriterium nur durch “&gt;50” ersetzt werden. Aber was machen wir mit “durchschnittlich”, also den Werten zwischen 40 und 50? Leider lässt sich innerhalb von “ZÄHLENWENN” kein Wertebereich als Kriterium formulieren. Aber wir können uns mit einem Trick behelfen: Wir zählen zunächst alle Werte &lt;= 50 (also alle “unterdurchschittlichen” plus alle “durchschnittlichen”) und ziehen dann einfach die wieder ab, die bei “unterdurchschnittlich” bereits gezählt wurden (wir verweisen dazu einfach auf die Zelle, in der die “unterdurchschnittlich”-Werte gezählt wurden):</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_zählenwenn2.png#bordered" style="width:100.0%" /></p>
-<p><br /></p>
-<p>Beim Prokrastinations-Fragebogen gibt es übrigens noch mehr “mittlere” Kategorien, da kann dieses Vorgehen also auch nochmal gut im Detail nachvollzogen werden.</p>
-<p>Wenn wir auf diese Weise die drei Kategorien ausgezählt haben, bietet es sich an, nocheinmal die Summe über alle Kategorien hinweg zu berechnen. Dabei sollten wir auf unsere Gesamtanzahl an Versuchspersonen kommen (84). Wenn nicht, haben wir beim Auszählen einen Fehler gemacht.</p>
-<p><br /></p>
-<p><img src="images/q1_02umfr/excel_zähltabelle.png#bordered" style="width:100.0%" /></p>
-<p><br /></p>
+<p><br></p>
+<p>Von seinen unzähligen fliegenden Rentieren (es sind tatsächlich mehrere hundert Stück in der Population) wählt der Weihnachtsmann 20 Rentiere zufällig aus, die an seinem Experiment teilnehmen sollen. Rudolf (… Julius Konstantin Friedemann) darf nicht teilnehmen, obwohl er sich natürlich mustergültig als erster freiwillig gemeldet hatte. Alle 20 Rentiere müssen zunächst eine abgesteckte Strecke entlangfliegen, damit ihre anfängliche Höchstgeschwindigkeit erfasst werden kann (Baseline-Messung). Was soll man sagen, es sieht nicht gut aus. Nach dieser doch recht ernüchternden Anfangsmessung geht es dann richtig los. Die Hälfte der Tiere kommt in die Kontrollgruppe. Die tägliche Ration Heu dieser Kontrollrentiere wird also lediglich mit einem Placebo, so genanntem „Fake-Sternenstaub“, angereichert. Das Heu der zehn Experimentalrentiere dagegen wird täglich mit hoch konzentriertem, Sternenstaub angereichert, welcher aus der letzten Supernova gewonnenen wurde. Da nicht mehr viel Zeit bleibt bis Weihnachten, wird bereits nach fünf Tagen erneut geschaut, wie sich die Höchstgeschwindigkeit der Versuchsrentiere verändert hat. Die Daten müssen jetzt also ausgewertet werden. Dafür braucht der Weihnachtsmann nun Ihre Hilfe. Denn obwohl er das Buch über wissenschaftliche Methoden und Statistik halbwegs gründlich studiert hat, traut er sich noch nicht zu, die Auswertung ganz alleine durchzuführen. Zu viel steht einfach auf dem Spiel. Die Daten des Versuchs hat der Weihnachtsmann in einer Excel-Datei für Sie bereitgestellt. Diese können Sie direkt vom Nordpol-Server <a href="">hier</a> herunterladen. Außerdem hat der Weihnachtsmann einen Brief an Sie beigefügt mit Fragen, die er gerne von Ihnen beantwortet hätte. Hier der Brief:</p>
+<p><br></p>
 </div>
-<div id="ein-histogramm-erstellen" class="section level2">
-<h2><span class="header-section-number">1.4</span> Ein Histogramm erstellen</h2>
-<p>Nun wollen wir unsere Werteverteilung graphisch darstellen. Dafür eignet sich ein <strong>Histogramm</strong>. Das ist eine Graphik, die die Anzahl von Messwerten in bestimmten Kategorien veranschaulicht. Das Erstellen von Graphiken in Excel lässt sich besser zeigen als beschreiben. Unten finden Sie deshalb ein kurzes Video, in dem wir Ihnen zeigen, wie man ein Histogramm erstellt:</p>
-<p><br /></p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/A4wCaxV8bJ0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-<p><br /> <br /></p>
-</div>
-</div>
-<div id="zum-weiteren-üben" class="section level1">
-<h1><span class="header-section-number">2</span> Zum weiteren Üben</h1>
-<p>In der Excel-Datei zu dieser Sitzung finden Sie in einer separaten Arbeitsmappe auch die Daten und weitere Aufgaben für den Prokrastinationsfragebogen. Bearbeiten Sie diese Aufgaben eigenständig.</p>
-<p><br /> <br /></p>
-</div>
-<div id="fragen-zur-selbstkontrolle" class="section level1">
-<h1><span class="header-section-number">3</span> Fragen zur Selbstkontrolle</h1>
-<!---LEARNR-->
-<iframe style="margin:0 auto; min-width: 100%;" id="myIframe1" class="interactive" src="https://simonstephan.shinyapps.io/q1_02umfragen/" scrolling="no" frameborder="no">
-</iframe>
-<!---------------->
-<p><br /> <br /></p>
-<script>
-  iFrameResize({}, ".interactive");
-</script>
+<div id="der-brief-vom-weihnachtsmann" class="section level1">
+<h1><span class="header-section-number">2</span> Der Brief vom Weihnachtsmann</h1>
+<p><br></p>
+<p><i> Liebe Studierende, für die Auswertung meines Rentierversuchs brauche ich Ihre Hilfe. Ich habe folgende Fragen an Sie:</p>
+<p>Wie sehen die Daten meiner 20 zunächst ungedopten Rentiere zu Beginn der Studie <strong>deskriptiv</strong> aus? - Was ist die <strong>Minimalgeschwindigkeit</strong> und was die <strong>Maximalgeschwindigkeit</strong>? - Was ist der <strong>Median</strong> und was ist der <strong>Mittelwert</strong> der Fluggeschwindigkeit zu diesem Zeitpunkt? - Bitte erstellen Sie auch eine <strong>Grafik</strong>, die geeignet ist, die <strong>Verteilung</strong> der Werte zu beschreiben. Ist die Verteilung symmetrisch oder nicht?</p>
+<p>Wie Sie sich schon denken können, interessiert mich natürlich nicht nur meine Zufallsstichprobe. Ich möchte anhand der Stichproben eigentlich gerne <strong>Rückschlüsse auf die Population</strong> ziehen.</p>
+<p>Wie schnell fliegen wohl ungedopte Rentiere im Mittel, wenn sie das ganze bisherige Jahr nur auf der faulen Haut gelegen haben?</p>
+<ul>
+<li><p>Bitte geben Sie sowohl eine <strong>Punkt-</strong> wie auch eine <strong>Intervallschätzung</strong> ab, die eine Spannbreite plausibler Werte für die wahre mittlere Fluggeschwindigkeit angibt.</p></li>
+<li><p>Kann man annehmen, dass <strong>ungedopte Rentiere</strong>, die bisher nur faul rumlagen, <strong>langsamer</strong> als der Schall sind? Warum?</p></li>
+<li><p>Bitte erstellen Sie auch eine Abbildung, die alle vier Gruppen zusammenfasst. Am besten ein <strong>Säulendiagramm mit 95% KIs</strong>.</p></li>
+<li><p>Kann ich davon ausgehen, dass das <strong>Doping mit Sternenstaub meine Rentiere schneller macht</strong>? Bitte testen Sie das. Was ist dieser <strong>“p-Wert”</strong> den man als Ergebnis eines Signifikanztests bekommt?</p></li>
+<li><p>Führt das Doping mit Sternenstaub dazu, dass die Rentiere das <strong>Minimalkriterium „Schneller als der Schall“</strong> erfüllen? Kann ich eventuell sogar davon ausgehen, dass sie <strong>schneller</strong> sind als der Schall? Was ist die <strong>standardisierte Effektgröße</strong> für die geschätzte Veränderung? Erstellen Sie bitte ein <strong>95% KI für die standardisierte Effektgröße</strong>, um die Spannbreite für den wahren Effekt besser einschätzen zu können. Bitte stellen Sie die standardisierte Effektgröße auch in einer <strong>Grafik</strong> dar.</p></li>
+<li><p>Kann ich davon ausgehen, dass auch meine Kontrollgruppenrentiere durch einen Placeboeffekt <strong>auch schneller</strong> werden? Eine Placebowirkung in diese Richtung hatte ich zumindest vermutet. Reicht der hier vorliegende Placeboeffekt aus, dass die Rentiere das <strong>Minimalkriterium „Schneller als der Schall“ erfüllen</strong>? Kann ich evtl. sogar davon ausgehen, dass auch meine Placeborentiere <strong>schneller sind als der Schall</strong>? Was ist die <strong>standardisierte Effektgröße</strong> für die geschätzte Veränderung? Erstellen Sie bitte ein <strong>95% KI für die standardisierte Effektgröße</strong>, um die Spannbreite für den wahren Effekt besser einschätzen zu können. Bitte stellen Sie die standardisierte Effektgröße auch in einer <strong>Grafik</strong> dar.</p></li>
+<li><p>Sind mit echtem Sternenstaub <strong>gedopte Rentiere schneller als Rentiere, die nur Placebo bekommen</strong>? Das war zumindest immer meine Vermutung. Was ist hier die Größe des standardisierten Unterschieds?</p></li>
+<li><p>Wie viel schneller als der Schall müssten gedopte Rentiere in Wirklichkeit sein, damit man mit einer Stichprobe von 10 gedopten Rentieren eine <strong>90%-ige Chance</strong> hat, ein signifikantes Ergebnis zu kriegen?</p></li>
+<li><p>Angenommen gedopte Rentiere flögen tatschächlich im Schnitt mit 1340 km/h: Wie viele gedopte Rentiere hätte man untersuchen müssen, damit man eine Geschwindigkeit, die mindestens so viel nach oben von der Schallgeschwindigkeit abweicht, wie die oben angegebene, mit <strong>90% Wahrscheinlichkeit</strong> durch ein signifikantes Ergebnis findet?</p></li>
+</ul>
+<p><br></p>
+<p>Ich wünsche Ihnen ein frohes Weihnachtsfest und hoffe, dass ich es rechtzeitig zur Bescherung zu Ihnen schaffe.</p>
+<p>Beste Grüße vom Nordpol und vielen Dank für Ihre Hilfe, Ihr Weihnachtsmann.</p>
+<p></i></p>
 </div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>

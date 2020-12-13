@@ -22,6 +22,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="favicon.ico"/>
@@ -34,7 +36,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -334,6 +336,9 @@ $(document).ready(function () {
       <a href="page-07testpl.html">Sitzung 7: G*Power zur Testplanung</a>
     </li>
     <li>
+      <a href="page-zwischensitzung.html">Zwischensitzung: Wiederholung/ Anwendung des bisher Gelernten</a>
+    </li>
+    <li>
       <a href="page-08kontraste.html">Sitzung 8: Kontraste</a>
     </li>
     <li>
@@ -443,6 +448,18 @@ body {
 <li>Excel-Datensatz “Signifikanztests”: <a href="q1_dataFiles/06_Signifikanztests.xlsx">download</a></li>
 </ul>
 </div>
+<div id="sitzung-7-g-power-zur-testplanung" class="section level4">
+<h4>Sitzung 7: G-Power zur Testplanung</h4>
+<ul>
+<li>Excel-Datensatz "G*Power zur Testplanung": <a href="q1_dataFiles/07_Hypothesentesten_Testplanung.xlsx">download</a></li>
+</ul>
+</div>
+<div id="zwischensitzung-anwendung-des-bisher-gelernten" class="section level4">
+<h4>Zwischensitzung: Anwendung des bisher Gelernten</h4>
+<ul>
+<li>Excel-Datensatz “Doping am Nordpol”: <a href="q1_dataFiles/Zwischensitzung_DopingNordpol.xlsx">download</a></li>
+</ul>
+</div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
@@ -454,7 +471,7 @@ body {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
