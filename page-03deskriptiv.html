@@ -37,7 +37,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-    </style>
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -83,7 +83,6 @@ h6 {
   text-align: left;
 }
 </style>
-
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -364,7 +363,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fas fa-home"></span>
+    <span class="fa fa-home"></span>
      
     Home
   </a>
@@ -410,9 +409,11 @@ div.tocify {
     <li>
       <a href="page-07testpl.html">Sitzung 7: G*Power zur Testplanung</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="page-zwischensitzung.html">Zwischensitzung: Wiederholung/ Anwendung des bisher Gelernten</a>
     </li>
+    <li class="divider"></li>
     <li>
       <a href="page-08kontraste.html">Sitzung 8: Kontraste</a>
     </li>
@@ -679,7 +680,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
