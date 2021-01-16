@@ -11,7 +11,7 @@
 
 
 
-<title>Sitzung 9: Wilcoxon-Tests</title>
+<title>Sitzung 9: Rangtests</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -34,7 +37,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -80,6 +83,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -262,6 +266,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -269,6 +336,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -287,7 +364,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
@@ -384,16 +461,81 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Sitzung 9: Wilcoxon-Tests</h1>
+<h1 class="title toc-ignore">Sitzung 9: Rangtests</h1>
 
 </div>
 
 
-
+<p>Rangtests machen, anders als die bisher behandelten Verfahren, keine Verteilungsannahmen und setzen nur ein Ordinalskalenniveau der AV voraus. Die Ausprägungen der AV müssen also in eine Rangfolge zu bringen, aber die Abstände zwischen den Ausprägungen müssen nicht interpretierbar sein.</p>
+<p><br></p>
+<div class="figure">
+<img src="images/q1_09rang/trump.JPG" style="width:70.0%" alt="" />
+<p class="caption">Kein t-test für Trump. Wäre ein Rangtest angemessen?</p>
+</div>
+<p><br></p>
+<p>Rangtests können also in einer Reihe von Situationen nützlich sein:</p>
+<ul>
+<li>Wenn die AV auf Ordinalskalenniveau erhoben wurde</li>
+<li>Wenn zwar auf Intervallskalenniveau gemessen wurde, aber Verteilungsannahmen stark verletzt sind (möglicherweise verschärft durch ungleiche Gruppengrößen)</li>
+<li>Wenn nachträglich Zweifel daran bestehen, ob die Abstände einer vermeintlich intervallskalierten Ratingskala durch Versuchspersonen wirklich gleich wahrgenommen wurden (wenn also Zweifel daran bestehen, ob tatsächlich Intervallskalenniveau vorliegt)</li>
+</ul>
+<p>Grundsätzlich gilt: Daten, die mit t-Tests analysierbar sind, sind immer auch mit einem Rangtest analysierbar (ein niedrigeres Skalenniveau als das vorliegende kann immer angenommen werden). Dass man angesichts der oben aufgelisteten Vorteile trotzdem nicht immer Rangtests verwendet, liegt daran, dass sie auch Nachteile haben: Sie nutzen weniger der in den Daten steckenden Informationen. Der Rangtest berücksichtigt nur, ob Messwerte kleiner oder größer sind als andere Messwerte. T-Tests berücksichtigen Rangfolge und Abstände. Rangtests sind dadurch weniger sensitiv als t-Tests und haben unter sonst gleichen Bedingungen eine geringere Power.</p>
+<p><br></p>
+<div class="figure">
+<img src="images/q1_09rang/meme1.png" style="width:50.0%" alt="" />
+<p class="caption">Rare footage of a rank test in its natural environment</p>
+</div>
+<p><br></p>
+<p>Rangtests können also sowohl bei ordinalskalierten Daten eingesetzt werden (hier sind sie die beste verfügbare Option) als auch bei Daten mit einem höheren Skalenniveau (hier sind sie die konservativere, also vorsichtigere, voraussetzungsärmere Option, die aber mit Einbußen bei der Sensitivität einhergeht).</p>
+<div id="ein-beispiel-wie-reagieren-unsere-haustiere-auf-den-lockdown" class="section level1">
+<h1><span class="header-section-number">1</span> Ein Beispiel: Wie reagieren unsere Haustiere auf den Lockdown?</h1>
+<p>In einer kürzlich <s>durchgeführten</s> imaginierten Studie haben Forscherinnen der Uni Göttingen 25 Hunde und 25 Katzen interviewt, deren Besitzer:innen durch den ersten Lockdown im März plötzlich ungewöhnlich viel Zeit daheim verbracht haben (Friedrich &amp; Amiri, 2020, <em>International Journal for Impossible But Really Cool Studies About Cats and Stuff</em>).</p>
+<p>Nach Ende des Lockdowns haben die Tiere folgende Frage beantwortet:</p>
+<p><br></p>
+<p><img src="images/q1_09rang/frage.png" style="width:100.0%" /> <br></p>
+<p>Wir haben es also mit einer Skala zu tun, bei der höhere Ratings eine höhere Ausprägung auf der interessierenden zugrundeliegenden Variable anzeigen (höhere Werte -&gt; Zeit wurde stärker genossen). Allerdings sind die Abstände nicht interpretierbar: Zwischen 1) und 2) könnte sich zum Beispiel eine deutlich größere Zunahme der Wertschätzung befinden als zwischen 3) und 4).</p>
+<p>Die Forscherinnen hatten die Hypothese, dass Hunde die zusätzliche Zeit mit ihren Menschen mehr genießen als Katzen, und somit tendenziell höhere Ratings auf der Skala abgeben.</p>
+<p>Die Daten finden Sie <a href="q1_dataFiles/10_Rangtests_Haustiere.xlsx">hier</a>.</p>
+<p>Schauen wir uns zunächst in einem Histogramm an, wie sich die Hunde und Katzen auf die Antwortoptionen verteilen. Was sieht man?</p>
+<p><br></p>
+<p><img src="images/q1_09rang/histogramm.png" style="width:80.0%" /> <br></p>
+<p>Wir sehen, dass Katzen tendenziell niedrige Ratings abgeben und Hunde tendenziell hohe Ratings. Wir möchten nun (wie immer) formal prüfen, ob diese Tendenzen ausgeprägt genug sind, um davon ausgehen können, dass sie nicht durch reinen Zufall (Stichprobenfehler) zustande gekommen sind. Wie können wir das tun, gegeben dass wir erstens keine Mittelwerte pro Gruppe berechnen können, und zweitens nur die Information berücksichtigen dürfen, ob ein bestimmter Messwert größer oder kleiner als ein anderer ist?</p>
+<p>Wir tun etwas, das zunächst kontraintuitiv erscheint: wir werfen die Messwerte beider Gruppen in einen Topf (merken uns dabei aber natürlich, welcher Wert ursprünglich aus welcher Gruppe kam).</p>
+<p>Diese Reihe von nun 50 Messwerten sortieren wir aufsteigend vom kleinsten Wert (eins der Einser-Ratings) zum größten Wert (eins der Vierer-Ratings). Wenn wir gekennzeichnet haben, welcher Wert ursprünglich aus welcher Gruppe stammt, können wir nun vielleicht schon ein Muster erkennen:</p>
+<p><br></p>
+<div class="figure">
+<img src="images/q1_09rang/daten1.png" style="width:30.0%" alt="" />
+<p class="caption">Ein Ausschnitt aus der Tabelle: Die niedrigen Werte stammen offenbar tendenziell von Katzen</p>
+</div>
+<p><br></p>
+<p>Nach dem aufsteigenden Sortieren können wir also feststellen, welches der kleinste und welches der größte Messwert in einem Datensatz ist. Wenn wir die Messwerte nun von 1 bis 50 durchnummerieren, können wir für jeden Messwert sagen, wo er sich relativ zu den anderen Messwerten im Datensatz befindet (siehe Spalte C im Screenshot unten).</p>
+<p>##Rangbindungen</p>
+<p>Allerdings ergibt sich hier ein Problem: mehrere Tiere haben ein Rating von 1 abgegeben (und dasselbe gilt für die anderen Antwortoptionen, keine davon wurde nur von einem einzigen Tier gewählt). Es scheint nicht richtig zu sein, zu sagen, dass z.B. Hund 6 den kleinsten Messwert im Datensatz geliefert hat und Katze 40 den neuntgrößten. Schließlich haben beide genau dieselbe Antwort abgegeben (“Ich brauche einen Anwalt”). Das sollte sich natürlich auch in der ihnen zugewiesenen Position im Datensatz widerspiegeln.</p>
+<p>Eine gute Möglichkeit, mit solchen sogenannten <em>Rangbindungen</em> umzugehen, ist, identischen Messwerten einfach den <em>mittleren Rang</em> ihrer “Gruppe” zuzuweisen: In unserem Fall haben 12 Tiere ein Rating von 1 abgegeben (nicht alle 12 sind im Screenshot zu sehen). Zunächst werden diesen 12 Tieren in beliebiger Reihenfolge die Ränge 1 bis 12 zugewiesen (Spalte D). Anschließend wird die Summe der Ränge gebildet, die zu identischen Messwerten gehören: 1+2+3+4+5+6+7+8+9+10+11+12 = 78. Diese wird durch die Anzahl der identischen Messwerte geteilt: 78/12 = 6.5. Dieser <em>mittlere Rang</em> wird dann allen identischen Messwerten final zugewiesen.</p>
+<p>Auf diese Weise haben identische Messwerte auch identische Ränge, und gleichzeitig bleibt die insgesamt vergebene Summe der Ränge konstant im Vergleich zu einem Datensatz mit identischem N und ohne Rangbindungen (wir werden später noch sehen, dass die Summe der Ränge bedeutsam ist).</p>
+<p>Gerade bei größeren Datensätzen und/oder vielen Rangbindungen ist es natürlich mühsam und fehleranfällig, die Ränge manuell zu vergeben.</p>
+<p>Die Funktion <em>rang.mittelw()</em> kann hier Abhilfe schaffen. Als Input benötigt sie:</p>
+<ul>
+<li><p>einen Verweis auf den Messwert, dessen Rang ausgegeben werden soll (Screenshot: C2)</p></li>
+<li><p>die Wertegruppe, relativ zu welcher der Rang ermittelt werden soll (C2:C51, also der gesamte Datensatz. Dieser Bereich wurde fixiert, damit die Formel auch auf alle anderen Messwerte angewendet werden kann).</p></li>
+<li><p>eine Angabe, ob Ränge aufsteigen (1) oder absteigend (2) vergeben werden sollen.</p></li>
+</ul>
+<p>Rangbindungen werden automatisch berücksichtigt, sodass in Spalte D im Screenshot jedes Tier, das eine 1 abgegeben hat, einen Rang von 6.5 erhalten hat.</p>
+<p><br></p>
+<p><img src="images/q1_09rang/daten2.png" style="width:100.0%" /></p>
+</div>
+<div id="fragen-zum-nachdenken" class="section level1">
+<h1><span class="header-section-number">2</span> Fragen zum Nachdenken</h1>
+<ol style="list-style-type: decimal">
+<li>Warum kein t-test bei ordinalskalierten Daten?</li>
+</ol>
+</div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
 
+</div>
+</div>
 
 </div>
 
@@ -401,7 +543,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -426,6 +568,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
