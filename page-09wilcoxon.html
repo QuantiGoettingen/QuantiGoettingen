@@ -11,7 +11,7 @@
 
 
 
-<title>Sitzung 9: Rangtests</title>
+<title>Sitzung 9: Wilcoxon-Rangsummentest</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -461,7 +461,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sitzung 9: Rangtests</h1>
+<h1 class="title toc-ignore">Sitzung 9: Wilcoxon-Rangsummentest</h1>
 
 </div>
 
@@ -487,8 +487,8 @@ div.tocify {
 </div>
 <p><br></p>
 <p>Rangtests können also sowohl bei ordinalskalierten Daten eingesetzt werden (hier sind sie die beste verfügbare Option) als auch bei Daten mit einem höheren Skalenniveau (hier sind sie die konservativere, also vorsichtigere, voraussetzungsärmere Option, die aber mit Einbußen bei der Sensitivität einhergeht).</p>
-<div id="ein-beispiel-wie-reagieren-unsere-haustiere-auf-den-lockdown" class="section level1">
-<h1><span class="header-section-number">1</span> Ein Beispiel: Wie reagieren unsere Haustiere auf den Lockdown?</h1>
+<div id="ein-beispiel-für-unabhängige-daten-wie-reagieren-unsere-haustiere-auf-den-lockdown" class="section level1">
+<h1><span class="header-section-number">1</span> Ein Beispiel für unabhängige Daten: Wie reagieren unsere Haustiere auf den Lockdown?</h1>
 <p>In einer kürzlich <s>durchgeführten</s> imaginierten Studie haben Forscherinnen der Uni Göttingen 25 Hunde und 25 Katzen interviewt, deren Besitzer:innen durch den ersten Lockdown im März plötzlich ungewöhnlich viel Zeit daheim verbracht haben (Friedrich &amp; Amiri, 2020, <em>International Journal for Impossible But Really Cool Studies About Cats and Stuff</em>).</p>
 <p>Nach Ende des Lockdowns haben die Tiere folgende Frage beantwortet:</p>
 <p><br></p>
@@ -509,7 +509,8 @@ div.tocify {
 </div>
 <p><br></p>
 <p>Nach dem aufsteigenden Sortieren können wir also feststellen, welches der kleinste und welches der größte Messwert in einem Datensatz ist. Wenn wir die Messwerte nun von 1 bis 50 durchnummerieren, können wir für jeden Messwert sagen, wo er sich relativ zu den anderen Messwerten im Datensatz befindet (siehe Spalte C im Screenshot unten).</p>
-<p>##Rangbindungen</p>
+<div id="rangbindungen" class="section level2">
+<h2><span class="header-section-number">1.1</span> Rangbindungen</h2>
 <p>Allerdings ergibt sich hier ein Problem: mehrere Tiere haben ein Rating von 1 abgegeben (und dasselbe gilt für die anderen Antwortoptionen, keine davon wurde nur von einem einzigen Tier gewählt). Es scheint nicht richtig zu sein, zu sagen, dass z.B. Hund 6 den kleinsten Messwert im Datensatz geliefert hat und Katze 40 den neuntgrößten. Schließlich haben beide genau dieselbe Antwort abgegeben (“Ich brauche einen Anwalt”). Das sollte sich natürlich auch in der ihnen zugewiesenen Position im Datensatz widerspiegeln.</p>
 <p>Eine gute Möglichkeit, mit solchen sogenannten <em>Rangbindungen</em> umzugehen, ist, identischen Messwerten einfach den <em>mittleren Rang</em> ihrer “Gruppe” zuzuweisen: In unserem Fall haben 12 Tiere ein Rating von 1 abgegeben (nicht alle 12 sind im Screenshot zu sehen). Zunächst werden diesen 12 Tieren in beliebiger Reihenfolge die Ränge 1 bis 12 zugewiesen (Spalte D). Anschließend wird die Summe der Ränge gebildet, die zu identischen Messwerten gehören: 1+2+3+4+5+6+7+8+9+10+11+12 = 78. Diese wird durch die Anzahl der identischen Messwerte geteilt: 78/12 = 6.5. Dieser <em>mittlere Rang</em> wird dann allen identischen Messwerten final zugewiesen.</p>
 <p>Auf diese Weise haben identische Messwerte auch identische Ränge, und gleichzeitig bleibt die insgesamt vergebene Summe der Ränge konstant im Vergleich zu einem Datensatz mit identischem N und ohne Rangbindungen (wir werden später noch sehen, dass die Summe der Ränge bedeutsam ist).</p>
@@ -524,11 +525,59 @@ div.tocify {
 <p><br></p>
 <p><img src="images/q1_09rang/daten2.png" style="width:100.0%" /></p>
 </div>
-<div id="fragen-zum-nachdenken" class="section level1">
-<h1><span class="header-section-number">2</span> Fragen zum Nachdenken</h1>
-<ol style="list-style-type: decimal">
-<li>Warum kein t-test bei ordinalskalierten Daten?</li>
-</ol>
+<div id="der-statistische-test" class="section level2">
+<h2><span class="header-section-number">1.2</span> Der statistische Test</h2>
+<p>Beim statistischen Testen auf Gruppenunterschiede machen wir uns nun folgendes zunutze:</p>
+<ul>
+<li><p><em>Die Gesamtsumme der vergebenen Ränge ist bei gleichem N immer gleich</em>. Bei 50 Messwerten: 1+2+3+ (…) +50 = 1275. (Dabei ist es egal, ob zu dem niedrigsten Rang ein Messwert von 5 oder von 500 gehört, die Ränge beginnen schließlich immer bei 1 und enden bei N, z.B. 50). Durch die Art, wie wir mit Rangbindungen umgegangen sind, haben wir sichergestellt, dass das so bleibt (hätten wir stattdessen beispielsweise jedem Tier, das eine 1 als Antwort abgegeben hat, einen Rang von 1 zugewiesen, wäre das nicht mehr gewährleistet gewesen. Dann wäre die Summe der ersten 12 Messwerte ja nur noch 12 statt 78).</p></li>
+<li><p>Wenn die H0 gilt und beide Gruppen tendenziell gleich hohe Ratings abgeben, sollte sich beim “Zusammenwerfen” der Messwerte zeigen, dass sowohl hohe als auch niedrige Messwerte ungefähr gleich häufig aus der Gruppe der Katzen und der Hunde kommen. <em>Hohe Ränge und niedrige Ränge sollten also ca. gleich häufig in beiden Gruppen vorkommen.</em></p></li>
+<li><p>Wenn wir die im Gesamtvergleich vergebenen Ränge nun zurück in ihre ursprünglichen Gruppen sortieren und für jede Gruppe eine Summe der Ränge bilden, sollten diese Summen bei Geltung der H0 ungefähr gleich sein. Die gesamte Rangsumme (hier 1275) sollte sich bei Geltung der H0 ungefähr gleichmäßig auf die beiden Gruppen verteilen (bei gleich großen Gruppen: 1275/2 = 637.5)</p></li>
+<li><p>Je ungleicher die totale Rangsumme auf die beiden Gruppen verteilt ist, desto unwahrscheinlicher werden die erhaltenen Daten (oder noch extremere) unter Annahme der H0. Wenn sie hinreichend ungleich verteilt sind, entscheiden wir uns, die H0 zurückzuweisen und nicht davon auszugehen, dass das beobachtete Muster (Gruppenunterschied) zufällig zustandegekommen ist.</p></li>
+</ul>
+<p><br></p>
+<p><img src="images/q1_09rang/daten3.png" style="width:60.0%" alt="Rangsummen in unserem Experiment" /> <br></p>
+<p>Wie erhält man aber einen p-Wert für eine Verteilung von Rangsummen auf Gruppen? Es gibt zwei Möglichkeiten:</p>
+<p>Bei kleinem n (unter 20) sind die Wahrscheinlichkeiten für bestimmte Rangsummen tabelliert und hängen von der Stichprobengröße ab. Bei beispielsweise n1 = n2 = 5 gibt es nur 10 Messwerte. Somit gibt es eine recht überschaubare Anzahl von Möglichkeiten, wie sich die Ränge von 1 bis 10 auf die beiden Gruppen verteilen können. Die Wahrscheinlichkeit jeder dieser Aufteilungen (oder extremerer) unter Annahme der H0 wird berechnet und kann abgelesen werden (siehe Anhänge in gängigen Statistikbüchern oder online).</p>
+<p>Ab einer hinreichend großen Stichprobengröße (über 20) kann jedoch davon ausgegangen werden, dass Rangsummen auf Populationsebene normalverteilt sind.</p>
+<p>Würde man unseren Versuch also sehr häufig durchführen und sich jedes Mal die erhaltene Rangsumme (z.B.) für Katzen notieren, würde sich eine Normalverteilung ergeben. Das bedeutet, dass wir die Rangsumme in einen z-Wert umrechnen und gegen die Standardnormalverteilung testen können. Dazu wird die Rangsumme pro Gruppe bestimmt, die bei Geltung der H0 erwartet würde. Wenn beide Gruppen gleich groß sind, kann man die totale Rangsumme durch zwei teilen. Wenn n1 und n2 nicht identisch sind, berechnet man die erwartete Rangsumme für die Gruppe mit dem kleineren n (n_k und n_g beziehen sich auf die n’s der kleineren vs. größeren Gruppe):</p>
+<p><span class="math display">\[
+    E_{rs} = \frac{n_k*(n_g+n_k+1)}{2} = \frac{25*(25+25+1)}{2} = 637.5
+\]</span></p>
+<p>Unter Annahme der H0 wäre also pro Gruppe eine Rangsumme von 637.5 am wahrscheinlichsten. Natürlich wird auch bei tatsächlicher Geltung der H0 nicht in jedem Versuch genau diese Summe getroffen werden. Eine gewisse Streuung der Rangsummen ist zu erwarten. Diese berechnet sich wie folgt, wenn man sie auf Basis einer Stichprobe schätzen möchte:</p>
+<p><span class="math display">\[
+    \sigma_{rs} = \sqrt{\frac{n_k*n_g*(n_g+n_k+1)}{12}} = \sqrt{\frac{25*25*(25+25+1)}{12}} = 51.54
+\]</span></p>
+<p>Nun können wir bestimmen, wie weit die in unserem Experiment beobachtete Rangsumme von der bei H0 erwarteten Rangsumme abweicht, und zwar relativ zur geschätzten Streuung der Rangsummen (“wie viele Standardabweichungen” liegt unsere Rangsumme neben der bei H0 erwarteten Rangsumme?). Wenn die Gruppen ungleich groß sind, vergleicht man dabei natürlich die tatsächlich erhaltene Rangsumme für die Gruppe mit dem kleineren n mit der für diese Gruppe erwarteten Rangsumme. Wenn die Gruppen gleich groß sind, ist es egal, welche der Rangsummen man verwendet. Wir könnten entweder testen, ob die RS der Katzen kleiner ist als unter H0 erwartet, oder ob die RS der Hunde größer ist als unter H0 erwartet. Wir nehmen hier die Katzen (und bilden die Differenz so, dass wir einen positiven z-Wert erhalten):</p>
+<p><span class="math display">\[
+    z_{emp} = \frac{E_{rs} -rs}{\sigma_{rs}} = \frac{637.5 - 490.5}{51.54} = 2.85
+\]</span></p>
+<p>Die Rangsumme der Katzen liegt hier also 2.85 Standardabweichungen unter der Rangsumme, die man bei Gültigkeit der H0 erwarten würde. Genau wie beim t-test können wir uns zu diesem empirischen z-Wert nun einen kritischen z-Wert zum Vergleich ausgeben lassen. Und natürlich können wir uns auch einen p-Wert ausgeben lassen, der uns anzeigt, wie wahrscheinlich der von uns gefundene oder ein noch extremerer Gruppenunterschied unter Annahme der H0 ist. Dabei helfen uns in Excel folgende Funktionen:</p>
+<ul>
+<li><p><em>norm.s.inv(1-alpha)</em>: Welcher Wert der Standardnormalverteilung trennt die Verteilung so, dass links von der Grenze ein Anteil von 1-alpha liegt (und rechts von der Grenze somit ein Anteil von alpha)?</p></li>
+<li><p><em>1-norm.s.vert(empirischer z-Wert; WAHR)</em>: Welcher Anteil der Werte der Standardnormalverteilung befindet sich rechts vom angegebenen z-Wert? (Ohne das “1-” würde links davon abgelesen.)</p></li>
+</ul>
+<p>Für unser Beispiel ergibt sich ein kritischer z-Wert von 1.64 und ein p-Wert von 0.002. Wir können also die H1 annehmen, dass Katzen die Gesellschaft ihrer Besitzer:innen während des ersten Lockdowns weniger genossen haben als Hunde.</p>
+</div>
+<div id="effektstärke" class="section level2">
+<h2><span class="header-section-number">1.3</span> Effektstärke</h2>
+<p>Auch für Rangtests lässt sich eine Effektstärke (theta) bestimmen, um die Größe des gefundenen Gruppenunterschieds besser einordnen zu können.</p>
+<p><span class="math display">\[
+    \theta = 1 + \frac{n_k * (n_k + 1)}{2 * n_k * n_g} - \frac{rs_k}{n_k * n_g}
+          = 1 + \frac{25 * (25 + 1)}{2 * 25 * 25} - \frac{490.5}{25 * 25} = 0.74
+\]</span></p>
+<p>Theta kann als die Wahrscheinlichkeit interpretiert werden, dass ein beliebiger Wert in der kleineren Gruppe (oder, wenn n1 = n2, in der Gruppe, deren Rangsumme man in der Formel für theta verwendet hat) <em>kleiner</em> ist als ein Wert in der anderen Gruppe.</p>
+<p>In unserem Fall liegt diese Wahrscheinlichkeit für einen beliebigen Wert der Katzengruppe also bei 74%.</p>
+<p>Auch diesen Wert hätten wir für die Hundegruppe ermitteln können, dann hätten die die Wahrscheinlichkeit erhalten, dass ein beliebiger Wert in der Hundegruppe kleiner ist als ein beliebiger Wert in der Katzengruppe (diese Wahrscheinlichkeit sollte hier natürlich klein sein).</p>
+</div>
+<div id="fazit" class="section level2">
+<h2><span class="header-section-number">1.4</span> Fazit</h2>
+<p><br></p>
+<p><img src="images/q1_09rang/fazit.png" /> <br></p>
+</div>
+</div>
+<div id="ein-beispiel-für-abhängige-daten" class="section level1">
+<h1><span class="header-section-number">2</span> Ein Beispiel für abhängige Daten</h1>
+<p>(to be continued)</p>
 </div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
