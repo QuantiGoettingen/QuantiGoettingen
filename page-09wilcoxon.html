@@ -575,9 +575,99 @@ div.tocify {
 <p><img src="images/q1_09rang/fazit.png" /> <br></p>
 </div>
 </div>
-<div id="ein-beispiel-für-abhängige-daten" class="section level1">
-<h1><span class="header-section-number">2</span> Ein Beispiel für abhängige Daten</h1>
-<p>(to be continued)</p>
+<div id="ein-beispiel-für-abhängige-daten-stimmung-vor-vs.-nach-lockdown" class="section level1">
+<h1><span class="header-section-number">2</span> Ein Beispiel für abhängige Daten: Stimmung vor vs. nach Lockdown</h1>
+<p>Doe Forscherinnen haben sich ebenfalls dafür interessiert, ob (und wenn ja wie) sich das allgemeine Befinden der einzelnen Haustiere während des Lockdowns verändert (handelt es sich hier um eine gerichtete oder um eine ungerichtete Hypothese?).</p>
+<p>Dazu haben sie alle Hunden und Katzen sowohl vor als auch nach dem Lockdown gebeten, ihr allgemeines Befinden auf folgender Skala einzuordnen:</p>
+<p><br></p>
+<p><img src="images/q1_09rang/scale2.png" style="width:60.0%" /></p>
+<p><br></p>
+<p>Zunächst schauen wir uns die Verteilung der Antworten vor dem Lockdown an. Das Histogramm zeigt sie einmal für alle Haustiere zusammen (blaue Balken) und einmal aufgeteilt nach Spezies (orange Balken für Hunde und graue Balken für Katzen). Die grauen und orangen Balken zeigen also an, wie sich die gesamten Antworten in jeder Kategorie auf Hunde vs. Katzen verteilen. Die grauen und orangen Balken summieren sich somit zu den blauen Balken.</p>
+<p><br></p>
+<p><img src="images/q1_09rang/hist2.png" style="width:80.0%" /></p>
+<p><br></p>
+<p>Vor dem Lockdown war das Befinden beider Gruppen offenbar recht symmetrisch um den Mittelpunkt der Skala verteilt. Schauen wir uns an, wie es nach dem Lockdown aussah:</p>
+<p><br></p>
+<p><img src="images/q1_09rang/hist3.png" style="width:80.0%" /></p>
+<p><br></p>
+<p>Wenn wir zunächst die blauen Balken betrachten, stellen wir fest, dass sich die Verteilung der Antworten verändert hat. Sie ist nicht mehr symmetrisch um den Mittelwert der Skala verteilt, sondern bimodal. Eine Gruppe von Tieren hatte nach dem Lockdown offenbar tendenziell ein höheres Wohlbefinden, während eine andere Gruppe tendenziell angegeben hat, sich weniger gut zu fühlen.</p>
+<p>Wenn wir die orangen und grauen Balken betrachten, sehen wir, dass sich das Befinden der Hunde eher zum positiven verändert hat, während sich das Befinden der Katzen offenbar eher verschlechtert hat.</p>
+<p>Wir können nun in separaten Rangtests prüfen, ob sich das Befinden der Haustiere insgesamt von Beginn zum Ende des Lockdowns signifikant verändert hat. Weiterhin gibt uns die Grafik Anlass dazu, die beiden Gruppen Hunde und Katzen zusätzlich separat zu betrachten. Wir führen also drei Rangtests für abhängige Daten durch.</p>
+<p>Analog zum t-Test für abhängige Daten ist der erste Schritt für den Rangtest das Bilden einer Differenz der Messwerte einer Versuchsperson bzw. eines Versuchstiers. Als erstes bilden wir also für jedes Tier eine Differenz der Messwerte zwischen Beginn und Ende des Lockdowns. Dabei ist es wie immer egal, in welche Richtung wir die Differenz bilden, aber wir müssen ins im Klaren darüber sein, was eine positive vs. negative Differenz bedeuten. Wenn wir die Messwerte wie im Screenshot dargestellt voneinander abziehen, bedeutet eine positive Differenz, dass sich das Wohlbefinden nach dem Lockdown erhöht hat.</p>
+<p>Im nächsten Schritt werfen wir alle positiven und negativen Differenzen wieder “in einen Topf”, indem wir ihre Vorzeichen ignorieren. Das entspricht dem Zusammenwerfen der Gruppen-Messwerte beim unabhängigen Test und dient dem (ordinalen) Vergleich der Beträge der Differenzen. Wir schauen also zunächst, was überhaupt die kleinsten und größten Differenzen waren, die in unserem Datensatz aufgetreten sind, unabhängig von ihrem Vorzeichen. Das Vorzeichen “merken” wir uns dabei aber natürlich, es ist ja in Spalte E kodiert.</p>
+<p><br></p>
+<p><img src="images/q1_09rang/abh1.png" style="width:100.0%" /> <br></p>
+<p>Im nächsten Schritt bringen wir die Differenzen unabhängig von ihrem Vorzeichen in eine Rangfolge. Welche Differenz war die kleinste, welche war die größte im Datensatz? Dazu können wir, wie bereits oben für unabhängige Daten beschrieben, die rang.mittelw() - Funktion nutzen (siehe Spalte G). Dadurch werden auch Rangbindungen auf die gewünschte Weise berücksichtigt. Da wir die Rangtests einmal für alle Haustiere und dann noch einmal separat für die Gruppen der Hunde und Katzen durchführen möchten, wird in Spalte H zusätzlich der Rang jeder Differenz in Bezug zu ihrer Untergruppe bestimmt (also nur in Bezug auf die Gruppe der Hunde für die Hunde, und nur in Bezug auf die Gruppe der Katzen für die Katzen). Sie sehen in der Lösung, dass sich das zweite Argument der rang.mittelw()-Funktion zwischen Spalte G und Spalte H unterscheidet (und innerhalb von Spalte H unterscheidet es sich zwischen Hunden und Katzen). Wir behandeln in Spalte H also Hunde und Katzen jeweils wie ihren eigenen Datensatz.</p>
+<p><br></p>
+<p><img src="images/q1_09rang/abh2.png" style="width:100.0%" /> <br></p>
+<p>Im nächsten Schritt sortieren wir die vergebenen Ränge wieder “zurück” in ihre ursprünglichen Gruppen, indem wir uns nur diejenigen Ränge weiter anschauen, die zu positiven Differenzen gehören (natürlich könnten wir stattdessen auch nur die Ränge der negativen Differenzen betrachten, die Hauptsache ist die getrennte Betrachtung). In Spalte I versammeln wir die Ränge der positiven Differenzen, die in Bezug auf die Gesamtgruppe der Haustiere ermittelt wurden. In Spalte J sammeln wir die Ränge der positiven Differenzen, die in Bezug auf die Subgruppen der Hunde vs. Katzen ermittelt wurden.</p>
+<p>In der Lösung werden die Spalten mit einer wenn-Funktion gefüllt: wenn eine Differenz ursprünglich positiv war (Wert größer als 0 in Spalte E), dann soll der Rang dieser Differenz (also der Wert in Spalte G bzw. H) übernommen werden. Wenn dieses Kriterium nicht erfüllt ist, soll die Zelle leer bleiben (angezeigt durch das Leerzeichen in Anführungszeichen: " ". Stattdessen könnten wir aber z.B. auch eine 0 eintragen lassen, wenn das Kriterium nicht erfüllt ist). Mit einer wenn-Funktion lassen sich solche Operationen gerade bei großen Datensätzen schneller ausführen. Natürlich könnte man die benötigten Werte aber auch manuell in die neuen Spalten kopieren.</p>
+<p><br></p>
+<p><img src="images/q1_09rang/abh3.png" style="width:100.0%" /> <br></p>
+<p>Nun können wir für alle drei Betrachtungen (Gesamtgruppe, nur Hunde, nur Katzen) die Summe der positiven Differenzen (Gesamt: Summe der Spalte I, Hunde: Summe erste Hälfte der Spalte J, Katzen: Summe zweite Hälfte der spalte J) und die Gesamtsumme der Differenzen berechnen (Gesamt: Summe der Spalte G, Hunde: Summe erste Hälfte der Spalte H, Katzen: Summe zweite Hälfte der Spalte H).</p>
+<p><br></p>
+<p><img src="images/q1_09rang/abh4.png" style="width:50.0%" /> <br></p>
+<p>Wir sehen in der unteren Hälfte, dass die Summe aller Differenzen für die Gesamtgruppe der Tiere größer ist als für die Untergruppen, und für die Untergruppen jeweils gleich. Genau das würde man erwarten, da die gesamte Rangsumme einer Gruppe nur von der Anzahl der Werte abhängt, für die Ränge vergeben werden (in diesem Fall: Anzahl von Differenzen). Wir hatten gleich viele Hunde und Katzen im Datensatz, daher ergibt sich für beide Untergruppen dieselbe Summe.</p>
+<p>Oben sehen wir, dass pro Gruppe unterschiedliche Anteile dieser Gesamtsummen auf positive Differenzen entfallen.</p>
+<div id="der-statistische-test-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Der statistische Test</h2>
+<p>Analog zum Rangtest für unabhängige Daten stützt sich der Test für abhängige Daten auf folgende Überlegungen:</p>
+<ul>
+<li><p>Wenn die H0 wahr ist und es keinen Unterschied im Befinden vor vs. nach dem Lockdown gibt, sollte jede beobachtete Abweichung von vorher zu nachher reiner Zufall sein. In diesem Fall sollte man gleich häufig positive wie negative Veränderungen beobachten, und sie sollten (im Betrag) auch ca. gleich hoch oder niedrig sein.</p></li>
+<li><p>Die totale Rangsumme der Differenzen einer Gruppe sollte sich somit, wenn die H0 gilt, gleichmäßig auf positive wie negative Differenzen verteilen.</p></li>
+<li><p>Wenn es allerdings einen systematischen Einfluss in den Daten gibt, wird man beobachten, dass eine der beiden Differenz-Gruppen (z.B. positive Differenzen) häufiger vorkommt und tendenziell (im Betrag) höher ist als die andere Gruppe. In diesem Fall wird sich die gesamte Rangsumme einer Gruppe nicht mehr gleichmäßig auf positive und negative Differenzen aufteilen.</p></li>
+</ul>
+<p>Genau wie beim Rangtest für unabhängige Daten kann man nun:</p>
+<ol style="list-style-type: decimal">
+<li>eine unter Annahme der H0 erwartete Rangsumme für (z.B.) positive Differenzen berechnen:</li>
+</ol>
+<p><span class="math display">\[
+    E_{rs+ alle} = \frac{n*(n + 1)}{4} = \frac{50*(50 + 1)}{2} = 637.5
+\]</span></p>
+<p><span class="math display">\[
+    E_{rs+ Hunde/Katzen} = \frac{n*(n + 1)}{4} = \frac{25*(25+1)}{4} = 162.5
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>berechnen, wie sehr die unter H0 erhaltenen Rangsummen bei der vorliegenden Stichprobengröße noch um diesen erwarteten Wert streuen würden (wenn man dasselbe Experiment sehr häufig durchführen würde)</li>
+</ol>
+<p><span class="math display">\[
+    \sigma_{rs+ alle} = \sqrt{\frac{n*(n+1) * (2 * n + 1)}{24}} = \sqrt{\frac{50*(50+1) * (2 * 50 + 1)}{24}} = 103.59
+\]</span></p>
+<p><span class="math display">\[
+    \sigma_{rs+ Hunde/Katzen} = \sqrt{\frac{n*(n+1) * (2 * n + 1)}{24}} = \sqrt{\frac{25*(25+1) * (2 * 25 + 1)}{24}} = 37.17
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>die Abweichung der von uns beobachteten Rangsumme der positiven Differenzen für eine Gruppe von der bei H0 erwarteten Rangsumme bestimmen und diese Abweichung an der Streuung der bei H0 erwarteten Rangsumme relativieren. Dadurch erhalten wir einen z-Wert für jede Gruppe:</li>
+</ol>
+<p><span class="math display">\[
+    z_{emp, alle} = \frac{rs - E_{rs}}{\sigma_{rs}} = \frac{ 717 - 637.5}{103.59} = 0.77
+\]</span></p>
+<p><span class="math display">\[
+    z_{emp, Hunde} = \frac{rs - E_{rs}}{\sigma_{rs}} = \frac{ 279 - 162.5}{37.17} = 3.13
+\]</span></p>
+<p><span class="math display">\[
+    z_{emp, Katzen} = \frac{rs - E_{rs}}{\sigma_{rs}} = \frac{ 77 - 162.5}{37.17} = -2.3
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li>diesen z-Wert mit dem relevanten kritischen z-Wert vergleichen und einen p-Wert bestimmen. Der kritische z-Wert bei zweiseitiger Testung (wir haben am Anfang eine ungerichtete Hypothese formuliert) ergibt sich mit norm.s.inv(0.05/2) = (+/-) 1.96. Somit liegt der empirische z-Wert für die Gesamtgruppe unterhalb des kritischen Werts. Für Hunde und Katzen separat liegt er jedoch darüber, für Hunde auf der positiven Seite und für Katzen auf der negativen Seite. Hunde haben ihr Befinden also signifikant verbessert, während sich das Befinden der Katzen im gleichen Zeitraum signifikant verschlechtert hat. Die exakten p-Werte erhalten wir für die beiden positiven z-Werte mittels 1-norm.s.vert(0.77;WAHR) = 0.22 und 1-norm.s.vert(3.13;WAHR) = 0.0009, und für die Katzen-Gruppe mit norm.s.vert(-2.3;WAHR) = 0.01. (Alternativ können wir auch für alle Gruppen den Betrag des z-Werts einsetzen: 1-norm.s.vert(abs(z-wert);WAHR)).</li>
+</ol>
+</div>
+<div id="effektstärke-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Effektstärke</h2>
+<p>Die Effektstärke gamma berechnet sich aus der relativen Häufigkeit positiver Differenzen (Anzahl positive Differenzen / Anzahl alle Differenzen) - 0.5. Die relativen Häufigkeiten für eine Gruppe können per Formel (zählenwenn(Werte&gt;0)/n) ermittelt werden oder natürlich auch per Hand ausgezählt.</p>
+<p>Für unsere drei Gruppen ergibt sich:</p>
+<ul>
+<li>Gesamt: (22/50) - 0.5 = - 0.06 (hier nur zur Demo berechnet, da die Veränderung ja nicht signifikant war)</li>
+<li>Hunde: (17/25) - 0.5 = 0.18</li>
+<li>Katzen:(5/25) - 0.5 = -0.3</li>
+</ul>
+<p>Die Konventionen: klein ab 0.05, mittel ab 0.15, groß ab 0.25. (Bei den Katzen kann hier natürlich der Betrag interpretiert werden.)</p>
+</div>
+<div id="fazit-1" class="section level2">
+<h2><span class="header-section-number">2.3</span> Fazit</h2>
+<p>Die Ergebnisse dieser Befragung passen ins Bild, das sich bereits bei den unabhängigen Daten ergeben hat: Katzen scheinen den Lockdown grundsätzlich weniger genossen zu haben als Hunde. Bei den abhängigen Daten ist interessant, dass wir dieses Muster gar nicht gefunden hätten, wenn wir die Daten der Hunde und Katzen nicht separat im Histogramm betrachtet hätten. Insgesamt haben sich ihre Befindensveränderungen nämlich ausgemittelt, sodass es im Gesamt-Datensatz aussah, als hätte es gar keine Veränderung gegeben.</p>
+<p>Ob die Veränderungen im Befinden der Hunde und Katzen tatsächlich durch die konstante Anwesenheit ihrer Menschen verursacht wurde, können diese Daten allerdings nicht zeigen. Schließlich könnten sich noch andere Bedingungen im Haus während des Lockdowns verändert haben. Die Ergebnisse der ersten Befragung (unabhängige Daten) deuten aber daraufhin, dass es zumindest eine plausible Hypothese ist. Weitere Forschung ist also in jedem Fall angezeigt.</p>
+</div>
 </div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
