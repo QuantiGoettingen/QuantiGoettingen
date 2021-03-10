@@ -529,8 +529,13 @@ div.tocify {
 </div>
 <p></br></p>
 </div>
+<div id="animation" class="section level2">
+<h2><span class="header-section-number">2.3</span> Animation</h2>
+<p>Eine sehr anschauliche Animation, mit der Sie ein Gefühl für Korrelationen (und vor allem auch ein Gefühl für den Einfluss einzelner extremer Werte auf die Steigung der Gerade) entwickeln können gibt es auf der Seite (R-Psychologist)[<a href="https://rpsychologist.com/correlation/" class="uri">https://rpsychologist.com/correlation/</a>] von (Kristoffer Magnusson)[<a href="https://rpsychologist.com/" class="uri">https://rpsychologist.com/</a>]. Diese Animation sehen Sie unten eingeblendet.</p>
+<p><br /> <iframe width="900" height="700" src="https://rpsychologist.com/correlation/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
+</div>
 <div id="signifikanztest" class="section level2">
-<h2><span class="header-section-number">2.3</span> Signifikanztest</h2>
+<h2><span class="header-section-number">2.4</span> Signifikanztest</h2>
 <p>Natürlich ist es möglich, dass wir nur durch Zufall einen von <span class="math inline">\(0\)</span> verschiedenen Wert für den Zusammenhang erhalten haben und auf Ebene der Population eigentlich gar kein Zusammenhang zwischen Depression und Angst besteht. Anhand von Stichproben geschätzte Korrelationskoeffizienten müssen auf Signifikanz geprüft werden. In Ihrer Formelsammlung finden sie das Vorgehen dazu auf Seite 2 (z-Test gegen <span class="math inline">\(0\)</span>).</p>
 <p>Ein Problem ist, dass Korrelationskoeffizienten nicht normalverteilt sind. Als Prüfverteilung lässt sich deshalb nicht einfach die Normalverteilung anwenden. Die Verteilung von <span class="math inline">\(r\)</span> ist aber systematisch (wenn Sie das näher interessiert, schauen Sie <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#Using_the_exact_distribution">hier</a>). Deshalb lassen sich Korrelationskoeffizienten so transformieren, dass sie einer Normalverteilung folgen. Die nötige Transformation nennt man “Fisher-Z-Transformation” (wichtig: hier ist das Z groß und nicht klein wie bei der Standardisierung). Die Formel dafür lautet:</p>
 <p><span class="math inline">\(Z(r)~= \frac{1}{2} \cdot ln(\frac{1+r}{1-r})\)</span>.</p>
@@ -545,7 +550,7 @@ div.tocify {
 <p>Wir verwerfen deshalb die <span class="math inline">\(H_0\)</span> und nehmen an, dass es einen positiven Zusammenhang zwischen Depressivität und Ängstlichkeit gibt.</p>
 </div>
 <div id="konfidenzintervall-für-r" class="section level2">
-<h2><span class="header-section-number">2.4</span> Konfidenzintervall für r</h2>
+<h2><span class="header-section-number">2.5</span> Konfidenzintervall für r</h2>
 <p>Um ein Maß dafür zu haben, wie präzise wir den Zusammenhang geschätzt haben, können wir auch ein 95 % KI für <span class="math inline">\(r\)</span> berechnen. Dazu müssen wir allerdings einen Umweg gehen, und zunächst die Untergrenzen für den Fisher-Z-transformierten Korrelationskoeffizienten bestimmen:</p>
 <p>Untergrenze: <span class="math inline">\(Z - 1,96 \cdot \frac{1}{\sqrt{N - 3}}\)</span> und</p>
 <p>Obergrenze: <span class="math inline">\(Z + 1,96 \cdot \frac{1}{\sqrt{N - 3}}\)</span>.</p>
