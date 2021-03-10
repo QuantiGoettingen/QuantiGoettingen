@@ -509,15 +509,24 @@ div.tocify {
 </div>
 <div id="korrelationskoeffizient-als-steigungsparameter" class="section level2">
 <h2><span class="header-section-number">2.2</span> Korrelationskoeffizient als Steigungsparameter</h2>
-<p>Oben wurde bereits erwähnt, dass der Korrelationskoeffizient <span class="math inline">\(r\)</span> ein Maß für den Zusammenhang zweier Variablen ist, das Werte zwischen <span class="math inline">\(-1\)</span> und <span class="math inline">\(1\)</span> annehmen kann. Gerade hatten wir gesehen, dass die Steigung der Gerade durch die Punktewolke auch ein Maß für den Zusammenhang ist. Je stärker die Steigung von Null verschieden ist, umso stärker ist der Zusammenhang. Augenscheinlich ist die Steigung dieser Gerade aber nicht auf einen Wertebereich von <span class="math inline">\(-1\)</span> und <span class="math inline">\(+1\)</span> beschränkt. Die Steigung hängt z.B. auch davon ab, welche Maßeinheiten die verwendeten Messinstrumente haben (bei Metern würde sich bspw. ein anderes Bild ergeben als bei Zentimetern). Wie hängen dann die Steigung der Gerade durch eine Punktewolke und der Korrelationskoeffizient <span class="math inline">\(r\)</span> zusammen?</p>
-<p><span class="math inline">\(r\)</span> kann auch als standardisiertes Maß eines Zusammenhangs zweier Variablen verstanden werden. Standardisiert heißt hier, Sie wissen es schon, dass die konkreten Einheiten der Variablen vernachlässigt werden können. Bei Standardisierung wird man die ursprünglichen Einheiten los, indem man von jedem vorliegenden Wert der Variable den Mittelwert der Variable abzieht und durch die Streuung teilt. Die resultierenden z-Werte haben dann einen Mittelwert von <span class="math inline">\(0\)</span> und eine Streuung von <span class="math inline">\(1\)</span>. Die Abstände zwischen den Werten bleiben dabei natürlich erhalten. Entsprechend würden wir durch die Standardisierung zweier Variablen auch nicht den Zusammenhang zwischen ihnen verändern. Unten sehen Sie erneut eine Punktewolke und eine Gerade, allerdings diesmal basierend auf den standardisierten Werten der Depressions- und Ängstlichkeits-Scores.</p>
+<p>Oben wurde bereits erwähnt, dass der Korrelationskoeffizient <span class="math inline">\(r\)</span> ein Maß für den Zusammenhang zweier Variablen ist, das Werte zwischen <span class="math inline">\(-1\)</span> und <span class="math inline">\(1\)</span> annehmen kann. Wir haben gesehen, dass die Steigung der Gerade durch die Punktewolke auch ein Maß für den Zusammenhang ist. Je stärker die Steigung von Null verschieden ist, umso stärker ist der Zusammenhang. Augenscheinlich ist die Steigung dieser Gerade aber nicht auf einen Wertebereich von <span class="math inline">\(-1\)</span> und <span class="math inline">\(+1\)</span> beschränkt. Die Steigung hängt z.B. auch davon ab, welche Maßeinheiten die verwendeten Messinstrumente haben (bei Metern würde sich bspw. ein anderes Bild ergeben als bei Zentimetern). Wie hängen dann die Steigung der Gerade durch eine Punktewolke und der Korrelationskoeffizient <span class="math inline">\(r\)</span> zusammen?</p>
+<p><span class="math inline">\(r\)</span> ist ein <em>standardisiertes</em> Maß für den Zusammenhang zweier Variablen. Standardisiert heißt hier, Sie wissen es schon, dass die konkreten Einheiten der Variablen vernachlässigt werden können. Bei Standardisierung wird man die ursprünglichen Einheiten los, indem man von jedem vorliegenden Wert der Variable den Mittelwert der Variable abzieht und durch die Streuung teilt. Die resultierenden <em>z-Werte</em> haben dann einen Mittelwert von <span class="math inline">\(0\)</span> und eine Streuung von <span class="math inline">\(1\)</span>. Die Abstände zwischen den Werten bleiben dabei natürlich erhalten. Entsprechend würden wir durch die Standardisierung zweier Variablen auch nicht den Zusammenhang zwischen ihnen verzerren. Unten sehen Sie erneut eine Punktewolke und eine Gerade, allerdings diesmal basierend auf den standardisierten Werten der Depressions- und Ängstlichkeits-Scores.</p>
 <p></br></p>
-<img src="page-10korrelz_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<p><img src="page-10korrelz_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p></br></p>
 <div class="column-right_alignRight">
 <p><img src="images/home/squirrel_wissen.PNG" /></p>
 </div>
-<p>Die Steigung der Geraden durch die Punktewolke der z-standardisierten Werte der beiden Variablen entspricht dem Korrelationskoeffizient <span class="math inline">\(r\)</span>.</p>
+<div class="boxBorder">
+<p>Der Korrelationskoeffizient <span class="math inline">\(r\)</span> entspricht der Steigung der Geraden durch die Punktewolke der z-standardisierten Werte der beiden Variablen.</p>
+<p></br></p>
+<p><strong>Berechnung:</strong></p>
+<p>Eine Möglichkeit für die Berechnung von <span class="math inline">\(r\)</span> ist folgende:</p>
+<p><span class="math inline">\(r_{x,y}~= \frac{1}{n}\sum^n_{i=1} \frac{x_i - \overline{x}}{S_x}\cdot \frac{y_i - \overline{y}}{S_y}\)</span>.</p>
 <p>In unserem konkreten Fall erhalten wir einen Wert von <span class="math inline">\(r~= 0.43\)</span>.</p>
+<p><strong>Excel:</strong></p>
+<p>In Excel lässt sich <span class="math inline">\(r\)</span> mit der <em>=KORREL()</em> Funktion berechnen. Die Funktion verlangt die Eingabe aller <span class="math inline">\(X\)</span>- und aller <span class="math inline">\(Y\)</span>-Werte. Sie müssen dazu also die entsprechenden Spaltenabschnitte auswählen.</p>
+</div>
 <p></br></p>
 </div>
 <div id="signifikanztest" class="section level2">
