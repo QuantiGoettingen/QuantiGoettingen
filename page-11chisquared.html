@@ -11,7 +11,7 @@
 
 
 
-<title>Sitzung 11: Chi-Quadrat Test</title>
+<title>Sitzung 11: Analyse von Ordinaldaten</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -263,6 +266,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -270,6 +336,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -385,16 +461,121 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Sitzung 11: Chi-Quadrat Test</h1>
+<h1 class="title toc-ignore">Sitzung 11: Analyse von Ordinaldaten</h1>
 
 </div>
 
 
-
+<p>In dieser letzten Sitzung geht es um die Analyse von Nominaldaten, also um die Frage, wie man Zusammenhänge/ Unterschiede zwischen Variablen analysieren kann, die lediglich auf <a href="https://de.wikipedia.org/wiki/Nominalskala">Nominalskalenniveau</a> erfasst wurden. Die Excel-Datei mit den Daten dazu finden Sie <a href="q1_dataFiles/12_Nominaldaten.xlsx">hier</a>. Je nachdem, wie viele Variablen vorliegen und wie viele Ausprägungen diese haben, lassen sich verschiedene statistische Verfahren anwenden. Wir schauen uns die folgenden an:</p>
+<ul>
+<li>Phi-Korrelation: bei zwei Variablen mit jeweils zwei Ausprägungen</li>
+<li>Risikodifferenzen-Test (z-Test): bei zwei Variablen mit jeweils zwei Ausprägungen</li>
+<li>Chi-Quadrat-Test: bei theoretisch beliebig vielen Variablen mit theoretisch beliebig vielen Ausprägungen</li>
+</ul>
+<p></br></p>
+<div id="szenario" class="section level1">
+<h1><span class="header-section-number">1</span> Szenario:</h1>
+<p>Wir schauen uns die Daten zur Wirksamkeit verschiedener Covid-19-Impfstoffe an. Eine Tabelle mit einer Übersicht aus einem kürzlich publizierten <a href="https://www.medrxiv.org/content/10.1101/2020.12.16.20248359v1.full.pdf">Pre-Print</a> sehen Sie unten:</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/vaccine_table.PNG" /></p>
+<p></br></p>
+<p>Die erste Spalte listet die verschiedenen Hersteller auf. Die zweite Spalte gibt die Daten der Ergebnisveröffentlichungen an. Die dritte Spalte ist die wichtigste für uns. Sie zeigt die Häufigkeiten von Covid-Erkrankungen in der Impfgruppe (X) und der Kontrollgruppe (Y). Die vierte Spalte zeigt die Stichprobengröße. Die fünfte Spalte zeigt die geschätzte Effektivität der Impfstoffe (wie man diese schätzt ist nicht klausurrelevant aber sehr interessant. Sie finden deshalb eine Zusatzarbeitsmappe “Und wieso 95% Wirksamkeit” dazu in der Excel-Datei für diese Sitzung.). Die letzte Spalte zeigt das Konfidenzintervall der Effektivitätsschätzung.</p>
+<p>Wir interessieren uns für die Frage, wie Impfung (ja vs. nein) und Covid-Erkrankung (ja vs. nein) zusammenhängen. Bei effektiven Impfstoffen sollten wir natürlich (um es in der Sprache von Korrelationen auszudrücken) einen negativen Zusammenhang zwischen Impfung und Covid-Erkrankung erwarten. Oder anders ausgedrückt: wir erwarten, dass die Wahrscheinlichkeit für eine Covid-Erkrankung unter den geimpften Personen geringer ist als unter den ungeimpften Personen.</p>
+<p>Zur besseren Veranschaulichung schauen wir uns nur die Daten für den Impfstoff von Pfizer-BioNTech an und übertragen diese in eine etwas anschaulichere Tabelle, die man auch <em>Kontingenztabelle</em> oder <em>Vierfeldertafel</em> nennt. Sie finden diese Tabelle auch in der Excel-Datei zu dieser Sitzung.</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/contingency_table.PNG" /></p>
+<p></br></p>
+<p>Die beiden Zeilen der Tabelle kodieren, ob man geimpft wurde oder nicht. Die beiden Spalten kodieren, ob eine Covid-Erkrankung vorlag oder nicht. Die Tabelle unten zeigt eine generische Kontingenztabelle mit den allgemeinen Bezeichnungen der verschiedenen Teile der Tabelle. Die Zeilen werden mit <span class="math inline">\(X\)</span> und die Spalten mit <span class="math inline">\(Y\)</span> kodiert (theoretisch könnte man das natürlich auch andersherum machen). Die vier verschiedenen Felder der Tabelle werden alphabetisch durchnummeriert. In unserem Fall kodiert die a-Zelle also all Versuchspersonen, die trotz Impfung im Untresuchungszeitraum an Covid-19 erkrankten und die b-Zelle alle geimpften Personen, die nicht an Covid erkrankten (a+b ergibt also die Zeilensumme; in unserem Fall die Anzahl an geimpften Personen in der Untersuchung).</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/contingency_table2.PNG" /></p>
+<p></br></p>
+<p></br></p>
+</div>
+<div id="phi-korrelation" class="section level1">
+<h1><span class="header-section-number">2</span> Phi-Korrelation:</h1>
+<p>Sie haben in der Veranstaltung Korrelationskoeffizienten für verschiedene Skalenniveaus kennengelernt und auf der Website zunächst die Produktmomentkorrelation (für zwei intervallskalierte Variablen) konzentriert. Auch für zwei nominalskalierte Variablen (mit jeweils zwei Ausprägungen) gibt es aber einen Korrelationskoeffizienten, die <em>Phi-Korrelation</em>. Diese berechnent man mit folgender Formel:</p>
+<p><span class="math inline">\(\phi~=\frac{a \cdot d - b \cdot c}{\sqrt{(a+c)(a+b)(c+d)(b+d)}}\)</span>.</p>
+<p>Diese Formel würde <span class="math inline">\(r~= 1\)</span> ergeben, wenn alle geimpften Personen an Covid erkrankt wären (in Zeile 1 alle Personen in der a-Zelle wären) und keine ungeimpfte Person an Covid erkrankt wäre (in Zeile 2 alle Personen in der d-Zelle wären). Ein Wert von <span class="math inline">\(r~= -1\)</span> würde sich entsprechend ergeben, wenn keine der geimpften Personen aber alle ungeimpften Personen an Covid erkrankt wären.</p>
+<p>In unserem Bsp. ergibt sich für die Tabelle basierend auf den Pfizer-BioNTech-Daten eine Phi-Korrelation von <span class="math inline">\(r~= -0.057\)</span>. Die Beurteilung der statistischen Signifikanz dieser Korrelation erfolgt dann auf dieselbe Weise, wie für alle Korrelationen (Stichwort: z-Test für Fisher-Z-transformierte Korrelation; s. letzte Sitzung). Unser geschätzter Korrelationskoeffizient entspricht einem z-Wert von <span class="math inline">\(z~= -11.85\)</span>. Das entspricht einem p-Wert von <span class="math inline">\(p~&lt; .0001\)</span>. Überlegen Sie kurz: Wieso kann es sein, dass ein so kleiner Korrelationskoeffizient mit einem so extremen und unter der Nullhypothese unwahrscheinlichen z-Wert einhergeht?</p>
+<p>Wir würden hier also die <span class="math inline">\(H_0\)</span>, die besagt, dass die Korrelation in der Population <span class="math inline">\(\geq~0\)</span> ist, verwerfen und die <span class="math inline">\(H_1\)</span> annehmen (<span class="math inline">\(r\leq~0\)</span>).</p>
+<p></br></p>
+</div>
+<div id="risikodifferenz" class="section level1">
+<h1><span class="header-section-number">3</span> Risikodifferenz:</h1>
+<p>Eine zweite Möglichkeit, den Zusammenhang zwischen Impfung und Covid-Erkrankung zu schätzen, ist, den Unterschied in den Wahrscheinlichkeiten für eine Covid-Erkrankung unter den geimpften und ungeimpften Personen zu analysieren. Anders ausgedrückt: kann man sagen, dass sich die <em>bedingten</em> Wahrscheinlichkeiten für eine Covid-Erkrankung unterscheiden? Dazu berechnen wir zunächst die beiden bedingten Wahrscheinlichkeiten:</p>
+<p><span class="math inline">\(P(Covid|Impfung)~= \frac{a}{a+b}~=\frac{8}{8+21492}~= 0.00037\)</span> <span class="math inline">\((0.037\%)\)</span>,</p>
+<p><span class="math inline">\(P(Covid|\lnot Impfung)~= \frac{c}{c+d}~=\frac{162}{162+21338}~= 0.00753\)</span> <span class="math inline">\((0.753\%)\)</span>.</p>
+<p>Die Risikodifferenz (<span class="math inline">\(\Delta R\)</span> oder <span class="math inline">\(RD\)</span>) ist demnach:</p>
+<p><span class="math inline">\(\Delta R~= P(Covid|\lnot Impfung) - P(Covid|Impfung)~= -0.00716\)</span> <span class="math inline">\((0.716\%)\)</span>.</p>
+<p>Das bedeutet, bei Impfung sinkt das Risiko für eine Covid-Erkrankung im Vgl. zur Nichtimpfung um 0.716 Prozentpunkte. Ist diese Risikodifferenz nur Zufall oder können wir davon ausgehen, dass die Impfung tatsächlich das Risiko verringert? Diese Frage beantworten wir wieder mit einem Signifikanztest.</p>
+<p>Dazu transformieren wir die Risikodifferenz in standardisierte z-Werte, indem wir <span class="math inline">\(\Delta R\)</span> (bzw. <span class="math inline">\(RD\)</span>) durch den Standardfehler von <span class="math inline">\(\Delta~R\)</span> teilen. Der Standardfehler ergibt sich durch:</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/SE_RDiff.PNG" /></p>
+<p></br></p>
+<p>Wir erhalten einen Wert von <span class="math inline">\(0.000604\)</span>. Entsprechend ergibt sich ein empirischer z-Wert von <span class="math inline">\(z~= \frac{\Delta R}{SE_{\Delta R}~= \frac{-0.00716}{0.000604}~= -11.85}\)</span>. Oben bei der Phi-Korrelation, haben Sie schon gesehen, dass dieser z-Wert ein signifikantes Ereignis ist. Entsprechend führt auch diese Art der Analyse zur Verwerfung der <span class="math inline">\(H_0\)</span> (die in diesem Fall besagt, dass die Risikodifferenz größer-gleich 0 ist). Wir nehmen die <span class="math inline">\(H_1\)</span> an (die besagt, dass das die Risikodifferenz kleiner als 0 ist.)</p>
+<p></br></p>
+</div>
+<div id="chi-quadrat-test" class="section level1">
+<h1><span class="header-section-number">4</span> Chi-Quadrat-Test:</h1>
+<p>Eine weitere Möglichkeit zur Analyse (die auch dann funktioniert, wenn mehr als zwei Ausprägungen der Variablen vorliegen) ist der Chi-Quadrat-Test für zwei kategoriale Variablen.</p>
+<p>Dabei wird im Prinzip die beobachtete Häufigkeitstabelle (in unserem Fall die Vierfeldertafel von oben) mit einer Häufigkeitstabelle verglichen, die man erwarten würde, wenn die <span class="math inline">\(H_0\)</span> zuträfe.</p>
+<p></br></p>
+<div id="konstruktion-der-h0-tabelle" class="section level2">
+<h2><span class="header-section-number">4.1</span> Konstruktion der H0-Tabelle:</h2>
+<p>Diese “H0-Tabelle” muss man sich in Excel zunächst konstruieren, das Ergebnis sieht dann so aus, wie die untere Tabelle in der nachfolgenden Abb.:</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/chisq_one.PNG" /></p>
+<p></br></p>
+<p>Was ist die Logik hinter dieser “H0-Tabelle”? Unter der Ausgangstabelle oben im Bild sehen Sie eine ergänzte Zeile, die die “Randwahrscheinlichkeiten” für eine Covid-Erkrankung bzw. Nicht-Covid-Erkrankung zeigt. Damit ist einfach die Wahrscheinlichkeit gemeint, Covid bzw. kein Covid zu haben, ungeachtet dessen, ob man geimpft wurde oder nicht: <span class="math inline">\(P(Covid)\)</span> und <span class="math inline">\(P(\lnot Covid)\)</span>. Die Idee ist, dass unter der <span class="math inline">\(H_0\)</span> diese Randwahrscheinlichkeiten auch innerhalb der beiden Gruppen des Impffaktors auftreten. Denn: Wenn die Impfung keinen Effekt hat, dann sollte sich die Wahrscheinlichkeit, an Covid zu erkranken, nicht zwischen Impfung und Nicht-Impfung unterscheiden.</p>
+<p>Die Formel zu Berechnung der unter der Nullhypothese zu erwartenden Zellenwerte ist:</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/chisq_expected.PNG" /></p>
+<p></br></p>
+<p><span class="math inline">\(p_i\)</span> und <span class="math inline">\(p_j\)</span> sind hierbei jeweils die Randwahrscheinlichkeiten (im Bild weiter oben haben wir die Zeilenwahrscheinlichkeiten nicht und könnten sie noch ergänzen. Es reicht aber auch, die Zeilensummen zu wissen.). Unter der <span class="math inline">\(H_0\)</span> erwarten wir, dass die Wahrscheinlichkeit für Covid bei <span class="math inline">\(P(Covid)\)</span> liegt. Wir multiplizieren also einfach diese Wahrscheinlichkeit mit der Anzahl der geimpften Personen, um die Anzahl der unter der <span class="math inline">\(H_0\)</span> erwarteten Fälle in der a-Zelle zu bekommen. Das sind 85 (<span class="math inline">\(21500\cdot 0.00395\)</span>). Ebenso multiplizieren wir die Anzahl der nichtgeimpften Personen mit <span class="math inline">\(P(Covid)\)</span>, um die erwarteten Fälle in der Placebogruppe (c-Zelle) zu erhalten. Die b- und d-Zelleneinträge kann man dann natürlich einfach durch Differenzbildung erhalten, könnte aber natürlich auch die Wahrscheinlichkeit für Nicht-Covid, <span class="math inline">\(P(\lnot Covid)\)</span> verwenden.</p>
+<p>Unter der H0-Tabelle in der Abbildung oben sehen sie auch die beiden bedingten Wahrscheinlichkeiten für Covid gegeben Covid bzw. gegeben Nicht-Covid. Diese entsprechen jetzt der Randwahrscheinlichkeit <span class="math inline">\(P(Covid)\)</span>, genau das, was man erwarten würde, wenn die Impfung gar keinen Einfluss hat.</p>
+<p></br></p>
+</div>
+<div id="unterschied-zwischen-beobachteten-und-erwarteten-häufigkeiten" class="section level2">
+<h2><span class="header-section-number">4.2</span> Unterschied zwischen beobachteten und erwarteten Häufigkeiten:</h2>
+<p>Beim Chi-Quadrat-Test wird jetzt im Prinzip getestet, wie wahrscheinlich dieser oder ein noch extremerer Unterschied der beobachteten von der erwarteten H0-Tabelle auftritt. Dazu konstruiert man noch eine weitere Tabelle, die sozusagen den Unterschied der beiden Tabellen quantifiziert. Das geht so:</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/chisq_diff.PNG" /></p>
+<p></br></p>
+<p>Man subtrahiert von den beobachteten Häufigkeiten die erwarteten Häufigkeiten, quadriert dann das Ergebnis und teil es durch die Anzahl der erwarteten Fälle. Das macht man für jede der vier Zellen.</p>
+<p>Der Chi-Quadrat-Wert (der empirische Testwert), <span class="math inline">\(\chi^2\)</span>, ist dann die Summe aller Zellen dieser Tabelle. Der Wert, der sich in unserem Fall ergibt, ist in der Abbildung oben zu sehen. Die Tabellensumme hat eine Verteilung, die man Chi-Quadrat-Verteilung nennt (eine Verteilung, deren Werte z.B. nicht negativ werden können, da ja quadriert wird.).</p>
+<p>Die Chi-Quadrat-Verteilung ist durch zwei Parameter gekennzeichnet, die Zeilen- (j) und Spalten-Freiheitsgrade (k). In unserem Fall ergibt sich <span class="math inline">\(df~= (j-1)\cdot (k-1)~= (2-1) \cdot (2-1)~= 1 \cdot 1~= 1\)</span>. Damit können unserem ermittelten Chi-Quadrat-Wert einen p-Wert zuordnen. Auch den sehen Sie oben in der Abbildung. Wie Sie sehen können, ist dieser kleiner als 0.05, weshalb wir auch bei dieser Analyse die <span class="math inline">\(H_0\)</span>, also die Hypothese, dass es keinen Zusammenhang zwischen Impfung und Covid-Erkrankung gibt, verwerfen.</p>
+<p>Noch eine Anmerkung zur “Gerichtet-” bzw. “Ungerichtetheit” der Testung. Der Chi-Quadrat-Test ist immer ungerichtet, denn es gibt unter dieser Verteilung ja keine negative Seite der Verteilung. Bei signifikantem Test und vermuteter Richtung des Zusammenhangs muss man deshalb auch noch schauen, ob der Zusammenhang in der vorhergesagten Richtung liegt. Das Vorzeichen des Chi-Quadrat-Wertes gibt hier keine Auskunft (es gibt ja nur positive Werte).</p>
+<p></br></p>
+</div>
+<div id="effektgröße" class="section level2">
+<h2><span class="header-section-number">4.3</span> Effektgröße</h2>
+<p>Für den Chi-Quadrat-Test gibt es die Effektgröße Cohen’s <span class="math inline">\(w\)</span> (das Ergebnis für unseren Fall sehen Sie auch oben in der Abbildung):</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/cohen_w.PNG" /></p>
+<p></br></p>
+<p>Im Falle einer Vierfeldertafel entspricht Cohen’s <span class="math inline">\(w\)</span> dem Phi-Korrelationskoeffizienten.</p>
+<p></br></p>
+</div>
+</div>
+<div id="und-wieso-95-impfwirksamkeit-nicht-klausurrelevant" class="section level1">
+<h1><span class="header-section-number">5</span> Und wieso 95% Impfwirksamkeit? (nicht klausurrelevant)</h1>
+<p>Aufgrund der Daten von Pfizer-BioNTech wurde eine Impfeffektivität von ca. 95% geschätzt. Keines der oben besprochenen Analyseverfahren hat diesen Wert geliefert. Augenscheinlich wird die Impfeffektivität also anders ermittelt. Der Vollständigkeit halber, schauen wir uns jetzt noch an (das ist aber nicht klausurrelevant), mit welcher Formel das eigentlich gemacht wird, nämlich mit folgender (die sie auch im letzten Excel-Tabellenblatt finden):</p>
+<p></br></p>
+<p><img src="images/q1_11nominal/vacc_eff.PNG" /></p>
+<p></br></p>
+<p>Zur Logik hinter dieser Formel, hier zunächst eine Animation, mit der Sie ein sehr gemeines Experiment simulieren können:</p>
+<p><br /> <iframe width="900" height="700" src="images/q1_11nominal/Prev_0_120_60_60.html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
+<p>Links sehen Sie die Stichprobe von Leuten, die geimpft wurde. Rechts die Placebogruppe. Durch Drücken auf “Start” können Sie nun beide Gruppen dem Virus aussetzen (in der echten Welt wäre das natürlich absolut unethisch und man muss stattdessen warten, bis sich Leute selbst infizieren). Sie können dann beobachten, wie viele der Leute in jeder Gruppe erkranken.</p>
+<p>Die Animation zeigt, dass in diesem Fall niemand der geimpften Personen erkrankt aber die Hälfte der Placebogruppe. Fragen Sie sich: Wie groß ist in diesem Fall die Phi-Korrelation? Erstellen Sie sich ggf. eine Vierfeldertafel in Excel mit den Ergebnissen der Animation. Wie groß ist die Risiko-Differenz bzw. Risiko-Reduktion? Welche Impfeffektivität ergibt sich stattdessen?</p>
+<p>Die Formel oben ergibt eine Impfeffektivität von 100%. Welche Logik fängt diese Formel ein, die die Risikodifferenz und auch die Phikorrelation nicht einfängt? Stellen Sie sich vor, wie viele Covid-Fälle in der Impfgruppe aufgetreten wären, wenn diese gar nicht geimpft worden wäre. Was wäre der Erwartungswert? Wir würden erwarten, dass sich dann auch in dieser Gruppe die Hälfte der Leute infiziert. Die andere Hälfte der Leute - die, die sowieso uninfiziert bleiben - sind für die Wirksamkeit des Impfstoffs somit gar nicht diagnostisch. Wie viele Fälle von Covid wurden daher in Anwesenheit des Impfstoffs verhindert? Antwort: 100% der Fälle, die ohne die Impfung erwartungsgemäß aufgetreten wären. Das ist, was die Formel berechnet.</p>
+<p>Die Formel für die Impfeffektivität wurde bereits im Jahr 1915 von Greenwood und Yule entwickelt, die sich damals noch für die Evaluation der Wirksamkeit von Impfungen gegen Typhus und Cholera interessierten. Die Publikation finden Sie <a href="https://journals.sagepub.com/doi/pdf/10.1177/003591571500801433">hier</a></p>
+</div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
 
+</div>
+</div>
 
 </div>
 
@@ -427,6 +608,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
