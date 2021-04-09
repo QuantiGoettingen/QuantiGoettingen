@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -263,6 +266,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -270,6 +336,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -364,12 +440,13 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Material</li>
     <li>
-      <a href="page-q2_materials.html">Übungsdatensätze</a>
+      <a href="page-q2_materials.html">Video Links und Daten</a>
     </li>
     <li class="divider"></li>
     <li class="divider"></li>
+    <li class="dropdown-header">Wiederholung</li>
     <li>
-      <a href="page-einfr.html">Sitzung 1: Einführung in R</a>
+      <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a>
     </li>
   </ul>
 </li>
@@ -399,16 +476,125 @@ body {
 <h2>
 <font style="color:lightgrey;"> Einführung </font>
 </h1>
-<div id="sitzung-1-arbeiten-mit-r" class="section level4">
-<h4>Sitzung 1: Arbeiten mit R</h4>
+<div id="sitzung-1-einführung-in-das-arbeiten-mit-r" class="section level1">
+<h1><span class="header-section-number">1</span> Sitzung 1: Einführung in das Arbeiten mit R</h1>
 <ul>
-<li>Link dann hier</li>
+<li><p>Begleitendes R-Skript: NEIN</p></li>
+<li><p>Anzahl Videos: 3</p></li>
+<li><p>Zum 1. Video (Dauer: 20 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586181480108">hier</a></p></li>
+<li><p>Benötigte Datensätze: KEINE</p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>02:00 Vor- und Nachteile eigene Installation vs. Remote Desktop</li>
+<li>04:30 Remotedesktopverbindung herstellen (siehe Anmerkung oben: neue Adresse)</li>
+<li>08:00 R-Studio über Remotedesktopverbindung öffnen</li>
+<li>12:00 R ohne R-Studio öffnen (nur zur Demo, werden wir später nicht mehr machen)</li>
+<li>13:00 Beziehung zwischen R und R-Studio</li>
+<li>15:50 R auf dem eigenen PC installieren</li>
+<li>17:00 R-Studio auf dem eigenen PC installieren</li>
+</ul></li>
 </ul>
+<p><br></p>
+<div id="erste-schritte-in-r-teil-1" class="section level2">
+<h2><span class="header-section-number">1.1</span> Erste Schritte in R (Teil 1)</h2>
+<ul>
+<li><p>Zum Video (Dauer: 35 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586534476460">hier</a></p></li>
+<li><p>Benötigte Datensätze: KEINE</p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>02:00 Erklärung der RStudio Benutzeroberfläche</li>
+<li>05:00 Erklärung Packages</li>
+<li>07:00 Erklärung der R-Hilfe</li>
+<li>09:45 Erklärung der Console</li>
+<li>12:20 Ein R-Skript anlegen</li>
+<li>13:20 Code und Kommentare in R-Skripts</li>
+<li>15:20 Code ausführen (oben rechts „Run“ klicken oder Strg+Enter / Ctrl + Enter)</li>
+<li>16:45 R-Skript abspeichern</li>
+<li>18:00 abgespeichertes R-Skript öffnen</li>
+<li>19:45 RMarkdown erstellen</li>
+<li>23:15 RMarkdown abspeichern</li>
+<li>24:00 Unterschiede zwischen Skript und Markdown</li>
+<li>25:30 Code Chunk in Markdown einfügen (Tasten-Kombination: Strg+Alt+I)</li>
+<li>29:00 Markdown knitten (Ausgabedatei erstellen)</li>
+<li>31:50 einzelne Code Chunks in Markdown ausführen</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+<div id="erste-schritte-in-r-teil-2" class="section level2">
+<h2><span class="header-section-number">1.2</span> Erste Schritte in R (Teil 2)</h2>
+<ul>
+<li><p>Zum Video (Dauer: 40 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586537113348">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/Kaffeedaten.csv">t-test between (Kaffeedaten)</a></p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>01:00 Daten zum Einlesen in R vorbereiten</li>
+<li>03:00 Daten aus Excel in eine csv-Datei speichern</li>
+<li>07:00 Unterschied Excel-Arbeitsmappe vs. csv-Datei</li>
+<li>09:00 csv-Datei in einem Text-Editor öffnen und anschauen</li>
+<li>11:00 Was ist in einer csv-Datei zu beachten? (Trennzeichen und Dezimalzeichen erkennen)</li>
+<li>14:20 Optionen zum Importieren von csv-Datei in R</li>
+<li>15:50 Option 1: Daten einlesen mit „base“</li>
+<li>20:00 Eingelesene Daten betrachten</li>
+<li>22:00 Variablentypen: Faktor vs. Integer</li>
+<li>25:30 Option 2: Dateien einlesen mit „readr“</li>
+<li>29:15 Eingelesene Daten betrachten</li>
+<li>31:15 Den in der Console generierten Code betrachten</li>
+<li>35:00 Code zum Einlesen von Daten in ein Markdown einfügen</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="sitzung-2-wiederholung-deskriptive-statistik-abbildung-t-tests" class="section level1">
+<h1><span class="header-section-number">2</span> Sitzung 2: Wiederholung deskriptive Statistik, Abbildung, t-Tests</h1>
+<ul>
+<li>Anzahl Videos: 2</li>
+</ul>
+<div id="teil-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Teil 1:</h2>
+<ul>
+<li><p>Zum 1. Video (Dauer: 59 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Priming_between.csv">IQ-Werte und Urlaub (between)</a></p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>00:00 Willkommen</li>
+<li>05:00 Datenbeispiel in Excel ansehen</li>
+<li>06:30 Daten in R einlesen über Buttons</li>
+<li>10:00 Einlesen der Daten über R-Code</li>
+<li>10:30 R-Commander</li>
+<li>18:00 Deskriptive Statistik</li>
+<li>29:15 Mittelwertsabbildung über R-Commander</li>
+<li>38:00 Skalierung der Y-Achse ändern</li>
+<li>41:40 T-Test für unabhängige Stichproben (über R-Commander)</li>
+<li>52:50 Cohen’s d berechnen</li>
+</ul></li>
+</ul>
+</div>
+<div id="teil-2" class="section level2">
+<h2><span class="header-section-number">2.2</span> Teil 2:</h2>
+<ul>
+<li><p>Zum 2. Video (Dauer: 22 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Urlaub_within.csv">IQ-Werte und Urlaub (between)</a></p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>00:50 Daten in R einlesen (über R-Code)</li>
+<li>03:30 Deskriptive Statistik über R-Commander</li>
+<li>06:30 Verschiedene Datenformate (Wide- und Long-Format)</li>
+<li>17:45 Abbildung erstellen über R-Commander</li>
+<li>19:40 T-Test für abhängige Daten (über R-Commander)</li>
+<li>22:00 Cohen’s d berechnen</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
 </div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
 
+</div>
+</div>
 
 </div>
 
@@ -441,6 +627,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
