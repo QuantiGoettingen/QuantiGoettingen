@@ -11,7 +11,7 @@
 
 
 
-<title>Materialien für Quantitative Methoden II</title>
+<title>Quantitative Methoden</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -266,69 +263,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -336,16 +270,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -462,192 +386,32 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Materialien für Quantitative Methoden II</h1>
+<h1 class="title toc-ignore">Quantitative Methoden</h1>
 
 </div>
 
 
-<style>
-body {
-    font-family: 'Muli';
-    font-size: 14px;
-}
-</style>
-<p>Wichtige Links:</p>
-<ul>
-<li><a href="https://cran.r-project.org/bin/windows/base/">Installation von R (Windows)</a></li>
-<li><a href="https://cran.r-project.org/bin/macosx/">Installation von R (Mac/ iOS)</a></li>
-<li><a href="https://www.rstudio.com/products/rstudio/download/">Installation von R-Studio</a></li>
-</ul>
-<p><br></p>
-<ul>
-<li>Server-Link für Remote-Desktop: <em>teaching.psych.bio.uni-goettingen.de:49121</em></li>
-</ul>
-<p><br></p>
-<ul>
-<li>Anmeldung:
-<ul>
-<li>Name: ug-student\vorname.nachname (genau wie bei StudIP)</li>
-<li>Passwort: wie bei StudIP</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><a href="https://praxistipps.chip.de/mac-remote-desktop-einrichten-so-gehts_51146">Tipps zu Remote-Desktop für Mac (ab Schritt 4)</a></li>
-</ul>
-<p><br></p>
-<ul>
-<li>Eine Anleitung für die Herstellung der Remote-Desktop-Verbindung über die <strong>App</strong> aus dem Apple Store gibt es <a href="mac_remoteDesk.html">hier</a>.</li>
-</ul>
-<p><br></p>
-<div id="sitzung-1-einführung-in-das-arbeiten-mit-r" class="section level1">
-<h1><span class="header-section-number">1</span> Sitzung 1: Einführung in das Arbeiten mit R</h1>
-<ul>
-<li><p>Begleitendes R-Skript: NEIN</p></li>
-<li><p>Anzahl Videos: 3</p></li>
-<li><p>Zum 1. Video (Dauer: 18 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/recording/screenshare/a61321b43fa64002d1766ced4a21d8fcb84842a5-1618041685960">hier</a></p></li>
-<li><p>Benötigte Datensätze: KEINE</p></li>
-<li><p>Inhalt (Timestamps):</p>
-<ul>
-<li>00:00 Website</li>
-<li>05:00 Remote-Desktop</li>
-<li>12:30 R und R-Studio selber installieren</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
-<ul>
-<li>auf jeden Fall: eine Remotedesktopverbindung zum Gemi herstellen und RStudio öffnen können</li>
-<li>optional: R und RStudio auf dem eigenen Rechner installiert haben</li>
-</ul></li>
-</ul>
-<p><br></p>
-<div id="erste-schritte-in-r-teil-1" class="section level2">
-<h2><span class="header-section-number">1.1</span> Erste Schritte in R (Teil 1)</h2>
-<ul>
-<li><p>Begleitendes R-Skript: NEIN</p></li>
-<li><p>Zum Video (Dauer: 35 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586534476460">hier</a></p></li>
-<li><p>Benötigte Datensätze: KEINE</p></li>
-<li><p>Inhalt (Timestamps):</p>
-<ul>
-<li>02:00 Erklärung der RStudio Benutzeroberfläche</li>
-<li>05:00 Erklärung Packages</li>
-<li>07:00 Erklärung der R-Hilfe</li>
-<li>09:45 Erklärung der Console</li>
-<li>12:20 Ein R-Skript anlegen</li>
-<li>13:20 Code und Kommentare in R-Skripts</li>
-<li>15:20 Code ausführen (oben rechts „Run“ klicken oder Strg+Enter / Ctrl + Enter)</li>
-<li>16:45 R-Skript abspeichern</li>
-<li>18:00 abgespeichertes R-Skript öffnen</li>
-<li>19:45 RMarkdown erstellen</li>
-<li>23:15 RMarkdown abspeichern</li>
-<li>24:00 Unterschiede zwischen Skript und Markdown</li>
-<li>25:30 Code Chunk in Markdown einfügen (Tasten-Kombination: Strg+Alt+I)</li>
-<li>29:00 Markdown knitten (Ausgabedatei erstellen)</li>
-<li>31:50 einzelne Code Chunks in Markdown ausführen</li>
-</ul></li>
-</ul>
-<p><br></p>
-<ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
-<ul>
-<li>ein grobes Verständnis der Benutzeroberfläche von RStudio haben (welche Bereiche gibt es, wofür sind sie da)</li>
-<li>ein Skript erstellen, abspeichern, und wieder öffnen können</li>
-<li>ein RMarkdown-Dokument erstellen, abspeichern, und wieder öffnen können</li>
-<li>ein grobes Verständnis über die Unterschiede zwischen Skripts und Markdowns haben (note: in der Klausur sollen später Markdowns genutzt werden)</li>
-<li>verstehen, was es bedeutet, ein Markdown zu “knitten” (zB zu einer html-Datei) und ein simples Markdown knitten können</li>
-</ul></li>
-</ul>
-<p><br></p>
+<div class="column-right">
+<p><img src="images/home/squirrel.PNG" /></p>
 </div>
-<div id="erste-schritte-in-r-teil-2" class="section level2">
-<h2><span class="header-section-number">1.2</span> Erste Schritte in R (Teil 2)</h2>
-<ul>
-<li><p>Begleitendes R-Skript: NEIN</p></li>
-<li><p>Zum Video (Dauer: 40 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586537113348">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/daten_ttest_between.csv">t-test between (Kaffeedaten)</a></p></li>
-<li><p>Inhalt (Timestamps):</p>
-<ul>
-<li>01:00 Daten zum Einlesen in R vorbereiten</li>
-<li>03:00 Daten aus Excel in eine csv-Datei speichern</li>
-<li>07:00 Unterschied Excel-Arbeitsmappe vs. csv-Datei</li>
-<li>09:00 csv-Datei in einem Text-Editor öffnen und anschauen</li>
-<li>11:00 Was ist in einer csv-Datei zu beachten? (Trennzeichen und Dezimalzeichen erkennen)</li>
-<li>14:20 Optionen zum Importieren von csv-Datei in R</li>
-<li>15:50 Option 1: Daten einlesen mit „base“</li>
-<li>20:00 Eingelesene Daten betrachten</li>
-<li>22:00 Variablentypen: Faktor vs. Integer</li>
-<li>25:30 Option 2: Dateien einlesen mit „readr“</li>
-<li>29:15 Eingelesene Daten betrachten</li>
-<li>31:15 Den in der Console generierten Code betrachten</li>
-<li>35:00 Code zum Einlesen von Daten in ein Markdown einfügen</li>
-</ul></li>
-</ul>
+<p>Herzlich willkommen auf der Begleitseite für die Seminare der Module <strong>Quantitative Methoden I</strong> (Wintersemester) und <strong>Quantitative Methoden II</strong> (Sommersemester) im Studienfach Psychologie an der Uni Göttingen. In den Seminaren sollen Sie die theoretischen Inhalte der Vorlesung durch praktische Anwendung vertiefen. Diese Seite soll Sie dabei unterstützen.</p>
+<p><br></p>
+<p>Sie finden hier Zusammenfassungen und Tutorials der einzelnen Sitzungen.</p>
+<p><br></p>
+<p>Zu den verschiedenen Sitzungen gelangen Sie über die jeweiligen Menüs oben in der Navigationsleiste.</p>
+<p><br></p>
+<p>Eine Übersicht über die Lernmaterialien (Übungsdaten und Musterlösungen) haben wir auf separaten Seiten für Sie zusammengestellt. Dort können Sie sich die Materialien auch direkt downloaden. Alternativ finden Sie natürlich auch alle Dateien in Stud-IP.</p>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
-<ul>
-<li>eine csv-Datei aus einer Excel-Arbeitsmappe erstellen können</li>
-<li>bei einer csv-Datei erkennen, was die Spaltentrennzeichen und was die Dezimalzeichen sind</li>
-<li>eine csv-Datei über mindestens einen der beschriebenen Wege in R einlesen können (auf Überschriften achten!)</li>
-<li>ein grobes Verständnis der Variablentypen “Faktor” und “numerisch”/“integer” haben</li>
-<li>den durch das Einlesen der Daten generierten Code in der Console erkennen und in ein Markdown übertragen können</li>
-</ul></li>
+<li><p>Zu den Materalien für <strong>Quanti I</strong> geht es <a href="page-q1_materials.html">hier</a>.</p></li>
+<li><p>Zu den Video-Links und Materialien für <strong>Quanti II</strong> geht es <a href="page-q2_materials.html">hier</a>.</p></li>
 </ul>
 <p><br></p>
-</div>
-</div>
-<div id="sitzung-2-wiederholung-deskriptive-statistik-abbildung-t-tests" class="section level1">
-<h1><span class="header-section-number">2</span> Sitzung 2: Wiederholung deskriptive Statistik, Abbildung, t-Tests</h1>
-<ul>
-<li>Begleitendes R-Skript: <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a></li>
-<li>Anzahl Videos: 2</li>
-</ul>
-<div id="teil-1" class="section level2">
-<h2><span class="header-section-number">2.1</span> Teil 1:</h2>
-<ul>
-<li><p>Zum 1. Video (Dauer: 59 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Priming_between.csv">IQ-Werte und Urlaub (between)</a></p></li>
-<li><p>Inhalt (Timestamps):</p>
-<ul>
-<li>00:00 Willkommen</li>
-<li>05:00 Datenbeispiel in Excel ansehen</li>
-<li>06:30 Daten in R einlesen über Buttons</li>
-<li>10:00 Einlesen der Daten über R-Code</li>
-<li>10:30 R-Commander</li>
-<li>18:00 Deskriptive Statistik</li>
-<li>29:15 Mittelwertsabbildung über R-Commander</li>
-<li>38:00 Skalierung der Y-Achse ändern</li>
-<li>41:40 T-Test für unabhängige Stichproben (über R-Commander)</li>
-<li>52:50 Cohen’s d berechnen</li>
-</ul></li>
-</ul>
-</div>
-<div id="teil-2" class="section level2">
-<h2><span class="header-section-number">2.2</span> Teil 2:</h2>
-<ul>
-<li><p>Zum 2. Video (Dauer: 22 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Urlaub_within.csv">IQ-Werte und Urlaub (within)</a></p></li>
-<li><p>Inhalt (Timestamps):</p>
-<ul>
-<li>00:50 Daten in R einlesen (über R-Code)</li>
-<li>03:30 Deskriptive Statistik über R-Commander</li>
-<li>06:30 Verschiedene Datenformate (Wide- und Long-Format)</li>
-<li>17:45 Abbildung erstellen über R-Commander</li>
-<li>19:40 T-Test für abhängige Daten (über R-Commander)</li>
-<li>22:00 Cohen’s d berechnen</li>
-</ul></li>
-</ul>
-<p><br></p>
-</div>
-</div>
+<p>Viel Spaß!</p>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
 
 
-</div>
-</div>
 
 </div>
 
@@ -680,32 +444,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
