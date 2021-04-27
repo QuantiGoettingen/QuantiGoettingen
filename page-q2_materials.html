@@ -500,6 +500,10 @@ body {
 <li>Eine Anleitung für die Herstellung der Remote-Desktop-Verbindung über die <strong>App</strong> aus dem Apple Store gibt es <a href="mac_remoteDesk.html">hier</a>.</li>
 </ul>
 <p><br></p>
+<p><strong>Hinweis:</strong></p>
+<p><strong>Es kann beim Ansehen der Aufzeichnungen leider gelegentlich passieren (z.B. bei schlechter Internetverbindung), dass Ton und Bild irgendwann nicht mehr synchron sind.</strong></p>
+<p><strong>In dem Fall hilft es, das Fenster zu aktualisieren und ab der gewünschten Stelle nochmal neu abzuspielen.</strong></p>
+<p><br></p>
 <div id="sitzung-1-einführung-in-das-arbeiten-mit-r" class="section level1">
 <h1><span class="header-section-number">1</span> Sitzung 1: Einführung in das Arbeiten mit R</h1>
 <ul>
@@ -603,12 +607,13 @@ body {
 <ul>
 <li>Begleitendes R-Skript: <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a></li>
 <li>Anzahl Videos: 2</li>
+<li>Das im Video angesprochene PDF gibt es <a href="q2_dataFiles/02_Einführung_R_SoSe21_Teil1.pdf">hier</a> und natürlich auch in stud.ip</li>
 </ul>
 <div id="teil-1" class="section level2">
-<h2><span class="header-section-number">2.1</span> Teil 1:</h2>
+<h2><span class="header-section-number">2.1</span> Teil 1</h2>
 <ul>
 <li><p>Zum 1. Video (Dauer: 59 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Priming_between.csv">IQ-Werte und Urlaub (between)</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Priming_between.csv">IQ-Werte und Priming (between)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen</li>
@@ -623,9 +628,21 @@ body {
 <li>52:50 Cohen’s d berechnen</li>
 </ul></li>
 </ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>den RCommander öffnen können</li>
+<li>einen Datensatz im Commander laden können</li>
+<li>Deskriptive Statistiken für einen Datensatz berechnen können</li>
+<li>eine Abbildung über Mittelwerte mit Konfidenzintervallen erstellen können</li>
+<li>einen t-Test im Commander und Cohen’s d außerhalb des Commanders berechnen können</li>
+</ul></li>
+</ul>
+<p><br></p>
 </div>
 <div id="teil-2" class="section level2">
-<h2><span class="header-section-number">2.2</span> Teil 2:</h2>
+<h2><span class="header-section-number">2.2</span> Teil 2</h2>
 <ul>
 <li><p>Zum 2. Video (Dauer: 22 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
 <li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Urlaub_within.csv">IQ-Werte und Urlaub (within)</a></p></li>
@@ -637,6 +654,117 @@ body {
 <li>17:45 Abbildung erstellen über R-Commander</li>
 <li>19:40 T-Test für abhängige Daten (über R-Commander)</li>
 <li>22:00 Cohen’s d berechnen</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>dieselben Schritte wie beim vorherigen Video für abhängige Daten ausführen können</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="sitzung-3-daten-transformieren-weitere-abbildungen-korrelationen-rang--und-chi-quadrat-test" class="section level1">
+<h1><span class="header-section-number">3</span> Sitzung 3: Daten transformieren, weitere Abbildungen, Korrelationen, Rang- und Chi-Quadrat-Test</h1>
+<ul>
+<li><p>Begleitende R-Skripts: 2</p></li>
+<li><p>Anzahl Videos: 2</p></li>
+</ul>
+<div id="teil-1-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Teil 1</h2>
+<ul>
+<li><p>Zum 1. Video (Dauer: 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588084379372">hier</a></p></li>
+<li><p>Benötigte Datensätze (2 Stück):</p>
+<ul>
+<li><a href="q2_dataFiles/Daten_EinfuehrungTeil2.csv">IQ-Werte und Priming numerisch (mixed Design)</a></li>
+<li><a href="q2_dataFiles/Daten_MissingValues_EinfuehrungTeil2.csv">IQ-Werte Missing values</a></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Begleitendes R-Skript: <a href="q2_html_pages/Sitzung3a.html">Skript zu Video Teil 1</a></p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>00:00 Willkommen, Daten einlesen, Daten-Vorschau im Markdown</li>
+<li>07:20 R-Commander öffnen</li>
+<li>08:30 Datenmanagement im Commander: Numerisch zu Faktor</li>
+<li>11:00 Mittelwertsgrafik für Werte zu T1 und zu T2 im Commander</li>
+<li>14:00 Interpretation der Grafiken</li>
+<li>15:20 Neue Spalten im Datensatz anlegen: AV standardisieren im Commander</li>
+<li>19:15 Mittelwertsgrafik mit z-standardisierten Werten im Commander</li>
+<li>19:40 Histogramm erstellen mit Commander</li>
+<li>22:15 T-Test ohne Commander &amp; Interpretation des Outputs zu T1</li>
+<li>26:15 Effektgröße</li>
+<li>27:00 T-Test ohne Commander &amp; Interpretation des Outputs zu T2</li>
+<li>28:15 Subsets von Datensätzen erstellen nach Spalten</li>
+<li>31:45 Subsets von Datensätzen erstellen nach Zeilen</li>
+<li>36:00 Within-T-Tests für die erstellten Subsets mit Commander</li>
+<li>42:20 Umformatierung wide zu long (melt)</li>
+<li>44:20 Daten in Vorschau sortieren</li>
+<li>45:00 Umformatierung von long wieder zu wide (dcast)</li>
+<li>49:10 Abbildung des kompletten mixed Designs mit long format-Daten im Commander</li>
+<li>52:10 Abbildung andersrum (y-Achse und x-Achse vertauschen)</li>
+<li>54:10 Umgang mit fehlenden Werten</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>wissen, wie man numerische Variablen als Faktoren definieren kann</li>
+<li>neue Spalten zu einem Datensatz hinzufügen können</li>
+<li>gemessene Variablen standardisieren können</li>
+<li>wissen, wie man Subsets von Datensätzen erstellen kann</li>
+<li>Daten vom Wide- zum Long-Format oder vom Long- zum Wide-Format konvertieren können</li>
+<li>eine 2x2 Interaktions-Grafik erstellen können</li>
+<li>wissen, wie man mit fehlenden Messwerten (missing values) umgeht</li>
+</ul></li>
+</ul>
+<p><br></p>
+</div>
+<div id="teil-2-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> Teil 2</h2>
+<ul>
+<li><p>Zum 2. Video (Dauer: 45 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588088369419">hier</a></p></li>
+<li><p>Benötigte Datensätze (2 Stück):</p>
+<ul>
+<li><a href="q2_dataFiles/Uebung3_Korrelationen.csv">Korrelation</a></li>
+<li><a href="q2_dataFiles/Uebung3_Rang.csv">Rangdaten</a></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Begleitendes R-Skript: <a href="q2_html_pages/Sitzung3b.html">Skript zu Video Teil 2</a></p></li>
+<li><p>Das später im Video angesprochene PDF-File gibt es <a href="q2_dataFiles/R_Einfuehrung_Teil3.pdf">hier</a>.</p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>00:00 Willkommen</li>
+<li>01:15 Überblick</li>
+<li>03:00 Zwei Datensätze einlesen und betrachten</li>
+<li>07:20 Korrelationsbeispiel</li>
+<li>08:00 Commander öffnen</li>
+<li>08:35 Streudiagramm erstellen im Commander</li>
+<li>11:00 Regressionslinie hinzufügen</li>
+<li>12:50 Achsenbeschriftung</li>
+<li>15:00 Korrelationskoeffizient + Signifikanztest</li>
+<li>23:00 Korrelationsmatrix</li>
+<li>26:10 Wilcoxon-Rangsummentest im Commander</li>
+<li>32:10 Boxplots erstellen im Commander</li>
+<li>37:00 Chi-Quadrat-Test im Commander</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>wissen, wie man zwei numerische Variablen und deren Zusammenhang grafisch abbilden kann</li>
+<li>wissen, wie man die Regressionslinie zu einem Streudiagramm hinzufügen kann</li>
+<li>eine Korrelation berechnen und auf Signifikanz prüfen können</li>
+<li>einen Rangtest durchführen können</li>
+<li>Boxplots erstellen können</li>
+<li>wissen, wie man einen Chi-Quadrat-Test in R durchführen kann</li>
 </ul></li>
 </ul>
 <p><br></p>
