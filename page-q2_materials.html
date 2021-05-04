@@ -454,6 +454,19 @@ div.tocify {
     <li>
       <a href="q2_html_pages/Sitzung3b.html">Sitzung 3: Skript zu Video Teil 2</a>
     </li>
+    <li class="dropdown-header">Inhalte Quanti II</li>
+    <li>
+      <a href="q2_html_pages/Sitzung4a_Regression01.html">Sitzung 4: Skript zu Video Teil 1 (Multiple Regression)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4b_Regression01.html">Sitzung 4: Skript Zusatzaufgabe Qualleneis</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4c_Regression02.html">Sitzung 4: Skript zu Video Teil 2 (Modellvergleiche)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4d_Regression02.html">Sitzung 4: Skript Zusatzaufgabe Album-Sales</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -509,6 +522,10 @@ body {
 <p><strong>Hinweis:</strong></p>
 <p><strong>Es kann beim Ansehen der Aufzeichnungen leider gelegentlich passieren (z.B. bei schlechter Internetverbindung), dass Ton und Bild irgendwann nicht mehr synchron sind.</strong></p>
 <p><strong>In dem Fall hilft es, das Fenster zu aktualisieren und ab der gewünschten Stelle nochmal neu abzuspielen.</strong></p>
+<p><br></p>
+<h2>
+<font style="color:lightgrey;"> Einführung in R und Wiederholung von Inhalten aus Quanti I</font>
+</h1>
 <p><br></p>
 <div id="sitzung-1-einführung-in-das-arbeiten-mit-r" class="section level1">
 <h1><span class="header-section-number">1</span> Sitzung 1: Einführung in das Arbeiten mit R</h1>
@@ -619,7 +636,7 @@ body {
 <h2><span class="header-section-number">2.1</span> Teil 1</h2>
 <ul>
 <li><p>Zum 1. Video (Dauer: 59 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Priming_between.csv">IQ-Werte und Priming (between)</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/IQ_Priming_between.csv">IQ-Werte und Priming (between)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen</li>
@@ -651,7 +668,7 @@ body {
 <h2><span class="header-section-number">2.2</span> Teil 2</h2>
 <ul>
 <li><p>Zum 2. Video (Dauer: 22 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/02_IQ_Urlaub_within.csv">IQ-Werte und Urlaub (within)</a></p></li>
+<li><p>Benötigter Datensatz: <a href="q2_dataFiles/IQ_Urlaub_within.csv">IQ-Werte und Urlaub (within)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:50 Daten in R einlesen (über R-Code)</li>
@@ -684,8 +701,8 @@ body {
 <li><p>Zum 1. Video (Dauer: 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588084379372">hier</a></p></li>
 <li><p>Benötigte Datensätze (2 Stück):</p>
 <ul>
-<li><a href="q2_dataFiles/Daten_EinfuehrungTeil2.csv">IQ-Werte und Priming numerisch (mixed Design)</a></li>
-<li><a href="q2_dataFiles/Daten_MissingValues_EinfuehrungTeil2.csv">IQ-Werte Missing values</a></li>
+<li><a href="q2_dataFiles/Daten_EinfuehrungTeil3.csv">IQ-Werte und Priming numerisch (mixed Design)</a></li>
+<li><a href="q2_dataFiles/Daten_MissingValues_EinfuehrungTeil3.csv">IQ-Werte Missing values</a></li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -774,6 +791,120 @@ body {
 </ul></li>
 </ul>
 <p><br></p>
+<h2>
+<font style="color:lightgrey;"> Inhalte aus Quanti II </font>
+</h1>
+<p><br></p>
+</div>
+</div>
+<div id="sitzung-4-multiple-regressionsanalyse-i-und-ii" class="section level1">
+<h1><span class="header-section-number">4</span> Sitzung 4: Multiple Regressionsanalyse I und II</h1>
+<ul>
+<li><p>Begleitende R-Skripts: 2</p></li>
+<li><p>Anzahl Videos: 2</p></li>
+<li><p>Benötigte Datensätze: 2</p></li>
+</ul>
+<div id="teil-1-multiple-regressionanalyse-in-r-durchführen" class="section level2">
+<h2><span class="header-section-number">4.1</span> Teil 1: Multiple Regressionanalyse in R durchführen</h2>
+<ul>
+<li><p>Zum Video (Dauer: ca. 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588683817905">hier</a></p></li>
+<li><p>Benötigter Datensatz:</p>
+<ul>
+<li><a href="q2_dataFiles/PruefungsleistungDaten.csv">Prüfungsleistung</a></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Zum begleitenden R-Skript geht es <a href="q2_html_pages/Sitzung4a_Regression01.html">hier</a>.</p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>01:20 Einführung des Beispiels</li>
+<li>06:30 Multiple Regression in R durchführen</li>
+<li>10:00 Grafische Analyse der Zusammenhänge via Streudiagramm-Matrix</li>
+<li>16:40 Grafische Prüfung der linearen Zusammenhänge in der Streudiagramm-Matrix</li>
+<li>20:35 Grafische Prüfung der Zusammenhänge der Prädiktoren untereinander</li>
+<li>22:55 Multiples Regressionsmodell anpassen (über R-Commander)</li>
+<li>25:20 R-Code dafür</li>
+<li>26:00 Besprechung des Outputs (was sieht man, was ist F? was ist R-Quadrat?)</li>
+<li>39:00 Besprechung der Regressionsparameter/ Regressionskoeffizienten</li>
+<li>48:00 Standardisierung der Regressionskoeffizienten</li>
+<li>52:40 Effektstärken für Regressionsmodelle</li>
+<li>56:50 G-Power</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>wissen, wie man eine multiples Regressionsmodell in R erstellt</li>
+<li>eine Streudiagrammmatrix erstellt</li>
+<li>wichtige Annahmen mittels Streudiagramm grafisch beurteilen kann</li>
+<li>den Output einer Regressionsanalyse richtig interpretieren können</li>
+<li>wissen, warum es sinnvoll ist, Regressionskoeffizienten zu standardisieren (und wie man das macht)</li>
+<li>wissen, wass die verschiedenen Effektgrößen bei einer Regression sind</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="zusatz-zum-eigenständigen-üben" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Zusatz zum eigenständigen Üben</h3>
+<ul>
+<li>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt es <a href="q2_dataFiles/JellyfishDaten.csv">hier</a>.</li>
+<li>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a href="q2_html_pages/Sitzung4b_Regression01.html">hier</a>.</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="teil-2-modellvergleiche" class="section level2">
+<h2><span class="header-section-number">4.2</span> Teil 2: Modellvergleiche</h2>
+<ul>
+<li><p>Zum Video (Dauer: ca. 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1589288598232">hier</a></p></li>
+<li><p>Benötigter Datensatz:</p>
+<ul>
+<li><a href="q2_dataFiles/Daten_Pruefungsleistung2.csv">Prüfungsleistung 2</a></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Zum begleitenden R-Skript geht es <a href="q2_html_pages/Sitzung4c_Regression02.html">hier</a>.</p></li>
+<li><p>Inhalt (Timestamps):</p>
+<ul>
+<li>00:00 Willkommen und Recap</li>
+<li>03:10 Warum Modellvergleich?</li>
+<li>04:00 Einführung Beispiel Prüfungsbeispiel</li>
+<li>06:40 Commander öffnen und Datensatz auswählen</li>
+<li>07:00 Regressionsmodell anpassen im Commander: bisher bekanntes Menü und ein kurzer rant</li>
+<li>10:15 Zweites Menü zum Anpassen eines Regressionsmodells im Commander</li>
+<li>13:50 Output Modell mit allen Prädiktoren</li>
+<li>17:00 Anpassen eines zweiten Modells nur mit Prüfungsangst im Commander</li>
+<li>18:35 Output des zweiten Modells</li>
+<li>24:10 Modellvergleich, Erklärung</li>
+<li>26:10 Modellvergleich über Code und im Commander</li>
+<li>28:50 Output Modellvergleich</li>
+<li>36:00 Adjustiertes R-Quadrat: Erklärung</li>
+<li>43:00 Vergleich R-Quadrat-Adjustiert der beiden Modelle</li>
+<li>46:40 AIC berechnen</li>
+<li>50:00 Teststärke für Modellvergleich in G-Power</li>
+<li>58:40 Outro + ein paar Worte zur Zusatzaufgabe</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<ul>
+<li>wissen, warum man oft verschiedene Regressionsmodelle vergleicht (und wie das in R geht)</li>
+<li>was es bedeutet, wenn das R^2 eines Modells signifikant höher ist als das eines anderen</li>
+<li>wie man die Teststärke für einen Modellvergleich in G-Power bestimmen kann</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="zusatz-zum-eigenständigen-üben-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Zusatz zum eigenständigen Üben</h3>
+<ul>
+<li>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt es <a href="q2_dataFiles/Daten_Albumsales.csv">hier</a>.</li>
+<li>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a href="q2_html_pages/Sitzung4d_Regression02.html">hier</a>.</li>
+</ul>
+<p><br></p>
+</div>
 </div>
 </div>
 
