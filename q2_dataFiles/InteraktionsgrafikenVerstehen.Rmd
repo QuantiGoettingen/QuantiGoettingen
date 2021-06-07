@@ -1,0 +1,290 @@
+---
+title: "2 x 2 Interaktions-Grafiken interpretieren"
+author: "Simon Stephan"
+date: "15 6 2020"
+output: html_document
+---
+
+```{r, echo = FALSE, message=FALSE, warning = FALSE}
+# Pakete laden und Daten einlesen 
+library(plyr)
+library(ggplot2)
+library(pastecs)
+library(grid)
+library(gridExtra)
+library(RcmdrMisc)
+library(reshape2)
+#library(Rcmdr)
+```
+
+In einem 2 x 2 experimentellen Design (das einfachste mehrfaktorielle Design) gibt es zwei Faktoren mit jeweils zwei Ausprägungen. In unserem Übungsbeispiel zum Übergewicht von Hauskatzen waren das: A) Art der Haltung (0: Stubentiger, 1: Freigänger) und B) Art der Fütterung (0: Nassfutter, 1: Trockenfutter). 
+
+In einem 2 x 2 Design können grundsätzlich drei Effekte auftreten: 
+
+1. Ein Haupteffekt für Faktor A
+2. Ein Haupteffekt für Faktor B
+3. Eine Interaktion zwischen den Faktoren A und B. 
+
+Da das Ergebnis einer 2 x 2 Varianzanalyse lediglich "sagt", ob man annehmen sollte, dass diese Effekte vorliegen oder nicht. Die Analyse sagt nicht, in welche Richtung die Effekte gehen und auch nicht, wie man diese Effekte interpreiteren sollte. 
+
+Wenn eine 2x2 ANOVA einen oder zwei signifikante Haupteffekte (HE) anzeigt und zusätzlich auch der Interkationseffekt (IE) signifikant ist, muss man genau prüfen, ob sich die HE "global" interpretieren lassen. 
+
+Es ist deshalb wichtig, 2 x 2 Eregebnisabbildungen richtig "lesen" zu können.
+
+In diesem R-Markdown haben Sie die Möglichkeit, das zu üben. Der erste Teil des Skripts erzeugt für Sie einen zufälligen Datensatz und anschließend die Interaktionsabbildungen. Das Muster der in diesen Abbildungen gezeigten Mittelwerte können sie zur Übung interpretieren. Jedes Mal, wenn Sie den ersten Teil des Scripts neu ausführen, wird ein neuer Zufallsdatensatz generiert. 
+
+Wenn Sie die Abbildungen sehe, müssen Sie sich folgende Fragen stellen: 
+
+Welche Haupteffekte gibt es hier? (Gibt es einen HE für A? gibt es einen HE für B?)
+Gibt es eine Interaktion? Wenn ja, was bedeutet das für die Interpretation der HE? 
+
+Im unteren Teil des Skripts finden Sie R-Code, der Beispielabbildungen für die verschiedenen möglichen Ergebnisse eines 2 x 2 Designs generiert. Sie können diesen unteren Teil nutzen, um zu prüfen, ob sie die mittel Zufallsstichproben generierten Ergebnisse im ersten Teil des Codes richtig interpretiert haben. 
+
+
+## Erste Teil: Abbildungen aus Zufallsstichproben
+
+
+```{r}
+# Datensatz mit Zufallsstichproben aus Normalverteilung generieren
+# (In Wahrheit kommen alle Stichproben aus derselben Population aber das ignorieren wir hier jetzt. Wir sehen uns nur den Verlauf der Mittelwerte an # und tun so, als ob das präzise gemessen wurde.)
+
+n <- 20
+
+A <- c(rep("A0", n), rep("A1", n))
+B <- c(rep("B0", n*0.5), rep("B1", n*0.5))
+Y <- rnorm(n*2, 100, 40)
+
+data <- data.frame(A,B,Y)
+
+data$A <- factor(data$A, levels = c("A0", "A1"))
+data$B <- factor(data$B, levels = c("B0", "B1"))
+
+```
+
+# Grundfragen: 
+
+- Woran sieht man, ob es Haupteffekte gibt? 
+- Woran sieht man, ob es eine Interaktion gibt? 
+- Wenne Haupteffekte und eine Interkation vorliegen: wie erkennt man, ob und wenn ja welche der Haupteffekte noch interpretierbar sind? 
+
+### 2 x 2 Interaktionsplots 
+
+Faktor A auf x-Achse:
+
+```{r}
+with(data, plotMeans(Y, A, B, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(70,130)))
+```
+Faktor B auf x-Achse:
+```{r}
+with(data, plotMeans(Y, B, A, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(50,150)))
+```
+
+
+
+## Zweiter Teil: Beispielabbildungen für jede Art von Ergebnis
+
+### 1. Zwei Haupteffekte aber keine Interaktion:
+
+```{r}
+# (In Wahrheit kommen alle Stichproben aus derselben Population aber das ignorieren wir hier jetzt. Wir sehen uns nur den Verlauf der Mittelwerte an # und tun so, als ob das präzise gemessen wurde.)
+
+set.seed(5)
+
+n <- 20
+
+A <- c(rep("A0", n), rep("A1", n))
+B <- c(rep("B0", n*0.5), rep("B1", n*0.5))
+Y <- rnorm(n*2, 100, 40)
+
+data <- data.frame(A,B,Y)
+
+data$A <- factor(data$A, levels = c("A0", "A1"))
+data$B <- factor(data$B, levels = c("B0", "B1"))
+
+```
+
+### 2 x 2 Interaktionsplots 
+
+Faktor A auf x-Achse:
+
+```{r}
+with(data, plotMeans(Y, A, B, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(70,130)))
+```
+Faktor B auf x-Achse:
+```{r}
+with(data, plotMeans(Y, B, A, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(50,150)))
+```
+
+
+Es gibt einen HE für Faktor A: gemittelt über B nehmen die Werte von A0 zu A1 zu. 
+
+Es gibt einen HE für Faktor B: gemittelt über A nehmen die Werte von B0 zu B1 ab.
+
+Es gibt keine IE: die Linien verlaufen parallel. (D.h., z.B., dass die Art der Wirkung von A gleich ist, egal welche Ausprägung B hat.)
+
+### 2. Zwei Haupteffekte und Interaktion: **Ordinale Interaktion**
+
+```{r}
+# (In Wahrheit kommen alle Stichproben aus derselben Population aber das ignorieren wir hier jetzt. Wir sehen uns nur den Verlauf der Mittelwerte an # und tun so, als ob das präzise gemessen wurde.)
+
+set.seed(8)
+
+n <- 20
+
+A <- c(rep("A0", n), rep("A1", n))
+B <- c(rep("B0", n*0.5), rep("B1", n*0.5))
+Y <- rnorm(n*2, 100, 40)
+
+data <- data.frame(A,B,Y)
+
+data$A <- factor(data$A, levels = c("A0", "A1"))
+data$B <- factor(data$B, levels = c("B0", "B1"))
+
+```
+
+### 2 x 2 Interaktionsplots 
+
+Faktor A auf x-Achse:
+
+```{r}
+with(data, plotMeans(Y, A, B, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(70,130)))
+```
+Faktor B auf x-Achse:
+```{r}
+with(data, plotMeans(Y, B, A, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(50,150)))
+```
+
+
+Es gibt einen HE für Faktor A: gemittelt über B nehmen die Werte von A0 zu A1 zu. 
+
+Es gibt einen HE für Faktor B: gemittelt über A nehmen die Werte von B0 zu B1 zu.
+
+Es gibt eine IE: die Linien verlaufen nicht parallel. (D.h., z.B., dass die Art der Wirkung von A davon abhängt, welche Ausprägung B hat.)
+
+**Achtung: Bei signifikanter IE muss geprüft werden, ob die HE global interpretierbar sind oder ob deren Interpretation durch die Interkation eingeschränkt wird.** 
+
+Ist HE für A global interpretierbar in der Form: "A1 im Vgl. zu A0 führt zu höheren Werten in der AV"? Antwort: Ja, denn die Aussage stimmt sowohl für B0 (schwarze Linie) wie auch für B1 (rote Linie). Somit ist die Interkation "ordinal für A". 
+
+Ist HE für B global interpretierbar in der Form: "B1 im Vgl. zu B0 führt zu höheren Werten in der AV"? Antwort: Ja, denn die Aussage stimmt sowohl für A0 (linke Hälfte in der ersten Abb.) wie auch für A1 (rechte Hälfte in der ersten Abb.). Somit ist die Interkation auch "ordinal für B". 
+
+Man kann hier also sagen, das Interaktionsmuster ist **ordinal**. 
+
+
+### 3. Zwei Haupteffekte und Interaktion: **semi-disordinale Interaktion**
+
+
+```{r}
+# (In Wahrheit kommen alle Stichproben aus derselben Population aber das ignorieren wir hier jetzt. Wir sehen uns nur den Verlauf der Mittelwerte an # und tun so, als ob das präzise gemessen wurde.)
+
+set.seed(13)
+
+n <- 20
+
+A <- c(rep("A0", n), rep("A1", n))
+B <- c(rep("B0", n*0.5), rep("B1", n*0.5))
+Y <- rnorm(n*2, 100, 40)
+
+data <- data.frame(A,B,Y)
+
+data$A <- factor(data$A, levels = c("A0", "A1"))
+data$B <- factor(data$B, levels = c("B0", "B1"))
+
+```
+
+### 2 x 2 Interaktionsplots 
+
+Faktor A auf x-Achse:
+
+```{r}
+with(data, plotMeans(Y, A, B, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(70,130)))
+```
+Faktor B auf x-Achse:
+```{r}
+with(data, plotMeans(Y, B, A, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(50,150)))
+```
+
+
+Es gibt einen HE für Faktor A: gemittelt über B nehmen die Werte von A0 zu A1 ab. 
+
+Es gibt einen HE für Faktor B: gemittelt über A nehmen die Werte von B0 zu B1 ab.
+
+Es gibt eine IE: die Linien verlaufen nicht parallel. (D.h., z.B., dass die Art der Wirkung von A davon abhängt, welche Ausprägung B hat.)
+
+**Achtung: Bei signifikanter IE muss geprüft werden, ob die HE global interpretierbar sind oder ob deren Interpretation durch die Interkation eingeschränkt wird.** 
+
+Ist HE für A global interpretierbar in der Form: "A0 im Vgl. zu A1 führt zu höheren Werten in der AV"? Antwort: Ja, denn die Aussage stimmt sowohl für B0 (schwarze Linie) wie auch für B1 (rote Linie). Somit ist die Interkation "ordinal für A". (Auch wenn die Veränderung zwischen A0 und A1 im Fall von B1, also der roten Linie, zugegebenermaßen sehr sehr klein aussieht.) 
+
+Ist HE für B global interpretierbar in der Form: "B0 im Vgl. zu B1 führt zu höheren Werten in der AV"? Antwort: Nein, denn die Aussage stimmt nicht für A1. Wenn A1 vorliegt, macht B keinen Unterschied mehr (die Werte sind gleich; in der ersten Abbildung liegen Punkt und Dreieck bei A1 genau aufeinander). Somit ist die Interkation auch "disordinal für B". 
+
+Man kann hier also sagen, das Interaktionsmuster ist **semidisordinal**. (d.h., nur noch ein HE ist interpretierbar.) 
+
+
+
+### 3. Zwei Haupteffekte und Interaktion: **disordinale Interaktion**
+
+```{r}
+# (In Wahrheit kommen alle Stichproben aus derselben Population aber das ignorieren wir hier jetzt. Wir sehen uns nur den Verlauf der Mittelwerte an # und tun so, als ob das präzise gemessen wurde.)
+
+set.seed(18)
+
+n <- 20
+
+A <- c(rep("A0", n), rep("A1", n))
+B <- c(rep("B0", n*0.5), rep("B1", n*0.5))
+Y <- rnorm(n*2, 100, 40)
+
+data <- data.frame(A,B,Y)
+
+data$A <- factor(data$A, levels = c("A0", "A1"))
+data$B <- factor(data$B, levels = c("B0", "B1"))
+
+```
+
+### 2 x 2 Interaktionsplots 
+
+Faktor A auf x-Achse:
+
+```{r}
+with(data, plotMeans(Y, A, B, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(70,130)))
+```
+Faktor B auf x-Achse:
+```{r}
+with(data, plotMeans(Y, B, A, error.bars="none", connect=TRUE, legend.pos="farright", ylim = c(50,150)))
+```
+
+
+Es gibt einen HE für Faktor A: gemittelt über B nehmen die Werte von A0 zu A1 ab. 
+
+Es gibt einen HE für Faktor B: gemittelt über A nehmen die Werte von B0 zu B1 zu. (Wenn auch nur minimal!)
+
+Es gibt eine IE: die Linien verlaufen nicht parallel. (D.h., z.B., dass die Art der Wirkung von A davon abhängt, welche Ausprägung B hat.)
+
+**Achtung: Bei signifikanter IE muss geprüft werden, ob die HE global interpretierbar sind oder ob deren Interpretation durch die Interkation eingeschränkt wird.** 
+
+Ist HE für A global interpretierbar in der Form: "A0 im Vgl. zu A1 führt zu höheren Werten in der AV"? Antwort: Nein, denn die Aussage stimmt nicht für B1 (rote Linie in der ersten Abb.). Für B1 ist die Wirkung genau umgekehrt. Somit ist die Interkation "disordinal für A". 
+
+Ist HE für B global interpretierbar in der Form: "B1 im Vgl. zu B0 führt zu höheren Werten in der AV"? Antwort: Nein, denn die Aussage stimmt nicht für A0. Wenn A0 vorliegt, ist die Wirkung umgekehrt. Somit ist die Interkation "disordinal für B". 
+
+Man kann hier also sagen, das Interaktionsmuster ist **disordinal**. (d.h., nur keiner der HE ist global interpretierbar; relevant für das Verständnis der Wirkungen der Faktoren ist deren Interaktion.) 
+
+
+
+
+## weitere Fälle 
+
+natürlich sind auch Fälle denkbar, in denen keine HE vorliegen oder nur ein HE vorliegt und trotzdem eine oder auch keine IE vorliegt. Die Beispiele oben sollten Ihnen aber reichen, um das Interpretieren von 2 x 2 Abb. zu trainieren.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

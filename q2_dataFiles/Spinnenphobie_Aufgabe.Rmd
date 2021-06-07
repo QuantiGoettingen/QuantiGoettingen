@@ -1,0 +1,47 @@
+---
+title: "Therapien bei Spinnenphobie"
+author: "Neele Engelmann"
+date: "6 6 2021"
+output: html_document
+---
+
+Forscher*innen untersuchen die Wirksamkeit zweier unterschiedlicher Therapieformen gegen Spinnenphobie. In einer Therapieform gibt es Gesprächstherapie plus Exposition mit Bildern von Spinnen, in der anderen Therapieform gibt es Gesprächstherapie plus Exposition mit realen Spinnen.
+
+Es soll untersucht werden, ob die Dauer der Therapie (in Wochen) mit der Symptomverbesserung zusammenhängt und ob sich dieser Zusammenhang eventuell zwischen den beiden Therapieformen unterscheidet.
+
+Die Symptomatik wurde operationalisiert als die Zeit in Minuten, die es Patient*innen aushalten, in einem Raum mit einer Spinne zu sein. Wenn sich die Symptome verbessern, sollten also höhere Werte auf diesem Maß beobachtet werden.
+
+Es handelt sich um unabhängige Stichproben. Das heißt, es wurden *nicht* dieselben Leute über einen längeren Zeitraum beobachtet, sondern es wurden Patient*innen getestet, die sich jeweils an unterschiedlichen Punkten in ihrem Therapieverlauf befanden. 
+
+Es wurden folgende Hypothesen aufgestellt:
+
+- Die Symptomverbesserung ist generell abhängig von der Therapiedauer.
+
+- Die Verbesserung verläuft in den beiden Therapiegruppen unterschiedlich schnell.
+
+**Aufgaben**:
+
+1) Stellen Sie die zugehörigen statistischen Hypothesen über Prädiktoren auf (siehe FS multiple Regression). 
+
+2) Erstellen Sie mit dem Commander eine Abbildung, in der die Verläufe der beiden Gruppen zu sehen sind (ein gruppiertes Streudiagramm mit Kleinstquadratlinien). Interpretieren Sie die Abbildung, welche Effekte deuten sich an?
+
+3) Berechnen Sie ein lineares Modell. Nehmen Sie beide Faktoren und ihre Interaktion ins Modell auf. Interpretieren Sie die erhaltenen Regressionskoeffizienten.
+
+
+**Statistische Hypothesen**:
+
+
+
+**Daten einlesen, Commander laden, Abbildung erstellen**:
+
+
+
+**Lineares Modell**:
+
+
+
+Interpretation der Koeffizienten:
+
+
+
+
