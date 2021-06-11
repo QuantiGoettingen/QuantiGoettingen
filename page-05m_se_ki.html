@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sitzung 5: Inferenzstatistik – Mittelwerte, Standardfehler und Konfidenzintervall</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="favicon.ico"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Seminar Quantitative Methoden</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fas fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="glyphicon glyphicon-book"></span>
+     
+    Quantitative Methoden I
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Material</li>
+    <li>
+      <a href="page-q1_materials.html">Übungsdatensätze</a>
+    </li>
+    <li class="divider"></li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Einführung</li>
+    <li>
+      <a href="page-01einfuehrung.html">Sitzung 1: Arbeiten mit MS Excel</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Deskriptive Statistik</li>
+    <li>
+      <a href="page-02datenaufb.html">Sitzung 2: Umfragen und Experimente - Datenaufbereitung</a>
+    </li>
+    <li>
+      <a href="page-03deskriptiv.html">Sitzung 3: Deskriptive Datenanalyse und Grafiken</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inferenzstatistik</li>
+    <li>
+      <a href="page-04wsk_vert.html">Sitzung 4: Arbeiten mit Wahrscheinlichkeitsverteilungen</a>
+    </li>
+    <li>
+      <a href="page-05m_se_ki.html">Sitzung 5: Mittelwerte, Standardfehler und Konfidenzintervall</a>
+    </li>
+    <li>
+      <a href="page-06mdiffs.html">Sitzung 6: Mittelwertsunterschiede prüfen - t-Tests</a>
+    </li>
+    <li>
+      <a href="page-07testpl.html">Sitzung 7: G*Power zur Testplanung</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="page-zwischensitzung.html">Sithzung 8: Wiederholung/ Anwendung des bisher Gelernten</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="page-08kontraste.html">Sitzung 9: Kontraste</a>
+    </li>
+    <li>
+      <a href="page-09wilcoxon.html">Sitzung 10: Wilcoxon-Tests</a>
+    </li>
+    <li>
+      <a href="page-10korrelz.html">Sitzung 11: Korrelationen und z-Test</a>
+    </li>
+    <li>
+      <a href="page-11chisquared.html">Sitzung 12: Analyse von Nominaldaten</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="glyphicon glyphicon-book"></span>
+     
+    Quantitative Methoden II
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Material</li>
+    <li>
+      <a href="page-q2_materials.html">Video Links und Daten</a>
+    </li>
+    <li class="divider"></li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Wiederholung</li>
+    <li>
+      <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung3a.html">Sitzung 3: Skript zu Video Teil 1</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung3b.html">Sitzung 3: Skript zu Video Teil 2</a>
+    </li>
+    <li class="dropdown-header">Inhalte Quanti II</li>
+    <li>
+      <a href="q2_html_pages/Sitzung4a_Regression01.html">Sitzung 4: Skript zu Video Teil 1 (Multiple Regression)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4b_Regression01.html">Sitzung 4: Skript Zusatzaufgabe Qualleneis</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4c_Regression02.html">Sitzung 4: Skript zu Video Teil 2 (Modellvergleiche)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4d_Regression02.html">Sitzung 4: Skript Zusatzaufgabe Album-Sales</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung5a_Annahmen.html">Sitzung 5: Skript zu Video (Annahmen)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung5b_PruefungAnnahmen_Zusatzaufgabe_SuperModels_Loesung.html">Sitzung 5: Skript zu Zusatzaufgabe (Annahmen)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung6_Regression_EinfaktorielleAnova_Glastonbury_Day1_Day3.html">Sitzung 6: Skript zu Video (Einfaktorielle ANOVA)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.html">Sitzung 7: Skript zu Video (Mehrfaktorielle ANOVA)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung7_Zusatz_KatzenMusterloesung.html">Sitzung 7: Skript Zusatzaufgabe Katzen</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung8_Spinnenphobie_Loesung.html">Sitzung 8: Skript zu Spinnenphobieaufgabe</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung8_Konzentration_Loesung.html">Sitzung 8: Skript zur Konzentrationsaufgabe</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Sitzung 5: Inferenzstatistik – Mittelwerte, Standardfehler und Konfidenzintervall</h1>
+
+</div>
+
+
+<p>Mit dem Wissen über Wahrscheinlichkeitsverteilungen, das Sie sich inzwischen angeeignet haben, können wir nun einen weiteren Schritt im Bereich der Inferenzstatistik (auch “schließende Statistik” genannt) machen.</p>
+<p>Wenn Ihnen in der Vorlesung schon alles klar geworden ist, dann können Sie die ganzen theoretischen Informationen zu Beginn dieser Seite hier überspringen un über die Navigationsleiste links direkt zum praktischen Excel-Beispiel springen. Wenn Sie noch vertiefender einsteigen wollen, weil es in der Vorlesung vielleicht doch ein wenig schnell ging, lesen Sie sich in Ruhe nach unten durch.</p>
+<p>Wie Sie in der Vorlesung mitbekommen haben, geht es in der Inferenzstatistik darum, von Befunden in Stichproben, gezogen aus einer Grundgesamtheit/ Population, auf Merkmale eben dieser Grundgesamtheit/ Population (zurück) zu schließen. Betrachten wir ein konkretes Szenario: PsychologInnen könnten sich bspw. die Frage stellen, ob laute Musik in der Umgebung einen negativen Einfluss auf die kognitive Leistungsfähigkeit hat. Zur Klärung dieser Frage ziehen sie eine zufällige Stichprobe von Menschen aus der Bevölkerung, setzen diese lauter Musik aus, und messen anschließend deren IQ mit Hilfe eines IQ-Tests. Zur Kontrolle gibt es eine weitere Zufallsstichprobe, deren IQ in stiller Umgebung erfasst wird.</p>
+<p>Wie Sie schon wissen, ist Intelligenz (gemessen als IQ durch einen IQ-Test) ein in der Population normalverteiltes Merkmal, das den Mittelwert 100 IQ-Punkte und eine Streuung von 15 IQ-Punkten hat. Die IQ-Verteilung der Population sieht also so aus:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-1-1.png" width="672" /> <br /></p>
+<p>Die wichtigsten Merkmale der Normalverteilung kennen Sie schon: Sie wissen z.B., dass ca. 68 Prozent aller Werte im Bereich von plus/ minus einer Standardabweichung liegen. Anders ausgedrückt: ca. 68 Prozent aller Menschen haben einen IQ-Wert zwischen 85 und 115. Das ist unten anhand der blauen Fläche noch einmal dargestellt:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-2-1.png" width="672" /> <br /></p>
+<p>Sie wissen auch schon, dass ca. 95 Prozent aller Werte im Bereich von plus/ minus zwei Standardabweichungen liegen (genauer gesagt im Bereich von plus/ minus 1,96 Standardabweichungen):</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-3-1.png" width="672" /> <br /></p>
+<p>95 Prozent aller Menschen haben also einen IQ-Wert, der zwischen 70 (genauer gesagt 70.6) und 130 (genauer gesagt 129.4) liegt. Das heißt auch, dass nur ca. 2,5 Prozent aller Menschen einen IQ-Wert haben, der größer als 130 ist (man spricht dann von Hochbegabung.):</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-4-1.png" width="672" /> <br /></p>
+<p>Zurück zum Beispiel:</p>
+<p>Wir beginnen unsere Überlegungen mit der oben genannten Kontrollgruppe von Versuchspersonen, deren IQ-Werte in stiller Umgebung erfasst werden. Wir nehmen an, dass Menschen in Stiller Umgebung nicht in ihrer kognitiven Leistungsfähigkeit beeinflusst sind (diese Annahme bezieht sich auf die Population). Entsprechend sollten wir aber auch erwarten, dass damit auch der IQ-Mittelwert der Kontrollgruppe bei 100 IQ-Punkten liegen sollte.</p>
+<p>Im Rahmen der (fiktiven) Studie muss natürlich entschieden werden, wie viele Versuchspersonen für jede Versuchsgruppe (= Stichprobengröße) zufällig aus der Population gezogen werden. Wir werden sehen, dass die <strong>Stichprobengröße</strong> in der Inferenzstatistik eine ganz entscheidende Rolle spielt.</p>
+<p>Wir nehmen zunächst an, dass (nur) vier Versuchspersonen pro Bedingung rekrutiert würden. Das nachfolgende Bild soll den Vorgang des zufälligen Ziehens aus der Population für die Kontrollgruppe illustrieren:</p>
+<p><br /></p>
+<p><img src="images/q1_05seki/sampling_distr1.png" style="width:100.0%" /></p>
+<p><br /></p>
+<p>Wir ziehen zufällig vier Leute, messen dann den IQ jeder Person und bestimmen dann den IQ-Stichprobenmittelwert. In unserem Fall ergibt sich ein IQ-Stichprobenmittelwert von 88,75. In unserem Fall wissen wir nun schon, dass dieser Mittelwert <span class="math inline">\(M\)</span> vom Mittelwert (<span class="math inline">\(\mu\)</span>) der Population abweicht, weil wir ja in unserem fiktiven Beispiel den Populationsmittelwert kennen. In der “echten Welt” kennen wir den Populationsmittelwert natürlich nicht, sonst müsste man ja gar keine Statistik betreiben. Wir würden stattdessen den <strong>Stichprobenmittelwert als Schätzwert für den Populationsmittelwert</strong> verwenden.</p>
+<p><br /></p>
+<div id="bestimmung-der-schätzpräzision" class="section level1">
+<h1><span class="header-section-number">1</span> Bestimmung der Schätzpräzision</h1>
+<p>Wie das Beispiel zeigt, ist diese Schätzung auf Basis der Stichprobe natürlich fehlerbehaftet. Wir haben einen Stichprobenmittelwert von 88,75 IQ-Punkten und nicht von 100 IQ-Punkten gemessen. Das Problem ist, dass man praktisch nie sicher wissen kann, wie sehr man mit der Stichprobenschätzung “daneben” liegt. Die gute Nachricht ist aber, dass man abschätzen kann, wie hoch die Messpräzision ist. Das ist das zentrale Element der Inferenzstatistik: Bei unseren auf Stichproben beruhenden Rückschlüssen auf die Population berücksichtigen wir die Unsicherheit der Messung.</p>
+<p>Wie kann das gelingen? Stellen Sie sich vor, dass wir den oben beschriebenen Vorgang wiederholen. Wir ziehen also nochmals zufällig vier neue Personen aus der Population, messen ihre IQ-Werte und bestimmen dann wieder den Stichprobenmittelwert. Natürlich ist es sehr wahrscheinlich, dass wir bei diesem zweiten Durchgang andere IQ-Werte erhalten. Unten ist wieder eine Illustration zu sehen.</p>
+<p><br /></p>
+<p><img src="images/q1_05seki/sampling_distr2.png" style="width:90.0%" /></p>
+<p><br /></p>
+<p>Dieses Mal messen wir einen Stichprobenmittelwert von 102.5. Würden wir den Vorgang erneut wiederholen, erhielten wir wieder einen etwas anderen Wert. Eine Möglichkeit, die Präzision einer Schätzung (in unserem Fall die Schätzung des Populationsmittelwerts auf Basis des Stichprobenmittelwerts) zu bestimmen, ist, die erwartete Variabilität der Stichprobenkennwerte (in unserem Fall sind das die IQ-Mittelwerte) bei theoretischer Wiederholung des Prozesses zu bestimmen.</p>
+<p>Dazu benutzen wir wiederum die Stichprobenkennwertverteilung (Engl. “Sampling Distribution”), also in unserem Fall die zu erwartende <strong>Verteilung der Stichprobenmittelwerte</strong>. Für diese Stichprobenkennwertverteilung müssen wir dann die Streuung bestimmen. Glücklicherweise kann man die (zu erwartende) Streuung der Stichprobenmittelwerte bestimmen, ohne dass man den Populationsmittelwert kennt.</p>
+<p>Stellen Sie sich vor, dass dieses zufällige Ziehen von Stichproben der Größe n = 4 ganz oft wiederholt wird. Bei jedem Durchgang werden die Stichprobenmittelwerte in einer Tabelle aufgelistet.</p>
+<p><br /></p>
+<p><img src="images/q1_05seki/sample_means.png" style="width:45.0%" /></p>
+<p><br /></p>
+<p>Nehmen Sie an, dass dieser Vorgang zehntausendmal wiederholt wird. Am Ende hätte man also eine Tabelle von zehntausend Stichprobenmittelwerten. Als nächstes stellen wir uns vor, dass wir die Verteilung dieser Stichprobenmittelwerte mit Hilfe eines Histogramms visualisieren. Das würde dann so aussehen, wie in der nachfolgenden Abbildung:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-5-1.png" width="672" /> <br /></p>
+<p>Wie Sie sehen können, sieht auch diese Verteilung der Stichprobenmittelwerte (wichtig: Das ist ein Histogramm über die Stichprobenmittelwerte, nicht die individuellen IQ-Werte) aus wie eine Normalverteilung. Die rote Kurve zeigt, dass die Stichprobenmittelwerte tatäschlich einer Normalverteilung entsprechen. Wir sehen auch: Wenn der Mittelwert der Populationswerte bei 100 liegt, dann wird auch der Mittelwert der Stichprobenmittelwerte bei 100 liegen. Es gilt also: Der Mittelwert der Stichprobenmittelwertsverteilung entspricht dem Populationsmittelwert des Merkmals (in unserem Fall IQ).</p>
+<p>Wir können nun die Streuung dieser auf einer Simulation mit zehntausend Stichprobenmittelwerten basierenden Stichprobenmittelwertsverteilung bestimmen. Die Streuung ist:</p>
+<pre class="r"><code>sd(Stichprobenmittelwerte)</code></pre>
+<pre><code>## [1] 7.491133</code></pre>
+<p><br></p>
+<div class="column-right_alignRight">
+<p><img src="images/home/squirrel_wissen.PNG" /></p>
+</div>
+<p>Tatsächlich kann man mathematisch beweisen, dass die Streuung der Stichprobenmittelwerte folgender Gleichung entspricht:</p>
+<p><span class="math inline">\(SE~= \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\)</span>.</p>
+<p>Die Streuung von Stichprobenmittelwerten entspricht der Populationsstreuung (<span class="math inline">\(\sigma\)</span>) geteilt durch die Wurzel der Stichprobengröße. In unserem Fall wissen wir, dass die Populationsstreuung 15 IQ-Punkte beträgt und wir eine Stichprobengröße von n = 4 haben. Nutzen wir diese Werte und setzen sie in die Gleichung ein, so erhalten wir:</p>
+<p><span class="math inline">\(SE~= \frac{\sigma}{\sqrt{n}}~= \frac{15}{\sqrt{4}}~= 7.5\)</span>.</p>
+<p>Also: bei Stichproben der Größe n = 4 und einem normalverteilten Merkmal mit einer Streuung von 15 Einheiten (IQ-Werte in unserem Fall) beträgt die Streuung der Stichprobenmittelwerte 7.5 Einheiten (IQ-Werte in unserem Fall). Übrigens: Die Streuung von Stichprobenmittelwerten nennt man <strong>Standardfehler</strong> (englisch “Standard Error”, abgekürzt <span class="math inline">\(SE\)</span>).</p>
+<p><br /></p>
+<div class="boxBorder">
+<p>Die Streuung von Stichprobenmittelwerten nennt man <strong>Standardfehler</strong> (“Standard Error”, <span class="math inline">\(SE\)</span>) oder <strong>Standardschätzfehler</strong>. Der Standardfehler ist ein Maß dafür, wie sehr Stichprobenmittelwerte variieren würden, wenn man das zufällige Ziehen aus der Population unendlich oft wiederholen würde. Praktisch gibt das Maß an, wie präzise man einen Stichprobenmittelwert gemessen hat. Die Formel für <span class="math inline">\(SE\)</span> ist:</p>
+<p><span class="math inline">\(SE~= \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}\)</span>.</p>
+</div>
+<p><br /></p>
+<p>Was nutzt uns dieses Wissen nun? Durch die Bestimmung des <span class="math inline">\(SE\)</span> haben wir ein Maß, dass uns sagt, wie präzise wir mit unserem Stichprobenmittelwert bei einer Stichprobe der Größe <span class="math inline">\(n\)</span> den Populationsparameter schätzen. Bezogen auf unser Beispiel: Wir können nun sagen, dass wir bei <span class="math inline">\(n = 4\)</span> mit einer durchschnittlichen Abweichung vom IQ-Mittelwert der Population von 7.5 IQ-Punkten rechnen müssen. Ein gemessener Stichprobenmittelwert von 102,5 IQ-Punkten wäre bei <span class="math inline">\(n = 4\)</span> also kein sehr außergewöhnliches Ergebnis, wenn der wahre Wert tatsächlich 100 IQ-Punkte beträgt.</p>
+<p><br /></p>
+</div>
+<div id="erhöhung-der-schätzpräzision-durch-größere-stichproben" class="section level1">
+<h1><span class="header-section-number">2</span> Erhöhung der Schätzpräzision durch größere Stichproben</h1>
+<p>An der Formel für <span class="math inline">\(SE\)</span> sehen Sie schon, warum die Stichprobengröße in der Inferenzstatistik ein ganz entscheidender Faktor ist. Was würde nämlich mit <span class="math inline">\(SE\)</span> passieren, wenn <span class="math inline">\(n\)</span> größer wird? Richtig, <span class="math inline">\(SE\)</span> würde kleiner werden und die Messpräzision somit ansteigen. Unten sehen Sie die Verteilung der Mittelwerte für <span class="math inline">\(n = 16\)</span>.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-7-1.png" width="672" /> <br /></p>
+<p>Der Standardfehler beträgt in diesem Fall:</p>
+<pre class="r"><code>sd(Stichprobenmittelwerte)</code></pre>
+<pre><code>## [1] 3.749655</code></pre>
+<p>Bei einer Verfierfachung der Stichprobengröße halbiert sich also der Standardfehler. Wiederholen wir das noch einmal, diesmal mit <span class="math inline">\(n = 64\)</span>.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-9-1.png" width="672" /> <br /></p>
+<p>Nun beträgt <span class="math inline">\(SE\)</span>:</p>
+<pre class="r"><code>sd(Stichprobenmittelwerte)</code></pre>
+<pre><code>## [1] 1.875423</code></pre>
+<p>Also: Je größer <span class="math inline">\(n\)</span> ist, umso weniger werden die Stichprobenmittelwerte streuen und umso eher kann man folglich erwarten, dass ein einzelner Stichprobenmittelwert <span class="math inline">\(M\)</span> tatsächlich nah am Populationsmittelwert <span class="math inline">\(\mu\)</span> liegen wird.</p>
+<p><br /></p>
+</div>
+<div id="angabe-der-präzision-durch-ein-intervall" class="section level1">
+<h1><span class="header-section-number">3</span> Angabe der Präzision durch ein Intervall</h1>
+<div id="se-intervall" class="section level2">
+<h2><span class="header-section-number">3.1</span> SE Intervall</h2>
+<p>Für die Schätzung eines Populationsmittelwerts basierend auf einem Stichprobenmittelwert kann man also den Standardfehler als Schätzfehler ansehen. Nehmen wir wieder die Ausgangssituation an, in der wir <span class="math inline">\(n = 4\)</span> Leute der Kontrollgruppe zugeteilt hatten, die den IQ-Test in stiller Umgebung bearbeitet. Nehmen wir an, wir hätten einen IQ-Mittelwert von 102,5 IQ-Punkten in dieser Gruppe gemessen. Wir wissen, dass der <span class="math inline">\(SE\)</span> bei einer Stichprobengröße von vier Versuchspersonen 7,5 IQ-Punkte beträgt. Wir können also sagen: Unsere Schätzung für den Populationsmittelwert beträgt 102,5 IQ-Punkte. Dies ist zunächst eine so genannte Punktschätzung. Wir können jetzt zusätzlich noch den IQ-Bereich angegeben, der einem Intervall von +/- <span class="math inline">\(SE\)</span> entspricht: <span class="math inline">\(M - SE~= 102,5 - 7,5 = 95\)</span> und <span class="math inline">\(M + SE = 102,5 + 7,5 = 110\)</span>. Also: plausible Schätzwerte im Bereich von +/- <span class="math inline">\(SE\)</span> für den Populationsmittelwert liegen zwischen 95 und 110 IQ-Punkten.</p>
+<p>Wie Sie schon wissen, ist die Verteilung der Stichprobenmittelwerte eine Normalverteilung, wenn das Merkmal (in unserem Fall IQ-Werte) in der Population normalverteilt ist. Sie wissen auch, dass es bei einer Normalverteilung so ist, dass ca. 68% der Werte im Bereich von +/- einer Standardabweichung liegen. Sie wissen auch, dass man die Standardabweichung der Stichprobenmittelwerte Standardfehler (<span class="math inline">\(SE\)</span>) nennt. Damit wissen Sie nun auch, dass 68% aller Stichprobenmittelwerte im Bereich von +/- <span class="math inline">\(1\cdot SE\)</span> liegen. Man kann deshalb sagen, dass die Wahrscheinlichkeit, dass das Intervall von +/- <span class="math inline">\(1\cdot SE\)</span> um den Stichprobenmittelwert herum, den wahren Wert der Population mit einer Wahrscheinlichkeit von 68% beinhaltet bzw. einschließt. Wir könnten hier also auch von einem <strong>68% Konfidenzintervall</strong> sprechen.</p>
+<p>Übrigens, die Zahl mit der man <span class="math inline">\(SE\)</span> multipliziert um ein Intervall zu konstruieren, dass den wahren (Populations-) Wert mit einer bestimmten Wahrscheinlichkeit einschließt, nennt man auch <strong>z-Wert</strong>. <strong>Z-Werte</strong> sind also nichts anderes als <strong>Standardfehlereinheiten</strong>.</p>
+<p><br /></p>
+</div>
+<div id="konfidenzintervall" class="section level2">
+<h2><span class="header-section-number">3.2</span> 95% Konfidenzintervall</h2>
+<div class="column-right_alignRight">
+<p><img src="images/home/squirrel_wissen.PNG" /></p>
+</div>
+<p>Typischerweise gibt man als Intervall nicht ein 68% Konfidenzintervall an, sondern das <strong>95% Konfidenzintervall</strong>. Sie wissen schon, mit welchem Wert man die Standardabweichung einer Normalverteilung multiplizieren muss, um ein Intervall zu konstruieren, innerhalb dessen 95% aller Werte liegen. Der Wert ist <span class="math inline">\(1.96\)</span>. Um für unsere Schätzung also ein 95 % Konfidenzintervall (abgekürzt 95% KI oder englisch 95% CI) zu erhalten, müssen wir also Folgendes rechnen:</p>
+<p><span class="math inline">\(KI_{Untergrenze} = M - 1,96\cdot SE~= 102,5 - 1,96 \cdot 7,5~= 87,8\)</span> IQ-Punkte; und <span class="math inline">\(KI_{Obergrenze} = M + 1,96\cdot SE~= 102,5 - 1,96 \cdot 7,5~= 117,2\)</span> IQ-Punkte.</p>
+<p><br /></p>
+<div class="boxBorder">
+<p>Im Bereich von +/- <span class="math inline">\(1.96\)</span> Standardabweichungen einer Normalverteilung liegen 95% aller Werte. Ein Konfidenzintervall um einen Stichprobenmittelwert <span class="math inline">\(M\)</span> herum, welches den Populationsmittelwert <span class="math inline">\(\mu\)</span> mit einer Wahrscheinlichkeit von 95% enthält, erhält man also, in dem man vom Stichprobenmittelwert zunächst 1,96-mal <span class="math inline">\(SE\)</span> abzieht, und danach 1,96-mal <span class="math inline">\(SE\)</span> addiert:</p>
+<ul>
+<li><span class="math inline">\(KI_{Untergrenze} = M - 1,96\cdot SE\)</span></li>
+<li><span class="math inline">\(KI_{Obergrenze} = M + 1,96\cdot SE\)</span></li>
+</ul>
+</div>
+<p><br /></p>
+<p><strong>Zur Selbstkontrolle</strong>:</p>
+<p>Wie wäre das 95% Konfidenzintervall, wenn der erhobene Stichprobenmittelwert von 102,5 IQ-Punkten nicht auf Basis von vier sondern 16 Versuchspersonen ermittelt worden wäre?</p>
+<p><br /></p>
+</div>
+</div>
+<div id="standardisierung" class="section level1">
+<h1><span class="header-section-number">4</span> Standardisierung</h1>
+<p>Bisher haben wir in unseren Überlegungen immer die “Messeinheiten” des konkreten Beispiels benutzt. Unser Szenario bezieht sich auf IQ-Werte und wir haben deshalb bisher alles in IQ-Werten ausgedrückt. Weiter oben haben wir schon den Begriff “z-Werte” eingeführt und festgestellt, dass es sich dabei einfach um Standardfehlereinheiten handelt. Statt in IQ-Werten könnten wir unsere beispielhaften Befunde natürlich auch einfach in z-Werten ausdrücken. Wir behandeln das hier, da standardisierte Werte in der Statistik häufig benutzt werden.</p>
+<p>Betrachten wir wieder das Ergebnis unserer Kontrollgruppe. Dort hatten wir einen IQ-Mittelwert von 102,5 gemessen. Wenn es stimmt, dass die IQ-Werte in der Population normalverteilt sind mit <span class="math inline">\(\mu~100\)</span>, dann können wir annehmen, dass dieser Stichprobenmittelwert von 102,5 IQ-Punkten aus einer Stichprobenmittelwertsverteilung stammt, die ebenfalls einen Mittelwert von 100 hat. Der Abstand zwischen Stichprobenmittelwert und Mittelwert der Stichprobenmittelwertsverteilung beträgt <span class="math inline">\(102,5 - 100~= 2,5\)</span> IQ-Punkte. Diesen Abstand könnten natürlich auch in <span class="math inline">\(SE\)</span>-Einheiten (sprich z-Werten) statt IQ-Einheiten angeben. Wir wissen, dass bei <span class="math inline">\(n~=4\)</span> der <span class="math inline">\(SE\)</span> 7,5 IQ-Punkte beträgt. Ein Abstand von 2,5 IQ-Punkten entspricht also <span class="math inline">\(\frac{2,5}{7,5}~= 0.33\)</span> <span class="math inline">\(SE\)</span>, oder <span class="math inline">\(0.33\)</span> <span class="math inline">\(z\)</span>.</p>
+<p>Die allgemeine Formel zur Umrechnung von Werten in ihrer ursprünglichen Einheit in standardisierte z-Werte ist:</p>
+<p><span class="math inline">\(\frac{X - \mu}{\sigma}\)</span>.</p>
+<p>In unserem Fall ist <span class="math inline">\(X\)</span> der gemessene Stichprobenmittelwert, <span class="math inline">\(\mu\)</span> der (vermutete) Mittelwert der Stichprobenmittelwertsverteilung und <span class="math inline">\(\sigma\)</span> der Standardfehler (<span class="math inline">\(SE\)</span>).</p>
+<p>Noch einmal: würden wir die Stichprobenmittelwertsverteilung für <span class="math inline">\(n~= 4\)</span> nicht wie weiter oben in IQ-Einheiten sondern in z-Einheiten ausdrücken, dann sähe diese so aus:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-11-1.png" width="672" /> <br /></p>
+<p>Die blaue senkrechte Linie, die die x-Achse bei <span class="math inline">\(0,33\)</span> schneidet, markiert unsere Stichprobe mit IQ-Mittelwert von 102,5.</p>
+<p><br /></p>
+<div id="warum-standardisierung" class="section level2">
+<h2><span class="header-section-number">4.1</span> Warum Standardisierung?</h2>
+<p>Sie fragen sich jetzt vielleicht, wozu diese Standardisierung von Werten überhaupt gut sein soll. Was bringt uns das? Stellen Sie sich dazu vor, Sie würden den Befund der Kontrollgruppe jemandem mitteilen, der von IQ-Werten nichts weiß, außer dass dieses Merkmal in der Population normalverteilt ist. Die Person kennst sich außerdem mit den Eigenschaften der Normalverteilung aus. (Es könnte sich hier also z.B. um eine/n Forscher/in handeln, die sich mit Statistik aber nicht mit IQ-Werten auskennt.) Wenn Sie dieser Person sagen, dass Sie in einer Untersuchung einen IQ-Mittelwert von 102,5 Punkten gemessen haben, dann wird diese Person keine Ahnung haben, was das bedeutet. Ist das ein ungewöhnliches/ sehr unwahrscheinliches Ergebnis? Wenn Sie der Person stattdessen sagen, dass sie einen Stichprobenmittelwert gemessen haben, der 0,33 z beträgt, so wird die Person sofort erkennen, dass Ihr Messergebnis (also dieser gefundene Stichprobenmittelwert) alles andere als ein verblüffendes Ergebnis ist. Denn: z-Werte nah an 0 sind am wahrscheinlichsten und ein z-Wert von 0,33 ist sehr nah dran. Hätte die Untersuchung einen Stichprobenmittelwert von 115 IQ-Punkten ergeben, so entspräche das einem z-Wert von <span class="math inline">\(\frac{115 - 100}{7,5}~= 2\)</span>. Die Person wüsste in diesem Fall sofort, dass es sich hierbei um ein sehr ungewöhnliches/ unwahrscheinliches Ergebnis handeln würde; denn Werte die 2 Standardabweichungen (2 z) oder mehr über dem Mittelwert liegen, haben eine sehr geringe Wahrscheinlichkeit von nur ca. 2%.</p>
+</div>
+</div>
+<div id="populationsstreuung-unbekannt-von-der-normalverteilung-zur-t-verteilung" class="section level1">
+<h1><span class="header-section-number">5</span> Populationsstreuung unbekannt: von der Normalverteilung zur t-Verteilung</h1>
+<p>Wir haben uns vor Augen geführt, wie man im Rahmen der Inferenzstatistik die Schätzpräzision einer Stichproben-Messung mit Hilfe von Wissen über die Stichproben-Verteilung des Schätzwertes ermitteln kann (in unserem Fall ist der Stichprobenmittelwerts <span class="math inline">\(M\)</span> der Schätzwert für den Populationsparameter <span class="math inline">\(\mu\)</span>). Sie haben bereits gelernt, dass sich die Schätzpräzision gut durch ein Intervall angeben lässt. In der Regel gibt man das 95%-Konfidenzintervall an.</p>
+<p>In unserem bisherigen Beispiel ging es um IQ-Mittelwerte. Das war kein Zufall. IQ-Mittelwerte eignen sich als Einstiegsbeispiel, weil bei IQ-Werten die Streuung der Werte in der Population bekannt ist (15 IQ-Punkte). Das haben wir uns oben in der Formel für den Standardfehler (<span class="math inline">\(SE\)</span>) zunutze gemacht. Dort hatten wir nämlich die (bekannte) Populationsstreuung durch die Wurzel aus der Stichprobengröße geteilt, um <span class="math inline">\(SE\)</span> zu ermitteln.</p>
+<p>Das war allerdings eine Vereinfachung. In den allermeisten Fällen wird man die Streuung des Merkmals in der Population nämlich gar nicht kennen (genauso wenig wie den Populationsmittelwert). Denken Sie z.B. an das Trolley-Problem aus der zweiten Sitzung zurück. In der “Switch-Bedingung” des Experiments sollten Versuchspersonen angeben, wie “moralisch akzeptabel” es ist, einen Zug umzulenken, dadurch eine Person zu töten aber fünf Personen zu retten. Natürlich will man auch im Rahmen dieser Studie anhand des Mittelwerts der “Moral-Antworten” der Versuchspersonen (der Stichprobe) etwas über die “allgemeine” Sicht von Menschen in Bezug auf derartige moralische Dilemmata lernen. Wie Menschen (also die Population) solche Situationen im Mittel (das ist <span class="math inline">\(\mu\)</span>) moralisch bewerten wissen wir nicht, deshalb machen wir ja das Experiment. Wir wissen aber genauso wenig, wie sehr sich Menschen in ihren Einschätzungen unterscheiden (das ist die Populationsstreuung <span class="math inline">\(\sigma\)</span>). In der Regel kennt man also weder <span class="math inline">\(\mu\)</span> noch <span class="math inline">\(\sigma\)</span>.</p>
+<p>Welches Problem ergibt sich daraus? Offensichtlich können wir zur Bestimmung von <span class="math inline">\(SE\)</span> in diesem Fall <span class="math inline">\(\sigma\)</span> nicht in die Gleichung einsetzen. Was können wir stattdessen tun, um die Streuung von Stichprobenmittelwerten zu ermitteln? Die Antwort: Statt <span class="math inline">\(\sigma\)</span> setzen wir in die Formel die Streuung der Stichprobe <span class="math inline">\(s\)</span> ein. Denn: Genau wie der Stichprobenmittelwert <span class="math inline">\(M\)</span> der Schätzwert für den Populationsparameter <span class="math inline">\(\mu\)</span> ist, so ist die Stichprobenstreuung <span class="math inline">\(s\)</span> ein Schätzwert für die Populationsstreuung <span class="math inline">\(\sigma\)</span>. Hier ergibt sich aber ein Problem. Wir haben oben gesehen, dass man erwarten muss, dass sich Stichprobenmittelwerte bei wiederholtem Ziehen aus der Population voneinander unterscheiden. Unser Maß dafür war <span class="math inline">\(SE\)</span>, die Streuung der Stichprobenmittelwerte. Um <span class="math inline">\(SE\)</span> zu bestimmen, wenn wir <span class="math inline">\(\sigma\)</span> nicht kennen, benutzen wir stattdessen <span class="math inline">\(s\)</span> als Schätzwert für <span class="math inline">\(\sigma\)</span>. Aber auch <span class="math inline">\(s\)</span> wird ja <span class="math inline">\(\sigma\)</span> nicht “perfekt” schätzen. Auch <span class="math inline">\(s\)</span> wird bei wiederholter Stichprobenziehung immer etwas anders ausfallen. Unten sehen Sie ein Histogramm, dass die Verteilung von <span class="math inline">\(s\)</span> (der Stichprobenstreuung) bei zehntausend Stichprobenziehungen mit <span class="math inline">\(n~= 4\)</span> aus einer Normalverteilung (wir nehmen dazu wieder unsere IQ-Verteilung) zeigt.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-12-1.png" width="672" /> <br /></p>
+<p>Der Mittelwert dieser Verteilung (also der Mittelwert der Stichprobenstreuungen) entspricht der Populationsstreuung. Aber wie Sie sehen können “schwanken” auch die Stichprobenstreuungen um diesen wahren Wert (der ja in der Population 15 IQ-Punkte beträgt). Die Streuung der Stichprobenstreuungen ist in diesem Fall:</p>
+<pre class="r"><code>sd(Stichprobenstreuungen)</code></pre>
+<pre><code>## [1] 5.85299</code></pre>
+<p>Wenn Sie näher wissen wollen, durch welche Funktion sich die Verteilung von Stichprobenstreuungen beschreiben lässt, dann schauen Sie <a href="https://mathworld.wolfram.com/StandardDeviationDistribution.html">hier</a>.</p>
+<p>Natürlich würden wir auch hier die Schätzpräzision der Populationsstreuung erhöhen, wenn wir eine größere Stichprobe hätten. Hier die Verteilung für <span class="math inline">\(n = 64\)</span>.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-14-1.png" width="672" /> <br /></p>
+<div id="bedeutung-für-die-bestimmung-von-se" class="section level2">
+<h2><span class="header-section-number">5.1</span> Bedeutung für die Bestimmung von <span class="math inline">\(SE\)</span></h2>
+<p>Würden wir also bei der Bestimmung von <span class="math inline">\(SE\)</span> (also der Streuung der Stichprobenmittelwerte) im Fall von unbekanntem <span class="math inline">\(\sigma\)</span> einfach die Stichprobenstreuung <span class="math inline">\(s\)</span> als Schätzwert für <span class="math inline">\(\sigma\)</span> einsetzen, dann würden wir nicht berücksichtigen, dass auch die <span class="math inline">\(s\)</span> als Schätzwert für <span class="math inline">\(\sigma\)</span> mit Unsicherheit behaftet ist. Wir würden folglich <span class="math inline">\(SE\)</span>-Werte und <span class="math inline">\(KI\)</span>-Werte bestimmen, die diese Unsicherheit über den wahren Wert von <span class="math inline">\(\sigma\)</span> nicht beinhalten. Anhand der beiden Stichprobenverteilungen für <span class="math inline">\(s\)</span> sehen Sie auch, dass dieses Problem umso größer ist, je kleiner die Stichprobe (<span class="math inline">\(n\)</span>) ist. Bei großen Stichproben wird <span class="math inline">\(s\)</span> ja schließlich sehr nah an <span class="math inline">\(\sigma\)</span> liegen.</p>
+<p>Nun sind wir gewissermaßen in einem Dilemma. Wir kennen <span class="math inline">\(\sigma\)</span> nicht und wissen, dass <span class="math inline">\(s\)</span> ein fehlerbehafteter Schätzwert für <span class="math inline">\(\sigma\)</span> ist. Etwas anderes/ besseres als <span class="math inline">\(s\)</span> können wir aber zur Bestimmung von <span class="math inline">\(SE\)</span> auch nicht nehmen. Wie können wir also zum Ausdruck bringen, dass die Bestimmung von <span class="math inline">\(SE\)</span> (und natürlich jedem anderen Konfidenzintervall) unsicherer ist, je unsicherer wir <span class="math inline">\(\sigma\)</span> anhand von <span class="math inline">\(s\)</span> schätzen - also je kleiner die Stichprobengröße <span class="math inline">\(n\)</span> ist.</p>
+</div>
+<div id="noch-höhere-werte-für-se-bei-kleinen-stichproben-die-t-verteilung" class="section level2">
+<h2><span class="header-section-number">5.2</span> Noch höhere Werte für SE bei kleinen Stichproben: die t-Verteilung</h2>
+<p>Die Idee ist, dass man systematisch größere Werte für <span class="math inline">\(SE\)</span> bestimmt, je kleiner <span class="math inline">\(n\)</span> ist. Größere Werte für <span class="math inline">\(SE\)</span> drücken schließlich eine größere Unsicherheit der Schätzung des Populationsparameters durch die Stichprobe aus. Zu Beginn hatten wir bereits gesehen, dass <span class="math inline">\(SE\)</span> auch bei bekanntem <span class="math inline">\(\sigma\)</span> größer wird, je kleiner <span class="math inline">\(n\)</span> ist. Diese Tendenz soll jetzt aber noch “extremer” sein, um eben bei unbekanntem <span class="math inline">\(\sigma\)</span> zusätzlich die Unsicherheit zu berücksichtigen, die dadurch entsteht, dass <span class="math inline">\(\sigma\)</span> durch ein fehlerbehaftetes <span class="math inline">\(s\)</span> ersetzt worden ist.</p>
+<p>Das Ergebnis dieser systematischen Integration von Unsicher über <span class="math inline">\(\sigma\)</span> bei der Bestimmung von <span class="math inline">\(SE\)</span> ist eine theoretische Verteilung, die man <strong>t-Verteilung</strong> (oder auch “Studentische t-Verteilung”) nennt. (Übrigens: Wenn Sie wissen wollen, warum die t-Verteilung auch “Studentische t-Verteilung” genannt wird und was diese Verteilung eigentlich mit irischem Bier zu tun hat, dann schauen Sie <a href="https://higherlogicdownload.s3.amazonaws.com/AMSTAT/1484431b-3202-461e-b7e6-ebce10ca8bcd/UploadedImages/Classroom_Activities/HS_7__t-ditribution_and_GOSSET.pdf">hier</a>.)</p>
+<p>Wie diese Verteilung bei einer Stichprobengröße von <span class="math inline">\(n = 4\)</span> aussieht, sehen Sie unten:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><br /></p>
+<p>Die blaue Kurve zeigt die t-Verteilung bei <span class="math inline">\(n = 4\)</span>. Die rote Kurve zeigt zum Vergleich wieder die Normalverteilung für <span class="math inline">\(SE~= 7,5\)</span>. Wie Sie sehen können, ist die t-Verteilung in der Mitte schmaler aber an den Rändern breiter als die Normalverteilung. Das führt dazu, dass auch die Streuung der t-Verteilung (für kleine <span class="math inline">\(n\)</span>) größer ist als die der Normalverteilung. Für die oben dargestellte t-Verteilung ist die Streuung:</p>
+<pre class="r"><code>sd(Stichprobenmittelwerte, na.rm=TRUE)</code></pre>
+<pre><code>## [1] 8.817848</code></pre>
+<p>Oben hatten wir erwähnt, dass die Unsicherheit durch die Verwendung von <span class="math inline">\(s\)</span> als Schätzer für <span class="math inline">\(\sigma\)</span> abnehmen sollte, je größer <span class="math inline">\(n\)</span> wird. Die t-Verteilung hat tatsächlich die Eigenschaft, diese abnehmende Unsicherheit bezüglich <span class="math inline">\(\sigma\)</span> abzubilden. Hier die t-Verteilung bei <span class="math inline">\(n~= 8\)</span>.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-17-1.png" width="672" /> <br /></p>
+<p>Und hier noch einmal für <span class="math inline">\(n~= 64\)</span>.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-18-1.png" width="672" /> <br /></p>
+<p>Wie Sie sehen können, geht die t-Verteilung bei steigendem <span class="math inline">\(n\)</span> immer mehr in eine Normalverteilung über. In der Abbildung oben ist die blaue Kurve der t-Verteilung von der roten Kurve der Normalverteilung schon gar nicht mehr zu unterscheiden.</p>
+<p>In der nachfolgenden Abbildung sehen Sie eine Zusammenfassung, die zeigt, wie die t-Verteilung mit steigendem <span class="math inline">\(n\)</span> in die Normalverteilung übergeht. Anders als die Abbildungen oben sind die Werte in der unteren Abbildung wieder standardisiert (sodass der Mittelwert der Verteilungen bei 0 liegt). Die schwarze gestrichelte Linie entspricht einer Normalverteilung.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Eine Anmerkung: die t-Verteilung ist tatsächlich eine “rein theoretische” Verteilung, die praktisch sinnvoll ist, wenn man die Populationsstreuung nicht kennt und die damit einhergehende Unsicherheit in die inferenzstatistischen Schlüsse einbeziehen will. Die t-Verteilung hat aber - anders als die Stichprobenmittelwertsverteilung - keine “empirische Realität”. Stellen Sie sich eine sehr reiche Firma mit sehr viel Zeit vor, die den Auftrag erhält, aus einer Population mit Merkmal <span class="math inline">\(X\)</span> tatsächlich fortlaufend Stichproben zu ziehen (etwas das eigentlich niemand jemals so machen würde), die Stichprobenmittelwerte zu bestimmen und letztlich deren Verteilung abzutragen. Egal um welches Merkmal es sich bei <span class="math inline">\(X\)</span> handelt, egal wie klein oder groß die Stichproben sind, die unsere fiktive Firma ständig aus der Population zieht, die Verteilung der Stichprobenkennwerte wird niemals aussehen wie eine t-Verteilung. Bei kleinem <span class="math inline">\(n\)</span> wird die Stichprobenkennwertverteilung qualitativ so aussehen, wie die Verteilung von <span class="math inline">\(X\)</span> in der Population und je größer <span class="math inline">\(n\)</span> wird, umso mehr wird die Stichprobenkennwertverteilung wie eine Normalverteilung aussehen. Diesen Umstand nennt man <strong>zentralen Grenzwertsatz</strong>. Die Verteilung wird aber nie so aussehen, wie eine t-Verteilung. Die t-Verteilung ist somit “rein theoretisch”.</p>
+<p><br /></p>
+</div>
+<div id="zentraler-grenzwertsatz" class="section level2">
+<h2><span class="header-section-number">5.3</span> Zentraler Grenzwertsatz</h2>
+<p><br /></p>
+<div class="boxBorder">
+<p>Den Umstand, dass die Verteilung der Stichprobenmittelwerte für ein Merkmal <span class="math inline">\(X\)</span> mit zunehmender Stichprobengröße <span class="math inline">\(n\)</span> in die Normalverteilung übergeht, egal wie <span class="math inline">\(X\)</span> in der Population verteilt ist, nennt man <strong>zentralen Grenzwertsatz</strong>.</p>
+<p>Mehr Hintergrundinformationen zum zentralen Grenzwertsatz gibt es <a href="https://matheguru.com/stochastik/zentraler-grenzwertsatz.html#:~:text=Der%20zentrale%20Grenzwertsatz%20besagt%2C%20dass,sind%20unabh%C3%A4ngig%20und%20identisch%20verteilt.">hier</a>.</p>
+</div>
+<p><br /></p>
+<p>Eine Website, auf der sich der zentrale Grenzwertsatz mit Hilfe einer Simulation nachvollziehen lässt, finden sie <a href="http://onlinestatbook.com/stat_sim/sampling_dist/index.html">hier</a>. (Sie müssen auf dieser Website dann auf den Button “Begin” drücken.) Die nachfolgenden Abbildungen wurden mit dem Simulator von jener Website erzeugt.</p>
+<p>Unten im Bild sehen Sie den Fall, in dem das Merkmal <span class="math inline">\(X\)</span> in der Population normalverteilt ist (das oberste Histogramm zeigt die Populationsverteilung von <span class="math inline">\(X\)</span>). Das blaue Histogramm zeigt die Verteilung des Mittelwerts von <span class="math inline">\(X\)</span>, basierend auf 10,000 Ziehungen von Stichproben der Größe <span class="math inline">\(n~= 2\)</span>. Sie sehen: Wenn <span class="math inline">\(X\)</span> normalverteilt ist, dann ist auch der Mittelwert normalverteilt, egal wie klein <span class="math inline">\(n\)</span> ist.</p>
+<p><br> <img src="images/q1_05seki/limitTheorem1.PNG" style="width:100.0%" /></p>
+<p><br></p>
+<p>In den nachfolgenden zwei Abbildungen ist <span class="math inline">\(X\)</span> in der Population nicht normalverteilt (sondern auf sehr seltsame Weise). Auf der linken Seite sehen Sie, wie der Mittelwert von <span class="math inline">\(X\)</span> in diesem Fall verteilt ist, wenn die Stichproben klein sind (<span class="math inline">\(n~= 2\)</span>). In diesem Fall sieht auch die Mittelwertsverteilung sehr seltsam (und alles andere als normal) aus. Auf der rechten Seite ist die Mittelwertsverteilung für <span class="math inline">\(n~=25\)</span> dargestellt. Wie Sie sehen, sieht diese Verteilung nahezu aus wie eine Normalverteilung. Also: Egal wie <span class="math inline">\(X\)</span> in der Population verteilt ist, der Mittelwert von <span class="math inline">\(X\)</span> wird mehr und mehr normalverteilt sein, je größer <span class="math inline">\(n\)</span> ist.</p>
+<p><br> <img src="images/q1_05seki/limitTheorem2.PNG" style="width:100.0%" /></p>
+<p><br></p>
+<p><br /></p>
+</div>
+<div id="bestimmung-von-konfidenzintervallen-mit-der-t-verteilung" class="section level2">
+<h2><span class="header-section-number">5.4</span> Bestimmung von Konfidenzintervallen mit der t-Verteilung</h2>
+<p>Was ändert sich für die Bestimmung eines Konfidenzintervalls, wenn anstelle der Normalverteilung mit der t-Verteilung gearbeitet wird? Ihnen sollte klar sein, dass auf Basis der t-Verteilung ermittelte Konfidenzintervalle tendenziell “breiter” sind als auf Basis der Normalverteilung konstruierte. Der Breitenunterschied sollte immer kleiner werden, je größer <span class="math inline">\(n\)</span> ist, denn: je größer <span class="math inline">\(n\)</span> ist, umso schmaler wird die t-Verteilung an den Rändern und umso mehr geht sie in die Normalverteilung über. Heißt z.B.: bei kleiner Stichprobe (kleinem <span class="math inline">\(n\)</span>) wird ein t-verteilungsbasiertes 95% KI größer sein als ein normalverteilungsbasiertes 95% KI.</p>
+<p>Betrachten wir wieder den Fall <span class="math inline">\(n~= 4\)</span>. Die standardisierte t-Verteilung für diesen Fall sehen Sie in der Abbildung “Vergleich von t-Verteilungen für verschiedene n” oben. Bei der Normalverteilung wissen wir, dass die mittleren 95% aller Werte im Bereich von +/- 1,96 Standardabweichungen liegen. Die t-Verteilung für <span class="math inline">\(n~=4\)</span> ist aber an den Rändern etwas breiter. Es gilt für die t-Verteilung deshalb nicht, dass 95% aller Werte in den Bereich von +/- 1,96 Standardabweichungen fallen. Für die Ermittlung des 95% KI basierend auf der t-Verteilung müssen wir also einen anderen Wert verwenden. Anders ausgedrückt: Wir brauchen das mittlere Integral unter der Kurve der t-Verteilung bei <span class="math inline">\(n~=4\)</span>, welches 95% aller Werte umfasst. Dann müssen wir schauen, welchen x-Werte die Endpunkte dieses Integrals bei der standardisierten t-Verteilung entsprechen. Glücklicherweise müssen wir das nicht mehr selbst berechnen, das haben schon Menschen vor uns für uns erledigt. Wir müssen die entsprechenden Werte einfach nur nachschlagen.</p>
+<p>für die t-Verteilung bei <span class="math inline">\(n~=4\)</span> liegen die mittleren 95% aller Werte im Bereich von +/- 3,18 Standardabweichungen. Unten sehen Sie dazu eine Illustration.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><br /></p>
+<p>Hätten wir statt <span class="math inline">\(n~= 4\)</span> eine Stichprobe der Größe <span class="math inline">\(n~= 64\)</span>, dann würden die mittleren 95% aller Werte im Bereich von +/- 1,998 Standardabweichungen. Dieser Wert läge also schon sehr nah an dem der Normalverteilung (1,96).</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><br /></p>
+<p>Wie konstruiert man nun das Konfidenzintervall für die Parameterschätzung? Kehren wir zu unserem IQ-Beispiel zurück. Nehmen wir an, wir wüssten nichts über den Populationsmittelwert und auch nichts über die Populationsstreuung (obwohl wir das eigentlich tun). Nehmen wir weiterhin wieder an, dass unsere Zufallsstichprobe aus <span class="math inline">\(n~=4\)</span> Versuchspersonen besteht und wir einen Stichprobenmittelwert von 102,5 IQ-Punkten berechnet haben. Da wir die Populationsstreuung nicht kennen, wollen wir das 95% Konfidenzintervall diesmal auf Basis der t-Verteilung für <span class="math inline">\(n~= 4\)</span> anstatt der Normalverteilung bestimmen.</p>
+<p>Wir haben oben bereits gesehen, dass die so genannten “kritischen Werte” der t-Verteilung für <span class="math inline">\(n~= 4\)</span>, die einen mittleren Flächenanteil von 95% eingrenzen +/- 3,18 sind. Das heißt +/- 3,18 mal die Standardabweichung der t-Verteilung für <span class="math inline">\(n~ 4\)</span> umschließt 95% der Fläche. Diese Werte entstammen aber der standardisierten t-Verteilung. In unserem Fall müssen wir bedenken, dass wir IQ-Werte gemessen hatten. Welchen Wert hat die Standardabweichung der Stichprobenmittelwerte in diesem Fall? Diesen müssen wir zunächst noch berechnen. Da wir ja diesmal davon ausgehen, die Populationsstreuung nicht zu kennen, müssen wir <span class="math inline">\(SE\)</span> also auf Basis der Stichprobenstreuung bestimmen. In unserem Beispiel hatten wir einen Stichprobenmittelwert von 102,5 IQ-Punkten, welcher durch die vier IQ-Werte 95, 110, 100 und 105 zustande kam. Nehmen wir diese Werte, um die Streuung der Population zu schätzen, so erhalten wir einen Wert für <span class="math inline">\(s\)</span> von:</p>
+<pre class="r"><code>sd(c(95,110,100,105))</code></pre>
+<pre><code>## [1] 6.454972</code></pre>
+<p>Sie sehen schon, dass wir mit unserer Stichprobe in diesem Fall eine deutlich zu kleine Populationsstreuung schätzen. Aber vergessen Sie nicht, dass man das eigentlich gar nicht weiß, da die Populationsstreuung ja eigentlich unbekannt ist.</p>
+<p>Diesen Wert benutzen wir nun zur Ermittlung von <span class="math inline">\(SE\)</span>, und zwar genau so, wie wir es zuvor gemacht hatten. Wir setzen statt <span class="math inline">\(\sigma\)</span> diesmal lediglich <span class="math inline">\(s\)</span> ein:</p>
+<p><span class="math inline">\(SE~= \frac{s}{\sqrt{n}}~= \frac{6,45}{\sqrt{4}}~= 3,225\)</span>.</p>
+<p>Nochmal: der wahre Wert für die Streuung der Stichprobenmittelwerte ist in unserem Fall <span class="math inline">\(SE~= 7,5\)</span>. Unser Schätzwert für <span class="math inline">\(SE\)</span> basierend auf unserer Stichprobe ist allerdings nur ungefähr halb so groß geworden, <span class="math inline">\(SE~= 3.225\)</span>. Das liegt daran, dass in unserer Zufallsstichprobe die Streuung niedriger ist als in der Population. In Wahrheit wissen wir nie, wie sehr wir uns in einem einzelnen Fall tatsächlich “verschätzt” haben. Wir können nur Maßnahmen treffen, die uns “auf Lange Sicht” erlauben, diese Schätzfehler auszugleichen. Im Fall von unbekannter Populationsstreuung und kleinen Stichproben mit der t-Verteilung anstatt der Normalverteilung zu arbeiten, um Konfidenzintervalle zu konstruieren, ist diese Maßnahme.</p>
+<p>Zurück zur Konstruktion des 95% Konfidenzintervalls: die “kritischen Werte” der t-Verteilung bei <span class="math inline">\(n~= 4\)</span> für ein Intervall, das 95% der Werte umfasst, kennen wir schon (+/- 3,18). Im letzten Schritt hatten wir auch geschätzt, wie groß eine Standardabweichung der Mittelwertsverteilung in unserem Fall ist, nämlich 3,225. Wir müssen nun lediglich diesen Wert für <span class="math inline">\(SE\)</span> mit den kritischen Werten multiplizieren und dann ausgehend vom ermittelten Stichprobenmittelwert von 102,5 die untere und obere Grenze des Intervalls berechnen:</p>
+<ul>
+<li><p><span class="math inline">\(KI_{Untergrenze}~= M - 3,18 \cdot SE~= 102,5 - 3,18 \cdot 3,225~= 92,24\)</span></p></li>
+<li><p><span class="math inline">\(KI_{Obergrenze}~= M + 3,18 \cdot SE~= 102,5 + 3,18 \cdot 3,225~= 112,76\)</span></p></li>
+</ul>
+<p>In diesem Fall würden wir also folgendes festhalten: Anhand unserer Stichprobe schätzen wir einen Populationsmittelwert von 102,5 IQ-Punkten. Das 95% KI für diese Schätzung beträgt [92,24; 112,76]. (Konfidenzintervalle gibt man in der Regel innerhalb von eckigen Klammern an.)</p>
+<p><strong>Zur Selbstüberprüfung</strong>: Welches Konfidenzintervall ergibt sich, wenn wir die erste Stichprobe aus unserem Eingangsbeispiel verwenden? Das war die Stichprobe, in der der Mittelwert 88,75 IQ-Punkte war. Rechen Sie das aus.</p>
+<p><br /></p>
+</div>
+</div>
+<div id="übung-in-excel" class="section level1">
+<h1><span class="header-section-number">6</span> Übung in Excel</h1>
+<p>Nun aber genug Theorie. Sie sollen Ihr Wissen ja auch praktisch in Excel erproben. Die Excel-Datei für diese Sitzung finden Sie <a href="q1_dataFiles/05_Standardfehler_Konfidenzintervalle.xlsx">hier</a>.</p>
+<p><br /></p>
+<div id="szenario" class="section level2">
+<h2><span class="header-section-number">6.1</span> Szenario</h2>
+<p>Der Excel-Datensatz behandelt genau das Beispiel, das wir eingangs eingeführt hatten. Eine Gruppe von Forschern/ Forscherinnen interessiert sich für die Auswirkung von lauter Umgebungsmusik auf die kognitive Leistungsfähigkeit von Menschen, operationalisiert durch IQ-Werte, die mittels eines psychologischen IQ-Tests erhoben worden sind. Eine Zufallsstichprobe wird deshalb den IQ-Test in einem Raum mit lauter Musik machen. Die zufällig ausgewählte Kontrollgruppe bearbeitet den IQ-Test in stiller Umgebung. Pro Versuchsbedingung (laute vs. ruhige Umgebung) nehmen 50 Versuchspersonen teil (<span class="math inline">\(n~= 50\)</span>; <span class="math inline">\(N~= n+n~= 100\)</span>).</p>
+<p>Wenn Sie die Excel-Datei öffnen, sollten Sie die erste Arbeitsmappe der Datei vor sich haben, welche so aussieht:</p>
+<p><br> <img src="images/q1_05seki/excel1.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>In Spalte A stehen die gemessenen IQ-Werte der Versuchspersonen, die lauter Musik ausgesetzt waren. In Spalte B die Werte der Personen der Kontrollgruppe, deren IQ-Werte in ruhiger Umgebung erfasst worden sind.</p>
+<p><br /></p>
+</div>
+<div id="aufgaben" class="section level2">
+<h2><span class="header-section-number">6.2</span> Aufgaben</h2>
+<p>Die Forscher/innen vermuten, dass Menschen niedrigere IQ-Werte haben, wenn sie lauter Musik ausgesetzt sind. Um diese Hypothese am Ende beurteilen zu können, sollen mit Hilfe der Stichproben die Populationsmittelwerte geschätzt werden. Um die Unsicherheit der Schätzung zu beurteilen, sollen für beide Gruppen außerdem 95% Konfidenzintervalle bestimmt werden.</p>
+<p>Da für die Kontrollgruppe einfach der Populationsmittelwert erwartet wird, und die Streuung der IQ-Werte in der Population bekannt ist (<span class="math inline">\(\sigma~= 15\)</span> IQ-Punkte), soll das Konfidenzintervall für die Kontrollgruppe auf Basis der kritischen Werte der Normalverteilung bestimmt werden.</p>
+<p>Für die Versuchsgruppe “laute Musik” will man hingegen “vorsichtiger” bei der Bestimmung des Konfidenzintervalls sein. Es könnte ja sein, dass laute Musik nicht nur den IQ-Mittelwert verändert, sondern auch die Streuung der IQ-Werte. Hier soll also die Streuung der Population auf Basis der Stichprobenstreuung geschätzt werden und dieser Schätzwert dann für die Konstruktion des Konfidenzintervalls herangezogen werden.</p>
+<p>In der Excel-Arbeitsmappe sehen Sie, dass auf dem Weg hin zum Konfidenzintervall noch einige andere Werte berechnet werden sollen. Zum Beispiel der Mittelwert, die Anzahl von Versuchspersonen pro Bedingung, die Streuung usw.</p>
+<p><br /></p>
+</div>
+<div id="vorgehen" class="section level2">
+<h2><span class="header-section-number">6.3</span> Vorgehen</h2>
+<p>Stichprobenmittelwerte und Anzahl der Personen pro Gruppe können Sie in Excel bereits bestimmen, das hatten wir in vergangenen Sitzungen bereits behandelt. Auch die Stichprobenstreuung können Sie bereits berechnen. Dazu benutzt man die Funktion <strong>“=STABW.N()”</strong>.</p>
+<p>Sie sehen in der Excel-Tabelle auch, dass dort einmal “Streuung (Stichprobe)” und einmal “Geschätzte Streuung (Population)” steht. Die Streuung der Werte in der Stichprobe wird durch <strong>“=STABW.N()”</strong> berechnet. Man kann natürlich auch die Stichprobenstreuung heranziehen, um damit die Streuung der Werte in der Population zu schätzen. Allerdings kann man zeigen, dass diese Schätzung präziser wird, wenn man die Formel für die Streuung etwas verändert. Hier noch einmal zur Erinnerung die Formel für die Berechnung der Stichprobenstreuung:</p>
+<p><span class="math inline">\(s=\sqrt{\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2}\)</span>.</p>
+<p>Und hier die veränderte Formel, mit deren Hilfe sich anhand der Stichprobenwerte die Streuung der Population (also <span class="math inline">\(\sigma\)</span>) schätzen lässt:</p>
+<p><span class="math inline">\(s=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}\)</span>.</p>
+<p>Wie Sieh sehen, ist der einzige Unterschied, dass in der zweiten Formel die Summe der quadrierten Abweichungen der Werte vom Gruppenmittelwert nicht einfach durch <span class="math inline">\(n\)</span>, sondern durch <span class="math inline">\(n-1\)</span> geteilt wird. Man kann zeigen (und mathematisch beweisen), dass durch dieses Teilen durch <span class="math inline">\(n-1\)</span> anstatt <span class="math inline">\(n\)</span> eine bessere Schätzung von <span class="math inline">\(\sigma\)</span> erreicht wird. Wenn Sie das näher interessiert, schauen Sie <a href="https://matheguru.com/stochastik/freiheitsgrade.html">hier</a>.</p>
+<p>In Excel lässt sich die Populationsstreuung <span class="math inline">\(\sigma\)</span> anhand einer Stichprobe mit der Funktion <strong>“=STABW.S()”</strong> schätzen. Also: <strong>“=STABW.N()”</strong> benutzen wir, um die Streuung der Werte einer Stichprobe zu berechnen. <strong>“=STABW.S()”</strong> benutzen wir, um anhand einer Stichprobe die Populationsstreuung zu <strong>schätzen</strong>. Sie sollten also in Excel zu folgenden Werten kommen:</p>
+<p><br> <img src="images/q1_05seki/excel2.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Wie Sie sehen, sind die geschätzten Populationsstreuungen etwas größer als die berechneten Stichprobenstreuungen. Das ist immer so, aber der Unterschied wird umso kleiner, je größer die Stichproben werden.</p>
+<p>Um beurteilen zu können, wie präzise unsere Gruppenmittelwerte die Populationsmittelwerte schätzen, wollen wir im nächsten Schritt die zu erwartende Streuung von Stichprobenmittelwerten (also den Standardfehler bzw. Standardschätzfehler <span class="math inline">\(SE\)</span>) bestimmen. Wenn Ihnen an dieser Stelle nicht klar ist, worum es hier gerade geht, dann lesen Sie den Beginn dieser Seite.</p>
+<p>Für die Kontrollgruppe nehmen wir an, die Streuung der Population (<span class="math inline">\(\sigma\)</span>) zu kennen, nämlich <span class="math inline">\(15\)</span> IQ-Punkte. Um in diesem Fall <span class="math inline">\(SE\)</span> zu berechnen setzen wir also direkt <span class="math inline">\(\sigma\)</span> in die Formel ein: <span class="math inline">\(SE~= \frac{\sigma}{\sqrt{n}}~= \frac{15}{\sqrt{50}}~= 2,12\)</span>. In Excel würden wir also folgendes rechnen:</p>
+<p><br> <img src="images/q1_05seki/excel3.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>In der Bedingung “laute Musik” nehmen wir an, dass die Populationsstreuung durchaus anders sein könnte als in der “normalen” Population (also von 15 abweichen könnte). Wenn das so wäre, dann würde auch die Streuung der Stichprobenmittelwerte (also <span class="math inline">\(SE\)</span>) anders sein. Darum bestimmen wir in diesem Fall <span class="math inline">\(SE\)</span> anhand der auf Basis der Stichrobe für die Population “laute Musik” geschätzten Streuung (welche <span class="math inline">\(16,31\)</span> war): <span class="math inline">\(SE~= \frac{s}{\sqrt{n}}~= \frac{16,31}{\sqrt{50}}~= 2,31\)</span>. In Excel würden wir also folgendes rechnen:</p>
+<p><br> <img src="images/q1_05seki/excel4.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<div id="bestimmung-des-95-ki-für-die-gruppe-still" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Bestimmung des 95% KI für die Gruppe “Still”</h3>
+<p>Bestimmen wir im nächsten Schritt das Konfindenzintervall für die Kontrollgruppe, deren IQ-Werte in stiller Umgebung erhoben worden sind. Da wir hier keine Unsicherheit bzgl. der Populationsstreuung berücksichtigen brauchen, können wir die Grenzen des Intervalls, in dem der wahre Wert mit 95% Wahrscheinlichkeit liegt, anhand der (standardisierten) Normalverteilung bestimmen. Die untere Grenze des Intervalls liegt bei 1,96 mal dem <span class="math inline">\(SE\)</span> unterhalb des Stichprobenmittelwerts, also bei: <span class="math inline">\(M - 1,96 \cdot SE~= 99,08 - 1,96 \cdot 2,12~= 94,92\)</span>. Die obere Grenze des Intervalls liegt bei 1,96 mal dem <span class="math inline">\(SE\)</span> überhalb des Stichprobenmittelwerts, also bei: <span class="math inline">\(M + 1,96 \cdot SE~= 99,08 + 1,96 \cdot 2,12~= 103,237\)</span>.</p>
+<p>Übrigens, für das Arbeiten mit Excel müssen Sie sich die “kritischen Werte” (in unserem Fall +/- 1,96), innerhalb derer ein bestimmter Anteil der Fläche (was übrigens einer Wahrscheinlichkeit entspricht) liegt, nicht merken. Man kann diese “kritischen Werte” in Excel direkt nachschlagen. Für den Fall gerade geht das mit der Funktion <strong>“=NORM.S.INV()”</strong>. In die Klammer der Funktion kommt der Anteil unter der Kurve (also der Flächenanteil) hinein, für die man den x-Wert sucht. In unserem Fall muss man hier <strong>“=NORM.S.INV(0.975)”</strong> schreiben, um auf den Wert von 1,96 zu kommen.</p>
+<p><br> <img src="images/q1_05seki/excel5.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Warum 0,975 und nicht 0,95? Die Fläche, die in die Funktion “=NORM.S.INV()” eingeben werden muss, ist nicht eine mittlere Fläche vom Mittelwert der Verteilung aus betrachtet, sondern eine Fläche, die <strong>von links aus betrachtet</strong> (also bei minus unendlich beginnt) beginnt. Hier eine Illustration, die zeigt, was hinter der Excel-Funktion steckt:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-23-1.png" width="672" /> <br /></p>
+<p>die blaue Fläche in der Abbildung entspricht 97,5% der Gesamtfläche unter der Kurve (also 0,975), genau der Wert, den wir in die Excel-Funktion eingegeben haben. Wie Sie sehen können liegt die rechte Grenze dieser Fläche bei dem gesuchten x-Wert, nämlich bei 1,96. Wir können in die Excel-Funktion übrigens auch <span class="math inline">\(0,025\)</span> schreiben. Welchen x-Wert erhielten wir dann? Richtig, - 1,96.</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-24-1.png" width="672" /> <br /></p>
+<p>Hier entspricht die blaue Fläche einem Anteil von 2,5% unter der Kurve. Also: geben wir für die Excel-Funktion “=NORM.S.INV(0,025)” ein, so erhalten wir den x-Wert für die Stelle, an der die ersten/ linken 2,5% der Fläche “abgeschnitten” werden. Geben wir stattdessen “=NORM.S.INV(0,975)” an, so erhalten wir den x-Wert für die Stelle, an der die von links aus begonnen 97,5% der Fläche abgeschnitten werden - was dann nach oben hin eben noch 2,5% der Fläche übrig lässt. Wir ermitteln also somit Grenzwerte, von denen nach außen hin jeweils 2,5% der Fläche verbleiben. Nach innen muss dann natürlich eine “mittlere” Fläche von 95% verbleiben. Stellen Sie sich vor, wir würden von der blauen Fläche der ersten Abbildung die (kleine) blaue Fläche der zweiten Abbildung abschneiden. Was übrig bliebe, sähe genau so aus, wie das, das wir suchen:</p>
+<p><img src="page-05m_se_ki_files/figure-html/unnamed-chunk-25-1.png" width="672" /> <br /></p>
+<p>Zur Bestimmung der Untergrenze des 95% KI in Excel, würden wir folgendes rechnen:</p>
+<p><br> <img src="images/q1_05seki/excel6.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Und für die Obergrenze entsprechend:</p>
+<p><br> <img src="images/q1_05seki/excel7.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Glücklicherweise lässt sich das Konfidenzintervall in Excel noch auf eine weniger fehleranfällige Weise bestimmen, nämlich mit der Funktion “<strong>KONFIDENZ.NORM()</strong>”. In unserem Fall müssten wir schreiben: <strong>“=KONFIDENZ.NORM(0.05;15;50)”</strong>. Der erste eingetragene Wert (0,05) ist die Fläche, die insgesamt nach beiden Seiten von der Mitte der Verteilung aus betrachtet “frei” bleiben soll. Da das für ein 95% KI unten und oben jeweils 2,5% sind, müssen wir da also 0,05 eintragen. Der zweite Eintrag in die Funktion (15), ist die Populationsstreuung (<span class="math inline">\(\sigma\)</span>). Der letzte Wert (50) ist der Stichprobenumfang (also <span class="math inline">\(n\)</span>). Das Ergebnis, dass wir in diesem Fall bekommen, ist <span class="math inline">\(4,16\)</span>:</p>
+<p><br> <img src="images/q1_05seki/excel8.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Was ist dieses Ergebnis? Das Ergebnis der Funktion ist die <strong>halbe Breite</strong> des 95% KI. Wir erhalten also damit den Wert, den wir jeweils vom Mittelwert subtrahieren und auf den Mittelwert addieren müssen, um zu Unter- und Obergrenze des Intervalls zu kommen. Prüfen wir nach: <span class="math inline">\(99,08 - 4,16~= 94,92\)</span>, genau der Wert für die Untergrenze, den wir zuvor schon berechnet hatten. Und <span class="math inline">\(99,08 + 4,16~= 103,24\)</span>, (gerundet) genau der Wert für die Obergrenze, den wir zuvor schon berechnet hatten.</p>
+</div>
+<div id="bestimmung-des-95-ki-für-die-gruppe-laute-musik" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Bestimmung des 95% KI für die Gruppe “Laute Musik”</h3>
+<p>Bestimmen wir nun das 95% KI für die den geschätzten Populationsmittelwert in der Versuchsbedingung “Laute Musik”. In diesem Fall wollen wir nicht mit der Normalverteilung, sondern der t-Verteilung arbeiten. Auch das ist in Excel kein Problem. Zunächst benötigen wir wieder die “kritischen Werte”, also die x-Werte der t-Verteilung bei <span class="math inline">\(n = 50\)</span>, mit denen Sich der Bereich eingrenzen lässt, in dem 95% der Werte liegen. Da sich die Form der t-Verteilung (anders als die der Normalverteilung) mit der Stichprobengröße <span class="math inline">\(n\)</span> ändert, kann man sich in diesem Fall die kritischen Werte nicht so leicht merken, wie bei der Normalverteilung. Denn für jedes <span class="math inline">\(n\)</span> sind die kritischen Werte etwas anders. Zum Glück kann man die kritischen Werte der t-Verteilung für ein bestimmtes <span class="math inline">\(n\)</span> nachschlagen. Das geht in diesem Fall sogar noch etwas leichter als bei der Normalverteilung. Die Funktion dafür heißt <strong>“=T.INV.2S()”</strong>. Eintragen müssen wir in diesmal <strong>“=T.INV.2S(0.05;50-1)”</strong>. Der erste Wert ist die Gesamtfläche, welche an den Rändern der Verteilung “frei” bleiben soll. Der zweite Eintrag ist die Stichprobengröße minus 1:</p>
+<p><br> <img src="images/q1_05seki/excel9.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Als Ergebnis erhalten wir in diesem Fall einen “kritischen” Wert von <span class="math inline">\(2,01\)</span>. Die kritischen Werte der t-Verteilung sind also etwas größer als die der Normalverteilung. Der Unterschied wird aber immer kleiner, je größer <span class="math inline">\(n\)</span> ist.</p>
+<p>An dieser Stelle können wir jetzt so weiterarbeiten, wie bereits für die Kontrollgruppe geschehen. Sie sollten folgende Ergebnisse erhalten:</p>
+<p><br> <img src="images/q1_05seki/excel10.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Auch für den Fall, dass man das KI auf Basis der t- und nicht der Normalverteilung erstellt, gibt es in Excel eine direkte Funktion, nämlich <strong>“=KONFIDENZ.T()”</strong>. Eintragen müssen wir in diesem Fall <strong>“=KONFIDENZ.T(0.05;16.31;50)”</strong>. Der erste Wert ist wieder der Flächenanteil, der an den Rändern der Verteilung abgeschnitten werden soll. Der zweite Eintrag ist die geschätzte Streuung der Population (das Ergebnis hatten wir über “=STABW.S()”) erhalten. Der letzte Eintrag ist wieder die Stichprobengröße.</p>
+<p><br> <img src="images/q1_05seki/excel11.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Das Ergebnis ist 4,64 und entspricht wieder der halben Breite des 95% Konfidenzintervalls.</p>
+</div>
+</div>
+<div id="grafische-darstellung" class="section level2">
+<h2><span class="header-section-number">6.4</span> Grafische Darstellung</h2>
+<p>Eine häufige Art, die Ergebnisse einer derartigen Untersuchung grafisch darzustellen, ist, die Mittelwerte als Säulen und die Konfidenzintervalle als Fehlerbalken abzubilden. Wie das in Excel funktioniert, wissen Sie schon. In einer früheren Sitzung hatten Sie ein Säulendiagramm mit Fehlerbalken erstellt, bei dem die Fehlerbalken die Stichprobenstreuungen waren. Stattdessen kann man natürlich auch die 95% KI einzeichnen. Genau das wird in der Regel auch gemacht. Das Ergebnis sollte so aussehen:</p>
+<p><br> <img src="images/q1_05seki/excel12.PNG#bordered" style="width:100.0%" /></p>
+<p><br></p>
+<p>Für diesen letzten Schritt hier auch noch ein kurzes Video.</p>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/S24F5VtwOIg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p><br></p>
+</div>
+<div id="ausblick-auf-kommende-woche" class="section level2">
+<h2><span class="header-section-number">6.5</span> Ausblick auf kommende Woche</h2>
+<p>Wenn Sie sich die Ergebnisse der Bedingung “laute Musik” ansehen, sollte man anhand dieses Befundes dann davon ausgehen, dass laute Musik die kognitive Leistungsfähigkeit (sofern diese durch einen IQ-Test gut abgebildet wird) verringert? Oder scheint es eher so zu sein, dass dieser Faktor keinen Einfluss hat?</p>
+</div>
+<div id="zusatzaufgabe" class="section level2">
+<h2><span class="header-section-number">6.6</span> Zusatzaufgabe</h2>
+<p>Einen weiteren Datensatz zum üben finden sie <a href="q1_dataFiles/05_Standardfehler_Konfidenzintervalle_Zusatzaufgabe.xlsx">hier</a>. Die Daten stammen aus einer fiktiven Studie, in der untersucht wurde, hoch die Problemlösefähigkeit bei Patienten mit diagnostizierter Depression oder ohne diagnostizierte Depression (Kontrollgruppe) ist. Am Ende sollen Sie auch hier alle Werte bestimmt haben, sodass die Ergebnisse in Form eines Säulendiagramms mit 95% KI als Fehlerindikatoren dargestellt werden können.</p>
+<p>Achtung: Da in diesem Fall auch für die Kontrollgruppe unbekannt ist, wie hoch die Problemlösefähigkeit in der Population nicht depressiver Menschen ist, müssen diesmal die Konfidenzintervalle für beide Versuchsbedingungen auf Basis der t-Verteilung konstruiert werden.</p>
+</div>
+</div>
+<div id="zusätzliche-illustration-zu-konfidenzintervallen" class="section level1">
+<h1><span class="header-section-number">7</span> Zusätzliche Illustration zu Konfidenzintervallen</h1>
+<p>Wir haben hier für Sie noch eine sehr anschauliche Simulation für Konfidenzintervalle eingeblendet, welche von der Seite <a href="https://rpsychologist.com">https://rpsychologist.com</a> stammt. Sie können in der App die Stichprobengröße und die Konfidenzintervallbreite verändern und dann schauen, was passiert.</p>
+<div id="simulation-für-konfidenzintervalle" class="section level2">
+<h2><span class="header-section-number">7.1</span> Simulation für Konfidenzintervalle</h2>
+<p><br /> <iframe width="800" height="600" src="https://rpsychologist.com/d3/ci/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br /> <br /></p>
+</div>
+</div>
+
+<p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
