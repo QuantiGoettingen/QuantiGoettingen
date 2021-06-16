@@ -69,7 +69,7 @@ Interpretation der Koeffizienten:
 
 - Für jede zusätzliche Woche Therapie steigt die Dauer, die es Patient*innen aushalten, mit einer Spinne im selben Raum zu sein, um 0.7095 Minuten (Interpretation des Estimates für Dauer). Dieser Unterschied ist signifikant. (Da wir eine ungerichtete Hypothese hatten, dürfen wir den p-Wert hier nicht halbieren.)
 
-- Wenn in der Therapie Tiere statt Bilder als Expositionsmaterial genutzt werden, halten Leute es im Schnitt 3.6351 Minuten mehr mit der Spinne aus aus als wenn Bilder genutzt werden (Interpretation des Estimates für Dauer). (Da wir keine Hypothese über diesen Prädiktor allein hatten, dürfen wir den p-Wert hier nicht halbieren.)
+- Der Estimate für Therapie gibt hier folgendes an: wenn die Dauer der Therapie = 0 ist und Tiere statt Bilder genutzt werden, beträgt der Unterschied zur Bilder-Gruppe 3.6351 (siehe VL Interaktion Folie 12). (Auch hier dürfen wir den p-Wert nicht halbieren)
 
 - Wenn Tiere statt Bilder als Expositionsmaterial genutzt werden, reduziert sich Zusammenhang von Therapiedauer mit den Minuten, die Leute es mit der Spinne aushalten (zu sehen am negativen Vorzeichen des Interaktions-Estimates). Genau genommen reduziert sich der Estimate für den Koeffizient von Dauer (oben angeben mit 0.7095) um 0.3882. Wenn Tiere als Expositionsmaterial verwendet werden, ist der Koeffizient für den Zusammenhang von Dauer mit Symptomverbesserung also  0.7095 - 0.3882 = 0.3213. Diese Reduktion ist sigifikant (Da wir eine ungerichtete Hypothese hatten, dürfen wir den p-Wert hier nicht halbieren.)
 
