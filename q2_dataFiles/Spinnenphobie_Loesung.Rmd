@@ -84,27 +84,9 @@ Tiere <- subset(Spinnenphobie,Therapie=="Tiere")
 summary(lm(Symptomatik~Dauer, data=Bilder))
 summary(lm(Symptomatik~Dauer, data=Tiere))
 ```
+
 Wir sehen, dass unsere Interpretation stimmt. Der Test über den Interaktionsterm im ursprünglichen Modell kann uns, anders als diese separaten Modelle, zusätzlich sagen, dass der Unterschied in den Steigungen signifikant ist. 
 
-Als letztes könnten wir uns fragen (auch hier: Zusatz), wie denn dieser Interaktionseffekt (Therapie bringt schnellere Verbesserungen wenn Bilder statt Tiere genutzt werden) mit dem Befund zusammenpasst, dass wir insgesamt (unabhängig von Dauer) eine schwächere Symptomatik (= mehr Minuten im Raum mit Spinne) bei denjenigen Patient*innen beobachten, die mit Tieren geübt haben (der Haupteffekt für Art der Therapie im ersten Regressionsmodell).
 
-Eine Möglichkeit könnte sein, dass diejenigen Patient*innen in unserem Datensatz, die mit Tieren geübt haben, insgesamt schon länger in Therapie waren als diejenigen, die mit Bildern geübt haben. Das können wir mit einer simplen Abbildung über Mittelwerte (mit 95% Konfidenzintervallen) prüfen:
-
-```{r}
-with(Spinnenphobie, plotMeans(Dauer, Therapie, error.bars="conf.int", level=0.95, connect=TRUE))
-```
-
-Die Vermutung bestätigt sich.
-
-Welche Annahme des linearen Modells könnte somit verletzt sein? Eventuell Multikollinearität, die beiden Prädiktoren Dauer und Therapie scheinen nicht ganz unabhängig zu sein. Ob die Korrelation zu stark ist, können wir über den Varianzinflationsfaktor prüfen:
-
-```{r}
-model <- lm(Symptomatik~Dauer*Therapie,data=Spinnenphobie)
-vif(model)
-```
-
-Die Varianzinflationfaktoren sind zu hoch (Kriterien FS: im Mittel nahe 1, kein einzelner >10).
-
-In Folgestudien sollte man also darauf achten, unkorrelierte Prädiktoren zu erhalten, zum Beispiel indem man ein echtes Experiment durchführt (zufällige Zuweisung sowohl zu Art als auch zu Dauer der Therapie). 
 
 
