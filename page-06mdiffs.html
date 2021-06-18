@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sitzung 6: Inferenzstatistik – Mittelwertsunterschiede analysieren (t-Tests)</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" type="image/png" href="favicon.ico"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Seminar Quantitative Methoden</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fas fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="glyphicon glyphicon-book"></span>
+     
+    Quantitative Methoden I
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Material</li>
+    <li>
+      <a href="page-q1_materials.html">Übungsdatensätze</a>
+    </li>
+    <li class="divider"></li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Einführung</li>
+    <li>
+      <a href="page-01einfuehrung.html">Sitzung 1: Arbeiten mit MS Excel</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Deskriptive Statistik</li>
+    <li>
+      <a href="page-02datenaufb.html">Sitzung 2: Umfragen und Experimente - Datenaufbereitung</a>
+    </li>
+    <li>
+      <a href="page-03deskriptiv.html">Sitzung 3: Deskriptive Datenanalyse und Grafiken</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Inferenzstatistik</li>
+    <li>
+      <a href="page-04wsk_vert.html">Sitzung 4: Arbeiten mit Wahrscheinlichkeitsverteilungen</a>
+    </li>
+    <li>
+      <a href="page-05m_se_ki.html">Sitzung 5: Mittelwerte, Standardfehler und Konfidenzintervall</a>
+    </li>
+    <li>
+      <a href="page-06mdiffs.html">Sitzung 6: Mittelwertsunterschiede prüfen - t-Tests</a>
+    </li>
+    <li>
+      <a href="page-07testpl.html">Sitzung 7: G*Power zur Testplanung</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="page-zwischensitzung.html">Sithzung 8: Wiederholung/ Anwendung des bisher Gelernten</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="page-08kontraste.html">Sitzung 9: Kontraste</a>
+    </li>
+    <li>
+      <a href="page-09wilcoxon.html">Sitzung 10: Wilcoxon-Tests</a>
+    </li>
+    <li>
+      <a href="page-10korrelz.html">Sitzung 11: Korrelationen und z-Test</a>
+    </li>
+    <li>
+      <a href="page-11chisquared.html">Sitzung 12: Analyse von Nominaldaten</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="glyphicon glyphicon-book"></span>
+     
+    Quantitative Methoden II
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Material</li>
+    <li>
+      <a href="page-q2_materials.html">Video Links und Daten</a>
+    </li>
+    <li class="divider"></li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Wiederholung</li>
+    <li>
+      <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung3a.html">Sitzung 3: Skript zu Video Teil 1</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung3b.html">Sitzung 3: Skript zu Video Teil 2</a>
+    </li>
+    <li class="dropdown-header">Inhalte Quanti II</li>
+    <li>
+      <a href="q2_html_pages/Sitzung4a_Regression01.html">Sitzung 4: Skript zu Video Teil 1 (Multiple Regression)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4b_Regression01.html">Sitzung 4: Skript Zusatzaufgabe Qualleneis</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4c_Regression02.html">Sitzung 4: Skript zu Video Teil 2 (Modellvergleiche)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung4d_Regression02.html">Sitzung 4: Skript Zusatzaufgabe Album-Sales</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung5a_Annahmen.html">Sitzung 5: Skript zu Video (Annahmen)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung5b_PruefungAnnahmen_Zusatzaufgabe_SuperModels_Loesung.html">Sitzung 5: Skript zu Zusatzaufgabe (Annahmen)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung6_Regression_EinfaktorielleAnova_Glastonbury_Day1_Day3.html">Sitzung 6: Skript zu Video (Einfaktorielle ANOVA)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.html">Sitzung 7: Skript zu Video (Mehrfaktorielle ANOVA)</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung7_Zusatz_KatzenMusterloesung.html">Sitzung 7: Skript Zusatzaufgabe Katzen</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung8_Spinnenphobie_Loesung.html">Sitzung 8: Skript zu Spinnenphobieaufgabe</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung8_Konzentration_Loesung.html">Sitzung 8: Skript zur Konzentrationsaufgabe</a>
+    </li>
+    <li>
+      <a href="q2_html_pages/Sitzung9_Kontraste_2Fakt.html">Sitzung 9: Skript Video Kontraste</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Sitzung 6: Inferenzstatistik – Mittelwertsunterschiede analysieren (t-Tests)</h1>
+
+</div>
+
+
+<p>In der letzten Sitzung haben wir uns mit der Schätzung von Populationsmittelwerten (<span class="math inline">\(\mu\)</span>) vertraut gemacht und gesehen, wie ein Populationsmittelwert auf Basis von <strong>Zufallsstichproben</strong> geschätzt werden kann. Dabei haben wir zwei Schätzmaße betrachtet: Den Stichprobenmittelwert als <strong>Punktschätzer</strong> für <span class="math inline">\(\mu\)</span> und den Standardfehler (<span class="math inline">\(SE\)</span>) bzw. das 95% Konfidenzintervall als <strong>Intervallschätzer</strong>. Das wichtigste Konzept der letzten Sitzung war das der theoretischen <strong>“Stichprobenkennwertverteilung”</strong>: Um zu beurteilen, wie gut ein ermittelter Stichprobenmittelwert den Populationsmittelwert schätzt, haben wir Wissen über die theoretisch angenommene Verteilung von Stichprobenmittelwerten angewendet. Dazu hatten wir zwei Arten von möglichen Verteilungen benutzt: die <strong>Normalverteilung</strong> und die <strong>t-Verteilung</strong>.</p>
+<p>In dieser Sitzung wollen wir dieses erworbene Wissen erweitern und auf die Konzepte <strong>Signifikanztest</strong> und <strong>Effektstärke</strong> anwenden.</p>
+<p>Mittels Signifkanztest prüft und quantifiziert man, wie sehr ein gefundenes Stichprobenergebnis von einer bestimmten Erwartung abweicht. Diese Erwartung wird typischerweise als Nullhypothese (<span class="math inline">\(H_0\)</span>) bezeichnet. Wenn ein Befund (z.B. ein gemessener Stichprobenmittelwert) unter der Nullhypothese nur sehr unwahrscheinlich ist, so wird diese Nullhypothese verworfen. In diesem Fall spricht man von einem statistisch <strong>signifikanten</strong> Ergebnis. Anders gesagt: Beim klassischen Signifikanztesten sammeln wir Evidenz gegen die Nullhypothese.</p>
+<p>Signifikanztests lassen sich für verschiedene Szenarien/ Fragestellungen anwenden. Wir können zum Beispiel prüfen, ob sich der Mittelwert (<span class="math inline">\(\mu\)</span>) einer bestimmten Population von einem theoretisch angenommen Wert unterscheidet. Wir können aber auch prüfen, ob sich der Populationsmittelwert (<span class="math inline">\(\mu\)</span>) über die Zeit hinweg verändert, oder ob sich zwei Populationen in ihren Mittelwerten unterscheiden.</p>
+<p><br></p>
+<div id="einstichprobenfall-ist-der-populationsmittelwert-von-einem-bestimmten-wert-verschieden" class="section level1">
+<h1><span class="header-section-number">1</span> Einstichprobenfall: Ist der Populationsmittelwert von einem bestimmten Wert verschieden?</h1>
+<p>Beginnen wir mit dem Fall, in dem wir prüfen möchten, ob sich eine bestimmte Population von einem bestimmten, theoretisch angenommen Wert unterscheidet. Dieses Szenario nennt man auch <strong>Einstichprobenfall</strong>. Als Beispiel können wir auf das Szenario der letzten Woche zurückgreifen und die Versuchsgruppe des besprochenen Experiments betrachten, deren IQ-Werte während lauter Musik gemessen wurden.</p>
+<p>Nehmen wir an, (etwas anders als in der letzten Woche) die Hypothese der ForscherInnen sei, dass laute Musik die kognitive Leistung (IQ-Werte) <em>verändert</em> (aber nicht zwangsläufig <em>senkt</em>; sie könnte auch <em>ansteigen</em>). Die Hypothese bezieht sich also lediglich auf eine <em>Veränderung</em> im Vergleich zum “Normalwert” aber sagt <em>keine bestimmte Richtung</em> der Veränderung vorher.</p>
+<p><br></p>
+<div id="nullhypothese" class="section level2">
+<h2><span class="header-section-number">1.1</span> Nullhypothese</h2>
+<p>Was ist in diesem Fall die Nullhypothese (<span class="math inline">\(H_0\)</span>), die für den Signifkanztest herangezogen wird? Die Nullhypothese ist, dass sich die IQ-Werte unter lauter Musik <em>nicht verändern</em>, d.h., der Populationsmittelwert <span class="math inline">\(\mu\)</span> von Menschen, die lauter Musik ausgesetzt sind, nicht vom “neutralen” Populationsmittelwert (100 IQ-Punkte) verschieden ist.</p>
+<p>Wenn die Nullhypothese wahr ist, dann sollten wir also einen Stichprobenmittelwert erwarten, der nah an 100 IQ-Punkten liegt. Mit anderen Worten, die zu erwartende Differenz zwischen Stichprobenmittelwert und Erwartungswert der <span class="math inline">\(H_0\)</span> ist null. Nehmen wir an, der gefundene mittlere IQ-Wert in der Bedingung “laute Musik” wäre 96 IQ-Punkte gewesen (in unserem Excel-Beispiel letzte Woche war es 91,92; aber nehmen jetzt zunächst einen etwas weniger extremen Wert). Die Frage, die wir uns im Rahmen eines Signifikanztests nun stellen lautet, wie wahrscheinlich dieses (oder ein noch extremeres) Ergebnis gefunden wird, wenn die <span class="math inline">\(H_0\)</span> tatsächlich wahr ist.</p>
+<div class="column-right_alignRight">
+<p><img src="images/home/squirrel_wissen.PNG" /></p>
+</div>
+<p><br></p>
+</div>
+<div id="p-wert" class="section level2">
+<h2><span class="header-section-number">1.2</span> p-Wert</h2>
+<p>Wir suchen also eine so genannte <strong>bedingte Wahrscheinlichkeit</strong>, <span class="math inline">\(P(A|B)\)</span>. Der senkrechte Strich bedeutet “gegeben”. <span class="math inline">\(P(A|B)\)</span> ist also die Wahrscheinlichkeit von <span class="math inline">\(A\)</span> gegeben dass <span class="math inline">\(B\)</span> gilt. Die bedingte Wahrscheinlichkeit, die wir mit unserem Signifkanztest ermitteln wollen, könnte man also so schreiben: <span class="math inline">\(P(diese~oder~eine~noch~extremere~Abweichung~vom~Erwartungswert~der~H_0 | H_0)\)</span>. Da das ein ziemlich langer Ausdruck ist, schreibt man in der Regel dafür einfach nur <span class="math inline">\(p\)</span>. Man spricht dann von <em>p-Wert</em> oder englisch <em>p-value</em>.</p>
+<p><br /></p>
+<div class="boxBorder">
+<p>der p-Wert (<span class="math inline">\(p\)</span>), der (oft) im Rahmen eines Signifikanztests ermittelt wird, ist eine bedingte Wahrscheinlichkeit, die angibt, wie wahrscheinlich das beobachtete oder ein noch extremeres Ergebnis unter der Annahme der Gültigkeit der Nullhypothese (<span class="math inline">\(H_0\)</span>) ist.</p>
+</div>
+<p><br /></p>
+<p>Um diese Wahrscheinlichkeit zu ermitteln, greifen wir wieder auf Wissen über theoretische Wahrscheinlichkeitsverteilungen zurück. In diesem Fall benutzen wir eine Verteilung, die sich auf den <strong>Abstand zwischen Stichprobenmittelwerten und Erwartungswert der <span class="math inline">\(H_0\)</span></strong> bezieht. Stellen wir uns dazu vor, wir würden unzählig viele zufällige Stichproben der Größe <span class="math inline">\(n\)</span> (in unserem Fall war <span class="math inline">\(n= 50\)</span>) ziehen, sie lauter Musik aussetzen und die IQ-Werte messen. Von jedem der Strichprobenmittelwerte würden wir dann den Erwartungswert der <span class="math inline">\(H_0\)</span> (in unserem Fall 100 IQ-Punkte) abziehen. Dann würden wir uns die <strong>Verteilung dieser Differenzen</strong> ansehen. Unten sehen Sie dazu wieder das Ergebnis einer Simulation.</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-1-1.png" width="672" /> <br></p>
+<p>Diese Verteilung ist wieder eine Normalverteilung, die einen Erwartungswert (Mittelwert) von 0 hat. Denn wenn die <span class="math inline">\(H_0\)</span> stimmt, dann sollte die “wahre Differenz” zwischen der Population und dem von der <span class="math inline">\(H_0\)</span> erwarteten Wert ja schließlich 0 sein. Der von uns angenommene Stichprobenmittelwert von 96 IQ-Punkten entspricht einer Differenz vom <span class="math inline">\(H_0\)</span>-Erwartungswert von <span class="math inline">\(96 - 100 = -4\)</span> IQ-Punkten. Wir müssten nun noch ermitteln, wie wahrscheinlich diese oder eine noch extremere Abweichung unter der oben gezeigten Verteilung ist.</p>
+<p>Um nicht mit den IQ-Werten als Maßeinheit für die beobachtete Differenz arbeiten zu müssen, können wir diese wieder in Streuungseinheiten der Verteilung umrechnen. Das erlaubt uns im Anschluss, einfach mit der standardisierten Normalverteilung zu arbeiten. Wir teilen dazu die gemessene Differenz durch den Standardfehler der Verteilung:</p>
+<p><span class="math inline">\(standardisierte~Abweichung:~z = \frac{M - \mu}{SE} = \frac{M - \mu}{\frac{\sigma}{\sqrt{n}}}= \frac{-4}{\frac{15}{\sqrt{50}}}= -1,89\)</span>.</p>
+<p>Hier nun noch einmal die Standardnormalverteilung:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><br></p>
+<p>Wie Sie sehen, entspricht unsere gefundene Abweichung von <span class="math inline">\(-4\)</span> IQ-Punkten einer standardisierten Abweichung von <span class="math inline">\(z = -1,89\)</span>. Dieser Wert ist in der Abbildung auch auf der x-Achse markiert. Außerdem ist die Fläche unter der Kurve markiert, die diesen und alle noch extremeren Abweichsungswerte umfasst. Der Anteil dieser Fläche ist über de Abbildung mit <span class="math inline">\(Probability~= 0.02938\)</span> angegeben. Dieser Wert ist das Ergebnis unseres Signifikanztests. Also: Unter der Annahme, dass die wahre Differenz <span class="math inline">\(\mu~= 0\)</span> ist, beobachtet man eine Differenz, die mindestens so extrem in den negativen Bereich von 0 abweicht, wie die von uns ermittelte (also von <span class="math inline">\(-4\)</span> IQ-Punkten bzw. <span class="math inline">\(-1,89 z\)</span>) mit einer Wahrscheinlichkeit von (gerundet) <span class="math inline">\(p~= .03\)</span>. (Da es sich bei <span class="math inline">\(p\)</span> um eine Wahrscheinlichkeit handelt, die nur Werte zwischen 0 und 1 annehmen kann, lässt man die <span class="math inline">\(0\)</span> vor dem Dezimaltrennzeichen in der Regel weg. Außerdem benutzt man bei der Angabe von p-Werten die englische Schreibweise, bei der Punkte “.” statt Kommas “,” als Dezimaltrennzeichen benutzt werden.)</p>
+<p><br></p>
+</div>
+<div id="statistische-signifikanz" class="section level2">
+<h2><span class="header-section-number">1.3</span> Statistische Signifikanz?</h2>
+<p>Ist dieses gefundene Ergebnis nun <strong>“statistisch signifikant”</strong>? Ab wann spricht man von “statistischer Signifikanz”? Man sagt, dass ein Befund/ eine Beobachtung dann statistisch signifikant ist, wenn sie unter der Annahme der <span class="math inline">\(H_0\)</span> sehr unwahrscheinlich ist. Den Grenzwert, der dafür in den allermeisten Fällen herangezogen wird, ist <span class="math inline">\(p &lt; .05\)</span>. Das heißt, man spricht dann von statistischer Signifikanz, wenn das beobachtete Ereignis in den Randbereich der theoretischen Verteilung fällt, in dem 5% der Ereignisse fallen. In diesem Fall verwirft man dann die <span class="math inline">\(H_0\)</span>, das heißt, man tut dann so, als wäre sie nicht (mehr) wahr (was man allerdings natürlich nie mit völliger Sicherheit wissen kann).</p>
+<p><br></p>
+</div>
+<div id="signifikanz-bei-ungerichteten-versus-gerichteten-vorhersagen" class="section level2">
+<h2><span class="header-section-number">1.4</span> Signifikanz bei “ungerichteten” versus “gerichteten” Vorhersagen</h2>
+<p>Dieses Kriterium von <span class="math inline">\(p &lt; .05\)</span> scheint in unserem Fall erfüllt zu sein, denn der gemessene z-Wert von <span class="math inline">\(-1,89\)</span> markiert eine linke Randfläche unter der Verteilung, die nur noch einem Anteil von 3% entspricht (was weniger als 5% sind). Doch wir müssen nun noch eine weitere Sache bedenken. In unserem Beispiel sind wir davon ausgegangen, dass die ForscherInnen lediglich vorhergesagt hätten, dass sich der IQ unter der Bedingung “laute Musik” vom Normalwert unterscheidet <em>aber nicht</em>, in welche Richtung der Unterschied geht. Wo ist das Problem? Die ForscherInnen hätten auch dann die <span class="math inline">\(H_0\)</span> verworfen, wenn der IQ-Mittelwert der Stichprobe deutlich größer als 100 gewesen wäre. In einem solchen Fall einer “ungerichteten” Vorhersage spricht man deshalb nur dann von einem signifikanten Befund, wenn der gefundene Wert <em>außerhalb der mittleren 95% der Fläche unter der Verteilung</em> liegt. Wir sprechen also im Falle einer solchen ungerichteten Vorhersage nur dann von einem signifikanten Ergebnis, wenn die <strong>linke UND die rechte Randfläche</strong> unter der Verteilung, die durch den <em>Betrag</em> des gefundenen Abweichungswerts markiert wird, in Summe kleiner als 5% ist. Das ist allerdings in unserem Fall nicht so. Schauen wir uns folgende Abbildung an:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-3-1.png" width="672" /> <br></p>
+<p>Der Flächenanteil in den Rändern, der von <span class="math inline">\(+/- 1.89 z\)</span> markiert wird, beträgt (gerundet) 5.9%. Im Falle einer ungerichteten Vorhersage entspricht dieser Wert dem empirisch gefundenen p-Wert (<span class="math inline">\(p = .059\)</span>), der mit dem Grenzwert von <span class="math inline">\(.05\)</span> abgeglichen werden muss. Diesen Grenzwert von <span class="math inline">\(.05\)</span> nennt man auch <strong>Signifikanzniveau</strong>. In unserem Fall ist der empirisch gefunden p-Wert somit größer als das Signifikanzniveau. Somit sprechen wir in unserem Fall von einem <em>nicht-signifikanten</em> Ergebnis und behalten die <span class="math inline">\(H_0\)</span> bei. Wir würden uns deshalb so verhalten, als wäre es wahr, dass laute Musik den IQ von Menschen <em>nicht</em> verändert.</p>
+<p>Was, wenn die Vorhersage “gerichtet” gewesen wäre, also die ForscherInnen z.B. vorhergesagt hätten, dass laute Musik zu einer Verringerung des IQ führt? In diesem Fall würde man sich tatsächlich nur die Seite der Verteilung ansehen, die in der <em>vorhersagekonformen Richtung</em> liegt. Das wäre in unserem Fall die “negative” bzw. linke Seite der Verteilung gewesen. Bei einer gerichteten Vorhersage hätten wir dann ein signifikantes Ergebnis erhalten, da, wie wir gesehen haben, die Randfläche unter der Verteilung links vom empirischen z-Wert von <span class="math inline">\(-1.89\)</span> weniger als 5% der Gesamtfläche unter der Verteilung beträgt. Wir hätten dann die <span class="math inline">\(H_0\)</span> verworfen und uns so verhalten, als würde es stimmen, dass laute Musik den IQ tatsächlich verringert. Allerdings hätten wir bei dieser gerichteten Vorhersage die <span class="math inline">\(H_0\)</span> auch dann beibehalten müssen, wenn wir einen ungewöhnlich hohen IQ-Wert gefunden hätten. Denn mit der Vorhersage, dass laute Musik den IQ verringert, wäre eine solche Beobachtung schließlich nicht vereinbar gewesen.</p>
+<p>Also:</p>
+<ul>
+<li><p>bei einer ungerichteten Vorhersage muss der empirisch gefundene Wert in einen der beiden Randbereiche hineinfallen, die <strong>in Summe</strong> fünf Prozent der Fläche unter der Verteilung ausmachen.</p></li>
+<li><p>bei einer gerichteten Vorhersage muss der empirisch gefundene Wert in den <strong>vorhersagekonformen Randbereich</strong> hineinfallen, der fünf Prozent der Fläche unter der Verteilung ausmacht.</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="t-test" class="section level2">
+<h2><span class="header-section-number">1.5</span> t-Test</h2>
+<p>Im Titel dieser Sitzung steht doch “t-Test” und in der Vorlesung hatten Sie auch über “t-Tests” gesprochen. Wo kommt jetzt also der t-Test ins Spiel? Genau wie beim Thema Konfidenzintervalle haben wir das Prinzip des Signifikanztestens oben zunächst anhand der Normalverteilung besprochen. Einen Signifikanztest auf Basis der Normalverteilung nennt man auch <strong>z-Test</strong>. Wie bei der Konstruktion von Konfidenzintervallen sollte man Signifikanztest auf Basis der Normalverteilung nur dann durchführen, wenn bei der Bestimmung des Standardfehlers (<span class="math inline">\(SE\)</span>) keine Unsicherheit bezüglich der Populationsstreuung (<span class="math inline">\(s\)</span>) besteht. Wann immer man die Populationsstreuung nicht kennt, und diese für die Ermittlung von <span class="math inline">\(SE\)</span> auf Basis der Stichprobe schätzen muss, sollte man also stattdessen einen Signifikanztest durchführen, der auf der t-Verteilung anstatt der Normalverteilung beruht. Die t-Verteilung berücksichtigt schließlich Unsicherheit (bzw. Fehlerhaftigkeit) der Schätzung der Populationsstreuung. In diesem Fall müssten wir die Abweichung des Stichprobenmittelwerts vom von der <span class="math inline">\(H_0\)</span> vorhergesagten Wert wie folgt standardisieren:</p>
+<p><span class="math inline">\(standardisierte~Abweichung:~t = \frac{M - \mu}{SE} = \frac{M - \mu}{\frac{s}{\sqrt{n}}}= \frac{-4}{\frac{15}{\sqrt{50}}}= -1,89\)</span>.</p>
+<p>Hier ist <span class="math inline">\(\sigma\)</span> einfach durch <span class="math inline">\(s\)</span> ersetzt worden, ansonsten ändert sich nichts. Wir müssen aber annehmen, dass der eingesetzte Streuungswert von 15 nicht der wahre Wert der Streuung der Populationswerte ist, sondern eben der auf Basis der Stichprobe <em>geschätzte</em> Wert. Wenn wir <span class="math inline">\(s~=15\)</span> einsetzen, ist unserer resultierender t-Wert natürlich in diesem Fall identisch mit dem zuvor berechneten z-Wert; <span class="math inline">\(t~= -1.89\)</span>. Was sich nun im Vergleich zum obigen Beispiel aber ändert, ist die theoretische Verteilung, die wir zur Beurteilung dieses standardisierten Werts heranziehen. Wir benutzen jetzt die t-Verteilung (deshalb t-Wert und nicht z-Wert).</p>
+<p>Unten Sehen sie die entsprechende standardisierte t-Verteilung für unsere Stichprobengröße von <span class="math inline">\(n = 50\)</span> (Freiheitsgrade <span class="math inline">\(= n - 1 = 49\)</span>). Die Abbildung zeigt auch den p-Wert des t-Tests für den Fall der ungerichteten Vorhersage.</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-4-1.png" width="672" /> <br></p>
+<p>Der rote Flächenanteil entspricht in diesem Fall einem p-Wert von <span class="math inline">\(p~= .065\)</span>. Generell gilt, dass die p-Werte, die durch einen t-Test ermittelt werden, größer sind, als die p-Werte, die durch einen auf der Normalverteilung beruhenden z-Test ermittelt werden. Man könnte also auch sagen, dass der t-Test “strenger” ist als der z-Test; man benötigt beim t-Test eine extremere Beobachtung, um von einem signifikanten Ergebnis sprechen zu können. Der Unterschied wir allerdings (Sie ahnen es sicher!) umso kleiner, je größer die Stichprobe ist auf der der Test basiert.</p>
+<p>Bevor Sie weiterlesen, hier noch ein sehr anschauliches Video, das den Signifikanztest für den “Einstichprobenfall” noch einmal super erklärt:</p>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/rbYg5IsOYaM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br></p>
+<p><br></p>
+</div>
+<div id="zusammenhang-von-einstichprobensignifikanztest-und-95-ki-einer-populationsmittelwertsschätzung" class="section level2">
+<h2><span class="header-section-number">1.6</span> Zusammenhang von Einstichprobensignifikanztest und 95% KI einer Populationsmittelwertsschätzung</h2>
+<p>Schauen wir uns noch an, in welchen Zusammenhang das Ergebnis eines Einstichprobensignifikanztests und das 95% KI für die Schätzung eines Populationsmittelwerts stehen.</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto auto auto 0;" /></p>
+<p><br></p>
+<p>In dieser Abbildung ist der gefundene Stichprobenmittelwert von 96 IQ-Punkten als Schätzwert für den Populationsparameter <span class="math inline">\(\mu\)</span> als schwarzes Kästchen dargestellt. Das 95% Konfidenzintervall des Schätzwerts [91.76, 100.24] ist als Fehlerbalken eingezeichnet. Die rote Linie bei 100 IQ-Punkten kennzeichnet den Erwartungswert des Populationsparameters, wie er von der <span class="math inline">\(H_0\)</span> angenommen wird. Die rote transparente Fläche kennzeichnet den Bereich um den unter der <span class="math inline">\(H_0\)</span> angenommenen Populationsparameter, in den 95% aller Stichprobenmittelwerte fallen würden, wenn die <span class="math inline">\(H_0\)</span> wahr ist. Diese rote Fläche ist genauso breit, wie das 95% KI des Stichprobenmittelwerts. Wie man sieht, liegt der Stichprobenmittelwert von 96 IQ-Punkten noch innerhalb dieser roten Fläche. Wann immer das der Fall ist, schließt natürlich auch das Konfidenzintervall des Stichprobenmittelwerts den von der <span class="math inline">\(H_0\)</span> vorhergesagten Populationsparameter mit ein (die rote Linie bei 100 IQ-Punkten liegt innerhalb des schwarzen 95% KI des mittels Stichprobe geschätzten Populationsmittelwerts). Wenn der Erwartungswert der <span class="math inline">\(H_0\)</span> innerhalb des 95% KI des geschätzten Populationsmittelwerts liegt, dann wollen wir nicht ausschließen, dass der wahre Populationsmittelwert tatsächlich der von der <span class="math inline">\(H_0\)</span> vorhergesagte sein könnte. In diesem Fall ist auch der statistische Test nicht signifikant (d.h., <span class="math inline">\(p &gt; .05\)</span>). Der vom Signifikanztest ermittelte p-Wert würde erst dann kleiner sein als <span class="math inline">\(.05\)</span>, wenn der durch die Stichprobe geschätzte Mittelwert außerhalb der roten Fläche liegen würde. Die rote Fläche nenn man deshalb auch <strong>Beibehaltungsbereich</strong>, weil die <span class="math inline">\(H_0\)</span> immer beibehalten wird, sobald ein gefundener Stichprobenmittelwert in diesem Bereich liegt. Entsprechend nennt man alles außerhalb der roten Fläche <strong>Ablehnungsbereich</strong>. Fällt ein Stichprobenmittelwert in den Bereich außerhalb der roten Fläche, wird die <span class="math inline">\(H_0\)</span> ja abgelehnt bzw. verworfen.</p>
+<p><br></p>
+</div>
+</div>
+<div id="unabhängige-gruppen-unterscheidet-sich-der-mittelwert-von-population-a-von-dem-von-population-b" class="section level1">
+<h1><span class="header-section-number">2</span> Unabhängige Gruppen: Unterscheidet sich der Mittelwert von Population A von dem von Population B?</h1>
+<p>Eben haben wir gesehen, wie man einen Signifikanztest anwendet, um die Frage zu beantworten, wie sehr ein vermuteter Populationsmittelwert mit einem bestimmten theoretischen Wert vereinbar ist. Den Signifikanztest für diesen Fall nennt man auch <em>Einstichprobentest</em>, weil man den Test auf Basis einer Zufallsstichprobe aus der Population durchführt.</p>
+<p>Manchmal wird man sich aber auch fragen, ob sich die Mittelwerte zweier Populationen voneinander unterscheiden oder nicht. Da man für die Beantwortung dieser Frage mittels Signifikanztest zwei Zufallsstichproben benötigt (eine aus jeder Population), nennt man den entsprechenden Test (logisch!) <em>Zweichstichprobentest</em> (genauer gesagt Zweistichproben-t-Test, wenn man ihn auf Basis der t-Verteilung anstatt der Normalverteilung durchführt).</p>
+<p>Betrachten wir dazu ein neues (fiktives) Beispiel. Nehmen wir an, eine Gruppe von ÄrztInnen möchte die Hypothese prüfen, dass Menschen über 60 Jahre, die sich seit mindestens zwanzig Jahren vegan ernähren, andere Cholesterinwerte haben als Menschen, die sich nicht ausschließlich vegan ernähren. Um Versuchspersonen für die Studie zu gewinnen, werden Werbebroschüren in verschiedenen öffentlichen Einrichtung ausgelegt. Nach einer Weile haben sich zwanzig Personen aus jeder der beiden Populationen für die Studie gemeldet (Achtung: Kann man hier wirklich von Zufallsstichproben sprechen? Wir tun jetzt als wäre das so - aber das ist mehr als fraglich). Alle ProbandInnen werden in das Forschungsinstitut eingeladen, wo sie dann eine Blutprobe für die Cholesterinwertbestimmung abgeben.</p>
+<p>Ist die Vorhersage gerichtet oder ungerichtet? Es wird nicht gesagt, welche Population höhere bzw. niedrigere Werte haben soll. Daher ist die Hypothese ungerichtet.</p>
+<p>Nehmen wir, dass folgende Stichprobenwerte als Populationsschätzer gemessen wurden:</p>
+<p>Geschätzte Populationsmittelwerte und Streuungen:</p>
+<ul>
+<li><p>Gruppe “nicht-vegan”: <span class="math inline">\(M_{nv}~= 254.36\)</span> mg/dl; <span class="math inline">\(S_{nv}~= 41.71\)</span> mg/dl.</p></li>
+<li><p>Gruppe “vegan”: <span class="math inline">\(M_{v}~= 212.93\)</span> mg/dl; <span class="math inline">\(S_{v}~= 37.87\)</span> mg/dl.</p></li>
+</ul>
+<p>Hier eine grafische Zusammenfassung des Befunds:</p>
+<p><br></p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto auto auto 0;" /> <br></p>
+<div id="nullhypothese-beim-zweistichproben-t-test" class="section level2">
+<h2><span class="header-section-number">2.1</span> Nullhypothese beim Zweistichproben-t-Test</h2>
+<p>Um einen Signifikanztest durchzuführen, müssen wir wieder klären, was die Nullhypothese (<span class="math inline">\(H_0\)</span>) ist. Im Fall einer ungerichteten Vorhersage über die Unterschiedlichkeit von zwei Populationsmittelwerten ist die <span class="math inline">\(H_0\)</span>, dass sich die zwei Populationsmittelwerte <em>nicht</em> unterscheiden: <span class="math inline">\(H_0: \mu_{nv} - \mu_{v}~= 0\)</span>.</p>
+</div>
+<div id="t-test-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> t-Test</h2>
+<p>Sie können sich inzwischen sicher schon denken, wie es nun weitergeht. Für die Durchführung des Signifikanztests brauchen wir wieder Wissen über die Stichprobenkennwertverteilung, die man erwarten würde, wenn die <span class="math inline">\(H_0\)</span> tatsächlich wahr wäre. Wenn man die Unterschiedlichkeit zweier Populationen testen will, fragt man sich, wie die <strong>Verteilung der Differenzen der geschätzten Populationsmittelwerte</strong> aussehen würde, wenn die <span class="math inline">\(H_0\)</span> stimmte, dass die Populationsmittelwerte gleich sind. Anders als im Einstichprobenfall von oben stellen wir uns nun vor, wir würden aus beiden Populationen lauter Zufallsstichproben ziehen und dann die Stichprobenmittelwerte voneinander abziehen und uns dann die Verteilung dieser <strong>Stichprobenmittelwertsdifferenzen</strong> ansehen. Wenn die <span class="math inline">\(H_0\)</span> wahr ist, dann hätte diese Verteilung natürlich wieder einen Mittelwert von <span class="math inline">\(0\)</span> und die Streuung wäre in diesem Fall der <strong>Standardfehler der Mittelwertsdifferenzen</strong>.</p>
+<p>Nehmen wir z.B. einfach einmal an, dass beide Populationen in Wahrheit einen mittleren Cholesterinwert von <span class="math inline">\(254.36\)</span> mg/dl hätten und eine Streuung von <span class="math inline">\(39.83\)</span> mg/dl (das sind jetzt einfach die gemittelten Werte aus beiden Stichproben); im Prinzip ist es völlig egal, welchen Wert wir für beide Mittelwerte annehmen, sie müssen lediglich gleich sein. Entscheidend ist der Wert für die gemittelte Streuung von <span class="math inline">\(s_{iB}~= 39.83\)</span>. Hier wieder das Ergebnis der Simulation für die Verteilung der Stichprobenmittelwertsdifferenzen:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-7-1.png" width="672" /> <br></p>
+<p>Alles, was wir für unseren Signifikanztest brauchen, ist im Prinzip wieder Streuung dieser Verteilung, die unter der <span class="math inline">\(H_0\)</span> bei gegeben Stichprobengrößen bestehen würde: wir suchen also den <strong>Standardfehler der Mittelwertsdifferenzen</strong>. Dieser ist gegeben durch:</p>
+<p><span class="math inline">\(SE_{Mdiff}~= \sqrt{\frac{(n_1-1)\cdot s_1^2 + (n_2 -1)\cdot s_2^2}{(n_1-1)+(n_2-1)}\cdot (\frac{1}{n_1}+ \frac{1}{n_2})}\)</span></p>
+<p>Wenn die Stichprobengrößen identisch sind, dann lässt sich diese Formel (zum Glück) noch vereinfachen zu:</p>
+<p><span class="math inline">\(SE_{Mdiff}~= \sqrt{(s_1^2 + s_2^2)\cdot (\frac{1}{n})}\)</span>.</p>
+<p>Wie Sie sehen, brauche wir für die Bestimmung des <span class="math inline">\(SE\)</span> der Mittelwertsdifferenzen wieder Schätzungen der Streuungen für beide Populationen (<span class="math inline">\(s_1\)</span> und <span class="math inline">\(s_2\)</span>), die wir auf Basis der Stichproben gewonnen haben. Setzen wir alle Werte ein, so erhalten wir:</p>
+<p><span class="math inline">\(SE_{Mdiff}~= \sqrt{(41.71^2 + 37.87^2)\cdot (\frac{1}{50})}~= 12.60\)</span>.</p>
+<p>Die in der Untersuchung geschätzte Mittelwertsdifferenz war: <span class="math inline">\(M_{nv} - M_{v}~= 254.36 - 212.93~= 41.43\)</span> mg/dl. Wir könnten jetzt die obige Verteilung benutzen und prüfen, ob diese Differenz außerhalb der mittleren 95% der Fläche liegt. Wir benutzen dafür aber wieder die standardisierte Verteilung, d.h., wir rechnen die Differenz wieder in Streuungseinheiten (genauer gesagt <span class="math inline">\(SE_{Mdiff}\)</span>-Einheiten) um:</p>
+<p><span class="math inline">\(t = \frac{M_{1} - M_{2}}{SE_{Mdiff}}= \frac{M_{nv} - M_{v}}{SE_{Mdiff}} = \frac{41.43}{12.60}~= 3.29\)</span>.</p>
+<p>Da wir (weil wir die wahren Populationsstreuungen ja gar nicht kennen) als Prüfverteilung wieder die t-Verteilung anstelle der Normalverteilung heranziehen, haben wir den oben berechneten standardisierten Wert für die Mittelwertsdifferenz von <span class="math inline">\(3.29\)</span> bereits mit <span class="math inline">\(t\)</span> (statt <span class="math inline">\(z\)</span>) bezeichnet.</p>
+<p>Hier die (standardisierte) t-Verteilung für die Mittelwertsdifferenzen bei Stichproben von <span class="math inline">\(N = n_1 + n_2 = 20 + 20 = 40\)</span> (Freiheitsgrade <span class="math inline">\(= n-1 + n-1 = 38\)</span>).</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+<p>Die äußeren Randflächen, die durch den gefundenen empirischen t-Wert abgegrenzt werden, sind auch wieder in rot eingetragen aber diesmal so klein, dass wir sie kaum erkennen können. Über der Abbildung steht wieder der Flächenanteil, den diese roten Flächen in Summe einnehmen: <span class="math inline">\(p = .002\)</span>.</p>
+<p>Das ist bereits das Ergebnis unseres t-Tests. Da dieser Wert kleiner als das Signifikanzniveau von <span class="math inline">\(.05\)</span> ist, sprechen wir von einem signifikanten Testergebnis und entschließen uns, die <span class="math inline">\(H_0\)</span> zu verwerfen. Wir verhalten uns nun also so, als ob sich die Cholesterinwerte von Leuten über 60 Jahren, die sich seit mindestens 20 Jahren vegan ernähren, von den Werten jener Leute über 60 Jahren, die sich nicht vegan ernähren unterscheiden.</p>
+<p>Wir haben eben die Entscheidung über die <span class="math inline">\(H_0\)</span> auf Basis des Vergleichs von <span class="math inline">\(p\)</span> und dem Signifikanzniveau getroffen (<span class="math inline">\(p &lt; .05\)</span>). Eine andere Möglichkeit wäre gewesen, zu schauen, ob der empirische <span class="math inline">\(t\)</span>-Wert jenseits der Grenze des <em>kritischen</em> t-Werts liegt. Der kritische t-Wert der unter der gegeben t-Verteilung Randflächen abgrenzt, die 5% der Fläche ausmachen ist unten gezeigt:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-9-1.png" width="672" /> <br></p>
+<p>Der von uns gefundene empirische <span class="math inline">\(t\)</span>-Wert von <span class="math inline">\(3.29\)</span> liegt jenseits des kritischen Werts von <span class="math inline">\(t_{krit}(38)~= 2.02\)</span> (die Zahl in Klammern nach dem <span class="math inline">\(t\)</span> sind die Freiheitsgrade) und wir würden die <span class="math inline">\(H_0\)</span> damit verwerfen.</p>
+<p>Also, es gibt immer zwei Möglichkeiten, über die <span class="math inline">\(H_0\)</span> zu entscheiden:</p>
+<ul>
+<li>prüfen, ob <span class="math inline">\(p\)</span> kleiner ist als das Signifikanzniveau von <span class="math inline">\(.05\)</span> oder</li>
+<li>prüfen, ob der empirische <span class="math inline">\(t\)</span>-Wert jenseits des kritischen <span class="math inline">\(t\)</span>-Werts liegt.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="angabe-einer-effektgröße-cohens-d" class="section level2">
+<h2><span class="header-section-number">2.3</span> Angabe einer Effektgröße: Cohen’s d</h2>
+<p>Wie der Signifikanztest für den Zweistichprobenfall funktioniert, wissen Sie jetzt. Kommen wir noch einmal auf die geschätzte Cholesterin-Mittelwertsdifferenz von <span class="math inline">\(41.43\)</span> mg/dl zurück. Diese Differenz könnte man auch als den <strong>“geschätzten Effekt”</strong> bzw. als “Effektgröße” bezeichnen. Wenn man Signifikanztests macht, gibt man in der Regel nicht nur an, ob der Test signifikant war, sondern auch, wie groß der gefundene Effekt ist. Die Größe des geschätzten Effekts gibt man dabei in der Regel auch in standardisierter Form an. Das hat den Vorteil, dass die Einheiten dann egal sind. Stellen Sie sich vor, eine andere Forschungseinrichtung führt eine identische Studie durch, misst den Cholesterinwert aber nicht in mg/dl sondern in g/ml. Für einen Vergleich der Effekte zwischen beiden Studien müsste man dann erst alles in dieselbe Einheit umrechnen. Um diesen Schritt zu sparen, gibt man Effekte deshalb standardisiert in Streuungseinheiten an. Diese Effektgröße nennt man <em>Cohen’s d</em>. Im Zweistichprobenfall ist diese gegeben durch:</p>
+<p><span class="math inline">\(d~= \frac{M_1 - M_2}{s_{iB}}\)</span>.</p>
+<p>wobei <span class="math inline">\(s_{iB}\)</span> die “gepoolte” bzw. “gemittelte” Streuung in den Bedingungen ist:</p>
+<p><span class="math inline">\(s_{iB}~= \sqrt{\frac{(n_1 - 1)\cdot s_1^2 +(n_2 - 1)\cdot s_2^2}{n_1 + n_2 -2}}\)</span></p>
+<p>Cohen’s d gibt somit den Mittelwertsunterschied in (mittleren) Streuungen an. In unserem Fall erhalten wir <span class="math inline">\(d~= \frac{41.43}{39.83}~= 1.04\)</span>. Das heißt, der Mittelwert der Bedingung “nicht vegan” liegt ca. eine Standardabweichung über dem Mittelwert der Bedingung “vegan”. Man spricht in diesem Fall von einem “großen” Effekt. Die Kriterien für die Einteilung der Effektgrößen sind:</p>
+<ul>
+<li>Kleiner Effekt: <span class="math inline">\(0.2 &lt;= d &lt; 0.5\)</span></li>
+<li>Mittlerer Effekt: <span class="math inline">\(0.5 &lt;= d &lt; 0.8\)</span></li>
+<li>Großer Effekt: <span class="math inline">\(0.8 &lt;= d &lt; 1.2\)</span></li>
+</ul>
+<p><br></p>
+<div id="konfidenzintervall-für-d" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Konfidenzintervall für d</h3>
+<p>Auch für die standardisierte Effektgröße lässt sich ein 95% Konfidenzintervall angeben. Die Streuung von <span class="math inline">\(d\)</span> ist gegeben durch:</p>
+<p><span class="math inline">\(SE_d~= \sqrt{(\frac{1}{n_1}+\frac{1}{n_2}) + \frac{d^2}{2\cdot(n_1 + n_2)})}\)</span>.</p>
+<p>In unserem Fall ergibt sich <span class="math inline">\(SE_d~= 0.34\)</span>. Die Effektgröße <span class="math inline">\(d\)</span> kann also normalverteilt angesehen werden, daher sind die kritischen z-Werte für ein 95% KI <span class="math inline">\(+/- 1.96\)</span>. Damit erhalten wir ein KI von:</p>
+<ul>
+<li>Untergrenze: <span class="math inline">\(d - SE_d \cdot 1.96~= 1.04 - 0.34 \cdot 1.96~= 0.37\)</span>.</li>
+<li>Obergrenze: <span class="math inline">\(d + SE_d \cdot 1.96~= 1.04 + 0.34 \cdot 1.96~= 1.71\)</span>.</li>
+</ul>
+<p>Auch das können wir natürlich grafisch darstellen:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Die rote Linie markiert einen Nulleffekt (Cohen’s <span class="math inline">\(d~ = 0\)</span>). Das ermittelte 95% KI von <span class="math inline">\(d\)</span> schließt diesen Nulleffekt nicht ein. Auch diese Analyse zeigt also, dass es nicht sehr plausibel ist, anzunehmen, dass die wahre Mittelwertsdifferenz <span class="math inline">\(0\)</span> ist.</p>
+<p>Natürlich kann man Cohen’s <span class="math inline">\(d\)</span> auch für den Einstichprobenfall bestimmen. Die Formel dafür finden Sie in Ihrer Formelsammlung.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="veränderung-unterscheidet-sich-der-populationsmittelwert-von-population-a-zum-zeitpunkt-t2-von-jenem-zum-zeiptunkt-t1" class="section level1">
+<h1><span class="header-section-number">3</span> Veränderung: Unterscheidet sich der Populationsmittelwert von Population A zum Zeitpunkt t2 von jenem zum Zeiptunkt t1?</h1>
+<p>Als letztes schauen wir uns an, wie man einen Signifikanztest für Fragen anwenden kann, die sich auf die Veränderung eines Populationsmittelwerts zwischen zwei Messzeitpunkten beziehen. Stellen wir uns dazu vor, die ForscherInnen, die sich für den Zusammenhang zwischen Ernährungsweise und Cholesterinwert interessieren, würden nun eine weiterführende Studie durchführen, in der zuerst der Cholesterinwert einer Zufallsstichprobe von “Nicht-Veganern” gemessen wird. Dieselbe Stichprobe wird dann instruiert, sich fortan für ein Jahr lang vegan zu ernähren. Die ForscherInnen vermuten, dass sich der Cholesterinspiegel durch die Ernährungsumstellung absenken wird. Die ForscherInnen vermuten, dass das so sei. Es gibt außerdem eine Kontrollgruppe von “Nicht-Veganern”, die sich über das Jahr hinweg wie gewöhnlich ernähren soll. Jede Stichprobe besteht aus 100 Leuten. Nach einem Jahr werden von allen Personen erneut die Cholesterinwerte gemessen.</p>
+<p>Die Ergebnisse der Studie sehen so aus:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Die Säulen zeigen die Cholesterinmittelwerte der Gruppen zu den beiden Zeitpunkten. Die grauen Punkte und Linien sind die individuellen Cholesterinwerte der verschiedenen Personen. Die Abbildung zeigt, dass sich die Werte der meisten Personen in der Gruppe, die nach der ersten Messung auf eine vegane Ernährung umgestiegen sind abgesenkt haben. In der Gruppe, die sich wie immer ernährt hat, gibt es dagegen keine systematische Veränderung.</p>
+<p>Zurück zu den Vorhersagen. Die Vermutung der ForscherInnen war, dass sich die Werte der Gruppe, die auf vegane Ernährung umsteigt, absenken. Die Vorhersage bezieht sich also auf eine Veränderung. Genauer gesagt: Der Mittelwert der Veränderung soll negativ sein. In der Kontrollgruppe soll der Mittelwert der Veränderung dagegen <span class="math inline">\(0\)</span> sein.</p>
+<p>Die Nullhypothese <span class="math inline">\(H_0\)</span> für beide Gruppen ist somit: Der Mittelwert der Veränderung zwischen Baseline und Follo-up ist <span class="math inline">\(0\)</span>. Für die “vegane” Gruppe vermuten die ForscherInnen natürlich, dass diese eigentlich falsch ist, während sie glauben, dass sie für die “reguläre” Gruppe wahr ist.</p>
+<p>Schauen wir uns die Mittelwerte der Veränderung in beiden Bedingungen an:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>In der Gruppe, die zu veganer Ernährung wechselt, ist der Mittelwert der Veränderung:</p>
+<pre><code>## [1] -34.15702</code></pre>
+<p>Außerdem zeigt die Abbildung, dass das 95% KI der mittleren Veränderung eine Veränderung von <span class="math inline">\(0\)</span> nicht einschließt.</p>
+<p>In der Gruppe, die weiter isst, wie zu vor, ist die mittlere Veränderung:</p>
+<pre><code>## [1] -3.765608</code></pre>
+<p>Außerdem sehen wir hier, dass das Konfidenzintervall der mittleren Veränderung die <span class="math inline">\(0\)</span> einschließt.</p>
+<p>Mit dieser Information können wir schon sehen, welche Ergebnisse der Signifikanztest liefern wird. Für die “vegane” Gruppe wird die <span class="math inline">\(H_0\)</span> verworfen werden, während sie für die “reguläre” Gruppe beibehalten werden wird.</p>
+<div id="signifikanztest" class="section level2">
+<h2><span class="header-section-number">3.1</span> Signifikanztest</h2>
+<p>In diesem Fall ist die theoretische Prüfverteilung eine, die sich auf die mittlere Veränderung bezieht, die von der <span class="math inline">\(H_0\)</span> vorhergesagt wird: Also eine Verteilung mit Mittelwert <span class="math inline">\(0\)</span>. Wir könnten also hier auch sagen, dass unsere Zufallstichprobe aus den Veränderungen zwischen den beiden Zeitpunkten besteht und dass der Mittelwert dieser Veränderungen der Schätzwert für die mittlere Veränderung der Population ist.</p>
+<p>Die Streuung der Verteilung der mittleren Veränderungen ist der Standardfehler der mittleren Veränderungen, gegeben durch:</p>
+<p><span class="math inline">\(SE_{Veränd.}~= \frac{s_{Veränd.}}{\sqrt{n}}\)</span>.</p>
+<p>Wir teilen also die Streuung der Veränderungen durch die Wurzel aus der Stichprobengröße. Die Formel ist also identisch mit der Formel für <span class="math inline">\(SE\)</span> für den Einstichprobenfall, nur benutzen wir hier eben die Streuung der Veränderungen.</p>
+<p>Die geschätzte Streuung der Veränderungen für die Gruppe “vegan” ist:</p>
+<pre><code>## [1] 30.21541</code></pre>
+<p>Und für die Gruppe “reguläre Ernährung”:</p>
+<pre><code>## [1] 24.78346</code></pre>
+<p>berechnen wir <span class="math inline">\(SE\)</span> für beide Gruppen.</p>
+<p>Bedingung “vegan”:</p>
+<ul>
+<li><p><span class="math inline">\(SE_{Veränderung~vegan}~= \frac{30.22}{\sqrt{100}}~= 3.02\)</span></p></li>
+<li><p><span class="math inline">\(SE_{Veränderung~regulär}~= \frac{24.78}{\sqrt{100}}~= 2.48\)</span></p></li>
+</ul>
+<p>Um standardisierte Werte für die mittleren Veränderungen beider Gruppen zu erhalten teilen wir die gefundenen mittleren Veränderungen durch die entsprechenden Standardfehler.</p>
+<ul>
+<li><p>Bedingung “vegan”: <span class="math inline">\(t~= \frac{M_{Veränderung~vegan}}{SE_{Veränderung~vegan}}~= \frac{-34.16}{3.02}~= -11.3\)</span></p></li>
+<li><p>Bedingung “regulär”: <span class="math inline">\(t~= \frac{M_{Veränderung~regulär}}{SE_{Veränderung~regulär}}~= \frac{-3.77}{2.48}~= -1.52\)</span></p></li>
+</ul>
+<p>Nun können wir wieder unter der entsprechenden t-Verteilung nachsehen, welcher Flächenanteil mit den jeweiligen empirischen t-Werten abgegrenzt wird. Zuerst für die Gruppe “regulär”:</p>
+<p><br></p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-17-1.png" width="672" /> Für die Gruppe, die sich weiter wie gewohnt ernährt, erhalten wir also einen p-Wert von <span class="math inline">\(p~= .13\)</span>. Da dieser Wert größer ist als <span class="math inline">\(.05\)</span> behalten wir für diese Bedingung die <span class="math inline">\(H_0\)</span> bei. Wir verhalten uns also so, als ob sich die Werte hier in der Population nicht verändert haben.</p>
+<p>Nun für die Gruppe, die sich nach der ersten Messung für ein Jahr vegan ernährt hat:</p>
+<p><img src="page-06mdiffs_files/figure-html/unnamed-chunk-18-1.png" width="672" /> Da es für diese Bedingung eine <em>gerichtete Vorhersage</em> gemacht wurde, nämlich dass sich die Cholesterinwerte absenken, müssen wir in diesem Fall auch nur zu dieser Veränderung passenden Seite der Verteilung betrachten. Das nennt man dann auch “gerichtete” oder “einseitige” Signifikanztestung. In der Abbildung oben sehen Sie, wie weit am linken Rand der empirische t-Wert von <span class="math inline">\(-11.3\)</span> liegt. Die rote Fläche links davon kann man gar nicht mehr erkennen. Entsprechend klein ist die Wahrscheinlichkeit, eine solch extreme Veränderung zu finden, wenn die <span class="math inline">\(H_0\)</span> wahr ist: der p-Wert ist <span class="math inline">\(p~= 8.2e-20\)</span>. Das heißt, <span class="math inline">\(p = 0.000000000000000000008192\)</span>. Wir verwerfen somit die <span class="math inline">\(H_0\)</span>. Wir verhalten uns nun so, als wäre die mittlere Veränderung in der Population tatsächlich negativ.</p>
+<p><br></p>
+</div>
+<div id="effektstärke" class="section level2">
+<h2><span class="header-section-number">3.2</span> Effektstärke</h2>
+<p>Auch mittlere Veränderungen lassen sich als standardisierte Effektgröße angeben:</p>
+<p><span class="math inline">\(d_{Veränderung}~= \frac{M_{Veränderung}}{s_{Veränderung}}\)</span>.</p>
+<p>Für die Bedingung “vegan” ergibt sich ein Veränderungseffekt von:</p>
+<ul>
+<li><span class="math inline">\(d_{Veränderung~vegan}~= \frac{-34.16}{30.22}~= -1.13\)</span>.</li>
+</ul>
+<p>Das ist ein großer Effekt. Für die Bedingung “regulär” berechnen wir keine Effektgröße, da wir hier nicht davon ausgehen, dass es überhaupt einen Effekt gibt.</p>
+<p><br></p>
+</div>
+<div id="ein-video" class="section level2">
+<h2><span class="header-section-number">3.3</span> Ein Video</h2>
+<p>Zum Abschluss des Theorieteils hier noch ein Link zu einem YouTube-Video, in dem die beiden letzten Signifikanztests nochmal sehr schön erklärt werden.</p>
+<p><br></p>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/RRIsBFW8ovc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br></p>
+<p><br></p>
+</div>
+</div>
+<div id="durchführung-in-excel" class="section level1">
+<h1><span class="header-section-number">4</span> Durchführung in Excel</h1>
+<p>Nun sollen Sie natürlich noch sehen, wie man die ganzen Tests in Excel durchführen kann. Die Excel-Datei mit den Daten zu allen Beispielen von oben finden <a href="q1_dataFiles/06_Signifikanztests.xlsx">hier</a>.</p>
+<p>In dieser Sitzung gibt es für die Vorführung in Excel Videos statt Beschreibungen.</p>
+<p><br></p>
+<div id="einstichproben-t-test" class="section level2">
+<h2><span class="header-section-number">4.1</span> Einstichproben-t-Test</h2>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/Lo_azVAVHQM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br></p>
+<p><br></p>
+</div>
+<div id="zweistichproben-t-test" class="section level2">
+<h2><span class="header-section-number">4.2</span> Zweistichproben-t-Test</h2>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/LbmbVpzKY5c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br></p>
+<p><br></p>
+</div>
+<div id="parrdifferenzen-t-test" class="section level2">
+<h2><span class="header-section-number">4.3</span> Parrdifferenzen-t-Test</h2>
+<p><br> <iframe width="560" height="315" src="https://www.youtube.com/embed/OWatsfT6MLM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br></p>
+</div>
+</div>
+
+<p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
