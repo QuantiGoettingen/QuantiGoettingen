@@ -1,0 +1,92 @@
+---
+title: "Therapien bei Spinnenphobie"
+author: "Neele Engelmann"
+date: "6 6 2021"
+output: html_document
+---
+
+Forscher*innen untersuchen die Wirksamkeit zweier unterschiedlicher Therapieformen gegen Spinnenphobie. In einer Therapieform gibt es Gesprächstherapie plus Exposition mit Bildern von Spinnen, in der anderen Therapieform gibt es Gesprächstherapie plus Exposition mit realen Spinnen.
+
+Es soll untersucht werden, ob die Dauer der Therapie (in Wochen) mit der Symptomverbesserung zusammenhängt und ob sich dieser Zusammenhang eventuell zwischen den beiden Therapieformen unterscheidet.
+
+Die Symptomatik wurde operationalisiert als die Zeit in Minuten, die es Patient*innen aushalten, in einem Raum mit einer Spinne zu sein. Wenn sich die Symptome verbessern, sollten also höhere Werte auf diesem Maß beobachtet werden.
+
+Es handelt sich um unabhängige Stichproben. Das heißt, es wurden *nicht* dieselben Leute über einen längeren Zeitraum beobachtet, sondern es wurden Patient*innen getestet, die sich jeweils an unterschiedlichen Punkten in ihrem Therapieverlauf befanden. 
+
+Es wurden folgende Hypothesen aufgestellt:
+
+- Die Symptomverbesserung ist generell abhängig von der Therapiedauer.
+
+- Die Verbesserung verläuft in den beiden Therapiegruppen unterschiedlich schnell.
+
+**Aufgaben**:
+
+1) Stellen Sie die zugehörigen statistischen Hypothesen über Prädiktoren auf (siehe FS multiple Regression). 
+
+2) Erstellen Sie mit dem Commander eine Abbildung, in der die Verläufe der beiden Gruppen zu sehen sind (ein gruppiertes Streudiagramm mit Kleinstquadratlinien). Interpretieren Sie die Abbildung, welche Effekte deuten sich an?
+
+3) Berechnen Sie ein lineares Modell. Nehmen Sie beide Faktoren und ihre Interaktion ins Modell auf. Interpretieren Sie die erhaltenen Regressionskoeffizienten.
+
+
+**Statistische Hypothesen**:
+
+Haupteffekt Dauer der Therapie:
+
+H1: beta (Dauer) =/= 0, H0: beta (Dauer) = 0
+
+Interaktion Dauer x Art der Therapie:
+
+H1: beta (Art x Dauer) =/= 0, H0: beta (Art x Dauer) = 0
+
+**Daten einlesen, Commander laden, Abbildung erstellen**
+
+```{r}
+#Einlesen
+Spinnenphobie <- read.csv("Spinnenphobie.csv", sep=";")
+
+#Therapie zum Faktor machen
+Spinnenphobie$Therapie <- factor(Spinnenphobie$Therapie)
+
+#Commander laden
+library(Rcmdr)
+
+#Gruppiertes Streudiagramm
+scatterplot(Symptomatik~Dauer | Therapie, regLine=TRUE, smooth=FALSE, boxplots=FALSE, by.groups=TRUE, data=Spinnenphobie)
+```
+
+Man sieht: in beiden Gruppen scheint sich die Symptomatik mit steigender Therapiedauer zu verbessern.
+
+Allerdings scheint es auch Unterschiede zwischen den Gruppen zu geben: Die Steigung der Gerade ist steiler für die "Bilder"-Gruppe als für die "Tiere"-Gruppe.  Überraschenderweise scheinen sich die Symptome also zunächst schneller zu verbessern, wenn man noch gar nicht mit echten Spinnen geübt hat. 
+
+Nun prüfen wir, ob sich die aus dem Graphen abgelesenen Effekte statistisch bestätigen lassen.
+
+**Lineares Modell**
+
+```{r}
+summary(lm(Symptomatik~Dauer*Therapie,data=Spinnenphobie))
+```
+Interpretation der Koeffizienten:
+
+- Für jede zusätzliche Woche Therapie steigt die Dauer, die es Patient*innen aushalten, mit einer Spinne im selben Raum zu sein, um 0.7095 Minuten (Interpretation des Estimates für Dauer). Dieser Unterschied ist signifikant. (Da wir eine ungerichtete Hypothese hatten, dürfen wir den p-Wert hier nicht halbieren.)
+
+- Der Estimate für Therapie gibt hier folgendes an: wenn die Dauer der Therapie = 0 ist und Tiere statt Bilder genutzt werden, beträgt der Unterschied zur Bilder-Gruppe 3.6351 (siehe VL Interaktion Folie 12). (Auch hier dürfen wir den p-Wert nicht halbieren)
+
+- Wenn Tiere statt Bilder als Expositionsmaterial genutzt werden, reduziert sich Zusammenhang von Therapiedauer mit den Minuten, die Leute es mit der Spinne aushalten (zu sehen am negativen Vorzeichen des Interaktions-Estimates). Genau genommen reduziert sich der Estimate für den Koeffizient von Dauer (oben angeben mit 0.7095) um 0.3882. Wenn Tiere als Expositionsmaterial verwendet werden, ist der Koeffizient für den Zusammenhang von Dauer mit Symptomverbesserung also  0.7095 - 0.3882 = 0.3213. Diese Reduktion ist sigifikant (Da wir eine ungerichtete Hypothese hatten, dürfen wir den p-Wert hier nicht halbieren.)
+
+Um das Interaktionsmuster und die Bedeutung des Koeffizienten in diesem Fall besser zu verstehen, können wir uns auch zwei neue Teildatensätze für die beiden Therapiegruppen erstellen und für jede Gruppe ein lineares Modell anpassen (das ist jetzt Zusatz fürs Verständnis, nicht mehr Teil der regulären Aufgabe). Wenn unsere Interpretation von eben stimmt, dann sollte beta für Dauer in der Bilder-Gruppe 0.7095 bleiben (wie im obigen Modell), aber in der Tiere-Gruppe sollte es 0.3213 sein (wie eben berechnet):
+
+```{r}
+#Subsets erstellen
+Bilder <- subset(Spinnenphobie,Therapie=="Bilder")
+Tiere <- subset(Spinnenphobie,Therapie=="Tiere")
+
+#lineare Modelle anpassen
+summary(lm(Symptomatik~Dauer, data=Bilder))
+summary(lm(Symptomatik~Dauer, data=Tiere))
+```
+
+Wir sehen, dass unsere Interpretation stimmt. Der Test über den Interaktionsterm im ursprünglichen Modell kann uns, anders als diese separaten Modelle, zusätzlich sagen, dass der Unterschied in den Steigungen signifikant ist. 
+
+
+
+

@@ -1,0 +1,80 @@
+---
+title: "Bewegung - Interaktionen mit zwei kontinuierlichen Variablen"
+author: "Neele Engelmann"
+date: "9 6 2021"
+output: html_document
+---
+
+Forscherinnen untersuchen den Einfluss von Bewegung an der frischen Luft (angegeben in Stunden pro Woche) und Extraversion (erhoben mit einem Fragebogen, wobei höhere Werte für mehr Extraversion stehen) auf die Konzentrationsfähigkeit (gemessen über einen Test, höhere Werte stehen für eine höhere Konzentrationsfähigkeit).
+
+Aufgaben:
+
+1) Prüfen Sie mittels eines linearen Modells, ob die beiden Prädiktoren sowie ihre Interaktion das Kriterium vorhersagen.
+
+2) Interpretieren Sie die Regressionskoeffienten 
+
+3) Zentrieren Sie die Prädiktoren und passen Sie das Modell erneut an (Commander, Datenmanagement, Standardisiere Variable). Wie sind die Koeffizienten nun zu interpretieren?
+
+### 1) Daten einlesen und Modell anpassen, Interpretation
+
+```{r}
+Konzentration <- read.csv("Konzentration.csv", sep=";")
+```
+
+```{r}
+summary(lm(Konzentration ~ Bewegung*Extraversion, data = Konzentration))
+```
+
+Interpretation bei signifikanter Interaktion (siehe VL zu Interaktionen):
+
+Estimate für Bewegung: Vorhersagekraft von Bewegung wenn Extraversion = 0. Wenn Extraversion = 0 ist, steigt die Konzentrationstestleistung also um ca. 0.79 Punkte mit jeder Stunde mehr Bewegung an der frischen Luft.
+
+Estimate für Extraversion: Vorhersagekraft von Extraversion wenn Bewegung = 0. Für Leute, die sich nie an der frischen Luft bewegen, steigt die Konzentrationstestleistung um 1.35 mit jedem Punkt mehr, den sie auf dem Extraversionsfragebogen erzielen.
+
+Der signifikante Interaktionsterm sagt uns, dass der Zusammenhang zwischen Bewegung und Konzentration sich je nach Ausprägung der Extraversion unterscheidet (oder andersrum: dass der Zusammenhang zwischen Extraversion und Konzentration sich je nach Ausmaß der Bewegung unterscheidet). 
+
+Daran dass der Interaktionsterm negativ ist, sehen wir, dass der Zusammenhang zwischen jedem einzelnen Prädiktor und Kriterium sich abschwächt, wenn der jeweils andere Prädiktor eine hohe Ausprägung hat. 
+
+Also: Die Anzahl der Stunden, die man sich an der frischen Luft bewegt, sagt die Konzentrationsleistung weniger gut vorher wenn man stark extrovertiert ist.
+
+Oder: Die Extraversion sagt die Konzentrationsleistung schlechter vorher, wenn die Anzahl der Stunden Bewegung an der frischen Luft höher ist.
+
+Der Einfluss von jedem Prädiktor ist also nicht mehr nur über sein jeweiliges beta kodiert, sondern auch über die Ausprägung des anderen Prädiktors, gewichtet mit dem beta für die Interaktion (siehe Vorlesung, Folie 20). Da der Koeffizient für die Interaktion negativ ist, wissen wir, dass sich der Einfluss jedes einzelnen Prädiktors auf das Kriterium verringert, wenn der jeweils andere Prädiktor eine höhere Ausprägung annimmt.
+
+Zudem können wir aus dem negativen Interaktionskoeffizienten auch ablesen, dass die Konzentrationswerte (also die Werte des Kriteriums) insgesamt niedriger werden, wenn beide Prädiktoren eine hohe Ausprägung annehmen. Siehe Modellgleichung unten zum eigenständigen Ausprobieren mit verschiedenen Werten für B und E: wenn B und E beide hoch sind, wird das Produkt ganz hinten größer. Da es aber negativ gewichtet wird, wird das Ergebnis (der vorhergesagte Wert für Konzentration) niedriger. 
+
+```{r}
+B <- 20
+E <- 20
+
+-4.23848+0.78785*B+1.35309*E-0.07384*(B*E)
+```
+
+
+
+3) Standardisieren, Modell erneut anpassen
+
+```{r}
+library(Rcmdr)
+
+Konzentration <- local({
+  .Z <- scale(Konzentration[,c("Bewegung","Extraversion")])
+  within(Konzentration, {
+    Z.Extraversion <- .Z[,2]
+    Z.Bewegung <- .Z[,1] 
+  })
+})
+
+
+summary(lm(Konzentration ~ Z.Bewegung*Z.Extraversion, data = Konzentration))
+```
+
+Die Koeffizienten für Bewegung und Extraversion beziehen sich formal jetzt immer noch auf die Wirkung, wenn der jeweils andere Prädiktor gleich null ist.
+
+Allerdings bezieht sich die 0 jetzt nicht mehr auf 0 Stunden Bewegung oder 0 Extraversion, sondern wegen der Zentrierung auf den Mittelwert von Bewegung und Extraversion.
+
+Das heißt, beta1 gibt jetzt die Vorhersagekraft von Bewegung auf Konzentration bei mittlerer Extraversion an, und beta2 die Vorhersagekraft für Extraversion auf Konzentration bei einer mittleren Anzahl an Stunden Bewegung pro Woche.
+
+Zudem bedeutet eine Veränderung im Prädiktor um 1 jetzt immer eine Veränderung um eine Standardabweichung. Das heißt, wenn sich Bewegung um eine Standardabweichung erhöht und Extraversion mittel ist, erzielen Leute 0.19 Punkte mehr im Konzentrationstest (das Kriterium ist nicht standardisiert, wird hier also weiterhin in seiner Ursprungseinheit interpretiert). Und wenn sich die Extraversion um eine Standardabweichung erhöht und die Bewegung mittel ist, erzielt man ca. 1.33 Punkte mehr im Konzentrationstest.
+
+Die Interaktion zeigt uns inhaltlich dasselbe wie oben beschrieben, der Koeffizient ist natürlich anders, weil wir die Einheiten der Prädiktoren verändert haben. Wichtig ist hier vor allem das weiterhin negative Vorzeichen.
