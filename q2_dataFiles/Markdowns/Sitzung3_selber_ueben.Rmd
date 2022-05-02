@@ -1,0 +1,39 @@
+---
+title: "Sitzung 3: selbst üben"
+output:  
+  html_document:
+    number_sections: true
+    toc: true  
+    collapsed: false
+    toc_float: true
+    smooth_scroll: false
+    toc_depth: 3
+---
+
+# Daten 
+
+__Kaffee-Datensatz__ aus der ersten Einführungswoche.
+
+# Aufgaben 
+
+Zur Lösung der Aufgaben können Sie sich am R-Markdown-Script aus dem Video (1. Teil) orientieren.
+
+1. Lesen Sie die Kaffee-Daten ein (Nennen Sie sie "kaffee_long") und schauen Sie sich die Daten in R-Studio an. 
+
+2. Definieren Sie die UV Spalte als "Faktor" mit den Stufen "kein.kaffee" und "kaffee".
+
+3. Fügen Sie die standardisierten Konzentrationswerte als neue Spalte den Daten hinzu.
+
+4. Erstellen Sie eine Grafik der standardisierten Gruppenmittelwerte. Bitte mit 95% KI als Fehlerindikator.
+
+5. Erstellen Sie nun zwei Subsets des Datensatzes, je eins für jede Bedingung.
+
+6. Erstellen Sie nun ein Subset des Gesamt-Datensatzes (in dem beide Gruppen drin sind), in dem die zuvor neu erstellte Spalte der z-Werte wieder weg ist.
+
+7. transformieren Sie nun diesen Datensatz vom Long-Format ins Wide-Format (dabei nehmen wir an, dass die Daten einem within-subject-Design entstammen).
+
+ACHTUNG: Um wie im Video das Paket "reshape2" dafür zu verwenden, braucht der Datensatz noch eine neue Spalte mit den Subject-Nummern. Diese müssen Sie versuchen, als neue Spalte dem Datensatz hinzuzufügen. Diese neue Spalte sollte "sID" heißen und Zahlen von 1 bis 20 enthalten: 1, 2, 3, [...] 20. Nach den ersten zwanzig Einträgen für "kein.kaffee", sollten sich die Zahlen von 1 bis 20 dann für "kaffee" wiederholen. 
+
+# Lösung 
+
+Die Lösung folgt.
