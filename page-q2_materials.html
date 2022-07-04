@@ -13,12 +13,22 @@
 
 <title>Materialien für Quantitative Methoden II</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -40,11 +50,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -57,32 +62,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -94,10 +74,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -114,40 +90,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -175,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -187,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -198,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -213,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -339,7 +303,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -353,7 +317,7 @@ div.tocify {
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -364,13 +328,13 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fas fa-home"></span>
+    <span class="fa fa-home"></span>
      
     Home
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="glyphicon glyphicon-book"></span>
      
     Quantitative Methoden I
@@ -430,7 +394,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="glyphicon glyphicon-book"></span>
      
     Quantitative Methoden II
@@ -504,11 +468,12 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Materialien für Quantitative Methoden II</h1>
+<h1 class="title toc-ignore">Materialien für Quantitative Methoden
+II</h1>
 
 </div>
 
@@ -521,13 +486,18 @@ body {
 </style>
 <p>Wichtige Links:</p>
 <ul>
-<li><a href="https://cran.r-project.org/bin/windows/base/">Installation von R (Windows)</a></li>
-<li><a href="https://cran.r-project.org/bin/macosx/">Installation von R (Mac/ iOS)</a></li>
-<li><a href="https://www.rstudio.com/products/rstudio/download/">Installation von R-Studio</a></li>
+<li><a href="https://cran.r-project.org/bin/windows/base/">Installation
+von R (Windows)</a></li>
+<li><a href="https://cran.r-project.org/bin/macosx/">Installation von R
+(Mac/ iOS)</a></li>
+<li><a
+href="https://www.rstudio.com/products/rstudio/download/">Installation
+von R-Studio</a></li>
 </ul>
 <p><br></p>
 <ul>
-<li>Server-Link für Remote-Desktop: <em>teaching.psych.bio.uni-goettingen.de:49121</em></li>
+<li>Server-Link für Remote-Desktop:
+<em>teaching.psych.bio.uni-goettingen.de:49121</em></li>
 </ul>
 <p><br></p>
 <ul>
@@ -539,27 +509,38 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><a href="https://praxistipps.chip.de/mac-remote-desktop-einrichten-so-gehts_51146">Tipps zu Remote-Desktop für Mac (ab Schritt 4)</a></li>
+<li><a
+href="https://praxistipps.chip.de/mac-remote-desktop-einrichten-so-gehts_51146">Tipps
+zu Remote-Desktop für Mac (ab Schritt 4)</a></li>
 </ul>
 <p><br></p>
 <ul>
-<li>Eine Anleitung für die Herstellung der Remote-Desktop-Verbindung über die <strong>App</strong> aus dem Apple Store gibt es <a href="mac_remoteDesk.html">hier</a>.</li>
+<li>Eine Anleitung für die Herstellung der Remote-Desktop-Verbindung
+über die <strong>App</strong> aus dem Apple Store gibt es <a
+href="mac_remoteDesk.html">hier</a>.</li>
 </ul>
 <p><br></p>
 <p><strong>Hinweis:</strong></p>
-<p><strong>Es kann beim Ansehen der Aufzeichnungen leider gelegentlich passieren (z.B. bei schlechter Internetverbindung), dass Ton und Bild irgendwann nicht mehr synchron sind.</strong></p>
-<p><strong>In dem Fall hilft es, das Fenster zu aktualisieren und ab der gewünschten Stelle nochmal neu abzuspielen.</strong></p>
+<p><strong>Es kann beim Ansehen der Aufzeichnungen leider gelegentlich
+passieren (z.B. bei schlechter Internetverbindung), dass Ton und Bild
+irgendwann nicht mehr synchron sind.</strong></p>
+<p><strong>In dem Fall hilft es, das Fenster zu aktualisieren und ab der
+gewünschten Stelle nochmal neu abzuspielen.</strong></p>
 <p><br></p>
 <h2>
-<font style="color:lightgrey;"> Einführung in R und Wiederholung von Inhalten aus Quanti I</font>
+<font style="color:lightgrey;"> Einführung in R und Wiederholung von
+Inhalten aus Quanti I</font>
 </h1>
 <p><br></p>
-<div id="sitzung-1-einführung-in-das-arbeiten-mit-r" class="section level1">
-<h1><span class="header-section-number">1</span> Sitzung 1: Einführung in das Arbeiten mit R</h1>
+<div id="sitzung-1-einführung-in-das-arbeiten-mit-r"
+class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Sitzung 1: Einführung
+in das Arbeiten mit R</h1>
 <ul>
 <li><p>Begleitendes R-Skript: NEIN</p></li>
 <li><p>Anzahl Videos: 3</p></li>
-<li><p>Zum 1. Video (Dauer: 18 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/recording/screenshare/a61321b43fa64002d1766ced4a21d8fcb84842a5-1618041685960">hier</a></p></li>
+<li><p>Zum 1. Video (Dauer: 18 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/recording/screenshare/a61321b43fa64002d1766ced4a21d8fcb84842a5-1618041685960">hier</a></p></li>
 <li><p>Benötigte Datensätze: KEINE</p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
@@ -570,18 +551,24 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>auf jeden Fall: eine Remotedesktopverbindung zum Gemi herstellen und RStudio öffnen können</li>
-<li>optional: R und RStudio auf dem eigenen Rechner installiert haben</li>
+<li>auf jeden Fall: eine Remotedesktopverbindung zum Gemi herstellen und
+RStudio öffnen können</li>
+<li>optional: R und RStudio auf dem eigenen Rechner installiert
+haben</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="erste-schritte-in-r-teil-1" class="section level2">
-<h2><span class="header-section-number">1.1</span> Erste Schritte in R (Teil 1)</h2>
+<div id="erste-schritte-in-r-teil-1" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Erste Schritte in R
+(Teil 1)</h2>
 <ul>
 <li><p>Begleitendes R-Skript: NEIN</p></li>
-<li><p>Zum Video (Dauer: 35 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586534476460">hier</a></p></li>
+<li><p>Zum Video (Dauer: 35 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586534476460">hier</a></p></li>
 <li><p>Benötigte Datensätze: KEINE</p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
@@ -591,43 +578,57 @@ body {
 <li>09:45 Erklärung der Console</li>
 <li>12:20 Ein R-Skript anlegen</li>
 <li>13:20 Code und Kommentare in R-Skripts</li>
-<li>15:20 Code ausführen (oben rechts „Run“ klicken oder Strg+Enter / Ctrl + Enter)</li>
+<li>15:20 Code ausführen (oben rechts „Run“ klicken oder Strg+Enter /
+Ctrl + Enter)</li>
 <li>16:45 R-Skript abspeichern</li>
 <li>18:00 abgespeichertes R-Skript öffnen</li>
 <li>19:45 RMarkdown erstellen</li>
 <li>23:15 RMarkdown abspeichern</li>
 <li>24:00 Unterschiede zwischen Skript und Markdown</li>
-<li>25:30 Code Chunk in Markdown einfügen (Tasten-Kombination: Strg+Alt+I)</li>
+<li>25:30 Code Chunk in Markdown einfügen (Tasten-Kombination:
+Strg+Alt+I)</li>
 <li>29:00 Markdown knitten (Ausgabedatei erstellen)</li>
 <li>31:50 einzelne Code Chunks in Markdown ausführen</li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>ein grobes Verständnis der Benutzeroberfläche von RStudio haben (welche Bereiche gibt es, wofür sind sie da)</li>
+<li>ein grobes Verständnis der Benutzeroberfläche von RStudio haben
+(welche Bereiche gibt es, wofür sind sie da)</li>
 <li>ein Skript erstellen, abspeichern, und wieder öffnen können</li>
-<li>ein RMarkdown-Dokument erstellen, abspeichern, und wieder öffnen können</li>
-<li>ein grobes Verständnis über die Unterschiede zwischen Skripts und Markdowns haben (note: in der Klausur sollen später Markdowns genutzt werden)</li>
-<li>verstehen, was es bedeutet, ein Markdown zu “knitten” (zB zu einer html-Datei) und ein simples Markdown knitten können</li>
+<li>ein RMarkdown-Dokument erstellen, abspeichern, und wieder öffnen
+können</li>
+<li>ein grobes Verständnis über die Unterschiede zwischen Skripts und
+Markdowns haben (note: in der Klausur sollen später Markdowns genutzt
+werden)</li>
+<li>verstehen, was es bedeutet, ein Markdown zu “knitten” (zB zu einer
+html-Datei) und ein simples Markdown knitten können</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
-<div id="erste-schritte-in-r-teil-2" class="section level2">
-<h2><span class="header-section-number">1.2</span> Erste Schritte in R (Teil 2)</h2>
+<div id="erste-schritte-in-r-teil-2" class="section level2"
+number="1.2">
+<h2><span class="header-section-number">1.2</span> Erste Schritte in R
+(Teil 2)</h2>
 <ul>
 <li><p>Begleitendes R-Skript: NEIN</p></li>
-<li><p>Zum Video (Dauer: 40 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586537113348">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/Kaffeedaten.csv">t-test between (Kaffeedaten)</a></p></li>
+<li><p>Zum Video (Dauer: 40 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1586537113348">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a
+href="q2_dataFiles/Kaffeedaten.csv">t-test between
+(Kaffeedaten)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>01:00 Daten zum Einlesen in R vorbereiten</li>
 <li>03:00 Daten aus Excel in eine csv-Datei speichern</li>
 <li>07:00 Unterschied Excel-Arbeitsmappe vs. csv-Datei</li>
 <li>09:00 csv-Datei in einem Text-Editor öffnen und anschauen</li>
-<li>11:00 Was ist in einer csv-Datei zu beachten? (Trennzeichen und Dezimalzeichen erkennen)</li>
+<li>11:00 Was ist in einer csv-Datei zu beachten? (Trennzeichen und
+Dezimalzeichen erkennen)</li>
 <li>14:20 Optionen zum Importieren von csv-Datei in R</li>
 <li>15:50 Option 1: Daten einlesen mit „base“</li>
 <li>20:00 Eingelesene Daten betrachten</li>
@@ -640,31 +641,47 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
 <li>eine csv-Datei aus einer Excel-Arbeitsmappe erstellen können</li>
-<li>bei einer csv-Datei erkennen, was die Spaltentrennzeichen und was die Dezimalzeichen sind</li>
-<li>eine csv-Datei über mindestens einen der beschriebenen Wege in R einlesen können (auf Überschriften achten!)</li>
-<li>ein grobes Verständnis der Variablentypen “Faktor” und “numerisch”/“integer” haben</li>
-<li>den durch das Einlesen der Daten generierten Code in der Console erkennen und in ein Markdown übertragen können</li>
+<li>bei einer csv-Datei erkennen, was die Spaltentrennzeichen und was
+die Dezimalzeichen sind</li>
+<li>eine csv-Datei über mindestens einen der beschriebenen Wege in R
+einlesen können (auf Überschriften achten!)</li>
+<li>ein grobes Verständnis der Variablentypen “Faktor” und
+“numerisch”/“integer” haben</li>
+<li>den durch das Einlesen der Daten generierten Code in der Console
+erkennen und in ein Markdown übertragen können</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-2-wiederholung-deskriptive-statistik-abbildung-t-tests" class="section level1">
-<h1><span class="header-section-number">2</span> Sitzung 2: Wiederholung deskriptive Statistik, Abbildung, t-Tests</h1>
+<div id="sitzung-2-wiederholung-deskriptive-statistik-abbildung-t-tests"
+class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Sitzung 2: Wiederholung
+deskriptive Statistik, Abbildung, t-Tests</h1>
 <ul>
-<li>Begleitendes R-Skript: <a href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil 1 und 2</a></li>
-<li>Die zum Skript gehörende R-Markdown-Dateien gibt es <a href="q2_dataFiles/Markdowns/Sitzung_02_RMarkdown.zip">hier</a> als ZIP-Ordner</li>
+<li>Begleitendes R-Skript: <a
+href="q2_html_pages/Wiederholung1.html">Sitzung 2: Skript zu Video Teil
+1 und 2</a></li>
+<li>Die zum Skript gehörende R-Markdown-Dateien gibt es <a
+href="q2_dataFiles/Markdowns/Sitzung_02_RMarkdown.zip">hier</a> als
+ZIP-Ordner</li>
 <li>Anzahl Videos: 2</li>
-<li>Das im Video angesprochene PDF gibt es <a href="q2_dataFiles/02_Einführung_R_SoSe21_Teil1.pdf">hier</a> und natürlich auch in stud.ip</li>
+<li>Das im Video angesprochene PDF gibt es <a
+href="q2_dataFiles/02_Einführung_R_SoSe21_Teil1.pdf">hier</a> und
+natürlich auch in stud.ip</li>
 </ul>
-<div id="teil-1" class="section level2">
+<div id="teil-1" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Teil 1</h2>
 <ul>
-<li><p>Zum 1. Video (Dauer: 59 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/IQ_Priming_between.csv">IQ-Werte und Priming (between)</a></p></li>
+<li><p>Zum 1. Video (Dauer: 59 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587658895535">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a
+href="q2_dataFiles/IQ_Priming_between.csv">IQ-Werte und Priming
+(between)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen</li>
@@ -681,22 +698,28 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
 <li>den RCommander öffnen können</li>
 <li>einen Datensatz im Commander laden können</li>
 <li>Deskriptive Statistiken für einen Datensatz berechnen können</li>
-<li>eine Abbildung über Mittelwerte mit Konfidenzintervallen erstellen können</li>
-<li>einen t-Test im Commander und Cohen’s d außerhalb des Commanders berechnen können</li>
+<li>eine Abbildung über Mittelwerte mit Konfidenzintervallen erstellen
+können</li>
+<li>einen t-Test im Commander und Cohen’s d außerhalb des Commanders
+berechnen können</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
-<div id="teil-2" class="section level2">
+<div id="teil-2" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Teil 2</h2>
 <ul>
-<li><p>Zum 2. Video (Dauer: 22 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
-<li><p>Benötigter Datensatz: <a href="q2_dataFiles/IQ_Urlaub_within.csv">IQ-Werte und Urlaub (within)</a></p></li>
+<li><p>Zum 2. Video (Dauer: 22 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1587665148727">hier</a></p></li>
+<li><p>Benötigter Datensatz: <a
+href="q2_dataFiles/IQ_Urlaub_within.csv">IQ-Werte und Urlaub
+(within)</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:50 Daten in R einlesen (über R-Code)</li>
@@ -709,34 +732,48 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>dieselben Schritte wie beim vorherigen Video für abhängige Daten ausführen können</li>
+<li>dieselben Schritte wie beim vorherigen Video für abhängige Daten
+ausführen können</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-3-daten-transformieren-weitere-abbildungen-korrelationen-rang--und-chi-quadrat-test" class="section level1">
-<h1><span class="header-section-number">3</span> Sitzung 3: Daten transformieren, weitere Abbildungen, Korrelationen, Rang- und Chi-Quadrat-Test</h1>
+<div
+id="sitzung-3-daten-transformieren-weitere-abbildungen-korrelationen-rang--und-chi-quadrat-test"
+class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Sitzung 3: Daten
+transformieren, weitere Abbildungen, Korrelationen, Rang- und
+Chi-Quadrat-Test</h1>
 <ul>
 <li><p>Begleitende R-Skripts: 2</p></li>
-<li><p>Die zum Skript gehörende R-Markdown-Dateien (Sitzung 3a und 3b) gibt es <a href="q2_dataFiles/Markdowns/Sitzung_03_RMarkdown.zip">hier</a> als ZIP-Ordner</p></li>
+<li><p>Die zum Skript gehörende R-Markdown-Dateien (Sitzung 3a und 3b)
+gibt es <a
+href="q2_dataFiles/Markdowns/Sitzung_03_RMarkdown.zip">hier</a> als
+ZIP-Ordner</p></li>
 <li><p>Anzahl Videos: 2</p></li>
 </ul>
-<div id="teil-1-1" class="section level2">
+<div id="teil-1-1" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Teil 1</h2>
 <ul>
-<li><p>Zum 1. Video (Dauer: 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588084379372">hier</a></p></li>
+<li><p>Zum 1. Video (Dauer: 60 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588084379372">hier</a></p></li>
 <li><p>Benötigte Datensätze (2 Stück):</p>
 <ul>
-<li><a href="q2_dataFiles/Daten_EinfuehrungTeil3.csv">IQ-Werte und Priming numerisch (mixed Design)</a></li>
-<li><a href="q2_dataFiles/Daten_MissingValues_EinfuehrungTeil3.csv">IQ-Werte Missing values</a></li>
+<li><a href="q2_dataFiles/Daten_EinfuehrungTeil3.csv">IQ-Werte und
+Priming numerisch (mixed Design)</a></li>
+<li><a
+href="q2_dataFiles/Daten_MissingValues_EinfuehrungTeil3.csv">IQ-Werte
+Missing values</a></li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p>Begleitendes R-Skript: <a href="q2_html_pages/Sitzung3a.html">Skript zu Video Teil 1</a></p></li>
+<li><p>Begleitendes R-Skript: <a
+href="q2_html_pages/Sitzung3a.html">Skript zu Video Teil 1</a></p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen, Daten einlesen, Daten-Vorschau im Markdown</li>
@@ -744,52 +781,65 @@ body {
 <li>08:30 Datenmanagement im Commander: Numerisch zu Faktor</li>
 <li>11:00 Mittelwertsgrafik für Werte zu T1 und zu T2 im Commander</li>
 <li>14:00 Interpretation der Grafiken</li>
-<li>15:20 Neue Spalten im Datensatz anlegen: AV standardisieren im Commander</li>
-<li>19:15 Mittelwertsgrafik mit z-standardisierten Werten im Commander</li>
+<li>15:20 Neue Spalten im Datensatz anlegen: AV standardisieren im
+Commander</li>
+<li>19:15 Mittelwertsgrafik mit z-standardisierten Werten im
+Commander</li>
 <li>19:40 Histogramm erstellen mit Commander</li>
-<li>22:15 T-Test ohne Commander &amp; Interpretation des Outputs zu T1</li>
+<li>22:15 T-Test ohne Commander &amp; Interpretation des Outputs zu
+T1</li>
 <li>26:15 Effektgröße</li>
-<li>27:00 T-Test ohne Commander &amp; Interpretation des Outputs zu T2</li>
+<li>27:00 T-Test ohne Commander &amp; Interpretation des Outputs zu
+T2</li>
 <li>28:15 Subsets von Datensätzen erstellen nach Spalten</li>
 <li>31:45 Subsets von Datensätzen erstellen nach Zeilen</li>
 <li>36:00 Within-T-Tests für die erstellten Subsets mit Commander</li>
 <li>42:20 Umformatierung wide zu long (melt)</li>
 <li>44:20 Daten in Vorschau sortieren</li>
 <li>45:00 Umformatierung von long wieder zu wide (dcast)</li>
-<li>49:10 Abbildung des kompletten mixed Designs mit long format-Daten im Commander</li>
+<li>49:10 Abbildung des kompletten mixed Designs mit long format-Daten
+im Commander</li>
 <li>52:10 Abbildung andersrum (y-Achse und x-Achse vertauschen)</li>
 <li>54:10 Umgang mit fehlenden Werten</li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, wie man numerische Variablen als Faktoren definieren kann</li>
+<li>wissen, wie man numerische Variablen als Faktoren definieren
+kann</li>
 <li>neue Spalten zu einem Datensatz hinzufügen können</li>
 <li>gemessene Variablen standardisieren können</li>
 <li>wissen, wie man Subsets von Datensätzen erstellen kann</li>
-<li>Daten vom Wide- zum Long-Format oder vom Long- zum Wide-Format konvertieren können</li>
+<li>Daten vom Wide- zum Long-Format oder vom Long- zum Wide-Format
+konvertieren können</li>
 <li>eine 2x2 Interaktions-Grafik erstellen können</li>
-<li>wissen, wie man mit fehlenden Messwerten (missing values) umgeht</li>
+<li>wissen, wie man mit fehlenden Messwerten (missing values)
+umgeht</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
-<div id="teil-2-1" class="section level2">
+<div id="teil-2-1" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Teil 2</h2>
 <ul>
-<li><p>Zum 2. Video (Dauer: 45 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588088369419">hier</a></p></li>
+<li><p>Zum 2. Video (Dauer: 45 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588088369419">hier</a></p></li>
 <li><p>Benötigte Datensätze (2 Stück):</p>
 <ul>
-<li><a href="q2_dataFiles/Uebung3_Korrelationen.csv">Korrelation</a></li>
+<li><a
+href="q2_dataFiles/Uebung3_Korrelationen.csv">Korrelation</a></li>
 <li><a href="q2_dataFiles/Uebung3_Rang.csv">Rangdaten</a></li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p>Begleitendes R-Skript: <a href="q2_html_pages/Sitzung3b.html">Skript zu Video Teil 2</a></p></li>
-<li><p>Das später im Video angesprochene PDF-File gibt es <a href="q2_dataFiles/R_Einfuehrung_Teil3.pdf">hier</a>.</p></li>
+<li><p>Begleitendes R-Skript: <a
+href="q2_html_pages/Sitzung3b.html">Skript zu Video Teil 2</a></p></li>
+<li><p>Das später im Video angesprochene PDF-File gibt es <a
+href="q2_dataFiles/R_Einfuehrung_Teil3.pdf">hier</a>.</p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen</li>
@@ -809,10 +859,13 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, wie man zwei numerische Variablen und deren Zusammenhang grafisch abbilden kann</li>
-<li>wissen, wie man die Regressionslinie zu einem Streudiagramm hinzufügen kann</li>
+<li>wissen, wie man zwei numerische Variablen und deren Zusammenhang
+grafisch abbilden kann</li>
+<li>wissen, wie man die Regressionslinie zu einem Streudiagramm
+hinzufügen kann</li>
 <li>eine Korrelation berechnen und auf Signifikanz prüfen können</li>
 <li>einen Rangtest durchführen können</li>
 <li>Boxplots erstellen können</li>
@@ -821,8 +874,12 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Selber üben</strong>: Ein R-Markdown-Script mit Aufgaben zum weiteren Üben finden Sie <a href="q2_dataFiles/Markdowns/Sitzung_03_selber_ueben.zip">hier</a>. Die Lösung folgt später.</p></li>
-<li><p>Die Datei mit der Lösung ist jetzt <a href="q2_dataFiles/Markdowns/Sitzung3_selber_ueben_loesung.zip">hier</a>.</p></li>
+<li><p><strong>Selber üben</strong>: Ein R-Markdown-Script mit Aufgaben
+zum weiteren Üben finden Sie <a
+href="q2_dataFiles/Markdowns/Sitzung_03_selber_ueben.zip">hier</a>. Die
+Lösung folgt später.</p></li>
+<li><p>Die Datei mit der Lösung ist jetzt <a
+href="q2_dataFiles/Markdowns/Sitzung3_selber_ueben_loesung.zip">hier</a>.</p></li>
 </ul>
 <p><br></p>
 <h2>
@@ -831,37 +888,52 @@ body {
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-4-multiple-regressionsanalyse-i-und-ii" class="section level1">
-<h1><span class="header-section-number">4</span> Sitzung 4: Multiple Regressionsanalyse I und II</h1>
+<div id="sitzung-4-multiple-regressionsanalyse-i-und-ii"
+class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Sitzung 4: Multiple
+Regressionsanalyse I und II</h1>
 <ul>
 <li><p>Begleitende R-Skripts: 2</p></li>
-<li><p>Die zum Skript gehörende R-Markdown-Dateien (Teil 1 und Teil 2) gibt es <a href="q2_dataFiles/Markdowns/Sitzung_04_RMarkdown.zip">hier</a> als ZIP-Ordner</p></li>
+<li><p>Die zum Skript gehörende R-Markdown-Dateien (Teil 1 und Teil 2)
+gibt es <a
+href="q2_dataFiles/Markdowns/Sitzung_04_RMarkdown.zip">hier</a> als
+ZIP-Ordner</p></li>
 <li><p>Anzahl Videos: 2</p></li>
 <li><p>Benötigte Datensätze: 2</p></li>
 </ul>
-<div id="teil-1-multiple-regressionanalyse-in-r-durchführen" class="section level2">
-<h2><span class="header-section-number">4.1</span> Teil 1: Multiple Regressionanalyse in R durchführen</h2>
+<div id="teil-1-multiple-regressionanalyse-in-r-durchführen"
+class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Teil 1: Multiple
+Regressionanalyse in R durchführen</h2>
 <ul>
-<li><p>Zum Video (Dauer: ca. 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588683817905">hier</a></p></li>
+<li><p>Zum Video (Dauer: ca. 60 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1588683817905">hier</a></p></li>
 <li><p>Benötigter Datensatz:</p>
 <ul>
-<li><a href="q2_dataFiles/PruefungsleistungDaten.csv">Prüfungsleistung</a></li>
+<li><a
+href="q2_dataFiles/PruefungsleistungDaten.csv">Prüfungsleistung</a></li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p>Zum begleitenden R-Skript geht es <a href="q2_html_pages/Sitzung4a_Regression01.html">hier</a>.</p></li>
+<li><p>Zum begleitenden R-Skript geht es <a
+href="q2_html_pages/Sitzung4a_Regression01.html">hier</a>.</p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>01:20 Einführung des Beispiels</li>
 <li>06:30 Multiple Regression in R durchführen</li>
-<li>10:00 Grafische Analyse der Zusammenhänge via Streudiagramm-Matrix</li>
-<li>16:40 Grafische Prüfung der linearen Zusammenhänge in der Streudiagramm-Matrix</li>
-<li>20:35 Grafische Prüfung der Zusammenhänge der Prädiktoren untereinander</li>
+<li>10:00 Grafische Analyse der Zusammenhänge via
+Streudiagramm-Matrix</li>
+<li>16:40 Grafische Prüfung der linearen Zusammenhänge in der
+Streudiagramm-Matrix</li>
+<li>20:35 Grafische Prüfung der Zusammenhänge der Prädiktoren
+untereinander</li>
 <li>22:55 Multiples Regressionsmodell anpassen (über R-Commander)</li>
 <li>25:20 R-Code dafür</li>
-<li>26:00 Besprechung des Outputs (was sieht man, was ist F? was ist R-Quadrat?)</li>
-<li>39:00 Besprechung der Regressionsparameter/ Regressionskoeffizienten</li>
+<li>26:00 Besprechung des Outputs (was sieht man, was ist F? was ist
+R-Quadrat?)</li>
+<li>39:00 Besprechung der Regressionsparameter/
+Regressionskoeffizienten</li>
 <li>48:00 Standardisierung der Regressionskoeffizienten</li>
 <li>52:40 Effektstärken für Regressionsmodelle</li>
 <li>56:50 G-Power</li>
@@ -869,48 +941,64 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
 <li>wissen, wie man eine multiples Regressionsmodell in R erstellt</li>
 <li>eine Streudiagrammmatrix erstellt</li>
-<li>wichtige Annahmen mittels Streudiagramm grafisch beurteilen kann</li>
-<li>den Output einer Regressionsanalyse richtig interpretieren können</li>
-<li>wissen, warum es sinnvoll ist, Regressionskoeffizienten zu standardisieren (und wie man das macht)</li>
-<li>wissen, wass die verschiedenen Effektgrößen bei einer Regression sind</li>
+<li>wichtige Annahmen mittels Streudiagramm grafisch beurteilen
+kann</li>
+<li>den Output einer Regressionsanalyse richtig interpretieren
+können</li>
+<li>wissen, warum es sinnvoll ist, Regressionskoeffizienten zu
+standardisieren (und wie man das macht)</li>
+<li>wissen, wass die verschiedenen Effektgrößen bei einer Regression
+sind</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatz-zum-eigenständigen-üben" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Zusatz zum eigenständigen Üben</h3>
+<div id="zusatz-zum-eigenständigen-üben" class="section level3"
+number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Zusatz zum
+eigenständigen Üben</h3>
 <ul>
-<li>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt es <a href="q2_dataFiles/JellyfishDaten.csv">hier</a>.</li>
-<li>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a href="q2_html_pages/Sitzung4b_Regression01.html">hier</a>.</li>
+<li>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt es
+<a href="q2_dataFiles/JellyfishDaten.csv">hier</a>.</li>
+<li>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a
+href="q2_html_pages/Sitzung4b_Regression01.html">hier</a>.</li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="teil-2-modellvergleiche" class="section level2">
-<h2><span class="header-section-number">4.2</span> Teil 2: Modellvergleiche</h2>
+<div id="teil-2-modellvergleiche" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Teil 2:
+Modellvergleiche</h2>
 <ul>
-<li><p>Zum Video (Dauer: ca. 60 min) geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1589288598232">hier</a></p></li>
+<li><p>Zum Video (Dauer: ca. 60 min) geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1589288598232">hier</a></p></li>
 <li><p>Benötigter Datensatz:</p>
 <ul>
-<li><a href="q2_dataFiles/Daten_Pruefungsleistung2.csv">Prüfungsleistung 2</a></li>
+<li><a href="q2_dataFiles/Daten_Pruefungsleistung2.csv">Prüfungsleistung
+2</a></li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p>Zum begleitenden R-Skript geht es <a href="q2_html_pages/Sitzung4c_Regression02.html">hier</a>.</p></li>
+<li><p>Zum begleitenden R-Skript geht es <a
+href="q2_html_pages/Sitzung4c_Regression02.html">hier</a>.</p></li>
 <li><p>Inhalt (Timestamps):</p>
 <ul>
 <li>00:00 Willkommen und Recap</li>
 <li>03:10 Warum Modellvergleich?</li>
 <li>04:00 Einführung Beispiel Prüfungsbeispiel</li>
 <li>06:40 Commander öffnen und Datensatz auswählen</li>
-<li>07:00 Regressionsmodell anpassen im Commander: bisher bekanntes Menü und ein kurzer rant</li>
-<li>10:15 Zweites Menü zum Anpassen eines Regressionsmodells im Commander</li>
+<li>07:00 Regressionsmodell anpassen im Commander: bisher bekanntes Menü
+und ein kurzer rant</li>
+<li>10:15 Zweites Menü zum Anpassen eines Regressionsmodells im
+Commander</li>
 <li>13:50 Output Modell mit allen Prädiktoren</li>
-<li>17:00 Anpassen eines zweiten Modells nur mit Prüfungsangst im Commander</li>
+<li>17:00 Anpassen eines zweiten Modells nur mit Prüfungsangst im
+Commander</li>
 <li>18:35 Output des zweiten Modells</li>
 <li>24:10 Modellvergleich, Erklärung</li>
 <li>26:10 Modellvergleich über Code und im Commander</li>
@@ -924,82 +1012,126 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, warum man oft verschiedene Regressionsmodelle vergleicht (und wie das in R geht)</li>
-<li>was es bedeutet, wenn das R^2 eines Modells signifikant höher ist als das eines anderen</li>
-<li>wie man die Teststärke für einen Modellvergleich in G-Power bestimmen kann</li>
+<li>wissen, warum man oft verschiedene Regressionsmodelle vergleicht
+(und wie das in R geht)</li>
+<li>was es bedeutet, wenn das R^2 eines Modells signifikant höher ist
+als das eines anderen</li>
+<li>wie man die Teststärke für einen Modellvergleich in G-Power
+bestimmen kann</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatz-zum-eigenständigen-üben-1" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Zusatz zum eigenständigen Üben</h3>
+<div id="zusatz-zum-eigenständigen-üben-1" class="section level3"
+number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Zusatz zum
+eigenständigen Üben</h3>
 <ul>
-<li><p>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt es <a href="q2_dataFiles/Daten_Albumsales.csv">hier</a>.</p></li>
-<li><p>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a href="q2_html_pages/Sitzung4d_Regression02.html">hier</a>.</p></li>
-<li><p>Auf <a href="q2_html_pages/Sitzung4e_Sum_of_squares.html">dieser Seite</a> gibt es nochmal eine Berechnung der verschiedenen Quadratsummen per Hand, zum Nachvollziehen und Verstehen (bei Bedarf).</p></li>
+<li><p>Die Daten für die am Ende des Video erwähnte Zusatzaufgabe gibt
+es <a href="q2_dataFiles/Daten_Albumsales.csv">hier</a>.</p></li>
+<li><p>Falls ihr allein nicht weiterkommt, gibt es das Skript dazu <a
+href="q2_html_pages/Sitzung4d_Regression02.html">hier</a>.</p></li>
+<li><p>Auf <a href="q2_html_pages/Sitzung4e_Sum_of_squares.html">dieser
+Seite</a> gibt es nochmal eine Berechnung der verschiedenen
+Quadratsummen per Hand, zum Nachvollziehen und Verstehen (bei
+Bedarf).</p></li>
 </ul>
 <p><br></p>
 </div>
 </div>
 </div>
-<div id="sitzung-5-multiple-regressionsanalyse-iii-prüfung-annahmen" class="section level1">
-<h1><span class="header-section-number">5</span> Sitzung 5: Multiple Regressionsanalyse III (Prüfung Annahmen)</h1>
+<div id="sitzung-5-multiple-regressionsanalyse-iii-prüfung-annahmen"
+class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Sitzung 5: Multiple
+Regressionsanalyse III (Prüfung Annahmen)</h1>
 <ul>
-<li><p>Begleitende R-Skripts: 1, das gibt es <a href="q2_html_pages/Sitzung5a_Annahmen.html">hier</a></p></li>
-<li><p>Die zum Skript gehörende R-Markdown-Dateien (Haupt- plus Zusatzaufgabe) gibt es <a href="q2_dataFiles/Markdowns/Sitzung_05_RMarkdown.zip">hier</a> als ZIP-Ordner</p></li>
-<li><p>Anzahl Videos: 1 (Dauer ca. 66 min), zum Video geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1589892041573">hier</a></p></li>
-<li><p>Benötigte Datensätze: 1, den gibt es <a href="q2_dataFiles/Daten_Pruefungsleistung_Annahmen.csv">hier</a></p></li>
+<li><p>Begleitende R-Skripts: 1, das gibt es <a
+href="q2_html_pages/Sitzung5a_Annahmen.html">hier</a></p></li>
+<li><p>Die zum Skript gehörende R-Markdown-Dateien (Haupt- plus
+Zusatzaufgabe) gibt es <a
+href="q2_dataFiles/Markdowns/Sitzung_05_RMarkdown.zip">hier</a> als
+ZIP-Ordner</p></li>
+<li><p>Anzahl Videos: 1 (Dauer ca. 66 min), zum Video geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1589892041573">hier</a></p></li>
+<li><p>Benötigte Datensätze: 1, den gibt es <a
+href="q2_dataFiles/Daten_Pruefungsleistung_Annahmen.csv">hier</a></p></li>
 </ul>
 <p><br></p>
 <ul>
 <li>Inhalt (Timestamps):
 <ul>
 <li>00:00 Einführung “Prüfung annahmen”</li>
-<li>04:20 Daten einlesen und Streudiagramm machen und wichtige Annahmen optisch prüfen</li>
+<li>04:20 Daten einlesen und Streudiagramm machen und wichtige Annahmen
+optisch prüfen</li>
 <li>09:30 RESET-Test zur Prüfung linearer Zusammenhänge</li>
-<li>15:10 Multikollinearität (Korrelationen der Prädiktoren untereinander) statistisch prüfen</li>
+<li>15:10 Multikollinearität (Korrelationen der Prädiktoren
+untereinander) statistisch prüfen</li>
 <li>18:30 VIFs mit R-Commander bestimmen</li>
 <li>22:00 Normalverteilung der Residuen</li>
-<li>26:00 Regressionstatistken über R-Commander zum Datensatz hinzufügen</li>
+<li>26:00 Regressionstatistken über R-Commander zum Datensatz
+hinzufügen</li>
 <li>28:30 Grafische Analyse der Residuen (Histogramm)</li>
 <li>29:50 Grafische Analyse der Residuen (Q-Q-Plot)</li>
-<li>36:00 Test auf Normalverteilung der Residuen (Shapiro-Wilk Test)</li>
+<li>36:00 Test auf Normalverteilung der Residuen (Shapiro-Wilk
+Test)</li>
 <li>37:50 Homoskedastizität grafisch prüfen</li>
-<li>44:15 Statistischer Test auf Heteroskedastizität (Breusch-Pagan Test)</li>
-<li>48:25 Statistische Ausreißer (einzelne Werte, die angepasste Regressionslinie stark beeinflussen)</li>
-<li>55:30 Unabhängigkeit der Messungen (ein Messwert ist unabhängig von anderen Messwerten)</li>
+<li>44:15 Statistischer Test auf Heteroskedastizität (Breusch-Pagan
+Test)</li>
+<li>48:25 Statistische Ausreißer (einzelne Werte, die angepasste
+Regressionslinie stark beeinflussen)</li>
+<li>55:30 Unabhängigkeit der Messungen (ein Messwert ist unabhängig von
+anderen Messwerten)</li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, welche Annahmen erfüllt sein müssen, damit eine multiple Regressionsanalyse vertrauenswürdige Ergebnisse liefert</li>
-<li>wissen, wie man diese Annahmen für ein gegebenes Szenario in R prüfen kann</li>
+<li>wissen, welche Annahmen erfüllt sein müssen, damit eine multiple
+Regressionsanalyse vertrauenswürdige Ergebnisse liefert</li>
+<li>wissen, wie man diese Annahmen für ein gegebenes Szenario in R
+prüfen kann</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatz-zum-eigenständigen-üben-2" class="section level2">
-<h2><span class="header-section-number">5.1</span> Zusatz zum eigenständigen Üben</h2>
+<div id="zusatz-zum-eigenständigen-üben-2" class="section level2"
+number="5.1">
+<h2><span class="header-section-number">5.1</span> Zusatz zum
+eigenständigen Üben</h2>
 <ul>
-<li>Die Daten für eine Zusatzaufgabe gibt es <a href="q2_dataFiles/Daten_Supermodels.csv">hier</a>.</li>
-<li>Das Script dazu, gibt es <a href="q2_html_pages/Sitzung5b_PruefungAnnahmen_Zusatzaufgabe_SuperModels_Loesung.html">hier</a>.</li>
+<li>Die Daten für eine Zusatzaufgabe gibt es <a
+href="q2_dataFiles/Daten_Supermodels.csv">hier</a>.</li>
+<li>Das Script dazu, gibt es <a
+href="q2_html_pages/Sitzung5b_PruefungAnnahmen_Zusatzaufgabe_SuperModels_Loesung.html">hier</a>.</li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-6-einfaktorielle-anova-oder-lineares-modell-bei-faktoren-mit-mehr-als-zwei-ausprägungen" class="section level1">
-<h1><span class="header-section-number">6</span> Sitzung 6: Einfaktorielle ANOVA (oder: Lineares Modell bei Faktoren mit mehr als zwei Ausprägungen )</h1>
+<div
+id="sitzung-6-einfaktorielle-anova-oder-lineares-modell-bei-faktoren-mit-mehr-als-zwei-ausprägungen"
+class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Sitzung 6:
+Einfaktorielle ANOVA (oder: Lineares Modell bei Faktoren mit mehr als
+zwei Ausprägungen )</h1>
 <ul>
-<li><p>Begleitende R-Skripts: 1, das gibt es <a href="q2_html_pages/Sitzung6_Regression_EinfaktorielleAnova_Glastonbury_Day1_Day3.html">hier</a></p></li>
-<li><p>Anzahl Videos: 1 (Dauer ca. 75 min), zum Video geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1591186909168">hier</a></p></li>
-<li><p>Benötigte Datensätze: 1, den gibt es <a href="q2_dataFiles/Glastonbury.csv">hier</a></p></li>
+<li><p>Begleitende R-Skripts: 1, das gibt es <a
+href="q2_html_pages/Sitzung6_Regression_EinfaktorielleAnova_Glastonbury_Day1_Day3.html">hier</a></p></li>
+<li><p>Anzahl Videos: 1 (Dauer ca. 75 min), zum Video geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1591186909168">hier</a></p></li>
+<li><p>Benötigte Datensätze: 1, den gibt es <a
+href="q2_dataFiles/Glastonbury.csv">hier</a></p></li>
 </ul>
 <p>Optional:</p>
 <ul>
-<li><p>Die im Video zur Vertiefung des Verständnisses gezeigte Excel-Datei (bei Minute 26:40) gibt es <a href="q2_dataFiles/Glastonbury_data.xlsx">hier</a></p></li>
-<li><p>Den Datensatz (als Excel-Datei) mit Dummy-Codierung, der im Verlauf des Videos erstellt wird, gibt es zum Download auch <a href="q2_dataFiles/Glastonbury_data_dummy.xlsx">hier</a></p></li>
+<li><p>Die im Video zur Vertiefung des Verständnisses gezeigte
+Excel-Datei (bei Minute 26:40) gibt es <a
+href="q2_dataFiles/Glastonbury_data.xlsx">hier</a></p></li>
+<li><p>Den Datensatz (als Excel-Datei) mit Dummy-Codierung, der im
+Verlauf des Videos erstellt wird, gibt es zum Download auch <a
+href="q2_dataFiles/Glastonbury_data_dummy.xlsx">hier</a></p></li>
 </ul>
 <p><br></p>
 <ul>
@@ -1026,48 +1158,85 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, welche Annahmen erfüllt sein müssen, damit eine einfaktorielle Varianzanalyse vertrauenswürdige Ergebnisse liefert</li>
-<li>wissen, wie man diese Annahmen für ein gegebenes Szenario in R prüfen kann</li>
-<li>eine einfaktorielle ANOVA in R durchführen (und natürlich die Ergebnisse interpretieren) können</li>
-<li>wissen, wie man post-hoc tests für spezifische Gruppenvergleiche erhält</li>
-<li>verstehen, wieso eine einfaktorielle ANOVA eigentlich auch ein lineares Modell ist</li>
-<li>welche Effektgrößen es gibt, wie man sie bestimmt, und wie man die Teststärke in G-Power bestimmen kann</li>
+<li>wissen, welche Annahmen erfüllt sein müssen, damit eine
+einfaktorielle Varianzanalyse vertrauenswürdige Ergebnisse liefert</li>
+<li>wissen, wie man diese Annahmen für ein gegebenes Szenario in R
+prüfen kann</li>
+<li>eine einfaktorielle ANOVA in R durchführen (und natürlich die
+Ergebnisse interpretieren) können</li>
+<li>wissen, wie man post-hoc tests für spezifische Gruppenvergleiche
+erhält</li>
+<li>verstehen, wieso eine einfaktorielle ANOVA eigentlich auch ein
+lineares Modell ist</li>
+<li>welche Effektgrößen es gibt, wie man sie bestimmt, und wie man die
+Teststärke in G-Power bestimmen kann</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatz-zum-eigenständigen-üben-3" class="section level2">
-<h2><span class="header-section-number">6.1</span> Zusatz zum eigenständigen Üben</h2>
+<div id="zusatz-zum-eigenständigen-üben-3" class="section level2"
+number="6.1">
+<h2><span class="header-section-number">6.1</span> Zusatz zum
+eigenständigen Üben</h2>
 <ul>
-<li><p>Im Video führen wir die ANOVA nur für “Tag 1” des Festivals durch. Es gibt aber auch Daten für “Tag 3”. Dafür können Sie die Analyse selbständig machen. Zur Not finden sie das Script aber auch weiter unten im begleitenden und oben angegeben HTML-Script.</p></li>
-<li><p>Zum Üben in den Übungen am Dienstag: R-Markdown-Dateien mit Aufgaben gibt es <a href="q2_dataFiles/Markdowns/Sitzung_06_RMarkdown_Aufg.zip">hier</a> als ZIP-Ordner. Die Lösungsdateien folgen später <a href="q2_dataFiles/Markdowns/Sitzung_06_RMarkdown_Loes.zip">hier</a>.</p></li>
+<li><p>Im Video führen wir die ANOVA nur für “Tag 1” des Festivals
+durch. Es gibt aber auch Daten für “Tag 3”. Dafür können Sie die Analyse
+selbständig machen. Zur Not finden sie das Script aber auch weiter unten
+im begleitenden und oben angegeben HTML-Script.</p></li>
+<li><p>Zum Üben in den Übungen am Dienstag: R-Markdown-Dateien mit
+Aufgaben gibt es <a
+href="q2_dataFiles/Markdowns/Sitzung_06_RMarkdown_Aufg.zip">hier</a> als
+ZIP-Ordner. Die Lösungsdateien folgen später <a
+href="q2_dataFiles/Markdowns/Sitzung_06_RMarkdown_Loes.zip">hier</a>.</p></li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="zwischensitzung-pfingstwoche-bisheriges-vertiefen" class="section level1 unnumbered">
-<h1>Zwischensitzung Pfingstwoche: Bisheriges vertiefen</h1>
-<p>In dieser Woche ist Zeit für zusätzliche Übungen. Eine gute Möglichkeit dafür sind die in R bereits integrierten Datensätze.</p>
-<p>Um zu sehen, welche Datensätze es in R gibt, tippt man einfach “data()” in die Console (oder in einen Code-Chunk).</p>
-<p>Um dann für einen der unzähligen Datensätze zu sehen, was sich dahinter verbirgt, tippt man einfach “?NAME_DATENSATZ” in die Console (oder einen Code-Chunk).</p>
-<p>Man könnte z.B. nachschlagen, was in dem Datensatz “TitanicSurvival” enthalten ist mit “?TitanicSurvival”.</p>
-<p>Eine Reihe von Übungsaufgaben basierend auf diesen Datensätzen sind in einem Zip-Ordner für Sie vorbereitet. Diesen können Sie <a href="q2_dataFiles/Markdowns/Pfingstuebungen.zip">hier</a> runterladen.</p>
+<div id="zwischensitzung-pfingstwoche-bisheriges-vertiefen"
+class="section level1 unnumbered">
+<h1 class="unnumbered">Zwischensitzung Pfingstwoche: Bisheriges
+vertiefen</h1>
+<p>In dieser Woche ist Zeit für zusätzliche Übungen. Eine gute
+Möglichkeit dafür sind die in R bereits integrierten Datensätze.</p>
+<p>Um zu sehen, welche Datensätze es in R gibt, tippt man einfach
+“data()” in die Console (oder in einen Code-Chunk).</p>
+<p>Um dann für einen der unzähligen Datensätze zu sehen, was sich
+dahinter verbirgt, tippt man einfach “?NAME_DATENSATZ” in die Console
+(oder einen Code-Chunk).</p>
+<p>Man könnte z.B. nachschlagen, was in dem Datensatz “TitanicSurvival”
+enthalten ist mit “?TitanicSurvival”.</p>
+<p>Eine Reihe von Übungsaufgaben basierend auf diesen Datensätzen sind
+in einem Zip-Ordner für Sie vorbereitet. Diesen können Sie <a
+href="q2_dataFiles/Markdowns/Pfingstuebungen.zip">hier</a>
+runterladen.</p>
 <p><br></p>
 </div>
 <div id="kurze-einführung-in-ggplot2" class="section level1 unnumbered">
-<h1>Kurze Einführung in ggplot2</h1>
-<p>Ein sehr gutes Paket zum Erstellen von Abbildungen ist “ggplot2”. Eine gute Übersicht gibt es hier: <a href="https://ggplot2-book.org/introduction.html" class="uri">https://ggplot2-book.org/introduction.html</a></p>
-<p>Für die Zusatzübung zu ggplot gibt es ein Markdown-Script, das <a href="q2_dataFiles/Markdowns/ggplot_einfuehrung.zip">hier</a> heruntergeladen werden kann.</p>
+<h1 class="unnumbered">Kurze Einführung in ggplot2</h1>
+<p>Ein sehr gutes Paket zum Erstellen von Abbildungen ist “ggplot2”.
+Eine gute Übersicht gibt es hier: <a
+href="https://ggplot2-book.org/introduction.html"
+class="uri">https://ggplot2-book.org/introduction.html</a></p>
+<p>Für die Zusatzübung zu ggplot gibt es ein Markdown-Script, das <a
+href="q2_dataFiles/Markdowns/ggplot_einfuehrung.zip">hier</a>
+heruntergeladen werden kann.</p>
 <p><br></p>
 </div>
-<div id="sitzung-7-mehrfaktorielle-anova" class="section level1">
-<h1><span class="header-section-number">7</span> Sitzung 7: Mehrfaktorielle ANOVA</h1>
+<div id="sitzung-7-mehrfaktorielle-anova" class="section level1"
+number="7">
+<h1><span class="header-section-number">7</span> Sitzung 7:
+Mehrfaktorielle ANOVA</h1>
 <ul>
-<li><p>Begleitende R-Skripts: 1, das gibt es <a href="q2_html_pages/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.html">hier</a></p></li>
-<li><p>Das Markdown-File zum Script gibt es als ZIP-File <a href="q2_dataFiles/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.zip">hier</a></p></li>
-<li><p>Anzahl Videos: 1 (Dauer ca. 40 min), zum Video geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1591794497698">hier</a></p></li>
-<li><p>Benötigte Datensätze: 1, den gibt es <a href="q2_dataFiles/Daten_Krankheitsstudie.csv">hier</a></p></li>
+<li><p>Begleitende R-Skripts: 1, das gibt es <a
+href="q2_html_pages/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.html">hier</a></p></li>
+<li><p>Das Markdown-File zum Script gibt es als ZIP-File <a
+href="q2_dataFiles/Sitzung7_Anova_Zweifaktoriell_Krankheitsstudie_details.zip">hier</a></p></li>
+<li><p>Anzahl Videos: 1 (Dauer ca. 40 min), zum Video geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1591794497698">hier</a></p></li>
+<li><p>Benötigte Datensätze: 1, den gibt es <a
+href="q2_dataFiles/Daten_Krankheitsstudie.csv">hier</a></p></li>
 </ul>
 <p><br></p>
 <ul>
@@ -1082,27 +1251,42 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, wie man eine ANOVA für mehrfaktorielle Designs durchführt und interpretiert,</li>
-<li>verstehen, dass auch die ANOVA für mehrfaktorielle Designs mit der Logik Linearer Modelle erklärt werden kann,</li>
-<li>wie man Haupteffekte und Interaktionseffekte grafisch darstellen kann, und</li>
-<li>wissen, wie man Haupteffekte und Interaktionseffekte ahand von Abbildungen interpretieren kann</li>
+<li>wissen, wie man eine ANOVA für mehrfaktorielle Designs durchführt
+und interpretiert,</li>
+<li>verstehen, dass auch die ANOVA für mehrfaktorielle Designs mit der
+Logik Linearer Modelle erklärt werden kann,</li>
+<li>wie man Haupteffekte und Interaktionseffekte grafisch darstellen
+kann, und</li>
+<li>wissen, wie man Haupteffekte und Interaktionseffekte ahand von
+Abbildungen interpretieren kann</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusätzliche-aufgaben-zum-eigenständigen-üben" class="section level2">
-<h2><span class="header-section-number">7.1</span> Zusätzliche Aufgaben zum eigenständigen Üben</h2>
+<div id="zusätzliche-aufgaben-zum-eigenständigen-üben"
+class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Zusätzliche Aufgaben
+zum eigenständigen Üben</h2>
 <ul>
-<li><p>Am Ende des Videos sprechen wir kurz über einen weiteren Datensatz zum eigenständigen Üben. Den findet ihr <a href="q2_dataFiles/CatsData.csv">hier</a>.</p></li>
-<li><p>Das Html-R-Script dazu gibt es <a href="q2_html_pages/Sitzung7_Zusatz_KatzenMusterloesung.html">hier</a>.</p></li>
-<li><p>Die Markdown-Files mit <em>Aufgaben</em> und <em>Loesung</em> gibt es als ZIP-File <a href="q2_dataFiles/Markdowns/Sitzung_07_Mehrfaktorielle_ANOVA.zip">hier</a>.</p></li>
+<li><p>Am Ende des Videos sprechen wir kurz über einen weiteren
+Datensatz zum eigenständigen Üben. Den findet ihr <a
+href="q2_dataFiles/CatsData.csv">hier</a>.</p></li>
+<li><p>Das Html-R-Script dazu gibt es <a
+href="q2_html_pages/Sitzung7_Zusatz_KatzenMusterloesung.html">hier</a>.</p></li>
+<li><p>Die Markdown-Files mit <em>Aufgaben</em> und <em>Loesung</em>
+gibt es als ZIP-File <a
+href="q2_dataFiles/Markdowns/Sitzung_07_Mehrfaktorielle_ANOVA.zip">hier</a>.</p></li>
 </ul>
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-8-interaktionen-bei-prädiktoren-auf-verschiedenen-skalenniveaus" class="section level1">
-<h1><span class="header-section-number">8</span> Sitzung 8: Interaktionen bei Prädiktoren auf verschiedenen Skalenniveaus</h1>
+<div
+id="sitzung-8-interaktionen-bei-prädiktoren-auf-verschiedenen-skalenniveaus"
+class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Sitzung 8:
+Interaktionen bei Prädiktoren auf verschiedenen Skalenniveaus</h1>
 <ul>
 <li>Begleitende R-Skripts: 2</li>
 <li>Anzahl Videos: 0</li>
@@ -1110,30 +1294,50 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p>Eine Übungsaufgabe zu Interaktionen zwischen einer <em>kontinuierlichen</em> Variablen und einem <em>kategorialen</em> Faktor gibt es <a href="q2_dataFiles/Spinnenphobie.zip">hier</a> als zip-File mit allen notwendigen Dateien (Aufgabe, Lösung, Daten).</p>
+<li><p>Eine Übungsaufgabe zu Interaktionen zwischen einer
+<em>kontinuierlichen</em> Variablen und einem <em>kategorialen</em>
+Faktor gibt es <a href="q2_dataFiles/Spinnenphobie.zip">hier</a> als
+zip-File mit allen notwendigen Dateien (Aufgabe, Lösung, Daten).</p>
 <ul>
-<li>Die Lösung zum online ansehen gibt es <a href="q2_dataFiles/Spinnenphobie_Loesung.html">hier</a></li>
+<li>Die Lösung zum online ansehen gibt es <a
+href="q2_dataFiles/Spinnenphobie_Loesung.html">hier</a></li>
 </ul></li>
-<li><p>Eine Übungsaufgabe zu Interaktionen bei ausschließlich kontinuierlichen Prädiktoren gibt es <a href="q2_dataFiles/Konzentration.zip">hier</a> als zip-File mit allen notwendigen Dateien.</p></li>
-<li><p>Außerdem gibt es noch: Eine Übersicht über mögliche Interaktionsmuster bei 2x2 faktoriellen Designs und ihre Interpretation (inklusive Möglichkeit zum eigenständigen Simulieren von Daten) gibt es <a href="q2_dataFiles/InteraktionsgrafikenVerstehen.zip">hier</a> (als zip-File mit Rmd-Datei) oder als reine Übersicht <a href="q2_dataFiles/InteraktionsgrafikenVerstehen.html">hier</a>.</p></li>
+<li><p>Eine Übungsaufgabe zu Interaktionen bei ausschließlich
+kontinuierlichen Prädiktoren gibt es <a
+href="q2_dataFiles/Konzentration.zip">hier</a> als zip-File mit allen
+notwendigen Dateien.</p></li>
+<li><p>Außerdem gibt es noch: Eine Übersicht über mögliche
+Interaktionsmuster bei 2x2 faktoriellen Designs und ihre Interpretation
+(inklusive Möglichkeit zum eigenständigen Simulieren von Daten) gibt es
+<a href="q2_dataFiles/InteraktionsgrafikenVerstehen.zip">hier</a> (als
+zip-File mit Rmd-Datei) oder als reine Übersicht <a
+href="q2_dataFiles/InteraktionsgrafikenVerstehen.html">hier</a>.</p></li>
 </ul>
 <p><br></p>
 <ul>
 <li><p><strong>Lernziele</strong>: Nach dieser Sitzung solltet ihr…</p>
 <ul>
-<li>wissen, dass Interaktionen auch vorliegen und analysiert werden können, wenn die Prädiktoren (oder UVs) nicht ausschließlich kategorial sind</li>
-<li>wissen, wie man solche Analysen in R mit Hilfe von Regressionsmodellen durchführen kann</li>
+<li>wissen, dass Interaktionen auch vorliegen und analysiert werden
+können, wenn die Prädiktoren (oder UVs) nicht ausschließlich kategorial
+sind</li>
+<li>wissen, wie man solche Analysen in R mit Hilfe von
+Regressionsmodellen durchführen kann</li>
 </ul></li>
 </ul>
 <p><br></p>
 </div>
-<div id="sitzung-9-kontraste" class="section level1">
-<h1><span class="header-section-number">9</span> Sitzung 9: Kontraste</h1>
+<div id="sitzung-9-kontraste" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Sitzung 9:
+Kontraste</h1>
 <ul>
-<li><p>Begleitende R-Skripts: 1, das gibt es <a href="q2_html_pages/Sitzung9_Kontraste_Zweifaktoriell_Krankheitsstudie.html">hier</a></p></li>
-<li><p>Das Markdown-File zum Script gibt es als ZIP-File <a href="q2_dataFiles/Sitzung9_Kontraste.zip">hier</a></p></li>
-<li><p>Anzahl Videos: 1 (Dauer ca. 60 min), zum Video geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1592493246734">hier</a></p></li>
-<li><p>Benötigte Datensätze: 1, den gibt es <a href="q2_dataFiles/Uebung9_Kontraste_Krankheitsstudie.csv">hier</a></p></li>
+<li><p>Begleitende R-Skripts: 1, das gibt es <a
+href="q2_html_pages/Sitzung9_Kontraste_Zweifaktoriell_Krankheitsstudie.html">hier</a></p></li>
+<li><p>Das Markdown-File zum Script gibt es als ZIP-File <a
+href="q2_dataFiles/Sitzung9_Kontraste.zip">hier</a></p></li>
+<li><p>Anzahl Videos: 1 (Dauer ca. 60 min), zum Video geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1592493246734">hier</a></p></li>
+<li><p>Benötigte Datensätze: 1, den gibt es <a
+href="q2_dataFiles/Uebung9_Kontraste_Krankheitsstudie.csv">hier</a></p></li>
 </ul>
 <p><br></p>
 <ul>
@@ -1141,11 +1345,14 @@ body {
 <ul>
 <li>01:00 Intro Kontraste Zweifaktoriell</li>
 <li>02:20 Intro Szenario</li>
-<li>03:00 Daten einlesen, “character”-Variablen als Faktoren definieren über code und über base-Menü</li>
+<li>03:00 Daten einlesen, “character”-Variablen als Faktoren definieren
+über code und über base-Menü</li>
 <li>08:00 Plots</li>
-<li>09:40 Statistische Hypothesen über Kontraste, mit Formelsammlung</li>
+<li>09:40 Statistische Hypothesen über Kontraste, mit
+Formelsammlung</li>
 <li>15:00 Kontrastkeffizienten auswählen im Commander</li>
-<li>19:30 Kontrastkoeffizienten manuell vergeben im Commander (orthogonale Kontraste für Haupteffekte und Interaktionen)</li>
+<li>19:30 Kontrastkoeffizienten manuell vergeben im Commander
+(orthogonale Kontraste für Haupteffekte und Interaktionen)</li>
 <li>25:35 Interaktionskontrast im Detail</li>
 <li>33:00 Lineares Modell mit Kontrasten</li>
 <li>34:15 Output interpretieren</li>
@@ -1156,27 +1363,41 @@ body {
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, wie man in einem faktoriellen Design spezifische Hypothesen mittels Kontrasten testen kann</li>
+<li>wissen, wie man in einem faktoriellen Design spezifische Hypothesen
+mittels Kontrasten testen kann</li>
 <li>diese Art der Analyse in R durchführen können</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatzaufgabe" class="section level2">
+<div id="zusatzaufgabe" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Zusatzaufgabe</h2>
 <p><br></p>
-<p>Ihr könnt mit dem Katzendatensatz, der als Zusatz in Übung 7 verwendet wurde, noch einmal eigenständig diese Art der Kontrastanalyse üben. In dem oben zu dieser Sitzung verlinkten ZIP-File sind die Daten (und auch ein Script) mit enthalten.</p>
-<p>Helmert-Kontraste können anhand des Glastonbury-Datensatzes geübt werden, alle benötigten Dateien gibt es als zip-Ordner <a href="q2_dataFiles/Glastonbury_Helmert.zip">hier</a> und eine Lösung zum online ansehen <a href="q2_html_pages/Sitzung9_Kontraste_Helmert.html">hier</a>.</p>
+<p>Ihr könnt mit dem Katzendatensatz, der als Zusatz in Übung 7
+verwendet wurde, noch einmal eigenständig diese Art der Kontrastanalyse
+üben. In dem oben zu dieser Sitzung verlinkten ZIP-File sind die Daten
+(und auch ein Script) mit enthalten.</p>
+<p>Helmert-Kontraste können anhand des Glastonbury-Datensatzes geübt
+werden, alle benötigten Dateien gibt es als zip-Ordner <a
+href="q2_dataFiles/Glastonbury_Helmert.zip">hier</a> und eine Lösung zum
+online ansehen <a
+href="q2_html_pages/Sitzung9_Kontraste_Helmert.html">hier</a>.</p>
 <p><br></p>
 </div>
 </div>
-<div id="sitzung-10-multi-level-analysen" class="section level1">
-<h1><span class="header-section-number">10</span> Sitzung 10: Multi-Level-Analysen</h1>
+<div id="sitzung-10-multi-level-analysen" class="section level1"
+number="10">
+<h1><span class="header-section-number">10</span> Sitzung 10:
+Multi-Level-Analysen</h1>
 <ul>
-<li><p>Begleitende R-Skripts: 1, das gibt es <a href="q2_html_pages/Sitzung10_MultiLevel.html">hier</a></p></li>
-<li><p>Das Markdown-File und die <em>Daten</em> gibt es als ZIP-File <a href="q2_dataFiles/Sitzung10.zip">hier</a></p></li>
-<li><p>Anzahl Videos: 1 (Dauer ca. 65 min), zum Video geht es <a href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1593595782293">hier</a></p></li>
+<li><p>Begleitende R-Skripts: 1, das gibt es <a
+href="q2_html_pages/Sitzung10_MultiLevel.html">hier</a></p></li>
+<li><p>Das Markdown-File und die <em>Daten</em> gibt es als ZIP-File <a
+href="q2_dataFiles/Sitzung10.zip">hier</a></p></li>
+<li><p>Anzahl Videos: 1 (Dauer ca. 65 min), zum Video geht es <a
+href="https://conf.psych.bio.uni-goettingen.de/playback/presentation/2.0/playback.html?meetingId=e9fc7316f0e71f84eb717675ff6a37bfe13025e4-1593595782293">hier</a></p></li>
 </ul>
 <p><br></p>
 <ul>
@@ -1189,32 +1410,55 @@ body {
 <li>21:00 Grafiken erstellen</li>
 <li>29:00 Modelle definieren (erst Nullmodell)</li>
 <li>33:00 Dann “Random Intercept Modell” anpassen</li>
-<li>43:00 Random Intercept Modell testen gegen Nullmodell - Likelihood-Test</li>
-<li>44:40 Modell dass den Prädiktor nun aufnimmt. Danach testen gegen Random Intercept Modell</li>
-<li>48:30 Modell mit zusätzlichem “Random Slope” und wieder testen. Danach Effektstärke</li>
-<li>59:00 Warum nicht einfach ANOVA oder ein “normales” lineares Modell?</li>
+<li>43:00 Random Intercept Modell testen gegen Nullmodell -
+Likelihood-Test</li>
+<li>44:40 Modell dass den Prädiktor nun aufnimmt. Danach testen gegen
+Random Intercept Modell</li>
+<li>48:30 Modell mit zusätzlichem “Random Slope” und wieder testen.
+Danach Effektstärke</li>
+<li>59:00 Warum nicht einfach ANOVA oder ein “normales” lineares
+Modell?</li>
 </ul></li>
 </ul>
 <p><br></p>
 <ul>
-<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos solltet ihr…</p>
+<li><p><strong>Lernziele</strong>: Nach dem Durcharbeiten des Videos
+solltet ihr…</p>
 <ul>
-<li>wissen, was Multi-Level-Analysen sind und wie man damit hierarchische Daten-Strukturen statistisch analysieren kann.</li>
+<li>wissen, was Multi-Level-Analysen sind und wie man damit
+hierarchische Daten-Strukturen statistisch analysieren kann.</li>
 </ul></li>
 </ul>
 <p><br></p>
-<div id="zusatzaufgaben" class="section level2">
-<h2><span class="header-section-number">10.1</span> Zusatzaufgabe(n)</h2>
+<div id="zusatzaufgaben" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span>
+Zusatzaufgabe(n)</h2>
 <p><br></p>
 <p>Aufgaben zum eigenständigen Üben:</p>
-<p>In einer weiteren Übungsaufgabe für euch geht es um die Wirksamkeit von Lernkompetenztrainings, die an verschiedenen Schulen untersucht werden soll. Alle benötigten Dateien gibt es als zip-Ordner <a href="q2_dataFiles/Markdowns/Sitzung_10_Multi_Level_school_training">hier</a>.</p>
-<p>Außerdem ist <a href="q2_dataFiles/Markdowns/Sitzung_10_MultiLevel_Chicks.zip">hier</a> noch eine weitere Anwendungsillustration von Multi-Level-Analysen anhand des “ChickWeight”-Datensatzes, den Sie von den Pfingstaufgaben schon kennen. Dieser Fall ist interessanta, da auch <em>Messwiederholungen</em> (das Gewicht der Küken an den verschiedenen Tagen) berücksichtigt werden. Die Illustration richtet sich eng nach den “Mixed-effect models”-Kapiteln in einem Online-Buch, das sie hier finden: <a href="https://psych252.github.io/psych252book/linear-mixed-effects-models-1.html" class="uri">https://psych252.github.io/psych252book/linear-mixed-effects-models-1.html</a></p>
+<p>In einer weiteren Übungsaufgabe für euch geht es um die Wirksamkeit
+von Lernkompetenztrainings, die an verschiedenen Schulen untersucht
+werden soll. Alle benötigten Dateien gibt es als zip-Ordner <a
+href="q2_dataFiles/Markdowns/Sitzung_10_Multi_Level_school_training.zip">hier</a>.</p>
+<p>Außerdem ist <a
+href="q2_dataFiles/Markdowns/Sitzung_10_MultiLevel_Chicks.zip">hier</a>
+noch eine weitere Anwendungsillustration von Multi-Level-Analysen anhand
+des “ChickWeight”-Datensatzes, den Sie von den Pfingstaufgaben schon
+kennen. Dieser Fall ist interessanta, da auch
+<em>Messwiederholungen</em> (das Gewicht der Küken an den verschiedenen
+Tagen) berücksichtigt werden. Die Illustration richtet sich eng nach den
+“Mixed-effect models”-Kapiteln in einem Online-Buch, das sie hier
+finden: <a
+href="https://psych252.github.io/psych252book/linear-mixed-effects-models-1.html"
+class="uri">https://psych252.github.io/psych252book/linear-mixed-effects-models-1.html</a></p>
 <p><br></p>
 </div>
 </div>
-<div id="zusätzliche-übungsaufgaben-gemischte-themen" class="section level1">
-<h1><span class="header-section-number">11</span> Zusätzliche Übungsaufgaben (gemischte Themen)</h1>
-<p>…gibt es als zip-folder <a href="q2_dataFiles/Uebungsaufgaben.zip">hier</a></p>
+<div id="zusätzliche-übungsaufgaben-gemischte-themen"
+class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Zusätzliche
+Übungsaufgaben (gemischte Themen)</h1>
+<p>…gibt es als zip-folder <a
+href="q2_dataFiles/Uebungsaufgaben.zip">hier</a></p>
 </div>
 
 <p><font size="-1.5">Copyright &copy; 2020 Simon Stephan. All rights reserved.</font></p>
@@ -1247,7 +1491,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1256,6 +1500,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
