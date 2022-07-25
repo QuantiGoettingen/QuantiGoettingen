@@ -13,7 +13,7 @@ Aufgaben:
 
 2) Interpretieren Sie die Regressionskoeffienten 
 
-3) Standardisieren Sie die Prädiktoren und passen Sie das Modell erneut an (Commander, Datenmanagement, Standardisiere Variable). Wie sind die Koeffizienten nun zu interpretieren?
+3) Zentrieren Sie die Prädiktoren und passen Sie das Modell erneut an (Commander, Datenmanagement, Standardisiere Variable). Wie sind die Koeffizienten nun zu interpretieren?
 
 ### 1) Daten einlesen und Modell anpassen, Interpretation
 
